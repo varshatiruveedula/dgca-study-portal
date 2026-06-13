@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 8: Aerodrome Control Procedures</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;
+  --card:#0D1A2E;--card2:#101E38;
+  --orange:#F97316;--amber:#F59E0B;--green:#22C55E;
+  --sky:#0EA5E9;--teal:#14B8A6;--red:#EF4444;
+  --purple:#A855F7;--indigo:#6366F1;--cyan:#06B6D4;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --or-bg:rgba(249,115,22,.11);--am-bg:rgba(245,158,11,.11);
+  --gn-bg:rgba(34,197,94,.11);--sk-bg:rgba(14,165,233,.11);
+  --tl-bg:rgba(20,184,166,.11);--rd-bg:rgba(239,68,68,.11);
+  --pu-bg:rgba(168,85,247,.11);--cy-bg:rgba(6,182,212,.11);
+  --in-bg:rgba(99,102,241,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(249,115,22,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);color:#FDB785;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#FDB785;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 10px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--orange);color:#FDB785;}
+.nb.active{background:var(--orange);border-color:var(--orange);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-cy{background:var(--cy-bg);color:#67E8F9;border:1px solid rgba(6,182,212,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-or{background:var(--or-bg);border-color:var(--orange);} .al-or strong{color:#FDB785;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);} .al-tl strong{color:#5EEAD4;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FDB785;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* priority ladder */
+.prio-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;margin-bottom:6px;border:1px solid;}
+.prio-num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;width:32px;flex-shrink:0;text-align:center;}
+.prio-txt{font-size:13px;font-weight:600;}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--orange),var(--amber));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--orange);color:#fff;background:var(--or-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--or-bg);border:1px solid rgba(249,115,22,.22);border-radius:8px;font-size:12.5px;color:#FDB785;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--orange);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#FB923C;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--orange) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FDB785;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🏢 DGCA CPL · Air Traffic Control</div>
+  <h1>Chapter 8 — <span>Aerodrome Control Procedures</span></h1>
+  <p>Tower Functions · Traffic Circuit · Takeoff & Landing Rules · Priority · Lighting · RWYCC · Wind Shear</p>
+  <div class="hero-chips">
+    <span class="chip">Long Final = >4 NM to 8 NM</span>
+    <span class="chip">Holding: ≥900m strip = 50m · &lt;900m = 30m</span>
+    <span class="chip">Only 1 aircraft cleared to land</span>
+    <span class="chip">Cruise Climb NOT permitted in India</span>
+    <span class="chip">Supersonic NOT permitted in India</span>
+    <span class="chip">RWYCC 5=Good · 1=Poor</span>
+    <span class="chip">Lights ON when vis ≤ 5000m</span>
+    <span class="chip">Uncontrolled aerodrome = 15min after departure</span>
+    <span class="chip">Emergency = Highest priority</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('tower')">🏢 Tower</button>
+  <button class="nb" onclick="show('circuit')">🔁 Circuit</button>
+  <button class="nb" onclick="show('runway')">✈️ Runway Ops</button>
+  <button class="nb" onclick="show('priority')">🔢 Priority</button>
+  <button class="nb" onclick="show('lighting')">💡 Lighting</button>
+  <button class="nb" onclick="show('friction')">📊 RWYCC</button>
+  <button class="nb" onclick="show('windshear')">🌪 Wind Shear</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ===== TOWER ===== -->
+<div class="section active" id="section-tower">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">🏢</div>
+  <div><div class="st">Aerodrome Control Tower</div>
+  <div class="ss">Functions · Controller roles · Information provided · Before takeoff · Before landing</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Tower Controller Roles — Who Does What</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Tower objective: Safe · Orderly · Expeditious flow — prevent collision between aircraft, vehicles and obstructions</text>
+
+        <!-- Aerodrome Controller -->
+        <rect x="20" y="28" width="220" height="175" rx="12" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="130" y="54" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">AERODROME</text>
+        <text x="130" y="70" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">CONTROLLER</text>
+        <text x="130" y="95" fill="#FCA5A5" font-family="sans-serif" font-size="22" text-anchor="middle">🛫</text>
+        <text x="130" y="125" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ RUNWAY operations</text>
+        <text x="130" y="143" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ AIRBORNE traffic</text>
+        <text x="130" y="163" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Takeoffs · Landings · Circuit</text>
+        <text x="130" y="193" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">★ Runway + Airborne</text>
+
+        <!-- Ground Controller -->
+        <rect x="260" y="28" width="220" height="175" rx="12" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="370" y="54" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">GROUND</text>
+        <text x="370" y="70" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">CONTROLLER</text>
+        <text x="370" y="95" fill="#FCD34D" font-family="sans-serif" font-size="22" text-anchor="middle">🚛</text>
+        <text x="370" y="125" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ TAXIWAYS</text>
+        <text x="370" y="143" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ APRONS</text>
+        <text x="370" y="163" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ Ground movements</text>
+        <text x="370" y="181" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">❌ NOT runways</text>
+
+        <!-- Clearance Delivery -->
+        <rect x="500" y="28" width="240" height="175" rx="12" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <text x="620" y="54" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">CLEARANCE</text>
+        <text x="620" y="70" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">DELIVERY</text>
+        <text x="620" y="95" fill="#7DD3FC" font-family="sans-serif" font-size="22" text-anchor="middle">📋</text>
+        <text x="620" y="125" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ START-UP clearance ★</text>
+        <text x="620" y="143" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ ATC clearance</text>
+        <text x="620" y="163" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">For departing IFR flights
+        <text x="620" y="193" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">★ DGCA Favourite</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Information Provided Before Takeoff</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">1</span><div><strong>Runway in use</strong> — e.g. "Runway 27"</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">2</span><div><strong>Surface wind</strong> — direction, speed, significant variations</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">3</span><div><strong>QNH</strong> (or QFE if requested)</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">4</span><div><strong>Air temperature</strong> — especially for turbine aircraft (performance calculations)</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">5</span><div><strong>Visibility / RVR</strong> — when visibility &lt; 10 km</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);"><span class="b b-or">6</span><div><strong>Correct time</strong> if required</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>India-Specific Rules</div>
+      <div class="g2" style="gap:8px;">
+        <div style="background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.4);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:6px;">🚫</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:13px;margin-bottom:4px;">Cruise Climb</div>
+          <div style="font-size:12px;color:var(--text2);">NOT permitted in Indian FIRs ★</div>
+        </div>
+        <div style="background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.4);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:6px;">✈️💨</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:13px;margin-bottom:4px;">Supersonic Flight</div>
+          <div style="font-size:12px;color:var(--text2);">NOT permitted over Indian airspace ★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Significant Meteorological Conditions (Provide to pilots)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <span class="b b-rd">Cumulonimbus (CB)</span><span class="b b-rd">Thunderstorm</span>
+      <span class="b b-rd">Moderate/Severe Turbulence</span><span class="b b-rd">Wind Shear</span>
+      <span class="b b-rd">Hail</span><span class="b b-rd">Moderate/Severe Icing</span>
+      <span class="b b-rd">Severe Squall Line</span><span class="b b-rd">Freezing Precipitation</span>
+      <span class="b b-rd">Mountain Waves</span><span class="b b-rd">Sandstorm</span>
+      <span class="b b-rd">Dust Storm</span><span class="b b-rd">Blowing Snow</span>
+      <span class="b b-rd">Tornado</span><span class="b b-rd">Waterspout</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CIRCUIT ===== -->
+<div class="section" id="section-circuit">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🔁</div>
+  <div><div class="st">Traffic Circuit</div>
+  <div class="ss">Upwind · Crosswind · Downwind · Base · Final · Long Final (>4 to 8 NM)</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Standard Traffic Circuit — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="300" fill="#07101c"/>
+        <!-- Runway -->
+        <rect x="280" y="205" width="200" height="30" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <text x="380" y="225" fill="white" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RUNWAY</text>
+        <!-- Threshold / touchdown end (right side = 09) -->
+        <line x1="280" y1="205" x2="280" y2="235" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+        <line x1="480" y1="205" x2="480" y2="235" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+
+        <!-- Circuit path (left-hand circuit, standard) -->
+        <!-- UPWIND: From runway end, climb straight ahead (up on screen) -->
+        <line x1="480" y1="220" x2="620" y2="220" stroke="rgba(34,197,94,.6)" stroke-width="2.5" stroke-dasharray="6,4"/>
+        <polygon points="620,214 634,220 620,226" fill="rgba(34,197,94,.6)"/>
+        <rect x="530" y="195" width="80" height="20" rx="5" fill="rgba(34,197,94,.12)"/>
+        <text x="570" y="209" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">UPWIND</text>
+
+        <!-- CROSSWIND: Right turn, climb crosswind -->
+        <path d="M640,220 Q660,220 660,170" fill="none" stroke="rgba(14,165,233,.6)" stroke-width="2.5"/>
+        <polygon points="654,170 660,155 666,170" fill="rgba(14,165,233,.6)"/>
+        <text x="690" y="200" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold">CROSS-</text>
+        <text x="690" y="215" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold">WIND</text>
+
+        <!-- DOWNWIND: Parallel to runway, opposite direction -->
+        <line x1="660" y1="150" x2="320" y2="150" stroke="rgba(168,85,247,.6)" stroke-width="2.5"/>
+        <polygon points="320,144 306,150 320,156" fill="rgba(168,85,247,.6)"/>
+        <rect x="440" y="128" width="95" height="20" rx="5" fill="rgba(168,85,247,.12)"/>
+        <text x="487" y="142" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">DOWNWIND</text>
+
+        <!-- BASE LEG: Turn from downwind towards runway -->
+        <path d="M306,150 Q300,150 300,210" fill="none" stroke="rgba(245,158,11,.6)" stroke-width="2.5"/>
+        <polygon points="294,210 300,225 306,210" fill="rgba(245,158,11,.6)"/>
+        <text x="240" y="185" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">BASE</text>
+        <text x="240" y="199" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Leg</text>
+
+        <!-- FINAL: Aligned with runway -->
+        <line x1="300" y1="220" x2="280" y2="220" stroke="rgba(239,68,68,.7)" stroke-width="3"/>
+        <!-- Extended final -->
+        <line x1="200" y1="220" x2="300" y2="220" stroke="rgba(239,68,68,.4)" stroke-width="2" stroke-dasharray="5,4"/>
+        <!-- Long final starts at 4 NM -->
+        <line x1="80" y1="220" x2="200" y2="220" stroke="rgba(249,115,22,.4)" stroke-width="2" stroke-dasharray="4,5"/>
+        <!-- Final label -->
+        <rect x="190" y="198" width="60" height="18" rx="4" fill="rgba(239,68,68,.12)"/>
+        <text x="220" y="211" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">FINAL</text>
+
+        <!-- Long final annotation -->
+        <line x1="130" y1="200" x2="130" y2="240" stroke="rgba(249,115,22,.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="225" y1="200" x2="225" y2="240" stroke="rgba(249,115,22,.4)" stroke-width="1" stroke-dasharray="3,3"/>
+        <rect x="63" y="246" width="185" height="24" rx="5" fill="rgba(249,115,22,.10)" stroke="rgba(249,115,22,.3)" stroke-width="1"/>
+        <text x="155" y="262" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">LONG FINAL: >4 to 8 NM ★</text>
+
+        <!-- Threshold label -->
+        <text x="280" y="245" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">THR</text>
+        <!-- Legend -->
+        <text x="380" y="282" fill="rgba(168,85,247,.7)" font-family="monospace" font-size="10" text-anchor="middle">Leg BEFORE Final = BASE · Leg BEFORE Base = DOWNWIND</text>
+      </svg>
+    </div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:16px;">Upwind</div><div class="sl">After takeoff, straight climb</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+        <div class="sn" style="color:#D8B4FE;font-size:14px;">Downwind</div><div class="sl">Parallel, opposite to landing</div>
+      </div>
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:16px;">Base</div><div class="sl">Before final ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;font-size:15px;">&gt;4–8 NM</div><div class="sl">Long Final ★</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RUNWAY OPS ===== -->
+<div class="section" id="section-runway">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">✈️</div>
+  <div><div class="st">Runway Operations</div>
+  <div class="ss">Takeoff rules · Landing rules · Holding positions · Separation · Incursion · Lost on manoeuvring area</div></div></div>
+
+  <!-- HOLDING POSITION VISUAL -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Runway Holding Positions — Distances</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Runway -->
+        <rect x="280" y="70" width="200" height="40" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <text x="380" y="95" fill="white" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RUNWAY EDGE</text>
+        <!-- Left side holding positions -->
+        <!-- 50m mark -->
+        <line x1="230" y1="55" x2="230" y2="125" stroke="rgba(239,68,68,.7)" stroke-width="2.5"/>
+        <polygon points="224,75 230,58 236,75" fill="rgba(239,68,68,.7)"/>
+        <rect x="100" y="35" width="238" height="28" rx="6" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="219" y="48" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Strip ≥ 900m → Hold at 50m ★</text>
+        <line x1="280" y1="90" x2="230" y2="90" stroke="rgba(239,68,68,.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="255" y="83" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">50m</text>
+        <!-- Aircraft symbol holding left -->
+        <g transform="translate(215,90)">
+          <ellipse cx="0" cy="0" rx="22" ry="6" fill="#7DD3FC" opacity=".7"/>
+          <line x1="4" y1="0" x2="-20" y2="-10" stroke="#7DD3FC" stroke-width="2"/>
+          <line x1="4" y1="0" x2="-20" y2="10" stroke="#7DD3FC" stroke-width="2"/>
+        </g>
+        <!-- Right side -->
+        <!-- 30m mark -->
+        <line x1="530" y1="55" x2="530" y2="125" stroke="rgba(245,158,11,.7)" stroke-width="2.5"/>
+        <polygon points="524,75 530,58 536,75" fill="rgba(245,158,11,.7)"/>
+        <rect x="484" y="35" width="238" height="28" rx="6" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="603" y="48" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Strip &lt; 900m → Hold at 30m</text>
+        <line x1="480" y1="90" x2="530" y2="90" stroke="rgba(245,158,11,.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="505" y="83" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">30m</text>
+        <!-- Aircraft symbol holding right -->
+        <g transform="translate(548,90)">
+          <ellipse cx="0" cy="0" rx="22" ry="6" fill="#FDB785" opacity=".7"/>
+          <line x1="4" y1="0" x2="-20" y2="-10" stroke="#FDB785" stroke-width="2"/>
+          <line x1="4" y1="0" x2="-20" y2="10" stroke="#FDB785" stroke-width="2"/>
+        </g>
+        <!-- Runway vacated definition -->
+        <rect x="100" y="138" width="560" height="30" rx="8" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.25)" stroke-width="1"/>
+        <text x="380" y="152" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">RUNWAY VACATED = Entire aircraft beyond holding position mark ★</text>
+        <text x="380" y="165" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">(NOT just nose wheel — NOT just main wheels)</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--orange)"></span>Key Takeoff & Landing Rules</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.09);">
+          <span style="font-size:18px;">🚫</span>
+          <div><strong>Never take off or land without ATC clearance</strong> — even if runway appears clear ★</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <span style="font-size:18px;">1️⃣</span>
+          <div><strong>Only ONE aircraft</strong> may be cleared to land on runway at a time (exception: military formation)</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);">
+          <span style="font-size:18px;">📋</span>
+          <div><strong>Cockpit checks before line-up</strong> — not on the runway, to minimise occupancy time</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.07);">
+          <span style="font-size:18px;">⚡</span>
+          <div><strong>Immediate takeoff</strong> = taxi onto runway + take off in one continuous movement (no stopping)</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+          <span style="font-size:18px;">🛬</span>
+          <div><strong>Landing has priority</strong> over departing aircraft on same / intersecting runway</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.07);">
+          <span style="font-size:18px;">🔄</span>
+          <div><strong>Backtrack:</strong> notify ATC BEFORE commencing taxi</div>
+        </div>
+      </div>
+      <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+        <div class="mt">Separation Memory</div>
+        <div class="mf">Preceding aircraft: Crossed end of runway OR Started a turn OR All landing aircraft clear</div>
+      </div></div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Runway Incursion Actions</div>
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div style="font-weight:700;color:#FCA5A5;margin-bottom:8px;">🚨 Vehicle/aircraft enters runway after clearance issued:</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">→</span><div>Inform aircraft immediately (obstruction + location)</div></div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">→</span><div><strong>If before takeoff roll:</strong> Cancel takeoff clearance</div></div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">→</span><div><strong>If landing clearance issued:</strong> GO AROUND ★</div></div>
+        </div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:14px;">
+        <div style="font-weight:700;color:#FCD34D;margin-bottom:8px;">🧭 Aircraft lost on manoeuvring area:</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;"><span class="cy">1</span><div><strong>STOP immediately ★</strong></div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cy">2</span><div>Notify ATS with last known position</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cy">!</span><div>If on RUNWAY: vacate if possible, then stop</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Taxi Clearance Rules</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span><div>Must be concise · avoid collisions · avoid runway incursions</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="cn">★</span><div>If route <strong>crosses a runway</strong>, ATC must explicitly say: <strong>"Cross Runway XX"</strong> or <strong>"Hold Short of Runway XX"</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div>Runway vacated = entire aircraft beyond holding position (not just nose or mains)</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>LVP & Surface Priority</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.07);">
+          <span style="font-size:14px;">🌫</span>
+          <div><strong>LVP — ILS Sensitive Area</strong> must be protected during CAT II &amp; CAT III operations</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.08);">
+          <span style="font-size:14px;">🚒</span>
+          <div><strong>Highest priority:</strong> Emergency vehicles assisting distressed aircraft ★</div>
+        </div>
+        <div class="chk-item">
+          <span style="font-size:14px;">💡</span>
+          <div><strong>Flashing runway lights:</strong> Vacate runway/taxiway and observe tower for light signal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRIORITY ===== -->
+<div class="section" id="section-priority">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🔢</div>
+  <div><div class="st">Traffic Priority Order</div>
+  <div class="ss">10 priority levels · Emergency highest · Medical over VVIP · SAR · Military formations</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Priority Ladder — All 10 Levels (Memorize in Order)</div>
+    <div>
+      <div class="prio-row" style="background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.5);">
+        <div class="prio-num" style="color:#FCA5A5;">1</div>
+        <div class="prio-txt" style="color:#FCA5A5;">🚨 Aircraft in Emergency (engine failure, fuel emergency, comm failure)</div>
+      </div>
+      <div class="prio-row" style="background:rgba(249,115,22,.10);border-color:rgba(249,115,22,.4);">
+        <div class="prio-num" style="color:#FDB785;">2</div>
+        <div class="prio-txt" style="color:#FDB785;">⚔️ Military Fighters with Fuel Constraints</div>
+      </div>
+      <div class="prio-row" style="background:rgba(245,158,11,.09);border-color:rgba(245,158,11,.35);">
+        <div class="prio-num" style="color:#FCD34D;">3</div>
+        <div class="prio-txt" style="color:#FCD34D;">⚡ Live Scramble</div>
+      </div>
+      <div class="prio-row" style="background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.35);">
+        <div class="prio-num" style="color:#86EFAC;">4</div>
+        <div class="prio-txt" style="color:#86EFAC;">🏥 Medical Flight (MEDEVAC) ★ — higher than VVIP</div>
+      </div>
+      <div class="prio-row" style="background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.35);">
+        <div class="prio-num" style="color:#D8B4FE;">5</div>
+        <div class="prio-txt" style="color:#D8B4FE;">👑 VVIP Flight</div>
+      </div>
+      <div class="prio-row" style="background:rgba(14,165,233,.08);border-color:rgba(14,165,233,.3);">
+        <div class="prio-num" style="color:#7DD3FC;">6</div>
+        <div class="prio-txt" style="color:#7DD3FC;">🔍 Search and Rescue (SAR)</div>
+      </div>
+      <div class="prio-row" style="background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.3);">
+        <div class="prio-num" style="color:#A5B4FC;">7</div>
+        <div class="prio-txt" style="color:#A5B4FC;">✈️ Military Formations</div>
+      </div>
+      <div class="prio-row" style="background:rgba(6,182,212,.07);border-color:rgba(6,182,212,.3);">
+        <div class="prio-num" style="color:#67E8F9;">8</div>
+        <div class="prio-txt" style="color:#67E8F9;">⚡ Urgent Military Commitment</div>
+      </div>
+      <div class="prio-row" style="background:rgba(132,204,22,.07);border-color:rgba(132,204,22,.3);">
+        <div class="prio-num" style="color:#BEF264;">9</div>
+        <div class="prio-txt" style="color:#BEF264;">⛈ Large Weather Deviation</div>
+      </div>
+      <div class="prio-row" style="background:rgba(255,255,255,.04);border-color:var(--bdr2);">
+        <div class="prio-num" style="color:var(--text2);">10</div>
+        <div class="prio-txt" style="color:var(--text2);">🌧 Diversion to Alternate due Weather</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:14px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Priority Memory</div>
+      <div class="mf">Emergency → Military Fuel → Scramble → MEDICAL ★ → VVIP → SAR → Mil Formation → Urgent Mil → Wx Dev → Diversion</div>
+    </div></div>
+  </div>
+
+  <div class="al al-rd" style="margin-bottom:0;"><strong>DGCA Favourite Trap:</strong> Medical Flight (MEDEVAC) = Priority 4, ranks ABOVE VVIP (Priority 5). This is asked directly.</div>
+</div>
+
+<!-- ===== LIGHTING ===== -->
+<div class="section" id="section-lighting">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">💡</div>
+  <div><div class="st">Aerodrome Lighting</div>
+  <div class="ss">When lights operate · 5000m rule · Reactivation 1hr · PAPI/VASI · Uncontrolled 15min</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Lighting Operation Rules — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Aeronautical ground lights shall be operated in all four conditions</text>
+        <!-- 4 conditions -->
+        <rect x="10" y="28" width="170" height="100" rx="10" fill="rgba(99,102,241,.09)" stroke="rgba(99,102,241,.35)" stroke-width="1.5"/>
+        <text x="95" y="54" fill="#A5B4FC" font-family="sans-serif" font-size="22" text-anchor="middle">🌙</text>
+        <text x="95" y="76" fill="#A5B4FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Sunset to Sunrise
+        <text x="95" y="93" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Always during night</text>
+
+        <rect x="194" y="28" width="175" height="100" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="281" y="54" fill="#FCD34D" font-family="sans-serif" font-size="22" text-anchor="middle">🌫</text>
+        <text x="281" y="76" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Vis ≤ 5000m ★</text>
+        <text x="281" y="93" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Day operation — India rule</text>
+        <rect x="200" y="102" width="162" height="18" rx="4" fill="rgba(245,158,11,.15)"/>
+        <text x="281" y="115" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">★ DGCA FAVOURITE</text>
+
+        <rect x="383" y="28" width="170" height="100" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="468" y="54" fill="#7DD3FC" font-family="sans-serif" font-size="22" text-anchor="middle">👨‍✈️</text>
+        <text x="468" y="76" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Pilot Request</text>
+        <text x="468" y="93" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">On pilot request</text>
+
+        <rect x="567" y="28" width="183" height="100" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="658" y="54" fill="#FCA5A5" font-family="sans-serif" font-size="22" text-anchor="middle">⚠️</text>
+        <text x="658" y="76" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Safety Requires</text>
+        <text x="658" y="93" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Whenever necessary</text>
+
+        <!-- Additional rules row -->
+        <rect x="10" y="140" width="350" height="48" rx="9" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <text x="185" y="161" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Lights OFF (no ops) must be reactivatable</text>
+        <text x="185" y="178" fill="#D8B4FE" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">1 HOUR before expected arrival ★</text>
+
+        <rect x="376" y="140" width="374" height="48" rx="9" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <text x="563" y="161" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">PAPI / VASI: Day AND Night ★</text>
+        <text x="563" y="178" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Whenever associated runway in use — regardless of visibility</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--orange)"></span>Uncontrolled Aerodrome Lighting</div>
+      <div class="stat" style="border-color:rgba(249,115,22,.5);background:rgba(249,115,22,.09);">
+        <div class="sn" style="color:#FDB785;">15 min</div>
+        <div class="su">After takeoff ★</div>
+        <div class="sl">Runway lights remain ON minimum 15 minutes after departure at uncontrolled aerodrome</div>
+      </div>
+      <div class="al al-am" style="margin-top:10px;margin-bottom:0;"><strong>Controlled aerodrome:</strong> Lights remain on as long as required for emergency return — no fixed time limit.</div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Runway Lighting Components</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="b b-sk">Edge lights</span><span class="b b-sk">Threshold lights</span>
+        <span class="b b-sk">Centreline lights</span><span class="b b-sk">End lights</span>
+        <span class="b b-sk">Touchdown zone lights</span><span class="b b-sk">Wing bar lights</span>
+      </div>
+      <div class="al al-tl" style="margin-top:10px;margin-bottom:0;"><strong>Variable intensity lighting:</strong> Adjust according to visibility and ambient light. Pilot can request intensity change.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RWYCC ===== -->
+<div class="section" id="section-friction">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">📊</div>
+  <div><div class="st">Runway Friction Coefficient (RWYCC)</div>
+  <div class="ss">Codes 1–5 · Good to Poor · First third = landing direction · μ values</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>RWYCC — Braking Action Codes Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Runway Friction Coefficient (μ) → RWYCC Code → Braking Action Quality</text>
+        <!-- Code 5 Good -->
+        <rect x="10" y="28" width="136" height="130" rx="10" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.5)" stroke-width="2.5"/>
+        <text x="78" y="62" fill="#86EFAC" font-family="monospace" font-size="50" font-weight="bold" text-anchor="middle">5</text>
+        <text x="78" y="90" fill="#86EFAC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">GOOD ★</text>
+        <text x="78" y="110" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">μ ≥ 0.40</text>
+        <text x="78" y="148" fill="rgba(34,197,94,.6)" font-family="monospace" font-size="9" text-anchor="middle">Best braking</text>
+        <!-- Code 4 Med-Good -->
+        <rect x="158" y="28" width="136" height="130" rx="10" fill="rgba(132,204,22,.10)" stroke="rgba(132,204,22,.4)" stroke-width="1.5"/>
+        <text x="226" y="62" fill="#BEF264" font-family="monospace" font-size="50" font-weight="bold" text-anchor="middle">4</text>
+        <text x="226" y="90" fill="#BEF264" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">MED-GOOD</text>
+        <text x="226" y="110" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">μ 0.36–0.39</text>
+        <!-- Code 3 Medium -->
+        <rect x="306" y="28" width="148" height="130" rx="10" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.45)" stroke-width="2"/>
+        <text x="380" y="62" fill="#FCD34D" font-family="monospace" font-size="50" font-weight="bold" text-anchor="middle">3</text>
+        <text x="380" y="90" fill="#FCD34D" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">MEDIUM</text>
+        <text x="380" y="110" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">μ 0.30–0.35</text>
+        <text x="380" y="148" fill="rgba(245,158,11,.6)" font-family="monospace" font-size="9" text-anchor="middle">e.g. μ 0.32 = Code 3</text>
+        <!-- Code 2 Med-Poor -->
+        <rect x="466" y="28" width="136" height="130" rx="10" fill="rgba(249,115,22,.10)" stroke="rgba(249,115,22,.4)" stroke-width="1.5"/>
+        <text x="534" y="62" fill="#FDB785" font-family="monospace" font-size="50" font-weight="bold" text-anchor="middle">2</text>
+        <text x="534" y="90" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">MED-POOR</text>
+        <text x="534" y="110" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">μ 0.26–0.29</text>
+        <!-- Code 1 Poor -->
+        <rect x="614" y="28" width="136" height="130" rx="10" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.5)" stroke-width="2.5"/>
+        <text x="682" y="62" fill="#FCA5A5" font-family="monospace" font-size="50" font-weight="bold" text-anchor="middle">1</text>
+        <text x="682" y="90" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">POOR ★</text>
+        <text x="682" y="110" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">μ ≤ 0.25</text>
+        <text x="682" y="148" fill="rgba(239,68,68,.6)" font-family="monospace" font-size="9" text-anchor="middle">Worst braking</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="mem" style="margin:0;"><div class="mi">🧠</div><div>
+        <div class="mt">RWYCC Memory</div>
+        <div class="mf">5=Good · 4=Med-Good · 3=Medium · 2=Med-Poor · 1=Poor<br>High number = Good braking · Low number = Poor braking</div>
+      </div></div>
+      <div class="al al-sk" style="margin:0;"><strong>Runway thirds:</strong> Reported for first / second / last third. First third = first third in <strong>landing direction</strong>, not physical runway start.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Hot Spots</div>
+    <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);">
+      <span style="font-size:18px;">⚠️</span>
+      <div><strong>Hot Spot:</strong> Location on movement area where collision or runway incursion risk exists. Designated by <strong>aerodrome operator</strong> ★</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WIND SHEAR ===== -->
+<div class="section" id="section-windshear">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🌪</div>
+  <div><div class="st">Wind Shear Advisories</div>
+  <div class="ss">Critical zone · Report to arrivals AND departures · Pass to Met office · VFR suspension</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Wind Shear — Definition & Critical Zone</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Runway -->
+        <rect x="60" y="140" width="640" height="20" rx="3" fill="#1e2a30"/>
+        <text x="380" y="154" fill="white" font-family="monospace" font-size="10" text-anchor="middle">RUNWAY</text>
+        <!-- Ground level -->
+        <line x1="0" y1="138" x2="760" y2="138" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <!-- 1500 ft level line -->
+        <line x1="0" y1="50" x2="760" y2="50" stroke="rgba(239,68,68,.4)" stroke-width="1.5" stroke-dasharray="8,5"/>
+        <text x="720" y="44" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold">1500 ft</text>
+        <!-- Critical zone shading -->
+        <rect x="60" y="50" width="640" height="88" fill="rgba(239,68,68,.06)"/>
+        <text x="380" y="95" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">WIND SHEAR CRITICAL ZONE ★</text>
+        <text x="380" y="115" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Surface to 1500 ft — especially during TAKEOFF and FINAL APPROACH</text>
+        <!-- Wind shear arrow indicator -->
+        <g opacity=".7">
+          <line x1="120" y1="110" x2="180" y2="75" stroke="#FCA5A5" stroke-width="2"/>
+          <line x1="200" y1="75" x2="280" y2="110" stroke="#FCA5A5" stroke-width="2"/>
+          <text x="155" y="88" fill="#FCA5A5" font-family="monospace" font-size="10">Wind ↑</text>
+          <text x="230" y="88" fill="#FCA5A5" font-family="monospace" font-size="10">↓ change</text>
+        </g>
+        <!-- Takeoff aircraft -->
+        <g transform="translate(380,100) rotate(-10)">
+          <ellipse cx="0" cy="0" rx="24" ry="6" fill="#7DD3FC" opacity=".7"/>
+          <line x1="4" y1="0" x2="-22" y2="-10" stroke="#7DD3FC" stroke-width="2"/>
+          <line x1="4" y1="0" x2="-22" y2="10" stroke="#7DD3FC" stroke-width="2"/>
+        </g>
+        <text x="380" y="28" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Definition: Sustained change in wind velocity along aircraft flight path</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Wind Shear Report Passing</div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);margin-bottom:10px;">
+        <span style="font-size:18px;">📢</span>
+        <div>Pass wind shear reports to <strong>subsequent arriving AND departing aircraft ★</strong> — until condition no longer exists, OR included in ATIS (and pilot confirms receiving ATIS)</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.07);">
+        <span style="font-size:18px;">☁️</span>
+        <div>Also send wind shear reports to the <strong>Meteorological Office</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>VFR Operations Suspension</div>
+      <div style="font-size:12px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Who can suspend VFR?</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+        <span class="b b-pu">Approach Control</span><span class="b b-pu">ACC</span>
+        <span class="b b-pu">Aerodrome Control Tower</span><span class="b b-pu">ATS Authority</span>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+        <span class="cn">→</span>
+        <div>When VFR suspended: <strong>Hold all VFR departures</strong> · Recall local VFR flights · OR obtain Special VFR approval</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference & Exam Traps</div>
+  <div class="ss">Every critical number and fact from Chapter 8</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--orange)"></span>Critical Facts Table</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(249,115,22,.12);"><tr><th style="color:#FDB785;">Question</th><th style="color:#FDB785;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Startup clearance issued by</td><td>Clearance Delivery ★</td></tr>
+            <tr><td>Ground controller responsible for</td><td>Taxiways, aprons, ground movement (NOT runway)</td></tr>
+            <tr><td>Aerodrome controller responsible for</td><td>Runway + airborne traffic</td></tr>
+            <tr><td>Long final distance</td><td><span class="num">&gt;4 NM up to 8 NM</span> ★</td></tr>
+            <tr><td>Holding position (strip ≥900m)</td><td><span class="num">50m</span> from runway edge ★</td></tr>
+            <tr><td>Holding position (strip &lt;900m)</td><td><span class="num">30m</span> from runway edge</td></tr>
+            <tr><td>Aircraft cleared to land at one time</td><td><span class="num">1</span> (exception: military formation)</td></tr>
+            <tr><td>Runway vacated means</td><td>Entire aircraft beyond holding position ★</td></tr>
+            <tr><td>Cockpit checks completed</td><td>BEFORE line-up ★</td></tr>
+            <tr><td>Immediate takeoff requires</td><td>Continuous movement — no stopping</td></tr>
+            <tr><td>Backtrack notification</td><td>Before commencement of taxi</td></tr>
+            <tr><td>Runway incursion after landing clearance</td><td>GO AROUND ★</td></tr>
+            <tr><td>Aircraft lost on manoeuvring area</td><td>STOP immediately, notify ATS</td></tr>
+            <tr><td>Cruise climb in India</td><td>NOT permitted ★</td></tr>
+            <tr><td>Supersonic flight in India</td><td>NOT permitted ★</td></tr>
+            <tr><td>Highest traffic priority</td><td>Emergency aircraft</td></tr>
+            <tr><td>Medical vs VVIP priority</td><td>Medical (4) ABOVE VVIP (5) ★</td></tr>
+            <tr><td>Highest priority on surface</td><td>Emergency vehicle assisting distressed aircraft</td></tr>
+            <tr><td>LVP protection</td><td>ILS Sensitive Area (CAT II/III)</td></tr>
+            <tr><td>Flashing runway lights</td><td>Vacate runway/taxiway</td></tr>
+            <tr><td>Lights ON visibility threshold</td><td>Visibility ≤ 5000m ★</td></tr>
+            <tr><td>Lights OFF reactivation time</td><td>1 hour before expected arrival ★</td></tr>
+            <tr><td>PAPI/VASI operation</td><td>Day AND night ★</td></tr>
+            <tr><td>Uncontrolled aerodrome lights after departure</td><td>Minimum 15 minutes ★</td></tr>
+            <tr><td>RWYCC 5 = </td><td>Good (μ ≥ 0.40)</td></tr>
+            <tr><td>RWYCC 1 = </td><td>Poor (μ ≤ 0.25)</td></tr>
+            <tr><td>RWYCC 3 = μ range</td><td>0.30–0.35 (Medium)</td></tr>
+            <tr><td>Hot spot designated by</td><td>Aerodrome operator</td></tr>
+            <tr><td>Wind shear critical zone</td><td>Surface to 1500 ft</td></tr>
+            <tr><td>Wind shear report passed to</td><td>Arrivals AND departures ★</td></tr>
+            <tr><td>Landing vs departing priority</td><td>Landing has priority ★</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Medical (MEDEVAC) is Priority 4 — ABOVE VVIP (Priority 5)</div><div class="trap-d">VVIP appears important but MEDEVAC outranks it. Emergency is #1, then military fuel constraints, then scramble, THEN Medical, then VVIP.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Startup clearance = Clearance Delivery (not Tower, not Ground)</div><div class="trap-d">Startup clearance is issued by Clearance Delivery position. Tower = runway + airborne. Ground = taxiways + aprons. Clearance Delivery = startup + ATC route clearance.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Long final = MORE THAN 4 NM, up to 8 NM (not 2-4 or 10+)</div><div class="trap-d">Long final = &gt;4 NM up to 8 NM from threshold. Exactly 4 NM is NOT long final. More than 8 NM would be extended final only.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">RWYCC 1 = POOR (lowest number = worst). RWYCC 5 = GOOD (highest = best)</div><div class="trap-d">Counterintuitive: higher code number = better braking. Code 5 = Good (μ≥0.40). Code 1 = Poor (μ≤0.25).</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Runway vacated = ENTIRE aircraft beyond holding position (not just nose/mains)</div><div class="trap-d">Runway not vacated until the ENTIRE aircraft — including tail — has crossed the holding position marking. Partial clearing is not "vacated."</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Lights must be reactivatable 1 HOUR before arrival (not 15 or 30 min)</div><div class="trap-d">If aerodrome lights are turned off (no expected ops), they must be capable of reactivation at least 1 HOUR before expected arrival — not 15 or 30 minutes.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 8</div>
+  <div class="ss">30 DGCA-style questions on Aerodrome Control Procedures</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"Startup clearance for a departing IFR flight is issued by:",opts:["Tower controller","Ground controller","Approach control","Clearance Delivery"],ans:3,exp:"Startup clearance = Clearance Delivery. Tower = runway + airborne. Ground = taxiways + aprons. Clearance Delivery = startup clearance + ATC route clearance for IFR departures."},
+{q:"Ground controller is normally responsible for:",opts:["Runway operations and airborne traffic","Taxiways, aprons and ground movements","Approach sequencing","ATC route clearances"],ans:1,exp:"Ground controller = taxiways, aprons, ground movements. NOT runways. Aerodrome (Tower) controller handles runway operations and airborne traffic."},
+{q:"'Long Final' is defined as:",opts:["2 to 4 NM from threshold","More than 4 NM up to 8 NM","More than 8 NM","Exactly 4 NM"],ans:1,exp:"Long Final = MORE THAN 4 NM, up to 8 NM from the threshold. Exactly 4 NM is NOT long final. This is a very frequently asked DGCA number."},
+{q:"The leg of the traffic circuit immediately before final is:",opts:["Upwind","Crosswind","Downwind","Base"],ans:3,exp:"Base leg is immediately before Final. Sequence: Upwind → Crosswind → Downwind → BASE → Final. Base leg is where the aircraft turns to align with the runway."},
+{q:"How many aircraft may normally be cleared to land on a runway at one time?",opts:["Two","Three","One","Four"],ans:2,exp:"Only ONE aircraft may be cleared to land on the runway at a time. Exception: military formation. This is a direct DGCA MCQ."},
+{q:"Cockpit checks prior to departure should be completed:",opts:["After entering the runway","While lining up","Before line-up ★","During the takeoff roll"],ans:2,exp:"Cockpit checks must be completed BEFORE line-up — to minimize runway occupancy time. Runway should be used for one purpose: taking off."},
+{q:"For a runway strip of 900m or more, the holding position is:",opts:["30m from runway edge","40m from runway edge","50m from runway edge ★","75m from runway edge"],ans:2,exp:"Strip width ≥ 900m → holding position = 50m from runway edge. Strip width < 900m → 30m. This is a common DGCA trap — know both values."},
+{q:"Runway is considered vacated when:",opts:["Nose wheel has crossed the holding position","Main wheels have cleared the runway","Entire aircraft is beyond the holding position ★","Aircraft reports clear"],ans:2,exp:"Runway VACATED = entire aircraft beyond the holding position mark. NOT just nose wheel, NOT just main wheels — the entire aircraft including tail must be past the hold bar."},
+{q:"A pilot requiring backtrack of the runway shall notify ATC:",opts:["After entering the runway","Before commencement of taxi","At the holding point only","After completing the backtrack"],ans:1,exp:"Pilot requiring backtrack must notify ATC BEFORE commencement of taxi — not at the holding point, not after entering. Early notification prevents conflicts."},
+{q:"If a vehicle enters the runway after landing clearance has been issued:",opts:["Continue the approach","The tower cancels the QNH","Instruct the aircraft to GO AROUND ★","Instruct aircraft to overshoot"],ans:2,exp:"Runway incursion after landing clearance = instruct aircraft to GO AROUND. If it was a takeoff clearance and aircraft hasn't started roll = cancel takeoff clearance."},
+{q:"An aircraft uncertain of its position on the manoeuvring area should first:",opts:["Continue taxiing slowly","Stop immediately ★ and notify ATS","Follow taxiway signs","Request progressive taxi"],ans:1,exp:"Aircraft lost on manoeuvring area: STOP immediately (Step 1), then notify ATS with last known position (Step 2). Continuing to taxi risks runway incursion."},
+{q:"Cruise climb in Indian FIRs is:",opts:["Permitted","Permitted above FL200","Not permitted ★","Permitted for heavy aircraft only"],ans:2,exp:"Cruise climb is NOT permitted in Indian FIRs. This is a direct India-specific DGCA rule asked very frequently."},
+{q:"Supersonic and transonic flight over Indian airspace is:",opts:["Permitted with ATC clearance","Permitted above FL400","Not permitted ★","Permitted for military only"],ans:2,exp:"Supersonic and transonic flight is NOT permitted over Indian airspace. Another India-specific rule that DGCA tests directly."},
+{q:"Immediate takeoff clearance requires the pilot to:",opts:["Stop on the runway for final checks","Taxi onto runway and take off in one continuous movement ★","Backtrack first","Hold position for 30 seconds"],ans:1,exp:"IMMEDIATE TAKEOFF = taxi onto runway and take off in one continuous movement — no stopping. Issued when ATC needs the aircraft airborne quickly for separation."},
+{q:"Which traffic has priority on approach: an aircraft on final approach or a departing aircraft?",opts:["Departing aircraft","Aircraft on final approach ★","First to call ATC","The larger aircraft"],ans:1,exp:"Aircraft in final stages of approach has priority over aircraft intending departure on the same or intersecting runway. Landing priority is standard ATC practice."},
+{q:"What is the highest traffic priority?",opts:["VVIP flight","Medical flight (MEDEVAC)","Aircraft in emergency ★","Military formation"],ans:2,exp:"Priority 1 = Aircraft in emergency (engine failure, fuel emergency, comm failure). Then military fighters with fuel constraints, scramble, then MEDICAL (4), then VVIP (5)."},
+{q:"Medical flight (MEDEVAC) has which priority relative to VVIP?",opts:["Lower than VVIP","Same as VVIP","Higher than VVIP ★","Depends on the situation"],ans:2,exp:"Medical flight = Priority 4. VVIP = Priority 5. MEDEVAC OUTRANKS VVIP. This is a favourite DGCA trap question."},
+{q:"During Low Visibility Procedures (LVP), special protection is required for:",opts:["Apron area","ILS Sensitive Area ★","Taxiway edge lights","Runway end lights"],ans:1,exp:"During LVP (CAT II/III operations), the ILS Sensitive Area must be protected. Vehicles and persons are restricted to essential minimum to prevent ILS signal distortion."},
+{q:"The highest priority on the manoeuvring area surface belongs to:",opts:["Follow-me vehicles","Fuel tankers","Emergency vehicles assisting distressed aircraft ★","VIP vehicles"],ans:2,exp:"Emergency vehicles assisting distressed aircraft have absolute priority on the manoeuvring area. All other vehicles must give way."},
+{q:"Flashing runway/taxiway lights indicate:",opts:["Clear to proceed","Hold position","Vacate the runway/taxiway and watch for light signal ★","Increase speed"],ans:2,exp:"Flashing runway/taxiway lights = vacate the runway or taxiway immediately and look to the tower for a light signal (further instructions)."},
+{q:"Aeronautical ground lights must be operated during daytime when visibility is:",opts:["Less than 8 km","Less than 10 km","5000m or less ★","Always during day"],ans:2,exp:"India rule: lights operated during day when visibility ≤ 5000m. Also mandatory at sunset to sunrise, on pilot request, and whenever safety requires."},
+{q:"If aerodrome lights are turned off due to no operations, they must be capable of reactivation:",opts:["Within 15 minutes of arrival","Within 30 minutes of arrival","At least 1 hour before expected arrival ★","Immediately on request"],ans:2,exp:"Aerodrome lights turned off must be capable of reactivation at least 1 HOUR before expected arrival — not 15 or 30 minutes. This ensures adequate preparation time."},
+{q:"PAPI/VASI approach slope lights are operated:",opts:["During night only","During day only","During day and night ★","Only when visibility is less than 5 km"],ans:2,exp:"PAPI/VASI must operate day AND night, regardless of visibility, whenever the associated runway is in use. They are always required when the runway is active."},
+{q:"At an uncontrolled aerodrome, runway lights remain illuminated for at least:",opts:["5 minutes after takeoff","10 minutes after takeoff","15 minutes after takeoff ★","30 minutes after takeoff"],ans:2,exp:"Uncontrolled aerodrome: lights remain on minimum 15 minutes after departure. This allows the aircraft to return if needed. Controlled aerodrome = as long as required."},
+{q:"RWYCC Code 5 indicates:",opts:["Poor braking action","Medium braking action","Good braking action ★","Medium to good braking"],ans:2,exp:"RWYCC 5 = GOOD braking (μ ≥ 0.40). RWYCC 1 = POOR (μ ≤ 0.25). Higher code = better braking. Remember: 5=Good, 1=Poor."},
+{q:"A runway friction coefficient of 0.32 corresponds to RWYCC code:",opts:["1 (Poor)","2 (Medium-Poor)","3 (Medium) ★","4 (Medium-Good)"],ans:2,exp:"μ 0.30–0.35 = Code 3 = MEDIUM. μ 0.32 falls in this range. Code 3 is the middle value — normal conditions, neither good nor poor."},
+{q:"Hot spots on the movement area are designated by:",opts:["Pilot-in-command","DGCA inspector","ATC","Aerodrome operator ★"],ans:3,exp:"Hot spots (locations with elevated collision/incursion risk) are designated by the AERODROME OPERATOR. They appear on aerodrome charts with HS1, HS2 etc."},
+{q:"Wind shear is most critical during:",opts:["Cruise flight","Takeoff and approach ★","Descent to FL100","Level flight in cloud"],ans:1,exp:"Wind shear is most dangerous from surface to 1500ft, especially during TAKEOFF and FINAL APPROACH when airspeed margins are low and altitude is limited."},
+{q:"Wind shear pilot reports shall be passed to:",opts:["Subsequent arriving aircraft only","Subsequent departing aircraft only","Both subsequent arrivals and departures ★","Met office only"],ans:2,exp:"Wind shear reports MUST be passed to BOTH subsequent arriving AND departing aircraft, until condition no longer exists OR the ATIS includes it and pilot confirms receiving ATIS."},
+{q:"Taxi clearance for a route that crosses a runway must contain:",opts:["Only a hold short instruction","Only a cross runway clearance","An explicit runway crossing clearance or hold short instruction ★","No special instruction needed"],ans:2,exp:"If taxi route crosses a runway, ATC MUST explicitly say either 'Cross Runway XX' (cross clearance) OR 'Hold Short of Runway XX'. Ambiguity is not permitted — it causes runway incursions."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='🏆 Excellent!';sub='Chapter 8 mastered — DGCA ready!';}else if(pct>=75){msg='✅ Strong!';sub='Review priority order and RWYCC codes.';}else if(pct>=60){msg='📚 Good!';sub='Drill the numbers table — long final, holding distances, lighting rules.';}else{msg='🔄 Keep Revising!';sub='Focus on priority ladder, startup clearance, and RWYCC codes.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

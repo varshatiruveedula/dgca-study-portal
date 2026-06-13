@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 24: CRM, TEM & LOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070C18;--bg2:#091220;--bg3:#0B1728;
+  --card:#0D1B2E;--card2:#102038;
+  --teal:#14B8A6;--sky:#0EA5E9;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--purple:#A855F7;
+  --indigo:#6366F1;--orange:#F97316;--pink:#EC4899;
+  --text:#D0E6FA;--text2:#6890B8;--text3:#304E68;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --tl-bg:rgba(20,184,166,.11);--sk-bg:rgba(14,165,233,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--pu-bg:rgba(168,85,247,.11);
+  --in-bg:rgba(99,102,241,.11);--or-bg:rgba(249,115,22,.11);
+  --pk-bg:rgba(236,72,153,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(20,184,166,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.4);color:#5EEAD4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#5EEAD4;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 11px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--teal);color:#5EEAD4;}
+.nb.active{background:var(--teal);border-color:var(--teal);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pk{background:var(--pk-bg);color:#F9A8D4;border:1px solid rgba(236,72,153,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);} .al-tl strong{color:#5EEAD4;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);} .al-pu strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#5EEAD4;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* SHEL specific */
+.shel-interface{border-radius:11px;padding:14px;margin-bottom:10px;border:1px solid;}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--teal);color:#fff;background:var(--tl-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--tl-bg);border:1px solid rgba(20,184,166,.22);border-radius:8px;font-size:12.5px;color:#5EEAD4;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--teal);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#2DD4BF;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--teal) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#5EEAD4;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nav-bar{gap:2px;}.nb{font-size:10px;padding:4px 8px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🧠 DGCA CPL · Human Performance</div>
+  <h1>Chapter 24 — <span>CRM, TEM & LOFT</span></h1>
+  <p>SHEL Model · CRM Skills · TEM Chain · 5 Error Types · Authority Gradient · LOFT</p>
+  <div class="hero-chips">
+    <span class="chip">SHEL = S·H·E·L·L</span><span class="chip">Hub = Liveware</span>
+    <span class="chip">Edwards 1972</span><span class="chip">TEM Chain → Threat→Error→UAS→Accident</span>
+    <span class="chip">5 Error Types</span><span class="chip">Balanced Authority Gradient</span>
+    <span class="chip">LOFT = Training NOT Exam</span><span class="chip">Tenerife = CRM trigger</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('crm')">🤝 CRM</button>
+  <button class="nb" onclick="show('shel')">🔷 SHEL Model</button>
+  <button class="nb" onclick="show('interfaces')">🔗 Interfaces</button>
+  <button class="nb" onclick="show('skills')">💡 CRM Skills</button>
+  <button class="nb" onclick="show('tem')">⚠️ TEM</button>
+  <button class="nb" onclick="show('errors')">❌ Error Types</button>
+  <button class="nb" onclick="show('loft')">🎮 LOFT</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ===== CRM ===== -->
+<div class="section active" id="section-crm">
+  <div class="sh">
+    <div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🤝</div>
+    <div><div class="st">Crew Resource Management (CRM)</div>
+    <div class="ss">Definition · Objectives · Skills focus · Tenerife · Foundations · CRM vs flying skills</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>CRM Definition & Focus</div>
+    <div class="g2">
+      <div>
+        <div style="background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.3);border-radius:12px;padding:16px;margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:#5EEAD4;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">CRM DEFINITION</div>
+          <div style="font-size:14px;color:#fff;font-weight:600;line-height:1.5;">Effective use of <strong style="color:#5EEAD4;">ALL available resources</strong> to ensure safe and efficient flight operations while reducing errors and stress.</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">Resources Include:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-tl">Pilots</span><span class="b b-tl">Cabin Crew</span><span class="b b-tl">ATC</span>
+          <span class="b b-tl">Aircraft Systems</span><span class="b b-tl">Checklists</span>
+          <span class="b b-tl">SOPs</span><span class="b b-tl">Ground Personnel</span>
+        </div>
+      </div>
+      <div>
+        <div class="al al-am" style="margin-bottom:10px;"><strong>DGCA Key Point:</strong> CRM is NOT primarily about flying skills. It focuses on cognitive and interpersonal skills.</div>
+        <div style="font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:8px;">CRM focuses on:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+            <span class="b b-sk">Cognitive</span><div>Situational awareness · Problem solving · Decision making</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+            <span class="b b-pu">Interpersonal</span><div>Communication · Leadership · Teamwork · Coordination</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRM SVG VISUAL -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>CRM — Why It Became Essential</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#08111c"/>
+        <!-- Before CRM: steep hierarchy -->
+        <rect x="20" y="20" width="330" height="185" rx="12" fill="rgba(239,68,68,.06)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="185" y="44" fill="#FCA5A5" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">BEFORE CRM — Captain-Centric</text>
+        <!-- captain figure large -->
+        <circle cx="185" cy="90" r="28" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <text x="185" y="86" fill="#FCA5A5" font-family="sans-serif" font-size="24" text-anchor="middle">👨‍✈️</text>
+        <text x="185" y="107" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">CAPTAIN</text>
+        <!-- arrow down one-way -->
+        <line x1="185" y1="120" x2="185" y2="145" stroke="#EF4444" stroke-width="2"/>
+        <polygon points="185,145 179,133 191,133" fill="#EF4444"/>
+        <!-- FO silent -->
+        <circle cx="130" cy="163" r="18" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.2)" stroke-width="1"/>
+        <text x="130" y="158" fill="rgba(239,68,68,.5)" font-family="sans-serif" font-size="18" text-anchor="middle">🧑‍✈️</text>
+        <text x="130" y="176" fill="rgba(239,68,68,.6)" font-family="monospace" font-size="9" text-anchor="middle">FO (silent)</text>
+        <!-- Tenerife label -->
+        <rect x="35" y="190" width="280" height="14" rx="4" fill="rgba(239,68,68,.12)"/>
+        <text x="175" y="201" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Tenerife Disaster 1977 → CRM born</text>
+
+        <!-- After CRM: balanced -->
+        <rect x="410" y="20" width="330" height="185" rx="12" fill="rgba(20,184,166,.06)" stroke="rgba(20,184,166,.3)" stroke-width="1.5"/>
+        <text x="575" y="44" fill="#5EEAD4" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">AFTER CRM — Balanced Team</text>
+        <!-- captain + FO equal sized with bidirectional arrow -->
+        <circle cx="510" cy="110" r="28" fill="rgba(20,184,166,.12)" stroke="rgba(20,184,166,.35)" stroke-width="1.5"/>
+        <text x="510" y="105" fill="#5EEAD4" font-family="sans-serif" font-size="22" text-anchor="middle">👨‍✈️</text>
+        <text x="510" y="125" fill="#5EEAD4" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">CAPTAIN</text>
+        <!-- bi-directional arrow -->
+        <line x1="540" y1="110" x2="610" y2="110" stroke="#5EEAD4" stroke-width="2.5"/>
+        <polygon points="540,104 528,110 540,116" fill="#5EEAD4"/>
+        <polygon points="610,104 622,110 610,116" fill="#5EEAD4"/>
+        <circle cx="640" cy="110" r="28" fill="rgba(20,184,166,.12)" stroke="rgba(20,184,166,.35)" stroke-width="1.5"/>
+        <text x="640" y="105" fill="#5EEAD4" font-family="sans-serif" font-size="22" text-anchor="middle">🧑‍✈️</text>
+        <text x="640" y="125" fill="#5EEAD4" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">FIRST OFFICER</text>
+        <!-- speaks up label -->
+        <text x="575" y="80" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Open communication ✅</text>
+        <text x="575" y="155" fill="#5EEAD4" font-family="monospace" font-size="11" text-anchor="middle">All resources used · Errors caught</text>
+        <rect x="425" y="190" width="300" height="14" rx="4" fill="rgba(20,184,166,.12)"/>
+        <text x="575" y="201" fill="#5EEAD4" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Teamwork + Shared SA → Safety ↑</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">CRM Foundations</div>
+      <div class="mf">1. Errors are NORMAL · 2. Non-punitive culture · 3. Learning organisation</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>CRM Objectives & Who Needs It</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#86EFAC;margin-bottom:8px;">CRM Objectives:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Reduce human error</div>
+          <div class="chk-item"><span class="cy">✓</span>Improve teamwork</div>
+          <div class="chk-item"><span class="cy">✓</span>Improve decision making</div>
+          <div class="chk-item"><span class="cy">✓</span>Improve situational awareness</div>
+          <div class="chk-item"><span class="cy">✓</span>Prevent accidents and incidents</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">CRM Training Required For:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-sk">Pilots</span><span class="b b-sk">Cabin Crew</span>
+          <span class="b b-sk">ATCOs</span><span class="b b-sk">Engineers</span>
+          <span class="b b-sk">Dispatchers</span><span class="b b-sk">All Aviation Personnel</span>
+        </div>
+        <div class="al al-am" style="margin-top:12px;margin-bottom:0;"><strong>Tenerife Airport Disaster (1977)</strong> = Historical trigger event for CRM development. Poor cockpit hierarchy and communication led to catastrophe.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SHEL MODEL ===== -->
+<div class="section" id="section-shel">
+  <div class="sh">
+    <div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🔷</div>
+    <div><div class="st">SHEL Model</div>
+    <div class="ss">Edwards 1972 · S·H·E·L·L · Liveware = Hub · 4 Interfaces · Mismatch = Error</div></div>
+  </div>
+
+  <!-- SHEL VISUAL DIAGRAM -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>SHEL Model — Complete Visual Diagram</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="340" fill="#08111c"/>
+        <!-- Title -->
+        <text x="380" y="22" fill="#D8B4FE" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SHEL Model — Edwards (1972) · Liveware (Pilot) is always the HUB</text>
+
+        <!-- CENTRAL LIVEWARE (Pilot) -->
+        <rect x="300" y="130" width="160" height="100" rx="14" fill="rgba(168,85,247,.15)" stroke="rgba(168,85,247,.5)" stroke-width="3"/>
+        <text x="380" y="168" fill="#D8B4FE" font-family="monospace" font-size="26" font-weight="bold" text-anchor="middle">L</text>
+        <text x="380" y="188" fill="#D8B4FE" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle">Liveware</text>
+        <text x="380" y="205" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">(Pilot — THE HUB)</text>
+        <!-- Pulsing ring -->
+        <circle cx="380" cy="180" r="68" fill="none" stroke="rgba(168,85,247,.2)" stroke-width="1.5" stroke-dasharray="6,5"/>
+
+        <!-- SOFTWARE — TOP -->
+        <rect x="300" y="25" width="160" height="80" rx="10" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <text x="380" y="57" fill="#7DD3FC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">S</text>
+        <text x="380" y="75" fill="#7DD3FC" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">Software</text>
+        <text x="380" y="90" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">SOPs · Checklists · Manuals</text>
+        <!-- L-S arrows -->
+        <line x1="380" y1="105" x2="380" y2="130" stroke="rgba(14,165,233,.5)" stroke-width="2"/>
+        <polygon points="380,105 374,116 386,116" fill="rgba(14,165,233,.5)"/>
+        <polygon points="380,130 374,119 386,119" fill="rgba(14,165,233,.5)"/>
+        <text x="400" y="118" fill="#7DD3FC" font-family="monospace" font-size="10" font-weight="bold">L-S</text>
+
+        <!-- HARDWARE — LEFT -->
+        <rect x="100" y="130" width="155" height="100" rx="10" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <text x="177" y="168" fill="#86EFAC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">H</text>
+        <text x="177" y="188" fill="#86EFAC" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">Hardware</text>
+        <text x="177" y="204" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Aircraft · Instruments</text>
+        <!-- L-H arrows -->
+        <line x1="255" y1="180" x2="300" y2="180" stroke="rgba(34,197,94,.5)" stroke-width="2"/>
+        <polygon points="255,174 244,180 255,186" fill="rgba(34,197,94,.5)"/>
+        <polygon points="300,174 311,180 300,186" fill="rgba(34,197,94,.5)"/>
+        <text x="267" y="172" fill="#86EFAC" font-family="monospace" font-size="10" font-weight="bold">L-H</text>
+
+        <!-- ENVIRONMENT — RIGHT -->
+        <rect x="505" y="130" width="155" height="100" rx="10" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="582" y="168" fill="#FCD34D" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">E</text>
+        <text x="582" y="188" fill="#FCD34D" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">Environment</text>
+        <text x="582" y="204" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Weather · Noise · Terrain</text>
+        <!-- L-E arrows -->
+        <line x1="460" y1="180" x2="505" y2="180" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <polygon points="505,174 516,180 505,186" fill="rgba(245,158,11,.5)"/>
+        <polygon points="460,174 449,180 460,186" fill="rgba(245,158,11,.5)"/>
+        <text x="472" y="172" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold">L-E</text>
+
+        <!-- LIVEWARE (Others) — BOTTOM -->
+        <rect x="300" y="258" width="160" height="70" rx="10" fill="rgba(249,115,22,.10)" stroke="rgba(249,115,22,.4)" stroke-width="2"/>
+        <text x="380" y="283" fill="#FDB785" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">L</text>
+        <text x="380" y="300" fill="#FDB785" font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle">Liveware (Others)</text>
+        <text x="380" y="316" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Co-pilot · ATC · Cabin crew</text>
+        <!-- L-L arrows -->
+        <line x1="380" y1="230" x2="380" y2="258" stroke="rgba(249,115,22,.5)" stroke-width="2"/>
+        <polygon points="380,258 374,247 386,247" fill="rgba(249,115,22,.5)"/>
+        <polygon points="380,230 374,241 386,241" fill="rgba(249,115,22,.5)"/>
+        <text x="400" y="246" fill="#FDB785" font-family="monospace" font-size="10" font-weight="bold">L-L</text>
+
+        <!-- MISMATCH label -->
+        <rect x="15" y="270" width="260" height="52" rx="8" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="145" y="291" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">⚠ Interface MISMATCH</text>
+        <text x="145" y="308" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">= Human error / incident / accident</text>
+
+        <!-- ICAO note -->
+        <rect x="490" y="270" width="255" height="52" rx="8" fill="rgba(99,102,241,.08)" stroke="rgba(99,102,241,.3)" stroke-width="1.5"/>
+        <text x="617" y="291" fill="#A5B4FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Developed: Edwards 1972</text>
+        <text x="617" y="308" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Adopted by ICAO for HF analysis</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SHEL EXPANSION CARDS -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>SHEL — Letter by Letter</div>
+    <div class="g2">
+      <div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.07);margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#7DD3FC;flex-shrink:0;">S</span>
+          <div><div style="font-weight:700;color:#7DD3FC;margin-bottom:3px;">Software — Procedures & Paperwork</div>
+          <div style="font-size:12px;color:var(--text2);">SOPs · Manuals · Checklists · Charts · Maps · Computer programs · Documents</div></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#86EFAC;flex-shrink:0;">H</span>
+          <div><div style="font-weight:700;color:#86EFAC;margin-bottom:3px;">Hardware — The Machine</div>
+          <div style="font-size:12px;color:var(--text2);">Aircraft · Instruments · Controls · Equipment · Flight deck design</div></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#FCD34D;flex-shrink:0;">E</span>
+          <div><div style="font-weight:700;color:#FCD34D;margin-bottom:3px;">Environment — Surroundings</div>
+          <div style="font-size:12px;color:var(--text2);">External: Weather · Terrain · Airport<br>Internal: Noise · Vibration · Temperature</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="chk-item" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.10);margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#D8B4FE;flex-shrink:0;">L</span>
+          <div><div style="font-weight:700;color:#D8B4FE;margin-bottom:3px;">Liveware — THE PILOT (HUB)</div>
+          <div style="font-size:12px;color:var(--text2);">The most important, most flexible component. Central hub of the model.</div></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#FDB785;flex-shrink:0;">L</span>
+          <div><div style="font-weight:700;color:#FDB785;margin-bottom:3px;">Liveware — Other Humans</div>
+          <div style="font-size:12px;color:var(--text2);">Co-pilot · Cabin crew · ATC · Engineers · Passengers</div></div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">SHEL Memory</div>
+          <div class="mf">Software=Procedures · Hardware=Machine<br>Env=Surroundings · L(1)=Pilot · L(2)=Others</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INTERFACES ===== -->
+<div class="section" id="section-interfaces">
+  <div class="sh">
+    <div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🔗</div>
+    <div><div class="st">SHEL Interfaces — High-Yield DGCA MCQs</div>
+    <div class="ss">L-L · L-H · L-S · L-E · 17-item classification table</div></div>
+  </div>
+
+  <div class="g2">
+    <!-- L-L -->
+    <div class="shel-interface" style="background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.35);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#FDB785;margin-bottom:6px;">L — L</div>
+      <div style="font-size:13px;font-weight:700;color:#FDB785;margin-bottom:6px;">Liveware ↔ Liveware (Human ↔ Human)</div>
+      <div style="font-size:12.5px;color:var(--text2);">Pilot–Co-pilot · Pilot–ATC · Pilot–Cabin Crew · CRM · Hand signals · Readback/hearback · Crew coordination</div>
+    </div>
+    <!-- L-H -->
+    <div class="shel-interface" style="background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.35);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#86EFAC;margin-bottom:6px;">L — H</div>
+      <div style="font-size:13px;font-weight:700;color:#86EFAC;margin-bottom:6px;">Liveware ↔ Hardware (Pilot ↔ Machine)</div>
+      <div style="font-size:12.5px;color:var(--text2);">Cockpit instrument design · GPWS · Seat design · Switch placement · Control layout · Instrument readability</div>
+    </div>
+    <!-- L-S -->
+    <div class="shel-interface" style="background:rgba(14,165,233,.07);border-color:rgba(14,165,233,.35);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#7DD3FC;margin-bottom:6px;">L — S</div>
+      <div style="font-size:13px;font-weight:700;color:#7DD3FC;margin-bottom:6px;">Liveware ↔ Software (Pilot ↔ Rules)</div>
+      <div style="font-size:12.5px;color:var(--text2);">SOPs · Checklists · Manuals · NOTAMs · Charts · Maps · Automation · Regulations</div>
+    </div>
+    <!-- L-E -->
+    <div class="shel-interface" style="background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.35);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#FCD34D;margin-bottom:6px;">L — E</div>
+      <div style="font-size:13px;font-weight:700;color:#FCD34D;margin-bottom:6px;">Liveware ↔ Environment (Pilot ↔ Weather)</div>
+      <div style="font-size:12.5px;color:var(--text2);">Weather · Turbulence · Noise · Vibration · Runway lighting · Temperature · Terrain · Sun glare</div>
+    </div>
+  </div>
+
+  <!-- HIGH YIELD TABLE -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>17-Item High-Yield DGCA Classification Table</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(20,184,166,.12);"><tr><th style="color:#5EEAD4;">Item / Situation</th><th style="color:#5EEAD4;">SHEL Interface</th><th style="color:#5EEAD4;">Memory Hook</th></tr></thead>
+        <tbody>
+          <tr><td>Pilot–ATC Communication</td><td><span class="b b-or">L-L</span></td><td>Human ↔ Human</td></tr>
+          <tr><td>Crew Coordination / CRM</td><td><span class="b b-or">L-L</span></td><td>Human ↔ Human</td></tr>
+          <tr><td>Readback / Hearback failure</td><td><span class="b b-or">L-L</span></td><td>Human ↔ Human</td></tr>
+          <tr><td>Hand Signals (Marshaller)</td><td><span class="b b-or">L-L</span></td><td>Human ↔ Human</td></tr>
+          <tr><td>Cockpit Instrument Design</td><td><span class="b b-gn">L-H</span></td><td>Pilot ↔ Machine</td></tr>
+          <tr><td>GPWS</td><td><span class="b b-gn">L-H</span></td><td>Warning HARDWARE device</td></tr>
+          <tr><td>Seat Design / Switch Layout</td><td><span class="b b-gn">L-H</span></td><td>Pilot ↔ Machine</td></tr>
+          <tr><td>Poor instrument readability</td><td><span class="b b-gn">L-H</span></td><td>Machine interface mismatch</td></tr>
+          <tr><td>SOP / Checklist</td><td><span class="b b-sk">L-S</span></td><td>Pilot ↔ Rules</td></tr>
+          <tr><td>NOTAM</td><td><span class="b b-sk">L-S</span></td><td>Pilot ↔ Information</td></tr>
+          <tr><td>Charts &amp; Maps</td><td><span class="b b-sk">L-S</span></td><td>Pilot ↔ Documents</td></tr>
+          <tr><td>Automation / FMS</td><td><span class="b b-sk">L-S</span></td><td>Pilot ↔ Software</td></tr>
+          <tr><td>Weather</td><td><span class="b b-am">L-E</span></td><td>External environment</td></tr>
+          <tr><td>Turbulence</td><td><span class="b b-am">L-E</span></td><td>External environment</td></tr>
+          <tr><td>Noise / Vibration</td><td><span class="b b-am">L-E</span></td><td>Internal environment</td></tr>
+          <tr><td>Runway Lighting</td><td><span class="b b-am">L-E</span></td><td>Airport environment</td></tr>
+          <tr><td>Cockpit noise → comm difficulty</td><td><span class="b b-am">L-E</span></td><td>Internal environment</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Interface Memory Quick Rule</div>
+      <div class="mf">L-L=people · L-H=equipment/machine · L-S=documents/rules/automation · L-E=weather/noise/environment</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== CRM SKILLS ===== -->
+<div class="section" id="section-skills">
+  <div class="sh">
+    <div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">💡</div>
+    <div><div class="st">CRM Skills</div>
+    <div class="ss">15 key skills · Authority gradient · Assertiveness · SA · Decision making · Workload</div></div>
+  </div>
+
+  <!-- AUTHORITY GRADIENT SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Trans-Cockpit Authority Gradient (TCAG)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#08111c"/>
+        <!-- STEEP gradient -->
+        <rect x="20" y="20" width="210" height="185" rx="10" fill="rgba(239,68,68,.07)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="125" y="42" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">STEEP ❌</text>
+        <!-- Captain big, FO tiny -->
+        <circle cx="125" cy="80" r="32" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="125" y="75" fill="#FCA5A5" font-family="sans-serif" font-size="26" text-anchor="middle">👨‍✈️</text>
+        <text x="125" y="100" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">CAPTAIN (dominates)</text>
+        <circle cx="125" cy="158" r="14" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.2)" stroke-width="1"/>
+        <text x="125" y="153" fill="rgba(239,68,68,.5)" font-family="sans-serif" font-size="14" text-anchor="middle">🧑‍✈️</text>
+        <text x="125" y="176" fill="rgba(239,68,68,.6)" font-family="monospace" font-size="9" text-anchor="middle">FO afraid to speak</text>
+        <text x="125" y="195" fill="#FCA5A5" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Errors unchallenged</text>
+
+        <!-- SHALLOW gradient -->
+        <rect x="270" y="20" width="210" height="185" rx="10" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <text x="375" y="42" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SHALLOW ❌</text>
+        <circle cx="340" cy="120" r="24" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="340" y="115" fill="#FCD34D" font-family="sans-serif" font-size="22" text-anchor="middle">👨‍✈️</text>
+        <text x="340" y="140" fill="#FCD34D" font-family="monospace" font-size="9" text-anchor="middle">Captain</text>
+        <circle cx="410" cy="120" r="24" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="410" y="115" fill="#FCD34D" font-family="sans-serif" font-size="22" text-anchor="middle">🧑‍✈️</text>
+        <text x="410" y="140" fill="#FCD34D" font-family="monospace" font-size="9" text-anchor="middle">FO</text>
+        <text x="375" y="175" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Both act as equals</text>
+        <text x="375" y="195" fill="#FCD34D" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Weak command</text>
+
+        <!-- BALANCED gradient ✅ -->
+        <rect x="530" y="20" width="210" height="185" rx="10" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.35)" stroke-width="2"/>
+        <text x="635" y="42" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BALANCED ✅ BEST</text>
+        <!-- Captain slightly larger -->
+        <circle cx="600" cy="100" r="30" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <text x="600" y="95" fill="#86EFAC" font-family="sans-serif" font-size="26" text-anchor="middle">👨‍✈️</text>
+        <text x="600" y="118" fill="#86EFAC" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">CAPTAIN</text>
+        <text x="600" y="130" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">(leader)</text>
+        <!-- bidirectional -->
+        <line x1="633" y1="100" x2="657" y2="100" stroke="#86EFAC" stroke-width="2"/>
+        <polygon points="633,94 622,100 633,106" fill="#86EFAC"/>
+        <polygon points="657,94 668,100 657,106" fill="#86EFAC"/>
+        <circle cx="678" cy="100" r="22" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <text x="678" y="95" fill="#86EFAC" font-family="sans-serif" font-size="20" text-anchor="middle">🧑‍✈️</text>
+        <text x="678" y="114" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">FO speaks up</text>
+        <text x="635" y="160" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">Captain leads · FO contributes</text>
+        <text x="635" y="195" fill="#86EFAC" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Errors caught ✅</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Authority Gradient</div>
+      <div class="mf">Steep = FO silent ❌ · Shallow = No command ❌ · BALANCED = Best ✅ (Tenerife = steep gradient)</div>
+    </div></div>
+  </div>
+
+  <!-- CRM SKILLS GRID -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>15 CRM Skills — All DGCA Relevant</div>
+    <div class="g3">
+      <div class="chk-item" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.06);">
+        <span class="b b-pk">1</span><div><strong>Leadership / Command</strong><br><span style="font-size:12px;color:var(--text2);">Appropriate authority + team support</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+        <span class="b b-sk">2</span><div><strong>Decision Making</strong><br><span style="font-size:12px;color:var(--text2);">DAGESR: Detect→Assess→Generate→Evaluate→Select→Review</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+        <span class="b b-gn">3</span><div><strong>Communication</strong><br><span style="font-size:12px;color:var(--text2);">Clear · Accurate · Timely · Interactive</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+        <span class="b b-pu">4</span><div><strong>Situational Awareness (SA)</strong><br><span style="font-size:12px;color:var(--text2);">Past → Present → Future picture</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <span class="b b-am">5</span><div><strong>Team Building</strong><br><span style="font-size:12px;color:var(--text2);">Cooperation · Coordination · Prioritization</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+        <span class="b b-or">6</span><div><strong>Workload Management</strong><br><span style="font-size:12px;color:var(--text2);">High=Errors · Low=Complacency · Balance!</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.06);">
+        <span class="b b-in">7</span><div><strong>Vigilance</strong><br><span style="font-size:12px;color:var(--text2);">Maintain alertness · Monitor systems</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+        <span class="b b-tl">8</span><div><strong>Automation Management</strong><br><span style="font-size:12px;color:var(--text2);">Assist, not replace thinking. Avoid mode confusion</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+        <span class="b b-sk">9</span><div><strong>Human Performance Awareness</strong><br><span style="font-size:12px;color:var(--text2);">Know personal limits · Fatigue · Stress</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);">
+        <span class="b b-rd">10</span><div><strong>Assertiveness ★</strong><br><span style="font-size:12px;color:var(--text2);">Speak up confidently &amp; respectfully when safety at risk</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+        <span class="b b-gn">11</span><div><strong>Briefings</strong><br><span style="font-size:12px;color:var(--text2);">Share info · Clarify plans · Encourage questions</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <span class="b b-am">12</span><div><strong>Setting Bottom Lines</strong><br><span style="font-size:12px;color:var(--text2);">Recognize limits: fuel / weather / approach criteria</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+        <span class="b b-pu">13</span><div><strong>Contingency Management</strong><br><span style="font-size:12px;color:var(--text2);">"What if?" planning · Alternates · Diversions</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+        <span class="b b-or">14</span><div><strong>Evaluation of Plans</strong><br><span style="font-size:12px;color:var(--text2);">Review decisions · Learn from errors</span></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.06);">
+        <span class="b b-in">15</span><div><strong>Trans-Cockpit Authority Gradient</strong><br><span style="font-size:12px;color:var(--text2);">Balanced gradient = Best. Steep = Danger.</span></div>
+      </div>
+    </div>
+    <div class="al al-rd" style="margin-top:4px;margin-bottom:0;"><strong>Assertiveness ≠ Aggression.</strong> Assertiveness = Professional, respectful communication of safety concerns. Remaining silent when danger exists = NOT assertive.</div>
+  </div>
+</div>
+
+<!-- ===== TEM ===== -->
+<div class="section" id="section-tem">
+  <div class="sh">
+    <div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">⚠️</div>
+    <div><div class="st">Threat & Error Management (TEM)</div>
+    <div class="ss">TEM Chain · Threat categories · UAS · 4-step process · TEM philosophy</div></div>
+  </div>
+
+  <!-- TEM CHAIN SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>TEM Chain — The Core Concept</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#08111c"/>
+        <text x="380" y="22" fill="var(--text2)" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">TEM chain shows how an unmanaged threat cascades to accident if not intercepted at each stage</text>
+
+        <!-- THREAT box -->
+        <rect x="20" y="45" width="155" height="90" rx="12" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="97" y="76" fill="#FCD34D" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">⛈</text>
+        <text x="97" y="98" fill="#FCD34D" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">THREAT</text>
+        <text x="97" y="113" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Bad weather · ATC error</text>
+        <text x="97" y="126" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Equipment fault</text>
+        <!-- arrow -->
+        <line x1="175" y1="90" x2="205" y2="90" stroke="#EF4444" stroke-width="2.5"/>
+        <polygon points="205,84 218,90 205,96" fill="#EF4444"/>
+        <!-- TEM intercept 1 -->
+        <rect x="175" y="72" width="30" height="36" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="190" y="94" fill="#86EFAC" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">TEM</text>
+
+        <!-- ERROR box -->
+        <rect x="218" y="45" width="155" height="90" rx="12" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="295" y="76" fill="#FCA5A5" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">⚠️</text>
+        <text x="295" y="98" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">ERROR</text>
+        <text x="295" y="113" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Crew action/inaction</text>
+        <text x="295" y="126" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">causing deviation</text>
+        <!-- arrow -->
+        <line x1="373" y1="90" x2="403" y2="90" stroke="#EF4444" stroke-width="2.5"/>
+        <polygon points="403,84 416,90 403,96" fill="#EF4444"/>
+        <!-- TEM intercept 2 -->
+        <rect x="373" y="72" width="30" height="36" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="388" y="94" fill="#86EFAC" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">TEM</text>
+
+        <!-- UAS box -->
+        <rect x="416" y="45" width="155" height="90" rx="12" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+        <text x="493" y="76" fill="#D8B4FE" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle">✈ ⚡</text>
+        <text x="493" y="98" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">UNDESIRED</text>
+        <text x="493" y="112" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">AIRCRAFT STATE</text>
+        <text x="493" y="126" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Unstable approach</text>
+        <!-- arrow -->
+        <line x1="571" y1="90" x2="601" y2="90" stroke="#EF4444" stroke-width="2.5"/>
+        <polygon points="601,84 614,90 601,96" fill="#EF4444"/>
+        <!-- TEM intercept 3 -->
+        <rect x="571" y="72" width="30" height="36" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="586" y="94" fill="#86EFAC" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">TEM</text>
+
+        <!-- ACCIDENT box -->
+        <rect x="614" y="45" width="130" height="90" rx="12" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.5)" stroke-width="2.5"/>
+        <text x="679" y="76" fill="#FCA5A5" font-family="monospace" font-size="26" font-weight="bold" text-anchor="middle">💥</text>
+        <text x="679" y="100" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">ACCIDENT</text>
+        <text x="679" y="116" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">If not managed</text>
+
+        <!-- TEM intercept legend -->
+        <rect x="100" y="168" width="18" height="18" rx="3" fill="rgba(34,197,94,.2)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="126" y="181" fill="#86EFAC" font-family="sans-serif" font-size="12" font-weight="bold">= TEM Intercept Point (Manage here to prevent cascade)</text>
+
+        <!-- TEM philosophy box -->
+        <rect x="20" y="200" width="720" height="44" rx="10" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <text x="380" y="218" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TEM PHILOSOPHY: Threats &amp; errors are NORMAL and UNAVOIDABLE.</text>
+        <text x="380" y="235" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">TEM does NOT eliminate them — it teaches crews to RECOGNIZE, MANAGE and MINIMIZE consequences.</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- THREAT CATEGORIES -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>6 Threat Categories</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+          <span class="b b-am">1</span><div><strong>Environmental</strong> — Bad weather · Terrain · Airport conditions · TCAS events</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.07);">
+          <span class="b b-sk">2</span><div><strong>ATC</strong> — Incorrect clearance · Similar callsigns · Language difficulty</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);">
+          <span class="b b-gn">3</span><div><strong>Aircraft</strong> — System failures · Equipment malfunction · Automation events</div>
+        </div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.07);">
+          <span class="b b-pu">4</span><div><strong>Crew Support</strong> — Dispatch errors · Ground handling errors · Maintenance mistakes</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.07);">
+          <span class="b b-or">5</span><div><strong>Operational</strong> — Time pressure · Diversions · Delays · Missed approaches</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.07);">
+          <span class="b b-pk">6</span><div><strong>Cabin Event</strong> — Passenger problems · Cabin crew errors · Medical emergencies</div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Threat Memory</div>
+      <div class="mf">Threat = External event outside crew control requiring management<br>Bad weather = Environmental Threat (DGCA favourite)</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== ERROR TYPES ===== -->
+<div class="section" id="section-errors">
+  <div class="sh">
+    <div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">❌</div>
+    <div><div class="st">5 Types of Errors</div>
+    <div class="ss">Intentional Non-Compliance · Procedural · Communication · Proficiency · Operational Decision</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Five Error Types — Visual Reference</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#08111c"/>
+        <text x="380" y="18" fill="var(--text2)" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">5 Error Types — Know all definitions and examples for DGCA</text>
+
+        <!-- Error 1: Intentional Non-Compliance -->
+        <rect x="15" y="30" width="140" height="110" rx="10" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="85" y="55" fill="#FCA5A5" font-family="sans-serif" font-size="20" text-anchor="middle">🚫</text>
+        <text x="85" y="73" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Intentional</text>
+        <text x="85" y="87" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Non-Compliance</text>
+        <text x="85" y="104" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Knowingly breaks rules</text>
+        <text x="85" y="117" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Ignoring SOP / checklist</text>
+        <text x="85" y="130" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Violating regulations</text>
+
+        <!-- Error 2: Procedural -->
+        <rect x="165" y="30" width="140" height="110" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.35)" stroke-width="2"/>
+        <text x="235" y="55" fill="#FCD34D" font-family="sans-serif" font-size="20" text-anchor="middle">📋</text>
+        <text x="235" y="73" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Procedural</text>
+        <text x="235" y="87" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Error</text>
+        <text x="235" y="104" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Intent correct</text>
+        <text x="235" y="117" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Execution wrong</text>
+        <text x="235" y="130" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Wrong switch / missed item</text>
+
+        <!-- Error 3: Communication -->
+        <rect x="315" y="30" width="140" height="110" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.35)" stroke-width="2"/>
+        <text x="385" y="55" fill="#7DD3FC" font-family="sans-serif" font-size="20" text-anchor="middle">📢</text>
+        <text x="385" y="73" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Communication</text>
+        <text x="385" y="87" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Error</text>
+        <text x="385" y="104" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Info transfer failure</text>
+        <text x="385" y="117" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Incorrect readback</text>
+        <text x="385" y="130" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Misinterpretation</text>
+
+        <!-- Error 4: Proficiency -->
+        <rect x="465" y="30" width="140" height="110" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.35)" stroke-width="2"/>
+        <text x="535" y="55" fill="#D8B4FE" font-family="sans-serif" font-size="20" text-anchor="middle">✈️</text>
+        <text x="535" y="73" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Proficiency</text>
+        <text x="535" y="87" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Error</text>
+        <text x="535" y="104" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Lack of skill/knowledge</text>
+        <text x="535" y="117" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Poor landing technique</text>
+        <text x="535" y="130" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Weak stick-and-rudder</text>
+
+        <!-- Error 5: Operational Decision -->
+        <rect x="615" y="30" width="130" height="110" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.35)" stroke-width="2"/>
+        <text x="680" y="55" fill="#86EFAC" font-family="sans-serif" font-size="20" text-anchor="middle">🎯</text>
+        <text x="680" y="73" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Operational</text>
+        <text x="680" y="87" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Decision</text>
+        <text x="680" y="104" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Wrong decision exists</text>
+        <text x="680" y="117" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Safer option ignored</text>
+        <text x="680" y="130" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Fly into wind shear</text>
+
+        <!-- TEM Classification table header -->
+        <rect x="15" y="157" width="730" height="18" rx="4" fill="rgba(20,184,166,.12)" stroke="rgba(20,184,166,.25)" stroke-width="1"/>
+        <text x="380" y="170" fill="#5EEAD4" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">QUICK CLASSIFICATION TABLE</text>
+        <text x="75" y="200" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">SOP violation</text>
+        <text x="75" y="215" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">→ Intentional NC</text>
+        <text x="220" y="200" fill="#FCD34D" font-family="monospace" font-size="11" text-anchor="middle">Wrong checklist</text>
+        <text x="220" y="215" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">→ Procedural</text>
+        <text x="375" y="200" fill="#7DD3FC" font-family="monospace" font-size="11" text-anchor="middle">Incorrect readback</text>
+        <text x="375" y="215" fill="#7DD3FC" font-family="monospace" font-size="10" text-anchor="middle">→ Communication</text>
+        <text x="530" y="200" fill="#D8B4FE" font-family="monospace" font-size="11" text-anchor="middle">Poor flying skill</text>
+        <text x="530" y="215" fill="#D8B4FE" font-family="monospace" font-size="10" text-anchor="middle">→ Proficiency</text>
+        <text x="665" y="200" fill="#86EFAC" font-family="monospace" font-size="11" text-anchor="middle">Fly into windshear</text>
+        <text x="665" y="215" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">→ Op. Decision</text>
+        <!-- Dividers -->
+        <line x1="150" y1="175" x2="150" y2="240" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+        <line x1="300" y1="175" x2="300" y2="240" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+        <line x1="455" y1="175" x2="455" y2="240" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+        <line x1="605" y1="175" x2="605" y2="240" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- UAS CARD -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Undesired Aircraft State (UAS)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-pu" style="margin-bottom:10px;"><strong>UAS Definition:</strong> A condition where safety margins are reduced as a result of errors or threats not being managed.</div>
+        <div style="font-size:12px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">UAS Examples:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-pu">Unstable approach</span>
+          <span class="b b-pu">Incorrect configuration</span>
+          <span class="b b-pu">Excessive speed</span>
+          <span class="b b-pu">Excessive altitude</span>
+          <span class="b b-pu">Lateral deviation</span>
+          <span class="b b-pu">Vertical deviation</span>
+        </div>
+      </div>
+      <div class="mem" style="margin:0;align-self:center;"><div class="mi">🧠</div><div>
+        <div class="mt">UAS Memory</div>
+        <div class="mf">Unstable approach = Classic UAS (DGCA favourite)<br>UAS → Accident if not RECOVERED</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOFT ===== -->
+<div class="section" id="section-loft">
+  <div class="sh">
+    <div class="si" style="background:var(--in-bg);border:1px solid rgba(99,102,241,.3);">🎮</div>
+    <div><div class="st">LOFT — Line Oriented Flight Training</div>
+    <div class="ss">Realistic simulator training · NOT an examination · CRM/TEM practice</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>LOFT — What It Is & What It Is NOT</div>
+    <div class="g2">
+      <div>
+        <div style="background:rgba(99,102,241,.09);border:1px solid rgba(99,102,241,.35);border-radius:12px;padding:16px;margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:#A5B4FC;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">LOFT DEFINITION</div>
+          <div style="font-size:14px;color:#fff;font-weight:600;line-height:1.5;margin-bottom:8px;">Realistic simulator training based on actual airline operations.</div>
+          <div style="font-size:12px;color:var(--text2);">Scenarios come from accident reports, incident reports, and operational experience.</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:#A5B4FC;margin-bottom:8px;">LOFT Characteristics:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Real flight scenarios</div>
+          <div class="chk-item"><span class="cy">✓</span>Full crew participation</div>
+          <div class="chk-item"><span class="cy">✓</span>Real-time decision making</div>
+          <div class="chk-item"><span class="cy">✓</span>Communication & leadership exercises</div>
+          <div class="chk-item"><span class="cy">✓</span>No deliberate training interruptions</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#86EFAC;margin-bottom:8px;">LOFT IS:</div>
+        <div class="chklist" style="margin-bottom:14px;">
+          <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);"><span class="cy">✓</span>A <strong>training tool</strong></div>
+          <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);"><span class="cy">✓</span>For practising CRM &amp; TEM skills</div>
+          <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);"><span class="cy">✓</span>A safe environment to make mistakes</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">LOFT is NOT:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">✗</span>An <strong>examination</strong></div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">✗</span>A performance check on individuals</div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">✗</span>A pass/fail assessment</div>
+        </div>
+      </div>
+    </div>
+    <div class="al al-am" style="margin-top:4px;margin-bottom:0;"><strong>DGCA Key Point:</strong> If weaknesses are found during LOFT, additional training is provided. There should be NO stigma, NO punishment, NO recrimination.</div>
+  </div>
+
+  <!-- CRM-TEM-LOFT RELATIONSHIP -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>CRM → TEM → LOFT Relationship</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="160" fill="#08111c"/>
+        <rect x="40" y="40" width="180" height="80" rx="12" fill="rgba(20,184,166,.10)" stroke="rgba(20,184,166,.4)" stroke-width="2"/>
+        <text x="130" y="75" fill="#5EEAD4" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">CRM</text>
+        <text x="130" y="95" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Manages Resources</text>
+        <text x="130" y="110" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Cognitive + Interpersonal</text>
+        <line x1="220" y1="80" x2="270" y2="80" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+        <polygon points="270,74 282,80 270,86" fill="rgba(255,255,255,.3)"/>
+        <text x="246" y="70" fill="var(--text2)" font-family="monospace" font-size="9">uses</text>
+
+        <rect x="280" y="40" width="200" height="80" rx="12" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="380" y="75" fill="#FCA5A5" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">TEM</text>
+        <text x="380" y="95" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Manages Threats &amp; Errors</text>
+        <text x="380" y="110" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Threat→Error→UAS→Accident</text>
+        <line x1="480" y1="80" x2="530" y2="80" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+        <polygon points="530,74 542,80 530,86" fill="rgba(255,255,255,.3)"/>
+        <text x="502" y="70" fill="var(--text2)" font-family="monospace" font-size="9">trained via</text>
+
+        <rect x="540" y="40" width="180" height="80" rx="12" fill="rgba(99,102,241,.10)" stroke="rgba(99,102,241,.4)" stroke-width="2"/>
+        <text x="630" y="75" fill="#A5B4FC" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">LOFT</text>
+        <text x="630" y="95" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Realistic Simulator Practice</text>
+        <text x="630" y="110" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">NOT an examination</text>
+        <text x="380" y="148" fill="rgba(255,255,255,.4)" font-family="sans-serif" font-size="11" text-anchor="middle">CRM provides resources → TEM manages threats/errors → LOFT trains both in realistic scenarios</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh">
+    <div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div class="st">Master Reference & Exam Traps</div>
+    <div class="ss">Every key fact from Chapter 24 — 10 most probable DGCA MCQs</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>10 Most Probable DGCA MCQs</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(20,184,166,.12);"><tr><th style="color:#5EEAD4;">Question</th><th style="color:#5EEAD4;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Central component of SHEL model</td><td><span class="num">Liveware (Pilot)</span></td></tr>
+            <tr><td>Second L in SHEL represents</td><td>Other humans (co-pilot, ATC, cabin crew)</td></tr>
+            <tr><td>Checklist belongs to which interface</td><td><span class="num">L-S (Liveware-Software)</span></td></tr>
+            <tr><td>GPWS belongs to which interface</td><td><span class="num">L-H (Liveware-Hardware)</span></td></tr>
+            <tr><td>Pilot-ATC communication is which interface</td><td><span class="num">L-L (Liveware-Liveware)</span></td></tr>
+            <tr><td>Weather belongs to which interface</td><td><span class="num">L-E (Liveware-Environment)</span></td></tr>
+            <tr><td>SHEL model developed by</td><td><span class="num">Edwards (1972)</span></td></tr>
+            <tr><td>CRM historical trigger event</td><td><span class="num">Tenerife Airport Disaster (1977)</span></td></tr>
+            <tr><td>Desired authority gradient</td><td><span class="num">Balanced gradient</span></td></tr>
+            <tr><td>LOFT is a training tool, NOT a</td><td><span class="num">Examination / Individual performance check</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>TEM Classification Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(239,68,68,.12);"><tr><th style="color:#FCA5A5;">Situation</th><th style="color:#FCA5A5;">Category</th></tr></thead>
+          <tbody>
+            <tr><td>Bad weather</td><td><span class="b b-am">Environmental Threat</span></td></tr>
+            <tr><td>ATC error / similar callsigns</td><td><span class="b b-sk">ATC Threat</span></td></tr>
+            <tr><td>SOP violation (deliberate)</td><td><span class="b b-rd">Intentional Non-compliance Error</span></td></tr>
+            <tr><td>Wrong checklist item</td><td><span class="b b-am">Procedural Error</span></td></tr>
+            <tr><td>Incorrect ATC readback</td><td><span class="b b-sk">Communication Error</span></td></tr>
+            <tr><td>Poor landing technique</td><td><span class="b b-pu">Proficiency Error</span></td></tr>
+            <tr><td>Fly into known wind shear</td><td><span class="b b-gn">Operational Decision Error</span></td></tr>
+            <tr><td>Unstable approach</td><td><span class="b b-pu">Undesired Aircraft State (UAS)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 24</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">CRM is NOT about flying skills</div><div class="trap-d">CRM focuses on COGNITIVE skills (SA, decision making) and INTERPERSONAL skills (communication, leadership, teamwork) — NOT technical flying ability.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">LOFT is NOT an examination</div><div class="trap-d">LOFT = Line Oriented Flight Training = training tool only. It should NEVER be used to check individual performance. If weaknesses found, provide additional training with no stigma.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">GPWS = L-H interface (hardware), NOT L-E</div><div class="trap-d">GPWS is a hardware device (L-H). Weather is L-E. Students mix these up because GPWS warns about terrain/environment, but it is itself a hardware instrument.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Checklist = L-S (Software), NOT L-H</div><div class="trap-d">Checklist is a SOFTWARE item (procedure/document). It goes in L-S. The aircraft instrument panel (hardware) is L-H.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">TEM does NOT eliminate threats/errors</div><div class="trap-d">TEM recognizes that threats and errors are NORMAL and UNAVOIDABLE. TEM aims to RECOGNIZE, MANAGE and MINIMIZE consequences — not eliminate them.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Assertiveness ≠ Aggression</div><div class="trap-d">Assertiveness = Confident, respectful communication of safety concerns. NOT arrogance or aggression. Not assertive = remaining silent when danger is recognized.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🧠</div>
+    <div><div class="st">Practice Quiz — Chapter 24</div>
+    <div class="ss">25 DGCA-style questions on CRM, SHEL, TEM, Errors & LOFT</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- content -->
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"What is the central/hub component of the SHEL Model?",opts:["Software","Hardware","Environment","Liveware (Pilot)"],ans:3,exp:"Liveware (the Pilot) is the central hub of the SHEL model. All four interfaces (L-S, L-H, L-E, L-L) radiate FROM the Liveware. It is the most important and most flexible component."},
+{q:"The SHEL model was developed by:",opts:["ICAO in 1944","WHO in 1960","Edwards in 1972","IATA in 1980"],ans:2,exp:"The SHEL model was developed by Edwards in 1972. It was later adopted by ICAO for human factors analysis in aviation."},
+{q:"In the SHEL model, the second 'L' represents:",opts:["Laws and legislation","The liveware (pilot) again","Other humans (co-pilot, ATC, cabin crew)","Logistics support"],ans:2,exp:"The second L = Liveware (Others) — co-pilot, cabin crew, ATC, engineers, passengers. The first L = the pilot themselves. Both are 'Liveware' but different components."},
+{q:"A checklist belongs to which SHEL interface?",opts:["L-H (Liveware-Hardware)","L-E (Liveware-Environment)","L-S (Liveware-Software)","L-L (Liveware-Liveware)"],ans:2,exp:"Checklist = Software item (procedure/document). L-S interface. Hardware = physical equipment (L-H). Classic DGCA trap: checklist is Software, not Hardware."},
+{q:"GPWS (Ground Proximity Warning System) belongs to which interface?",opts:["L-S","L-L","L-E","L-H"],ans:3,exp:"GPWS is hardware equipment = L-H (Liveware-Hardware). Weather itself is L-E. GPWS warns about environment but is itself a hardware device — classic trap."},
+{q:"Pilot–ATC communication belongs to which SHEL interface?",opts:["L-H","L-S","L-E","L-L"],ans:3,exp:"Pilot-ATC = Human to Human = L-L (Liveware-Liveware). Any human-to-human interaction is L-L."},
+{q:"Weather belongs to which SHEL interface?",opts:["L-S","L-L","L-E","L-H"],ans:2,exp:"Weather = External environment = L-E (Liveware-Environment). Internal environment (noise, vibration) is also L-E."},
+{q:"CRM is defined as:",opts:["Technical flying skill development","Effective use of all available resources for safe and efficient flight operations","Purely cockpit automation management","Emergency procedures only"],ans:1,exp:"CRM = Effective use of ALL available resources (people, systems, checklists, ATC) to ensure safe and efficient flight while reducing errors and stress."},
+{q:"CRM mainly deals with:",opts:["Aircraft handling and technical skills","Cognitive and interpersonal skills","Weather analysis and fuel planning","Emergency checklists"],ans:1,exp:"CRM is NOT about technical flying skills. It focuses on cognitive skills (SA, decision making) and interpersonal skills (communication, leadership, teamwork, coordination)."},
+{q:"The historical event that triggered the development of CRM was:",opts:["Lockerbie bombing","Tenerife Airport Disaster","Chernobyl nuclear accident","Air France 447"],ans:1,exp:"Tenerife Airport Disaster (1977) — poor cockpit hierarchy and communication led to catastrophe. This showed that captain-centric culture with poor communication was dangerous."},
+{q:"A steep authority gradient means:",opts:["Both pilots have equal authority","Captain dominates — FO afraid to speak","FO has more authority than captain","No clear command structure"],ans:1,exp:"Steep authority gradient = Captain dominates, FO is reluctant or afraid to speak up. This means errors go unchallenged. Example: Tenerife accident."},
+{q:"The IDEAL (desired) authority gradient is:",opts:["Steep gradient","Shallow gradient","Balanced gradient","Maximum gradient"],ans:2,exp:"Balanced gradient = Captain remains leader but FO feels comfortable speaking up. Captain has command, FO contributes safety inputs. Best of both worlds."},
+{q:"Assertiveness in CRM means:",opts:["Being aggressive and dominant","Remaining silent to avoid conflict","Expressing concerns confidently and respectfully","Always agreeing with the captain"],ans:2,exp:"Assertiveness = Professional, respectful communication of safety concerns when needed. NOT aggression. NOT silence. An assertive FO speaks up when danger is recognized."},
+{q:"TEM (Threat and Error Management) philosophy states:",opts:["Threats and errors can be completely eliminated","Threats and errors are normal and unavoidable — focus on managing them","Only errors matter, not threats","TEM replaces CRM completely"],ans:1,exp:"TEM accepts that threats and errors are NORMAL and UNAVOIDABLE in flight operations. The goal is to RECOGNIZE, MANAGE, and MINIMIZE consequences — not eliminate them."},
+{q:"Bad weather is an example of:",opts:["Operational Decision Error","Environmental Threat","Procedural Error","Undesired Aircraft State"],ans:1,exp:"Bad weather = Environmental Threat. Threats are external events outside crew control that increase operational complexity. DGCA favourite example."},
+{q:"An incorrect ATC readback is classified as:",opts:["Intentional Non-compliance Error","Procedural Error","Communication Error","Proficiency Error"],ans:2,exp:"Incorrect ATC readback = Communication Error (failure in information transfer). Intentional Non-compliance = deliberately breaking rules. Procedural = wrong execution of correct procedure."},
+{q:"A pilot deliberately ignores an SOP. This is:",opts:["Procedural Error","Communication Error","Intentional Non-compliance Error","Proficiency Error"],ans:2,exp:"Intentional Non-compliance = Knowingly/deliberately violating rules, SOPs, or checklists. The intent is wrong from the start."},
+{q:"Flying into known wind shear instead of going around is:",opts:["Procedural Error","Environmental Threat","Intentional Non-compliance","Operational Decision Error"],ans:3,exp:"Operational Decision Error = Wrong decision when safer alternatives existed. Flying into KNOWN wind shear despite safer go-around option = classic Operational Decision Error."},
+{q:"An unstable approach is classified as:",opts:["A Threat","A Procedural Error","An Undesired Aircraft State (UAS)","A Communication Error"],ans:2,exp:"Unstable approach = Undesired Aircraft State (UAS) — a condition where safety margins are reduced. If not corrected, UAS can lead to accident."},
+{q:"LOFT stands for:",opts:["Line-Oriented Failure Training","Line-Oriented Flight Training","Low-Orbit Flight Tracking","Left-of-Runway Threshold"],ans:1,exp:"LOFT = Line Oriented Flight Training. Realistic simulator training based on actual airline operations. Used to practice CRM and TEM skills."},
+{q:"LOFT should be used as:",opts:["A performance examination","A pass/fail check ride","A training tool — not an examination","A regulatory compliance test"],ans:2,exp:"LOFT is a TRAINING tool only — NOT an examination, NOT a check ride, NOT individual performance evaluation. If weaknesses found, provide additional training with no stigma."},
+{q:"In the TEM chain, the correct sequence is:",opts:["Error → Threat → UAS → Accident","Threat → UAS → Error → Accident","Threat → Error → UAS → Accident","UAS → Error → Threat → Accident"],ans:2,exp:"TEM Chain = Threat → Error → Undesired Aircraft State (UAS) → Accident. TEM teaches crews to intercept this chain at each stage."},
+{q:"Cockpit noise causing communication difficulty is which interface?",opts:["L-H","L-L","L-S","L-E"],ans:3,exp:"Cockpit noise = Internal environment = L-E (Liveware-Environment). Noise is an environmental factor affecting the pilot."},
+{q:"Which of the following is an L-S (Liveware-Software) item?",opts:["GPWS","Seat design","NOTAM","Turbulence"],ans:2,exp:"NOTAM = Notice to Airmen = a document/publication = Software = L-S interface. GPWS = L-H. Seat design = L-H. Turbulence = L-E."},
+{q:"NOTAMs, charts, and automation are all examples of which SHEL interface?",opts:["L-H (Hardware)","L-L (Human-Human)","L-E (Environment)","L-S (Software)"],ans:3,exp:"NOTAMs, charts, maps, automation, SOPs, manuals = Software items = L-S interface. These are rules, procedures, and information systems the pilot interacts with."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=88){msg='🏆 Excellent!';sub='Chapter 24 mastered. DGCA ready!';}else if(pct>=72){msg='✅ Strong!';sub='Review SHEL interfaces and error classifications.';}else if(pct>=60){msg='📚 Good!';sub='Drill the 17-item classification table and TEM chain.';}else{msg='🔄 Keep Revising!';sub='Focus on SHEL interfaces — most DGCA questions come from there.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

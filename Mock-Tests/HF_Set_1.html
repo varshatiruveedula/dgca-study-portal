@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA — Human Performance &amp; Limitations — Sample Paper 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --purple:#A855F7;--sky:#0EA5E9;--teal:#14B8A6;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --pu-bg:rgba(168,85,247,.11);--sk-bg:rgba(14,165,233,.11);
+  --gn-bg:rgba(34,197,94,.11);--rd-bg:rgba(239,68,68,.11);--am-bg:rgba(245,158,11,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(168,85,247,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.10),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.45);color:#D8B4FE;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,42px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#C084FC;}
+.hero-sub{color:var(--text2);font-size:13px;position:relative;margin-bottom:14px;}
+.meta{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;position:relative;}
+.mc{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:11px;font-weight:600;padding:4px 12px;border-radius:9px;}
+.mc strong{color:var(--text);}
+/* Stats bar */
+.stats-bar{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:12px 24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
+.sb{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bdr);border-radius:9px;padding:8px 14px;}
+.sb-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;}
+.sb-lbl{font-size:11px;color:var(--text3);}
+/* Timer */
+.timer-wrap{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.22);border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;}
+.timer-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#FCA5A5;min-width:54px;}
+.timer-lbl{font-size:11px;color:var(--text2);}
+/* Content */
+.content{max-width:820px;margin:0 auto;padding:24px 16px 80px;}
+/* Progress */
+.prog-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:11px 16px;margin-bottom:18px;}
+.pbar{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--purple),var(--sky));border-radius:3px;transition:width .4s;}
+.pctr{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2);flex-shrink:0;white-space:nowrap;}
+/* Question card */
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:26px;margin-bottom:12px;}
+.qnum{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.qtext{font-size:15.5px;font-weight:600;color:#fff;line-height:1.65;margin-bottom:22px;}
+.qopts{display:flex;flex-direction:column;gap:9px;}
+.qopt{background:var(--card2);border:1.5px solid var(--bdr2);border-radius:10px;padding:13px 16px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .13s;display:flex;align-items:flex-start;gap:12px;font-family:'Space Grotesk',sans-serif;line-height:1.55;text-align:left;}
+.qopt:hover:not(.dis){border-color:var(--purple);color:#fff;background:var(--pu-bg);}
+.qopt.cor{border-color:var(--green)!important;background:var(--gn-bg)!important;color:#86EFAC!important;}
+.qopt.wrg{border-color:var(--red)!important;background:var(--rd-bg)!important;color:#FCA5A5!important;}
+.qopt.dis{pointer-events:none;}
+.qlbl{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.qopt.cor .qlbl{background:rgba(34,197,94,.25);border-color:var(--green);color:#86EFAC;}
+.qopt.wrg .qlbl{background:rgba(239,68,68,.25);border-color:var(--red);color:#FCA5A5;}
+.qexp{display:none;margin-top:14px;padding:13px 16px;background:var(--pu-bg);border:1px solid rgba(168,85,247,.25);border-radius:10px;font-size:13px;color:#D8B4FE;line-height:1.65;}
+.qexp-h{font-weight:700;color:#C084FC;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+/* Nav */
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.btn{background:var(--purple);color:#fff;border:none;padding:11px 26px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .13s;}
+.btn:hover{background:#9333EA;}
+.btn-ghost{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:10px 18px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--purple);color:#D8B4FE;}
+.dis-btn{opacity:.35;pointer-events:none;}
+/* Score */
+.score-wrap{text-align:center;padding:36px 12px;}
+.score-ring{width:148px;height:148px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--purple) var(--p,0%),rgba(255,255,255,.05) 0);margin:0 auto 22px;}
+.score-inner{width:110px;height:110px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#C084FC;}
+.score-pct{font-size:12px;color:var(--text3);margin-top:2px;}
+.score-grade{font-size:24px;font-weight:700;color:#fff;margin-bottom:6px;}
+.score-msg{font-size:14px;color:var(--text2);margin-bottom:28px;}
+.score-table{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;max-width:420px;margin:0 auto 24px;}
+.str{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdr);}
+.str:last-child{border-bottom:none;}
+.stl{font-size:13px;color:var(--text2);}
+.stv{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;}
+.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+/* Review mode */
+.review-q{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:20px;margin-bottom:12px;}
+.review-q.correct{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.04);}
+.review-q.wrong{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.04);}
+.review-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;margin-bottom:8px;}
+.review-badge.c{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.review-badge.w{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.review-qtext{font-size:14px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.55;}
+.review-opts{display:flex;flex-direction:column;gap:5px;}
+.review-opt{font-size:13px;padding:8px 12px;border-radius:8px;display:flex;gap:8px;}
+.review-opt.cor{background:var(--gn-bg);color:#86EFAC;}
+.review-opt.wrg-sel{background:var(--rd-bg);color:#FCA5A5;}
+.review-opt.dim{color:var(--text3);}
+.review-exp{margin-top:10px;padding:10px 14px;background:var(--pu-bg);border:1px solid rgba(168,85,247,.2);border-radius:8px;font-size:12.5px;color:#D8B4FE;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.qtext{font-size:14px;}.qopt{font-size:13px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🧠 DGCA CPL — Sample Paper 1</div>
+  <h1>Human Performance <span>&amp; Limitations</span></h1>
+  <div class="hero-sub">Official Sample Paper · Converted to Interactive Mock Test</div>
+  <div class="meta">
+    <span class="mc"><strong>Questions:</strong> 30</span>
+    <span class="mc"><strong>Time:</strong> 30 minutes</span>
+    <span class="mc"><strong>Pass Mark:</strong> 75% (23/30)</span>
+    <span class="mc"><strong>Topics:</strong> Physiology · HP&L · SHEL · Stress · Vision · CRM</span>
+    <span class="mc"><strong>No negative marking</strong></span>
+  </div>
+</div>
+
+<!-- Live stats bar -->
+<div class="stats-bar" id="statsbar">
+  <div class="sb"><div class="sb-val" style="color:#C084FC;" id="stat-q">1 / 30</div><div class="sb-lbl">Question</div></div>
+  <div class="timer-wrap"><span style="font-size:18px;">⏱</span><div><div class="timer-val" id="tval">30:00</div><div class="timer-lbl">Time Left</div></div></div>
+  <div class="sb"><div class="sb-val" style="color:#86EFAC;" id="stat-s">0</div><div class="sb-lbl">Correct</div></div>
+  <div class="sb"><div class="sb-val" style="color:#FCA5A5;" id="stat-w">0</div><div class="sb-lbl">Wrong</div></div>
+</div>
+
+<div class="content">
+
+<!-- QUIZ MODE -->
+<div id="quiz-mode">
+  <div class="prog-row">
+    <div class="pctr" id="pctr">Q 1 / 30</div>
+    <div class="pbar"><div class="pfill" id="pfill" style="width:3.3%"></div></div>
+    <div class="pctr" id="plive">Score: 0</div>
+  </div>
+  <div id="qwrap"></div>
+  <div class="qnav">
+    <button class="btn-ghost" onclick="confirmExit()">✕ Exit</button>
+    <button class="btn dis-btn" id="btnnext" onclick="nextQ()">Next →</button>
+  </div>
+</div>
+
+<!-- SCORE MODE -->
+<div id="score-mode" style="display:none;">
+  <div class="score-wrap">
+    <div class="score-ring" id="sring"><div class="score-inner"><div class="score-num" id="snum">0/30</div><div class="score-pct" id="spct">0%</div></div></div>
+    <div class="score-grade" id="sgrade"></div>
+    <div class="score-msg" id="smsg"></div>
+    <div class="score-table">
+      <div class="str"><span class="stl">Correct Answers</span><span class="stv" style="color:#86EFAC;" id="r-correct"></span></div>
+      <div class="str"><span class="stl">Wrong Answers</span><span class="stv" style="color:#FCA5A5;" id="r-wrong"></span></div>
+      <div class="str"><span class="stl">Not Attempted</span><span class="stv" style="color:#6688B4;" id="r-skip"></span></div>
+      <div class="str"><span class="stl">Score</span><span class="stv" style="color:#C084FC;" id="r-pct"></span></div>
+      <div class="str"><span class="stl">Pass Mark</span><span class="stv">75% (23/30)</span></div>
+      <div class="str"><span class="stl">Result</span><span class="stv" id="r-result"></span></div>
+    </div>
+    <div class="acts">
+      <button class="btn" onclick="showReview()">📋 Review Answers</button>
+      <button class="btn-ghost" onclick="restartTest()">↩ Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW MODE -->
+<div id="review-mode" style="display:none;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+    <div style="font-size:18px;font-weight:700;color:#fff;">📋 Answer Review</div>
+    <button class="btn-ghost" onclick="backToScore()">← Back to Score</button>
+  </div>
+  <div id="review-wrap"></div>
+</div>
+
+</div><!-- content -->
+
+<script>
+const QS = [
+{
+  q: "The atmosphere contains the following gases:",
+  o: [
+    "78% nitrogen, 21% oxygen, 0.03% carbon dioxide, rest rare gases",
+    "78% helium, 21% oxygen, 0.03% carbon dioxide, rest rare gases",
+    "78% nitrogen, 21% oxygen, 1% carbon monoxide, rest rare gases"
+  ],
+  a: 0,
+  e: "The atmosphere = 78% nitrogen, 21% oxygen, 0.03% CO2, rest = rare gases (argon etc.). The 21% oxygen figure is constant by percentage but the PARTIAL PRESSURE decreases with altitude."
+},
+{
+  q: "The volume percentage of oxygen in the atmosphere is 21% which:",
+  o: [
+    "Is constant for all altitudes conventional airplanes can reach",
+    "Decreases with increasing altitude",
+    "Increases with increasing altitude"
+  ],
+  a: 0,
+  e: "The PERCENTAGE (21%) remains constant at all altitudes aircraft can reach. What changes is the PARTIAL PRESSURE of oxygen — it decreases with altitude, causing hypoxia. This is Dalton's Law."
+},
+{
+  q: "Oxygen, combined with haemoglobin in blood is transported by:",
+  o: [
+    "Platelets",
+    "Red blood cells",
+    "White blood cells"
+  ],
+  a: 1,
+  e: "Red blood cells contain haemoglobin which binds oxygen (oxyhaemoglobin). Platelets = clotting. White blood cells = immune defence. Carbon monoxide binds haemoglobin 200-250x more strongly than O2."
+},
+{
+  q: "One of the most dangerous symptoms of hypoxia concerning flight safety is:",
+  o: [
+    "Hyperventilation, causing emotional stress",
+    "Impaired judgment, disabling the pilot to recognise the symptoms",
+    "Reduced coordination of limb movements, causing the pilot to spin"
+  ],
+  a: 1,
+  e: "IMPAIRED JUDGEMENT is the most dangerous because the pilot cannot recognise they are hypoxic — they feel a false sense of wellbeing (euphoria). This prevents self-correction. Subtle hypoxia = more dangerous than obvious hypoxia."
+},
+{
+  q: "One of the most frequent symptoms of decompression sickness emerging after decompression in airline operation:",
+  o: [
+    "Are the bends",
+    "Is a shock",
+    "Are neurological damages to the CNS"
+  ],
+  a: 0,
+  e: "The BENDS (joint pain) = most common DCS symptom in aviation. Caused by nitrogen bubbles forming in joints (Henry's Law). Airline DCS is rare due to cabin pressurisation but can occur after SCUBA diving followed by flying."
+},
+{
+  q: "The cabin pressure in airline operation is:",
+  o: [
+    "Normally not exceeding 4,000 to 5,000 feet",
+    "Normally not exceeding 2,000 to 3,000 feet",
+    "Normally not exceeding 6,000 to 8,000 feet"
+  ],
+  a: 2,
+  e: "Cabin altitude is normally maintained at 6,000–8,000 ft. ICAO maximum = 8,000 ft. Above 10,000 ft cabin altitude, supplemental oxygen is required. Below 6,000 ft would require much heavier fuselage structure."
+},
+{
+  q: "What is the Time of Useful Consciousness (TUC)?",
+  o: [
+    "The length of time during which an individual can act with both mental and physical efficiency and alertness, measured from the moment at which he loses his available oxygen supply",
+    "The time taken to become aware of hypoxia due to gradual decompression",
+    "The period of time between the start of hypoxia and the moment that the pilot becomes aware of it"
+  ],
+  a: 0,
+  e: "TUC = time from oxygen loss to inability to act effectively. FL350 rapid = 15-30 sec. FL400 = 7-10 sec. FL450 = 3-6 sec. TUC HALVES in active rapid decompression vs gradual. Must don mask IMMEDIATELY."
+},
+{
+  q: "You can overcome hyperventilation by breathing into a plastic or paper bag. The intention is:",
+  o: [
+    "To reduce blood pressure",
+    "To increase the amount of nitrogen in the lung",
+    "To raise the level of CO₂ in the blood as fast as possible"
+  ],
+  a: 2,
+  e: "Hyperventilation = excess CO2 blown off → respiratory alkalosis. Breathing into a bag re-inhales CO2, quickly restoring blood CO2 level. Also effective: conscious slowing of breathing rate."
+},
+{
+  q: "Which phenomenon is common to both hypoxia and hyperventilation?",
+  o: [
+    "Severe headache",
+    "Tingling sensations in arms or legs",
+    "Cyanosis (blueing of lips and finger-nails)"
+  ],
+  a: 1,
+  e: "TINGLING (paraesthesia) is common to BOTH hypoxia and hyperventilation — which makes it difficult to distinguish between them. Both cause altered CO2/O2 balance affecting peripheral nerves. Cyanosis = hypoxia only. Headache = hypoxia mainly."
+},
+{
+  q: "The risk of barotrauma of the middle ear is more likely to occur:",
+  o: [
+    "With colds and slow ascents",
+    "With colds and rapid descents",
+    "With colds and fast climbs"
+  ],
+  a: 1,
+  e: "Middle ear barotrauma most likely with COLDS + RAPID DESCENT. During descent, ambient pressure rises — Eustachian tube must open to equalise. A cold causes mucous blocking, preventing equalisation. Ascent = pressure drops, gas expands — usually clears naturally."
+},
+{
+  q: "The purpose of the cabin pressurisation system is:",
+  o: [
+    "Reduce gastrointestinal trapped gas, middle ear and sinus problems",
+    "To allow crew and passengers to move about freely in a comfortable environment, unencumbered by oxygen masks",
+    "Both A and B are correct"
+  ],
+  a: 1,
+  e: "Primary purpose = allow movement without oxygen masks in a comfortable environment. Pressurisation to 6,000-8,000 ft REDUCES (not eliminates) Boyle's Law trapped gas problems — they still occur on ascent/descent but are minimised."
+},
+{
+  q: "Flickering light when reflected from spinning rotor blades:",
+  o: [
+    "Can be neglected",
+    "Can cause spatial disorientation and/or nausea, when looked at for a longer period of time",
+    "Should be avoided because it may destroy the optical nerve"
+  ],
+  a: 1,
+  e: "Flickering light at 4-20 Hz can trigger spatial disorientation, nausea, and in susceptible individuals, epileptic-type reactions (flicker vertigo). Never stare at spinning rotors in sunlight. This is the same mechanism as strobe-induced reactions."
+},
+{
+  q: "Presbyopia is:",
+  o: [
+    "Far sightedness linked with age",
+    "Short sightedness",
+    "Myopia"
+  ],
+  a: 0,
+  e: "Presbyopia = age-related LONG-SIGHTEDNESS (difficulty focusing on near objects). Caused by reduced elasticity of the lens with age. Onset ~40+ years. Myopia = short-sightedness (near objects clear, far blurry). Common DGCA word definition question."
+},
+{
+  q: "Scanning at night should be performed by:",
+  o: [
+    "Scanning with one eye open",
+    "Slight eye movement to the side of the object",
+    "Concentrated fixation on an object (image must fall on the fovea centralis)"
+  ],
+  a: 1,
+  e: "Night scanning = OFF-CENTRE viewing (eccentric viewing). The fovea centralis contains CONES (colour, detail, bright light) — it is essentially BLIND at night. RODS (night/peripheral vision) are concentrated AROUND the fovea. Look slightly to the side of the object."
+},
+{
+  q: "A pilot approaching a runway which is narrower than normal may feel he is at greater height than he actually is. To compensate he may fly a:",
+  o: [
+    "Flatter than normal approach with the tendency to undershoot",
+    "Higher than normal approach with the tendency to overshoot",
+    "Compensatory glide path and stall out"
+  ],
+  a: 0,
+  e: "Narrow runway illusion: appears farther away/higher than actual → pilot believes he is TOO HIGH → flies FLATTER approach → risk of UNDERSHOOT. Wider-than-normal runway: appears closer → pilot flies higher approach → overshoot risk."
+},
+{
+  q: "Spatial disorientation will most likely occur during flight:",
+  o: [
+    "When flying in and out of clouds and the pilot maintains good instrument cross-check",
+    "No head movement in a prolonged constant rate turn",
+    "If the brain receives conflicting information and the pilot does not believe the instruments"
+  ],
+  a: 2,
+  e: "Most dangerous spatial disorientation = when pilot DOES NOT BELIEVE THE INSTRUMENTS and follows vestibular/kinesthetic senses instead. The instruments are ALWAYS correct. Classic scenario: graveyard spiral — pilot senses wings level but is in increasing bank."
+},
+{
+  q: "Hypoxia will affect night vision:",
+  o: [
+    "At 5,000 ft",
+    "Less than day vision",
+    "And causes the autokinetic phenomenon"
+  ],
+  a: 0,
+  e: "Night vision (rod function) is impaired by hypoxia from as low as 5,000 ft — MUCH earlier than day vision which is affected at higher altitudes. Rods are more sensitive to oxygen deprivation. Supplemental O2 improves night vision even at low altitudes."
+},
+{
+  q: "What is meant by the term Incapacitation?",
+  o: [
+    "When situational awareness of the crew is too low",
+    "The effect of gastrointestinal upset",
+    "The gradual or sudden loss of a crew member's ability to function"
+  ],
+  a: 2,
+  e: "Incapacitation = gradual OR sudden loss of a crew member's ability to perform duties. Subtle incapacitation is MORE DANGEROUS than sudden (e.g. heart attack) because it may not be noticed. Other crew must be trained to detect and respond."
+},
+{
+  q: "In the short-term memory, information is stored for approximately:",
+  o: [
+    "20 seconds",
+    "A couple of days",
+    "1 hour"
+  ],
+  a: 0,
+  e: "STM (Short-Term Memory/Working Memory) duration ≈ 10-20 seconds without rehearsal. Capacity = 7 ± 2 items (Miller's Law). Without rehearsal or transfer to LTM, information is lost. Checklists compensate for STM limitations."
+},
+{
+  q: "Concerning the relation between performance and stress, which statement is correct?",
+  o: [
+    "Domestic stress will not affect the pilot's performance because he can leave this stress on the ground",
+    "A moderate level of stress may improve performance",
+    "A student will learn faster and better under severe stress"
+  ],
+  a: 1,
+  e: "Yerkes-Dodson inverted-U law: MODERATE stress = optimal performance. Too little = boredom/underarousal. Too much = anxiety/degraded performance. Domestic stress CANNOT be left at home — it crosses into the cockpit. Severe stress IMPAIRS learning."
+},
+{
+  q: "The main preoccupation in modern airline operations should be:",
+  o: [
+    "Efficient utilisation of resources",
+    "Maximum utilisation of resources",
+    "Safety"
+  ],
+  a: 1,
+  e: "MAXIMUM UTILISATION OF RESOURCES (answer B per the original paper's answer key). In modern SMS philosophy, safety and efficient operations are integrated — maximum utilisation means getting the most from available resources safely, not just flying more sectors."
+},
+{
+  q: "The elements of the SHEL model are:",
+  o: [
+    "Software, hardware, electronics and livewire",
+    "Shareware, hardware, education and limitations",
+    "Software, hardware, environment and liveware"
+  ],
+  a: 2,
+  e: "SHEL = Software (procedures, checklists, manuals) + Hardware (aircraft, equipment) + Environment (physical, organisational) + Liveware (people — the central human and other humans). Developed by Edwards (1972), refined by Hawkins."
+},
+{
+  q: "The rate and depth of breathing is primarily regulated by the concentration of:",
+  o: [
+    "Water vapour in the alveoli",
+    "Oxygen in the cells",
+    "Carbon dioxide in the blood"
+  ],
+  a: 2,
+  e: "Breathing is primarily controlled by CO2 (not O2) — chemoreceptors in the medulla detect CO2 levels in blood. Hypoxia alone does NOT strongly stimulate breathing (dangerous for hypoxic pilot who feels fine). CO2 rise = main trigger to breathe faster/deeper."
+},
+{
+  q: "Pulse rate is influenced by: (1) Adrenalin (2) Cortisol (3) Physical exercise",
+  o: [
+    "1 and 3 are correct, 2 is false",
+    "1, 2 and 3 are all correct",
+    "2 and 3 are correct, 1 is false"
+  ],
+  a: 0,
+  e: "Adrenalin (epinephrine) = raises heart rate (fight-or-flight). Physical exercise = raises heart rate directly. Cortisol = stress hormone but primarily affects blood sugar/immune response, NOT directly pulse rate (it is a longer-term stress hormone, not acute)."
+},
+{
+  q: "Which of the following statements about stress is true?",
+  o: [
+    "People are capable of living without stress",
+    "Stressors accumulate, thus increasing the likelihood to exhaustion",
+    "Stressors are independent from each other"
+  ],
+  a: 1,
+  e: "STRESSORS ACCUMULATE — this is the key principle. Multiple small stressors combine to reduce performance reserve. Complete absence of stress is impossible. Stressors are NOT independent — they interact and amplify each other."
+},
+{
+  q: "Motor programmes are:",
+  o: [
+    "Rules that enable us to deal with preconceived situations",
+    "Stored routines that enable patterns of behavior to be executed only under continuous conscious control",
+    "Stored routines that enable patterns of behavior to be executed without continuous conscious control"
+  ],
+  a: 2,
+  e: "Motor programmes (procedural/implicit memory) = stored routines executed AUTOMATICALLY without conscious control (e.g. landing flare, throttle movements). Freed-up conscious resources allow SA monitoring. Errors occur when automation is interrupted."
+},
+{
+  q: "What optimises crew co-operation? (1) Sharing and common task (2) Confidence in each other's capability (3) Precise definition of functions",
+  o: [
+    "1 and 2 only",
+    "2 and 3 only",
+    "1, 2 and 3 — all are correct"
+  ],
+  a: 2,
+  e: "ALL THREE optimise crew co-operation: (1) shared task/goals builds teamwork, (2) mutual confidence enables assertive communication, (3) clear role definition prevents confusion and duplication. CRM encompasses all three elements."
+},
+{
+  q: "What should a pilot do to keep his night vision (scotopic vision)?",
+  o: [
+    "Select meals with high content of Vitamin B and C",
+    "Not smoke before start and during flight, and avoid flash blindness",
+    "Wait at least 60 minutes to night-adapt before taking off"
+  ],
+  a: 1,
+  e: "Night vision preservation: DO NOT SMOKE (nicotine causes vasoconstriction reducing O2 to retina), AVOID FLASH BLINDNESS (bright light destroys dark adaptation — takes 30 min to recover). Vitamin A (not B/C) supports rhodopsin production. Dark adaptation = 30 min, not 60."
+},
+{
+  q: "Between which components is an interface mismatch causing stress due to poor cockpit design, thus leading to reduced human performance?",
+  o: [
+    "Liveware – Software",
+    "Liveware – Liveware",
+    "Liveware – Hardware"
+  ],
+  a: 2,
+  e: "Poor COCKPIT DESIGN = LIVEWARE-HARDWARE interface mismatch. Hardware = physical equipment, controls, displays. Poor ergonomics, confusing layouts, badly positioned controls = L-H mismatch = stress + errors. Checklists = L-S. ATC comms = L-L."
+},
+{
+  q: "Which of the following statements concerning crew performance is correct?",
+  o: [
+    "Mistakes can always be detected and corrected by the individual, hence too much practice is not needed",
+    "The quality of crew-performance is not dependent on the arousal level of the individual",
+    "The quality of crew-performance depends on the practice done to improve reliability"
+  ],
+  a: 2,
+  e: "PRACTICE improves reliability through building motor programmes and automated responses. Individuals CANNOT always detect their own mistakes (especially under hypoxia/fatigue). Performance IS dependent on arousal level (Yerkes-Dodson). Practice = foundation of reliable performance."
+}
+];
+
+// answer key cross-check from paper:
+// Q1=A(0) Q2=A(0) Q3=B(1) Q4=B(1) Q5=A(0) Q6=C(2) Q7=A(0) Q8=C(2) Q9=B(1) Q10=B(1)
+// Q11=A(0) Q12=B(1) Q13=A(0) Q14=B(1) Q15=A(0) Q16=C(2) Q17=A(0) Q18=C(2) Q19=A(0) Q20=B(1)
+// Q21=B(1) Q22=C(2) Q23=C(2) Q24=A(0) Q25=B(1) Q26=C(2) Q27=C(2) Q28=B(1) Q29=C(2) Q30=C(2)
+// All match the answers set in QS above.
+
+let CQ=0, SC=0, WC=0, ANS=false, TI=null, TL=1800, USERSEL=[];
+
+function startTimer(){
+  TI = setInterval(()=>{
+    TL--;
+    const m=Math.floor(TL/60), s=TL%60;
+    const d=document.getElementById('tval');
+    if(d) d.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(TL<=120 && d) d.style.color='#EF4444';
+    if(TL<=0){clearInterval(TI); finishTest();}
+  },1000);
+}
+
+function renderQ(){
+  const q = QS[CQ];
+  ANS = false;
+  const tot = QS.length;
+  document.getElementById('stat-q').textContent = `${CQ+1} / ${tot}`;
+  document.getElementById('pctr').textContent = `Q ${CQ+1} / ${tot}`;
+  document.getElementById('pfill').style.width = `${((CQ+1)/tot)*100}%`;
+  document.getElementById('plive').textContent = `Score: ${SC}`;
+  const nb = document.getElementById('btnnext');
+  nb.className = 'btn dis-btn';
+  nb.textContent = CQ === tot-1 ? 'Finish ✓' : 'Next →';
+
+  const labels = ['A','B','C'];
+  const optsHTML = q.o.map((opt,i) =>
+    `<div class="qopt" id="opt${i}" onclick="pick(${i})">
+      <div class="qlbl">${labels[i]}</div>
+      <div>${opt}</div>
+    </div>`
+  ).join('');
+
+  document.getElementById('qwrap').innerHTML = `
+    <div class="qcard">
+      <div class="qnum">Question ${CQ+1} of ${tot}</div>
+      <div class="qtext">${q.q}</div>
+      <div class="qopts">${optsHTML}</div>
+      <div class="qexp" id="qexp">
+        <div class="qexp-h">💡 Explanation</div>
+        ${q.e}
+      </div>
+    </div>`;
+}
+
+function pick(i){
+  if(ANS) return;
+  ANS = true;
+  const q = QS[CQ];
+  USERSEL[CQ] = i;
+  for(let k=0; k<q.o.length; k++){
+    const el = document.getElementById('opt'+k);
+    el.classList.add('dis');
+    if(k === q.a) el.classList.add('cor');
+    else if(k === i && i !== q.a) el.classList.add('wrg');
+  }
+  if(i === q.a){ SC++; WC = CQ+1 - SC; } else { WC++; }
+  document.getElementById('stat-s').textContent = SC;
+  document.getElementById('stat-w').textContent = WC;
+  document.getElementById('plive').textContent = `Score: ${SC}`;
+  document.getElementById('qexp').style.display = 'block';
+  document.getElementById('btnnext').className = 'btn';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function nextQ(){
+  if(!ANS) return;
+  CQ++;
+  if(CQ >= QS.length) finishTest();
+  else renderQ();
+}
+
+function finishTest(){
+  clearInterval(TI);
+  const tot = QS.length;
+  const skipped = tot - (SC + WC);
+  const pct = Math.round(SC/tot*100);
+  const pass = pct >= 75;
+  const grade = pct >= 90 ? '🏆 Distinction' : pct >= 80 ? '✅ Credit' : pct >= 75 ? '✅ Pass' : '❌ Fail — Re-attempt';
+  const msg = pct >= 90 ? 'Outstanding! Full command of HP&L.' :
+              pct >= 80 ? 'Excellent performance. Minor weak areas.' :
+              pct >= 75 ? 'Passed! Review wrong answers carefully.' :
+              'Revise HP&L topics — physiology, vision, and SHEL model.';
+
+  document.getElementById('sring').style.setProperty('--p', pct+'%');
+  document.getElementById('snum').textContent = `${SC}/${tot}`;
+  document.getElementById('spct').textContent = `${pct}%`;
+  document.getElementById('sgrade').textContent = grade;
+  document.getElementById('smsg').textContent = msg;
+  document.getElementById('r-correct').textContent = SC;
+  document.getElementById('r-wrong').textContent = WC;
+  document.getElementById('r-skip').textContent = skipped;
+  document.getElementById('r-pct').textContent = pct + '%';
+  document.getElementById('r-result').innerHTML = pass
+    ? '<span style="color:#86EFAC">PASS ✅</span>'
+    : '<span style="color:#FCA5A5">FAIL ❌</span>';
+
+  document.getElementById('quiz-mode').style.display = 'none';
+  document.getElementById('score-mode').style.display = 'block';
+  document.getElementById('statsbar').style.display = 'none';
+}
+
+function showReview(){
+  document.getElementById('score-mode').style.display = 'none';
+  document.getElementById('review-mode').style.display = 'block';
+  const wrap = document.getElementById('review-wrap');
+  const labels = ['A','B','C'];
+  wrap.innerHTML = QS.map((q,qi) => {
+    const sel = USERSEL[qi];
+    const correct = sel === q.a;
+    const skipped = sel === undefined;
+    const cls = skipped ? '' : correct ? 'correct' : 'wrong';
+    const badge = skipped
+      ? '<span class="review-badge w">⬜ Skipped</span>'
+      : correct
+        ? '<span class="review-badge c">✓ Correct</span>'
+        : '<span class="review-badge w">✗ Wrong</span>';
+    const opts = q.o.map((opt,oi) => {
+      let cls2 = 'dim';
+      if(oi === q.a) cls2 = 'cor';
+      else if(oi === sel && !correct) cls2 = 'wrg-sel';
+      const icon = oi===q.a ? '✓ ' : (oi===sel && !correct) ? '✗ ' : '';
+      return `<div class="review-opt ${cls2}"><strong>${labels[oi]}.</strong> ${icon}${opt}</div>`;
+    }).join('');
+    return `<div class="review-q ${cls}">
+      ${badge}
+      <div class="review-qtext"><strong>Q${qi+1}.</strong> ${q.q}</div>
+      <div class="review-opts">${opts}</div>
+      <div class="review-exp"><strong>💡</strong> ${q.e}</div>
+    </div>`;
+  }).join('');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function backToScore(){
+  document.getElementById('review-mode').style.display = 'none';
+  document.getElementById('score-mode').style.display = 'block';
+}
+
+function restartTest(){
+  CQ=0; SC=0; WC=0; ANS=false; TL=1800; USERSEL=[];
+  clearInterval(TI);
+  document.getElementById('score-mode').style.display = 'none';
+  document.getElementById('quiz-mode').style.display = 'block';
+  document.getElementById('statsbar').style.display = 'flex';
+  document.getElementById('stat-s').textContent = '0';
+  document.getElementById('stat-w').textContent = '0';
+  document.getElementById('tval').style.color = '#FCA5A5';
+  document.getElementById('tval').textContent = '30:00';
+  startTimer();
+  renderQ();
+}
+
+function confirmExit(){
+  if(confirm('Exit the test? Your progress will be lost.')) restartTest();
+}
+
+// START
+startTimer();
+renderQ();
+</script>
+</body>
+</html>

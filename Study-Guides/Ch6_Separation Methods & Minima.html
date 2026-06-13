@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 6: Separation Methods and Minima</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;
+  --card:#0D1A2E;--card2:#101E38;
+  --indigo:#6366F1;--purple:#A855F7;--sky:#0EA5E9;
+  --teal:#14B8A6;--green:#22C55E;--amber:#F59E0B;
+  --red:#EF4444;--orange:#F97316;--cyan:#06B6D4;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --in-bg:rgba(99,102,241,.11);--pu-bg:rgba(168,85,247,.11);
+  --sk-bg:rgba(14,165,233,.11);--tl-bg:rgba(20,184,166,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --cy-bg:rgba(6,182,212,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(99,102,241,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.4);color:#A5B4FC;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#A5B4FC;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 10px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--indigo);color:#A5B4FC;}
+.nb.active{background:var(--indigo);border-color:var(--indigo);color:#fff;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.g5{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-cy{background:var(--cy-bg);color:#67E8F9;border:1px solid rgba(6,182,212,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-in{background:var(--in-bg);border-color:var(--indigo);} .al-in strong{color:#A5B4FC;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);} .al-tl strong{color:#5EEAD4;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);} .al-pu strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#A5B4FC;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--sky));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--indigo);color:#fff;background:var(--in-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--in-bg);border:1px solid rgba(99,102,241,.22);border-radius:8px;font-size:12.5px;color:#A5B4FC;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--indigo);color:#fff;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#818CF8;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--indigo) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#A5B4FC;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">↔️ DGCA CPL · Air Traffic Control</div>
+  <h1>Chapter 6 — <span>Separation Methods & Minima</span></h1>
+  <p>Vertical · Lateral · Longitudinal · DME/GNSS · ATS Surveillance · PBN · RNP · RCP · RSP</p>
+  <div class="hero-chips">
+    <span class="chip">Below FL290=1000ft · Above FL290=2000ft · RVSM=1000ft</span>
+    <span class="chip">VOR=15° · NDB=30° · Both need 15NM</span>
+    <span class="chip">Same track=15min · 20kt=5min · 40kt=3min</span>
+    <span class="chip">DME same track=20NM · climb/descend=10NM</span>
+    <span class="chip">Radar ≤60NM=5NM · >60NM=10NM</span>
+    <span class="chip">Same track &lt;45° · Reciprocal 135°–225°</span>
+    <span class="chip">Mach technique=80NM RNAV</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('vertical')">📏 Vertical</button>
+  <button class="nb" onclick="show('lateral')">↔️ Lateral</button>
+  <button class="nb" onclick="show('tracks')">🧭 Track Defs</button>
+  <button class="nb" onclick="show('longitudinal')">⏱ Longitudinal</button>
+  <button class="nb" onclick="show('dme')">📡 DME/GNSS</button>
+  <button class="nb" onclick="show('surveillance')">🎯 ATS Surv.</button>
+  <button class="nb" onclick="show('pbn')">🛰 PBN/RNP</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ===== VERTICAL ===== -->
+<div class="section active" id="section-vertical">
+  <div class="sh"><div class="si" style="background:var(--in-bg);border:1px solid rgba(99,102,241,.3);">📏</div>
+  <div><div class="st">Vertical Separation</div>
+  <div class="ss">Below/Above FL290 · RVSM · Airspace classes · Composite separation</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>Vertical Separation Minima — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="240" fill="#07101c"/>
+        <!-- Altitude axis -->
+        <line x1="60" y1="10" x2="60" y2="230" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <text x="38" y="180" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle" transform="rotate(-90,38,180)">ALTITUDE / FL</text>
+        <!-- FL290 line -->
+        <line x1="60" y1="100" x2="740" y2="100" stroke="rgba(245,158,11,.4)" stroke-width="1.5" stroke-dasharray="8,5"/>
+        <text x="38" y="104" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">FL290</text>
+        <!-- BELOW FL290 zone -->
+        <rect x="60" y="100" width="680" height="130" fill="rgba(34,197,94,.04)"/>
+        <!-- Two aircraft below FL290 -->
+        <text x="200" y="150" fill="#86EFAC" font-family="sans-serif" font-size="18" text-anchor="middle">✈</text>
+        <text x="200" y="215" fill="rgba(34,197,94,.6)" font-family="sans-serif" font-size="18" text-anchor="middle">✈</text>
+        <line x1="215" y1="153" x2="215" y2="210" stroke="rgba(34,197,94,.5)" stroke-width="2"/>
+        <line x1="210" y1="153" x2="220" y2="153" stroke="rgba(34,197,94,.5)" stroke-width="2"/>
+        <line x1="210" y1="210" x2="220" y2="210" stroke="rgba(34,197,94,.5)" stroke-width="2"/>
+        <rect x="228" y="170" width="110" height="26" rx="7" fill="rgba(34,197,94,.14)" stroke="rgba(34,197,94,.4)" stroke-width="1.5"/>
+        <text x="283" y="188" fill="#86EFAC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">1000 ft ★</text>
+        <text x="200" y="230" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">Below FL290</text>
+        <!-- ABOVE FL290 zone -->
+        <rect x="60" y="10" width="680" height="90" fill="rgba(239,68,68,.04)"/>
+        <!-- Two aircraft above FL290 - Non RVSM -->
+        <text x="470" y="40" fill="#FCA5A5" font-family="sans-serif" font-size="18" text-anchor="middle">✈</text>
+        <text x="470" y="90" fill="rgba(239,68,68,.6)" font-family="sans-serif" font-size="18" text-anchor="middle">✈</text>
+        <line x1="485" y1="44" x2="485" y2="87" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+        <line x1="480" y1="44" x2="490" y2="44" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+        <line x1="480" y1="87" x2="490" y2="87" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+        <rect x="500" y="55" width="110" height="26" rx="7" fill="rgba(239,68,68,.14)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <text x="555" y="73" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">2000 ft ★</text>
+        <text x="470" y="108" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Above FL290 (non-RVSM)</text>
+        <!-- RVSM band annotation -->
+        <rect x="90" y="56" width="240" height="34" rx="8" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="210" y="71" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">RVSM Aircraft above FL290:</text>
+        <text x="210" y="84" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">1000 ft ★ (same as below)</text>
+        <!-- Labels -->
+        <text x="680" y="150" fill="rgba(34,197,94,.6)" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">BELOW FL290</text>
+        <text x="680" y="165" fill="rgba(34,197,94,.5)" font-family="monospace" font-size="10" text-anchor="middle">= 1000 ft</text>
+        <text x="680" y="48" fill="rgba(239,68,68,.6)" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ABOVE FL290</text>
+        <text x="680" y="63" fill="rgba(239,68,68,.5)" font-family="monospace" font-size="10" text-anchor="middle">= 2000 ft</text>
+      </svg>
+    </div>
+    <div class="g3">
+      <div class="stat" style="border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.09);">
+        <div class="sn" style="color:#86EFAC;">1000 ft</div><div class="su">Below FL290</div>
+        <div class="sl">Standard minimum ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);">
+        <div class="sn" style="color:#FCA5A5;">2000 ft</div><div class="su">Above FL290 (non-RVSM)</div>
+        <div class="sl">High-altitude standard ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.09);">
+        <div class="sn" style="color:#D8B4FE;">1000 ft</div><div class="su">RVSM (any altitude)</div>
+        <div class="sl">Between RVSM-approved AC ★</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Vertical Memory</div>
+      <div class="mf">Below FL290 = 1000ft · Above FL290 = 2000ft · RVSM = 1000ft (same as below FL290)</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Who Gets Separation — By Airspace Class</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Airspace Class</th><th style="color:#FCD34D;">Separation Between</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(99,102,241,.04);"><td><span class="b b-in">A &amp; B</span></td><td>ALL flights ★</td></tr>
+            <tr style="background:rgba(14,165,233,.04);"><td><span class="b b-sk">C</span></td><td>IFR↔IFR AND IFR↔VFR ★★</td></tr>
+            <tr style="background:rgba(34,197,94,.04);"><td><span class="b b-gn">D &amp; E</span></td><td>IFR↔IFR only</td></tr>
+            <tr><td><span class="b b-am">Special VFR</span></td><td>IFR↔SVFR · SVFR↔SVFR (when prescribed)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="al al-am" style="margin:0;"><strong>Class C trap:</strong> Separation is IFR↔IFR AND IFR↔VFR — not VFR↔VFR.</div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Composite Separation</div>
+      <div class="chk-item" style="border-color:rgba(20,184,166,.35);background:rgba(20,184,166,.07);margin-bottom:10px;">
+        <span style="font-size:18px;">🔗</span>
+        <div><strong>Definition:</strong> Combination of vertical + horizontal separation where each component may be reduced — but NOT less than <strong>half</strong> of the individual minimum.</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+        <span style="font-size:18px;">⚠️</span>
+        <div><strong>Cruise Climb in Indian FIRs:</strong> NOT permitted ★</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LATERAL ===== -->
+<div class="section" id="section-lateral">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">↔️</div>
+  <div><div class="st">Lateral Separation</div>
+  <div class="ss">VOR=15° · NDB=30° · Both need 15NM from station · GNSS · VMC climb/descent</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>VOR vs NDB Lateral Separation — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 230" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="230" fill="#07101c"/>
+        <!-- LEFT: VOR 15° -->
+        <text x="185" y="18" fill="#7DD3FC" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">VOR — 15° Divergence</text>
+        <!-- VOR station -->
+        <circle cx="185" cy="130" r="16" fill="rgba(14,165,233,.2)" stroke="rgba(14,165,233,.5)" stroke-width="2"/>
+        <text x="185" y="135" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">VOR</text>
+        <!-- Radial 1 -->
+        <line x1="185" y1="114" x2="130" y2="30" stroke="rgba(14,165,233,.6)" stroke-width="2.5"/>
+        <polygon points="130,30 124,44 136,44" fill="rgba(14,165,233,.6)"/>
+        <text x="120" y="25" fill="#7DD3FC" font-family="sans-serif" font-size="14">✈</text>
+        <!-- Radial 2 -->
+        <line x1="185" y1="114" x2="240" y2="30" stroke="rgba(14,165,233,.4)" stroke-width="2" stroke-dasharray="5,4"/>
+        <polygon points="240,30 234,44 246,44" fill="rgba(14,165,233,.4)"/>
+        <text x="240" y="24" fill="rgba(14,165,233,.6)" font-family="sans-serif" font-size="14">✈</text>
+        <!-- 15° arc -->
+        <path d="M185,100 A30,30 0 0,1 200,89" fill="none" stroke="rgba(14,165,233,.7)" stroke-width="2"/>
+        <text x="205" y="95" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold">15°</text>
+        <!-- 15 NM marker -->
+        <circle cx="155" cy="67" r="5" fill="rgba(245,158,11,.5)"/>
+        <line x1="155" y1="67" x2="185" y2="130" stroke="rgba(245,158,11,.3)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="128" y="95" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">≥15 NM</text>
+        <text x="128" y="107" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">from VOR</text>
+        <!-- VOR summary box -->
+        <rect x="60" y="170" width="250" height="48" rx="9" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="185" y="191" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">VOR: Radials diverge ≥ 15° ★</text>
+        <text x="185" y="208" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">AND at least one AC is ≥15 NM from VOR</text>
+
+        <!-- RIGHT: NDB 30° -->
+        <text x="570" y="18" fill="#D8B4FE" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">NDB — 30° Divergence</text>
+        <!-- NDB station -->
+        <circle cx="570" cy="130" r="16" fill="rgba(168,85,247,.2)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+        <text x="570" y="135" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">NDB</text>
+        <!-- Track 1 -->
+        <line x1="570" y1="114" x2="490" y2="25" stroke="rgba(168,85,247,.6)" stroke-width="2.5"/>
+        <polygon points="490,25 484,39 496,39" fill="rgba(168,85,247,.6)"/>
+        <text x="480" y="20" fill="#D8B4FE" font-family="sans-serif" font-size="14">✈</text>
+        <!-- Track 2 -->
+        <line x1="570" y1="114" x2="650" y2="25" stroke="rgba(168,85,247,.4)" stroke-width="2" stroke-dasharray="5,4"/>
+        <polygon points="650,25 644,39 656,39" fill="rgba(168,85,247,.4)"/>
+        <text x="648" y="20" fill="rgba(168,85,247,.6)" font-family="sans-serif" font-size="14">✈</text>
+        <!-- 30° arc -->
+        <path d="M570,100 A30,30 0 0,1 596,90" fill="none" stroke="rgba(168,85,247,.7)" stroke-width="2"/>
+        <text x="602" y="94" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold">30°</text>
+        <!-- 15 NM marker -->
+        <circle cx="540" cy="63" r="5" fill="rgba(245,158,11,.5)"/>
+        <line x1="540" y1="63" x2="570" y2="130" stroke="rgba(245,158,11,.3)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="510" y="90" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">≥15 NM</text>
+        <text x="510" y="102" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">from NDB</text>
+        <!-- NDB summary box -->
+        <rect x="445" y="170" width="250" height="48" rx="9" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="570" y="191" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NDB: Tracks diverge ≥ 30° ★</text>
+        <text x="570" y="208" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">AND at least one AC is ≥15 NM from NDB</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="mem" style="margin:0;"><div class="mi">🧠</div><div>
+        <div class="mt">VOR vs NDB Memory</div>
+        <div class="mf">VOR = 15° (more accurate, smaller angle)<br>NDB = 30° (less accurate, larger angle needed)<br>BOTH need 15 NM from the station</div>
+      </div></div>
+      <div class="card" style="margin:0;">
+        <div class="ch"><span class="pip" style="background:var(--teal)"></span>GNSS Lateral Separation</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><div>ATC must confirm aircraft is <strong>navigating using GNSS</strong></div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>Confirm <strong>no strategic lateral offset</strong> being applied</div></div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="cn">✗</span><div><strong>GNSS separation shall NOT apply during RAIM outage ★</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>VMC Climb/Descent — Own Separation</div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:18px;">Class D/E</div><div class="sl">Only these airspace classes</div>
+      </div>
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:14px;">Daylight only</div><div class="sl">Not at night</div>
+      </div>
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:10px;">
+        <div class="sn" style="color:#7DD3FC;font-size:14px;">≤10,000 ft</div><div class="sl">Altitude limit ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+        <div class="sn" style="color:#D8B4FE;font-size:14px;">VMC</div><div class="sl">Remain in VMC at all times</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TRACK DEFINITIONS ===== -->
+<div class="section" id="section-tracks">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">🧭</div>
+  <div><div class="st">Track Definitions</div>
+  <div class="ss">Same track &lt;45° · Reciprocal 135°–225° · Crossing = everything else</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Three Track Types — Visual Compass</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#07101c"/>
+
+        <!-- SAME TRACK left -->
+        <rect x="10" y="20" width="220" height="225" rx="12" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <text x="120" y="44" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">SAME TRACK</text>
+        <text x="120" y="60" fill="#86EFAC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">&lt;45° or &gt;315°</text>
+        <!-- Circle with arrows in same direction -->
+        <circle cx="120" cy="145" r="55" fill="rgba(34,197,94,.04)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+        <!-- North tick -->
+        <line x1="120" y1="90" x2="120" y2="70" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+        <text x="120" y="67" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="9" text-anchor="middle">N</text>
+        <!-- Two arrows very close together pointing up -->
+        <line x1="112" y1="155" x2="112" y2="95" stroke="#86EFAC" stroke-width="2.5"/>
+        <polygon points="107,100 112,85 117,100" fill="#86EFAC"/>
+        <line x1="128" y1="155" x2="128" y2="95" stroke="rgba(34,197,94,.5)" stroke-width="2" stroke-dasharray="5,4"/>
+        <polygon points="123,100 128,85 133,100" fill="rgba(34,197,94,.5)"/>
+        <!-- Angle arc -->
+        <path d="M120,120 A12,12 0 0,1 125,109" fill="none" stroke="rgba(34,197,94,.7)" stroke-width="1.5"/>
+        <text x="135" y="118" fill="#86EFAC" font-family="monospace" font-size="10" font-weight="bold">&lt;45°</text>
+        <text x="120" y="215" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Both going same way</text>
+        <text x="120" y="230" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">or opposite: &gt;315°</text>
+
+        <!-- RECIPROCAL centre -->
+        <rect x="268" y="20" width="224" height="225" rx="12" fill="rgba(239,68,68,.07)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="380" y="44" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">RECIPROCAL</text>
+        <text x="380" y="60" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">135° to 225°</text>
+        <!-- Circle -->
+        <circle cx="380" cy="145" r="55" fill="rgba(239,68,68,.04)" stroke="rgba(239,68,68,.2)" stroke-width="1"/>
+        <line x1="380" y1="90" x2="380" y2="70" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+        <text x="380" y="67" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="9" text-anchor="middle">N</text>
+        <!-- One arrow up, one down -->
+        <line x1="370" y1="155" x2="370" y2="95" stroke="#FCA5A5" stroke-width="2.5"/>
+        <polygon points="365,100 370,85 375,100" fill="#FCA5A5"/>
+        <line x1="390" y1="135" x2="390" y2="195" stroke="rgba(239,68,68,.6)" stroke-width="2.5"/>
+        <polygon points="385,190 390,205 395,190" fill="rgba(239,68,68,.6)"/>
+        <text x="380" y="215" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Opposite directions</text>
+        <text x="380" y="230" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Angular diff 135°–225°</text>
+
+        <!-- CROSSING right -->
+        <rect x="530" y="20" width="220" height="225" rx="12" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="640" y="44" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">CROSSING</text>
+        <text x="640" y="60" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Not same, not reciprocal</text>
+        <!-- Circle -->
+        <circle cx="640" cy="145" r="55" fill="rgba(245,158,11,.04)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+        <line x1="640" y1="90" x2="640" y2="70" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+        <text x="640" y="67" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="9" text-anchor="middle">N</text>
+        <!-- Crossing arrows -->
+        <line x1="640" y1="155" x2="640" y2="100" stroke="#FCD34D" stroke-width="2.5"/>
+        <polygon points="635,105 640,90 645,105" fill="#FCD34D"/>
+        <line x1="590" y1="145" x2="695" y2="145" stroke="rgba(245,158,11,.6)" stroke-width="2.5"/>
+        <polygon points="690,140 705,145 690,150" fill="rgba(245,158,11,.6)"/>
+        <text x="640" y="215" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">All other tracks</text>
+        <text x="640" y="230" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">45°–135° or 225°–315°</text>
+      </svg>
+    </div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Track Type</th><th style="color:#FCD34D;">Angular Difference</th><th style="color:#FCD34D;">Example</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(34,197,94,.04);"><td><span class="b b-gn">Same Track</span></td><td>Less than <strong>45°</strong> OR more than <strong>315°</strong></td><td>Both going 010° · Both going 350°</td></tr>
+          <tr style="background:rgba(239,68,68,.04);"><td><span class="b b-rd">Reciprocal</span></td><td>More than <strong>135°</strong> and less than <strong>225°</strong></td><td>One on 020°, other on 200°</td></tr>
+          <tr style="background:rgba(245,158,11,.04);"><td><span class="b b-am">Crossing</span></td><td>Everything else <strong>(45°–135°) or (225°–315°)</strong></td><td>Perpendicular 90°</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Track Memory</div>
+      <div class="mf">Same=&lt;45° · Reciprocal=135°-225° · Crossing=anything else</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== LONGITUDINAL ===== -->
+<div class="section" id="section-longitudinal">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">⏱</div>
+  <div><div class="st">Longitudinal Separation (Time-Based)</div>
+  <div class="ss">15min standard · 10min nav aids · 5min=20kt · 3min=40kt · Reciprocal=10min · Climb/descent rules</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Same Track — Four Time Separations Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SAME TRACK longitudinal separation — all four scenarios side by side</text>
+
+        <!-- 15 min standard -->
+        <rect x="10" y="28" width="168" height="140" rx="10" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.42)" stroke-width="2"/>
+        <text x="94" y="52" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">STANDARD</text>
+        <text x="94" y="100" fill="#FCA5A5" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">15</text>
+        <text x="94" y="122" fill="#FCA5A5" font-family="monospace" font-size="13" text-anchor="middle">MINUTES</text>
+        <text x="94" y="158" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">No speed advantage</text>
+
+        <!-- 10 min nav aids -->
+        <rect x="192" y="28" width="168" height="140" rx="10" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+        <text x="276" y="52" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">NAV AIDS</text>
+        <text x="276" y="100" fill="#D8B4FE" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">10</text>
+        <text x="276" y="122" fill="#D8B4FE" font-family="monospace" font-size="13" text-anchor="middle">MINUTES</text>
+        <text x="276" y="158" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Freq. pos/speed check</text>
+
+        <!-- 5 min 20kt -->
+        <rect x="374" y="28" width="185" height="140" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.45)" stroke-width="2.5"/>
+        <text x="466" y="52" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">20 kt FASTER</text>
+        <text x="466" y="100" fill="#FCD34D" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">5</text>
+        <text x="466" y="122" fill="#FCD34D" font-family="monospace" font-size="13" text-anchor="middle">MINUTES ★</text>
+        <text x="466" y="158" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Lead AC ≥20 kt faster</text>
+
+        <!-- 3 min 40kt -->
+        <rect x="574" y="28" width="175" height="140" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.45)" stroke-width="2.5"/>
+        <text x="661" y="52" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">40 kt FASTER</text>
+        <text x="661" y="100" fill="#86EFAC" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">3</text>
+        <text x="661" y="122" fill="#86EFAC" font-family="monospace" font-size="13" text-anchor="middle">MINUTES ★</text>
+        <text x="661" y="158" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Lead AC ≥40 kt faster</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Longitudinal Time Memory</div>
+      <div class="mf">Standard=15min · Nav aids=10min · 20kt=5min · 40kt=3min · Faster AC = shorter separation</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Crossing Tracks & Climb/Descent</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.11);"><tr><th style="color:#7DD3FC;">Situation</th><th style="color:#7DD3FC;">Separation</th></tr></thead>
+          <tbody>
+            <tr><td>Crossing tracks — standard</td><td><span class="num">15 min</span></td></tr>
+            <tr><td>Crossing tracks — nav aids</td><td><span class="num">10 min</span></td></tr>
+            <tr style="background:rgba(239,68,68,.04);"><td>Reciprocal tracks ★</td><td><span class="num">10 min</span> (before and after passing)</td></tr>
+            <tr><td>Climb/descent same track — standard</td><td><span class="num">15 min</span></td></tr>
+            <tr><td>Climb/descent same track — reduced</td><td><span class="num">10 min</span> (nav aids/GNSS)</td></tr>
+            <tr><td>Climb/descent — special case ★</td><td><span class="num">5 min</span> (level change within 10 min of common point)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>The DGCA Trap: 5min vs 3min</div>
+      <div style="background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px;margin-bottom:10px;">
+        <div style="font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:10px;">⚠️ The examiner SWAPS these values:</div>
+        <div class="g2" style="gap:8px;">
+          <div style="background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#FCD34D;">20 kt</div>
+            <div style="font-size:12px;color:var(--text2);">speed advantage</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#FCD34D;margin-top:5px;">= 5 min</div>
+          </div>
+          <div style="background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.35);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#86EFAC;">40 kt</div>
+            <div style="font-size:12px;color:var(--text2);">speed advantage</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#86EFAC;margin-top:5px;">= 3 min</div>
+          </div>
+        </div>
+      </div>
+      <div class="al al-am" style="margin:0;"><strong>Rule:</strong> Faster lead aircraft = shorter time needed. 40kt is faster advantage so 3min (shorter) applies.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DME/GNSS ===== -->
+<div class="section" id="section-dme">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">📡</div>
+  <div><div class="st">DME / GNSS Distance-Based Separation</div>
+  <div class="ss">Same/Crossing=20NM · 20kt=10NM · Climb/descend=10NM · Reciprocal=10NM · Mach=80NM</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>DME/GNSS Separation — All Scenarios</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="160" fill="#07101c"/>
+        <text x="380" y="16" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Using same DME station OR same GNSS waypoint — separation continuously monitored</text>
+
+        <!-- Same track standard 20NM -->
+        <rect x="10" y="28" width="140" height="120" rx="9" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.42)" stroke-width="2"/>
+        <text x="80" y="52" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Same Track</text>
+        <text x="80" y="66" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Standard</text>
+        <text x="80" y="105" fill="#FDB785" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle">20</text>
+        <text x="80" y="128" fill="#FDB785" font-family="monospace" font-size="13" text-anchor="middle">NM ★</text>
+
+        <!-- Same track 20kt = 10NM -->
+        <rect x="162" y="28" width="140" height="120" rx="9" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.42)" stroke-width="2"/>
+        <text x="232" y="52" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Same Track</text>
+        <text x="232" y="66" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Lead ≥20kt</text>
+        <text x="232" y="105" fill="#86EFAC" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle">10</text>
+        <text x="232" y="128" fill="#86EFAC" font-family="monospace" font-size="13" text-anchor="middle">NM ★</text>
+
+        <!-- Crossing tracks 20NM -->
+        <rect x="314" y="28" width="140" height="120" rx="9" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.42)" stroke-width="2"/>
+        <text x="384" y="52" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Crossing</text>
+        <text x="384" y="66" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">(&lt;90° angle)</text>
+        <text x="384" y="105" fill="#D8B4FE" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle">20</text>
+        <text x="384" y="128" fill="#D8B4FE" font-family="monospace" font-size="13" text-anchor="middle">NM ★</text>
+
+        <!-- Climb/descend 10NM -->
+        <rect x="466" y="28" width="140" height="120" rx="9" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.42)" stroke-width="2"/>
+        <text x="536" y="52" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Climb/Descend</text>
+        <text x="536" y="66" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Same track</text>
+        <text x="536" y="105" fill="#7DD3FC" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle">10</text>
+        <text x="536" y="128" fill="#7DD3FC" font-family="monospace" font-size="13" text-anchor="middle">NM ★</text>
+
+        <!-- Reciprocal 10NM -->
+        <rect x="618" y="28" width="132" height="120" rx="9" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.42)" stroke-width="2"/>
+        <text x="684" y="52" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Reciprocal</text>
+        <text x="684" y="66" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Passed + apart</text>
+        <text x="684" y="105" fill="#FCA5A5" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle">10</text>
+        <text x="684" y="128" fill="#FCA5A5" font-family="monospace" font-size="13" text-anchor="middle">NM ★</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">DME/GNSS Memory</div>
+      <div class="mf">Same/Crossing track=20NM · 20kt speed advantage=10NM · Climb/descend=10NM · Reciprocal=10NM</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Mach Number Technique</div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);margin-bottom:10px;">
+        <span style="font-size:18px;">✈️</span>
+        <div>Used for <strong>turbojet aircraft on same track.</strong> Normal: <strong>10 min</strong> unless differential Mach numbers used.</div>
+      </div>
+      <div class="stat" style="border-color:rgba(249,115,22,.5);background:rgba(249,115,22,.09);">
+        <div class="sn" style="color:#FDB785;">80 NM</div>
+        <div class="su">RNAV distance (150 km) replaces 10 min</div>
+        <div class="sl">Same-direction tracks with Mach technique ★</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>PBN Performance-Based Separation</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(20,184,166,.11);"><tr><th style="color:#5EEAD4;">Separation</th><th style="color:#5EEAD4;">Requirements</th></tr></thead>
+          <tbody>
+            <tr><td><span class="num">50 NM</span></td><td>RNP 10 or 4 · RCP 240 · RSP 180</td></tr>
+            <tr><td><span class="num">30 NM</span></td><td>RNP 2 or 4 · RCP 240 · RSP 180</td></tr>
+            <tr><td><span class="num">5 min</span></td><td>RNP 2, 4 or 10 · RCP 240 · RSP 180</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ATS SURVEILLANCE ===== -->
+<div class="section" id="section-surveillance">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🎯</div>
+  <div><div class="st">ATS Surveillance Separation</div>
+  <div class="ss">Radar ≤60NM=5NM · >60NM=10NM · ADS-B same · Reduced=3NM · Essential Traffic</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>ATS Surveillance — Distance Zones Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="210" fill="#07101c"/>
+        <!-- Radar head in centre -->
+        <circle cx="380" cy="105" r="22" fill="rgba(239,68,68,.2)" stroke="rgba(239,68,68,.6)" stroke-width="2.5"/>
+        <text x="380" y="100" fill="#FCA5A5" font-family="sans-serif" font-size="16" text-anchor="middle">📡</text>
+        <text x="380" y="118" fill="#FCA5A5" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">RADAR</text>
+        <!-- 60 NM circle -->
+        <circle cx="380" cy="105" r="100" fill="rgba(34,197,94,.05)" stroke="rgba(34,197,94,.35)" stroke-width="2"/>
+        <!-- Aircraft within 60NM -->
+        <text x="280" y="105" fill="#86EFAC" font-family="sans-serif" font-size="16" text-anchor="middle">✈</text>
+        <text x="475" y="105" fill="#86EFAC" font-family="sans-serif" font-size="16" text-anchor="middle">✈</text>
+        <!-- 5NM separation label inside zone -->
+        <rect x="300" y="82" width="160" height="22" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="380" y="97" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">5 NM separation ★</text>
+        <text x="380" y="140" fill="rgba(34,197,94,.6)" font-family="monospace" font-size="10" text-anchor="middle">WITHIN 60 NM</text>
+        <!-- Outer zone -->
+        <circle cx="380" cy="105" r="155" fill="rgba(14,165,233,.04)" stroke="rgba(14,165,233,.25)" stroke-width="1.5" stroke-dasharray="8,5"/>
+        <!-- Aircraft beyond 60NM -->
+        <text x="120" y="105" fill="#7DD3FC" font-family="sans-serif" font-size="16" text-anchor="middle">✈</text>
+        <text x="640" y="105" fill="#7DD3FC" font-family="sans-serif" font-size="16" text-anchor="middle">✈</text>
+        <!-- 10NM label outside -->
+        <rect x="182" y="82" width="80" height="22" rx="5" fill="rgba(14,165,233,.12)" stroke="rgba(14,165,233,.3)" stroke-width="1"/>
+        <text x="222" y="97" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">10 NM</text>
+        <!-- 60NM label on circle -->
+        <text x="480" y="65" fill="rgba(34,197,94,.7)" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">60 NM</text>
+        <!-- Special reduced -->
+        <rect x="285" y="168" width="190" height="30" rx="8" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="380" y="185" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Special reduced: 3 NM ★</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(239,68,68,.11);"><tr><th style="color:#FCA5A5;">System</th><th style="color:#FCA5A5;">Distance</th><th style="color:#FCA5A5;">Separation</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(34,197,94,.04);"><td>Radar</td><td>≤ 60 NM</td><td><span class="num">5 NM ★</span></td></tr>
+            <tr style="background:rgba(14,165,233,.04);"><td>Radar</td><td>&gt; 60 NM</td><td><span class="num">10 NM ★</span></td></tr>
+            <tr style="background:rgba(34,197,94,.04);"><td>ADS-B</td><td>≤ 60 NM</td><td><span class="num">5 NM</span></td></tr>
+            <tr style="background:rgba(14,165,233,.04);"><td>ADS-B</td><td>&gt; 60 NM</td><td><span class="num">10 NM</span></td></tr>
+            <tr style="background:rgba(168,85,247,.04);"><td>Radar (special)</td><td>Any</td><td><span class="num">3 NM ★</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin:0;">
+        <div class="ch"><span class="pip" style="background:var(--amber)"></span>Essential Traffic Information (ETI)</div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);">
+          <span style="font-size:18px;">⚠️</span>
+          <div><strong>Essential Traffic</strong> = Controlled traffic to which separation is applicable but is NOT, or will NOT be, separated by prescribed minima. ATC must pass ETI when controlled flights constitute essential traffic to each other ★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PBN/RNP ===== -->
+<div class="section" id="section-pbn">
+  <div class="sh"><div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🛰</div>
+  <div><div class="st">PBN · RNP · RCP · RSP</div>
+  <div class="ss">Performance-Based Navigation · Communication · Surveillance — definitions & values</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>PBN Hierarchy — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="170" fill="#07101c"/>
+        <!-- PBN big box -->
+        <rect x="20" y="20" width="720" height="130" rx="12" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.35)" stroke-width="2"/>
+        <text x="380" y="46" fill="#D8B4FE" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">PBN — Performance-Based Navigation</text>
+        <text x="380" y="62" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Navigation specification appropriate to ATS, communication and surveillance capability</text>
+        <!-- RNAV box inside PBN -->
+        <rect x="60" y="74" width="280" height="60" rx="10" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="200" y="99" fill="#7DD3FC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">RNAV</text>
+        <text x="200" y="117" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Area Navigation — no sensor required</text>
+        <text x="200" y="130" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Types: RNAV 1, 2, 5, 10</text>
+        <!-- RNP box inside PBN -->
+        <rect x="420" y="74" width="280" height="60" rx="10" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="560" y="99" fill="#86EFAC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">RNP</text>
+        <text x="560" y="117" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">RNAV + on-board monitoring</text>
+        <text x="560" y="130" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Values: RNP 1, 2, 4, 10, 12.6, 20</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>Four Key Terms</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#D8B4FE;flex-shrink:0;">PBN</span>
+          <div><strong>Performance-Based Navigation</strong> — umbrella concept: RNAV + RNP</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#86EFAC;flex-shrink:0;">RNP</span>
+          <div><strong>Required Navigation Performance</strong> — navigation performance needed for defined airspace</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.35);background:rgba(14,165,233,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#7DD3FC;flex-shrink:0;">RCP</span>
+          <div><strong>Required Communication Performance</strong> — measures communication capability. Values: 10, 60, 120, 240, 400 (seconds)</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.07);">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FDB785;flex-shrink:0;">RSP</span>
+          <div><strong>Required Surveillance Performance</strong> — surveillance transaction time. Values: 180, 240, 400 (seconds)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>RNP Values Used in Separation</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+        <span class="b b-gn">RNP 1</span><span class="b b-gn">RNP 2</span>
+        <span class="b b-gn">RNP 4</span><span class="b b-gn">RNP 10</span>
+        <span class="b b-gn">RNP 12.6</span><span class="b b-gn">RNP 20</span>
+      </div>
+      <div class="al al-am" style="margin:0;"><strong>Number = lateral navigation accuracy in NM.</strong> RNP 4 = aircraft stays within ±4 NM of centreline 95% of time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference — Complete Numbers Sheet</div>
+  <div class="ss">Every critical number from Chapter 6 in one place</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--indigo)"></span>All Critical Numbers (DGCA Guaranteed)</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(99,102,241,.12);"><tr><th style="color:#A5B4FC;">Question</th><th style="color:#A5B4FC;">Answer</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(34,197,94,.04);"><td>Vertical sep — below FL290</td><td><span class="num">1000 ft ★</span></td></tr>
+            <tr style="background:rgba(239,68,68,.04);"><td>Vertical sep — above FL290 (non-RVSM)</td><td><span class="num">2000 ft ★</span></td></tr>
+            <tr style="background:rgba(168,85,247,.04);"><td>Vertical sep — RVSM</td><td><span class="num">1000 ft ★</span></td></tr>
+            <tr><td>Class C separation provided between</td><td>IFR↔IFR AND IFR↔VFR</td></tr>
+            <tr><td>Composite separation — each component min</td><td>Half of individual minimum</td></tr>
+            <tr><td>VMC climb/descent: airspace</td><td>Class D and E</td></tr>
+            <tr><td>VMC climb/descent: altitude limit</td><td><span class="num">10,000 ft</span></td></tr>
+            <tr><td>Cruise climb in Indian FIRs</td><td>NOT permitted</td></tr>
+            <tr><td>VOR lateral separation divergence</td><td><span class="num">15° ★</span></td></tr>
+            <tr><td>NDB lateral separation divergence</td><td><span class="num">30° ★</span></td></tr>
+            <tr><td>VOR/NDB — min distance from station</td><td><span class="num">15 NM</span></td></tr>
+            <tr><td>GNSS separation — RAIM outage</td><td>SHALL NOT be applied</td></tr>
+            <tr><td>Same track — angular diff</td><td>&lt;45° or &gt;315°</td></tr>
+            <tr><td>Reciprocal track — angular diff</td><td>&gt;135° and &lt;225°</td></tr>
+            <tr><td>Long. separation — standard</td><td><span class="num">15 min ★</span></td></tr>
+            <tr><td>Long. separation — with nav aids</td><td><span class="num">10 min</span></td></tr>
+            <tr><td>Long. separation — lead 20 kt faster</td><td><span class="num">5 min ★</span></td></tr>
+            <tr><td>Long. separation — lead 40 kt faster</td><td><span class="num">3 min ★</span></td></tr>
+            <tr><td>Long. separation — reciprocal tracks</td><td><span class="num">10 min</span></td></tr>
+            <tr><td>DME/GNSS — same/crossing track</td><td><span class="num">20 NM ★</span></td></tr>
+            <tr><td>DME/GNSS — lead 20 kt faster</td><td><span class="num">10 NM</span></td></tr>
+            <tr><td>DME/GNSS — climb/descend</td><td><span class="num">10 NM</span></td></tr>
+            <tr><td>DME/GNSS — reciprocal tracks</td><td><span class="num">10 NM</span></td></tr>
+            <tr><td>Radar/ADS-B — within 60 NM</td><td><span class="num">5 NM ★</span></td></tr>
+            <tr><td>Radar/ADS-B — beyond 60 NM</td><td><span class="num">10 NM ★</span></td></tr>
+            <tr><td>Reduced radar separation</td><td><span class="num">3 NM ★</span></td></tr>
+            <tr><td>Mach technique RNAV distance</td><td><span class="num">80 NM</span></td></tr>
+            <tr><td>PBN separation — 50 NM requires</td><td>RNP 10 or 4 · RCP 240 · RSP 180</td></tr>
+            <tr><td>PBN separation — 30 NM requires</td><td>RNP 2 or 4 · RCP 240 · RSP 180</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">5 min = 20 kt · 3 min = 40 kt (not the other way round)</div><div class="trap-d">Examiner frequently swaps these. 20kt advantage = 5 min. 40kt advantage = 3 min. Greater speed advantage = SHORTER separation needed. Know it instantly.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">RVSM = 1000ft (same as below FL290, not 2000ft)</div><div class="trap-d">In RVSM airspace, even above FL290, separation is 1000 ft between RVSM-approved aircraft. Without RVSM approval above FL290 = 2000 ft.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Class C: IFR↔IFR AND IFR↔VFR (not VFR↔VFR)</div><div class="trap-d">Class C provides separation between IFR↔IFR AND IFR↔VFR. VFR↔VFR is NOT separated in Class C. This catches many students.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">VOR=15° · NDB=30° (larger angle = less accurate aid)</div><div class="trap-d">NDB is less accurate than VOR, so requires a WIDER divergence angle (30°) for lateral separation. VOR = 15°. Both require the aircraft to be at least 15 NM from the station.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Same track = less than 45° (not 90° or 135°)</div><div class="trap-d">Same track means angular difference is LESS THAN 45° or MORE THAN 315°. Common wrong answer: "less than 90°". The cutoff is 45°, not 90°.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Radar/ADS-B uses the SAME distances (5NM ≤60NM, 10NM >60NM)</div><div class="trap-d">ADS-B separation follows exactly the same distances as radar: 5 NM within 60 NM, 10 NM beyond 60 NM. Identical rules for both systems.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--in-bg);border:1px solid rgba(99,102,241,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 6</div>
+  <div class="ss">30 DGCA-style questions on Separation Methods and Minima</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));if(window.event&&window.event.target){window.event.target.classList.add('active');}window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"Vertical separation minimum below FL290 is:",opts:["500 ft","1000 ft","1500 ft","2000 ft"],ans:1,exp:"Below FL290: 1000 ft standard vertical separation. Above FL290 (non-RVSM): 2000 ft. RVSM: 1000 ft. The 1000/2000/1000 pattern is the most tested vertical separation question."},
+{q:"Vertical separation above FL290 in non-RVSM airspace is:",opts:["1000 ft","1500 ft","2000 ft","2500 ft"],ans:2,exp:"Above FL290 in NON-RVSM airspace: 2000 ft. In RVSM airspace: 1000 ft (same as below FL290). The 2000 ft applies only without RVSM approval."},
+{q:"In RVSM airspace, vertical separation between RVSM-approved aircraft is:",opts:["500 ft","1000 ft","1500 ft","2000 ft"],ans:1,exp:"RVSM = Reduced Vertical Separation Minimum = 1000 ft even above FL290. This is the same as below FL290. RVSM extends the 1000 ft band into what was previously 2000 ft territory."},
+{q:"In Class C airspace, separation is provided between:",opts:["IFR and IFR only","VFR and VFR only","IFR/IFR and IFR/VFR","All flights including VFR/VFR"],ans:2,exp:"Class C provides separation between IFR↔IFR and IFR↔VFR. VFR↔VFR separation is not provided."},
+{q:"VOR lateral separation requires tracks to diverge by at least:",opts:["10°","15°","20°","30°"],ans:1,exp:"VOR lateral separation = 15° divergence AND at least one aircraft is 15 NM from the VOR. NDB requires 30°. VOR is more accurate so smaller angle is acceptable."},
+{q:"NDB lateral separation requires tracks to diverge by at least:",opts:["10°","15°","20°","30°"],ans:3,exp:"NDB lateral separation = 30° divergence AND at least one aircraft is 15 NM from the NDB. NDB is less accurate than VOR so requires a wider divergence angle (30° vs 15°)."},
+{q:"For VOR/NDB lateral separation, at least one aircraft must be:",opts:["5 NM from the station","10 NM from the station","15 NM from the station","25 NM from the station"],ans:2,exp:"Both VOR and NDB require at least one aircraft to be 15 NM from the station. The distance requirement is the SAME for both — only the angle differs (VOR=15°, NDB=30°)."},
+{q:"GNSS track separation shall NOT be applied during:",opts:["DME failure","RAIM outage","VMC conditions","Night operations"],ans:1,exp:"GNSS separation is prohibited during a reported RAIM outage. RAIM provides integrity monitoring — without it, GNSS accuracy cannot be guaranteed."},
+{q:"'Same track' exists when the angular difference between tracks is:",opts:["Less than 45° or more than 315°","45° to 135°","135° to 225°","Less than 90°"],ans:0,exp:"Same track = angular difference less than 45° OR more than 315°. Common trap: not 90°. The 45° boundary is critical."},
+{q:"'Reciprocal tracks' have an angular difference of:",opts:["Less than 45°","45° to 135°","More than 135° and less than 225°","More than 270°"],ans:2,exp:"Reciprocal tracks = angular difference MORE THAN 135° and LESS THAN 225°. This means roughly opposite directions."},
+{q:"Standard longitudinal time separation on same track at same level is:",opts:["5 min","10 min","15 min","20 min"],ans:2,exp:"Standard longitudinal same-track separation = 15 MINUTES. Reduces to 10 min with nav aids, 5 min with 20 kt advantage, 3 min with 40 kt advantage."},
+{q:"5-minute longitudinal separation requires the leading aircraft to be at least:",opts:["10 kt faster","20 kt faster","30 kt faster","40 kt faster"],ans:1,exp:"5 min = 20 kt faster. 3 min = 40 kt faster. The examiner frequently swaps these. Greater speed advantage = shorter separation."},
+{q:"3-minute longitudinal separation requires the leading aircraft to be at least:",opts:["10 kt faster","20 kt faster","30 kt faster","40 kt faster"],ans:3,exp:"3 min = 40 kt faster. Most frequently swapped DGCA trap. 20kt=5min, 40kt=3min. Larger advantage → shorter separation."},
+{q:"Longitudinal separation on reciprocal tracks is:",opts:["5 min","10 min","15 min","20 min"],ans:1,exp:"Reciprocal tracks = 10 min before and after the estimated passing time. Less than standard 15 min because reciprocal aircraft diverge quickly after passing."},
+{q:"DME/GNSS longitudinal separation on same track same level is:",opts:["10 NM","15 NM","20 NM","30 NM"],ans:2,exp:"DME/GNSS same-track standard = 20 NM. Using the same DME station or GNSS waypoint with continuous monitoring."},
+{q:"DME/GNSS separation may be reduced to 10 NM when the leading aircraft is:",opts:["10 kt faster","20 kt faster","30 kt faster","40 kt faster"],ans:1,exp:"DME/GNSS 10 NM: leading aircraft at least 20 kt faster. Same 20 kt threshold as the time-based 5-min reduction."},
+{q:"Standard ATS surveillance separation within 60 NM of the radar head is:",opts:["3 NM","5 NM","8 NM","10 NM"],ans:1,exp:"Within 60 NM of radar: 5 NM. Beyond 60 NM: 10 NM. ADS-B uses identical distances."},
+{q:"ATS surveillance separation beyond 60 NM of the radar head is:",opts:["5 NM","8 NM","10 NM","15 NM"],ans:2,exp:"Beyond 60 NM = 10 NM. Within 60 NM = 5 NM. The 60 NM boundary is the key threshold for both radar and ADS-B."},
+{q:"Special reduced ATS surveillance separation may be:",opts:["2 NM","3 NM","4 NM","5 NM"],ans:1,exp:"Reduced radar separation = 3 NM with special authorization. Standard is 5 NM within 60 NM."},
+{q:"RNP stands for:",opts:["Required Navigation Procedure","Required Navigation Performance","Radar Navigation Performance","Required Navigation Precision"],ans:1,exp:"RNP = Required Navigation Performance. Inside PBN: RNAV (no on-board monitoring) and RNP (RNAV + on-board monitoring and alerting)."},
+{q:"The RNAV distance for Mach Number Technique separation is:",opts:["50 NM","80 NM","100 NM","120 NM"],ans:1,exp:"Mach Number Technique RNAV = 80 NM (150 km) on same-direction tracks, replacing the standard 10-minute longitudinal separation for turbojet aircraft."},
+{q:"Cruise climb in Indian FIRs is:",opts:["Permitted","Permitted above FL290 only","Not permitted","Permitted for turbojet aircraft"],ans:2,exp:"Cruise climb is NOT permitted in Indian FIRs. This India-specific rule appears in multiple chapters and is asked directly."},
+{q:"Essential Traffic Information must be passed when:",opts:["All aircraft in an FIR","Only VFR aircraft","Controlled flights constitute essential traffic to each other","Radar is unserviceable"],ans:2,exp:"ETI = passed when controlled traffic constitute essential traffic — when required separation is not or will not be achieved by prescribed minima."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML='<span class="qltr">'+l+'</span>'+q.opts[i];b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='🏆 Excellent!';sub='Chapter 6 mastered — DGCA ready!';}else if(pct>=75){msg='✅ Strong!';sub='Review 5min/3min trap and track definitions.';}else if(pct>=60){msg='📚 Good!';sub='Drill all four separation tables until automatic.';}else{msg='🔄 Keep Revising!';sub='Focus on vertical sep, 20kt/40kt, and radar 60NM boundary.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

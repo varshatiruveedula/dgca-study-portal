@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 16: Airworthiness of Aircraft</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060D1A;
+  --bg2: #0A1525;
+  --bg3: #0D1B2E;
+  --card: #0F2040;
+  --card2: #122545;
+  --sky: #0D7EE8;
+  --sky2: #1588F5;
+  --teal: #00A896;
+  --amber: #F59E0B;
+  --green: #22C55E;
+  --red: #EF4444;
+  --purple: #A855F7;
+  --orange: #F97316;
+  --text: #E2EBF8;
+  --text2: #94A8C8;
+  --text3: #526480;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.11);
+  --border3: rgba(255,255,255,0.18);
+  --success-bg: rgba(34,197,94,0.12);
+  --danger-bg: rgba(239,68,68,0.12);
+  --amber-bg: rgba(245,158,11,0.12);
+  --sky-bg: rgba(13,126,232,0.12);
+  --teal-bg: rgba(0,168,150,0.12);
+  --purple-bg: rgba(168,85,247,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; }
+
+/* HERO */
+.hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  padding: 44px 24px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 0%, rgba(0,168,150,0.15) 0%, transparent 55%),
+              radial-gradient(ellipse at 80% 20%, rgba(13,126,232,0.12) 0%, transparent 50%);
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,168,150,0.15);
+  border: 1px solid rgba(0,168,150,0.35);
+  color: #5EEAD4;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px;
+  position: relative;
+}
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px,5vw,46px); font-weight: 700; color: #fff; position: relative; margin-bottom: 8px; }
+.hero h1 span { color: #5EEAD4; }
+.hero p { color: var(--text2); font-size: 14px; position: relative; margin-bottom: 8px; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; position: relative; margin-top: 14px; }
+.chip { background: rgba(255,255,255,0.05); border: 1px solid var(--border2); color: var(--text2); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 12px; letter-spacing: 0.5px; }
+
+/* NAV */
+.nav-bar {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  padding: 16px 20px; background: var(--bg3); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-btn {
+  background: transparent; border: 1px solid var(--border2); color: var(--text2);
+  padding: 7px 15px; border-radius: 20px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.nav-btn:hover { border-color: var(--teal); color: #5EEAD4; }
+.nav-btn.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* LAYOUT */
+.content { max-width: 980px; margin: 0 auto; padding: 32px 18px 64px; }
+.section { display: none; }
+.section.active { display: block; }
+.sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.sec-icon { width: 46px; height: 46px; background: var(--teal-bg); border: 1px solid rgba(0,168,150,0.3); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.sec-title { font-size: 22px; font-weight: 700; color: #fff; }
+.sec-sub { font-size: 13px; color: var(--text3); margin-top: 3px; }
+
+/* CARDS */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+.card-h { font-size: 12px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.card-h .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+/* GRID */
+.g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.g4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 12px; }
+
+/* STAT BOXES */
+.stat { background: var(--card2); border: 1px solid var(--border2); border-radius: 12px; padding: 16px; text-align: center; transition: transform 0.18s; }
+.stat:hover { transform: translateY(-2px); }
+.stat-n { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #5EEAD4; line-height: 1.1; }
+.stat-u { font-size: 13px; color: var(--text3); }
+.stat-l { font-size: 12px; color: var(--text2); margin-top: 5px; font-weight: 500; }
+
+/* TABLES */
+.tw { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th { background: rgba(0,168,150,0.15); color: #5EEAD4; padding: 10px 14px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid rgba(0,168,150,0.25); }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.015); }
+
+/* BADGES */
+.b { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
+.b-green { background: var(--success-bg); color: #86EFAC; border: 1px solid rgba(34,197,94,0.28); }
+.b-red   { background: var(--danger-bg);  color: #FCA5A5; border: 1px solid rgba(239,68,68,0.28); }
+.b-amber { background: var(--amber-bg);   color: #FCD34D; border: 1px solid rgba(245,158,11,0.28); }
+.b-blue  { background: var(--sky-bg);     color: #93C5FD; border: 1px solid rgba(13,126,232,0.28); }
+.b-teal  { background: var(--teal-bg);    color: #5EEAD4; border: 1px solid rgba(0,168,150,0.28); }
+.b-purple { background: var(--purple-bg); color: #D8B4FE; border: 1px solid rgba(168,85,247,0.28); }
+
+/* MEMORY BOX */
+.mem { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(249,115,22,0.07)); border: 1px solid rgba(245,158,11,0.28); border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; gap: 12px; }
+.mem-ico { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.mem-title { font-size: 11px; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+.mem-txt { font-size: 14px; color: var(--text); }
+.mem-f { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: #FCD34D; margin-top: 6px; padding: 7px 12px; background: rgba(0,0,0,0.25); border-radius: 8px; display: inline-block; }
+
+/* ALERT BOXES */
+.alert { border-left: 3px solid; border-radius: 0 10px 10px 0; padding: 13px 16px; margin: 14px 0; font-size: 13.5px; }
+.alert-amber { background: rgba(245,158,11,0.09); border-color: var(--amber); color: var(--text); }
+.alert-teal  { background: rgba(0,168,150,0.09);  border-color: var(--teal);  color: var(--text); }
+.alert-red   { background: rgba(239,68,68,0.09);  border-color: var(--red);   color: var(--text); }
+.alert-blue  { background: rgba(13,126,232,0.09); border-color: var(--sky);   color: var(--text); }
+.alert strong { color: #FCD34D; }
+.alert-teal strong  { color: #5EEAD4; }
+.alert-red strong   { color: #FCA5A5; }
+.alert-blue strong  { color: #93C5FD; }
+
+/* FLOW */
+.flow { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; overflow-x: auto; }
+.f-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.f-box { background: var(--card2); border: 1px solid var(--border2); border-radius: 10px; padding: 11px 18px; text-align: center; min-width: 100px; }
+.f-box .fn { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: #5EEAD4; }
+.f-box .fl { font-size: 11px; color: var(--text3); margin-top: 3px; font-weight: 600; }
+.f-box .fs { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.f-box.sky  { border-color: rgba(13,126,232,0.45); background: rgba(13,126,232,0.08); }
+.f-box.teal { border-color: rgba(0,168,150,0.45);  background: rgba(0,168,150,0.08); }
+.f-box.amber { border-color: rgba(245,158,11,0.45); background: rgba(245,158,11,0.08); }
+.f-box.red  { border-color: rgba(239,68,68,0.45);  background: rgba(239,68,68,0.08); }
+.f-box.green { border-color: rgba(34,197,94,0.45); background: rgba(34,197,94,0.08); }
+.f-arr { font-size: 18px; color: var(--text3); flex-shrink: 0; }
+
+/* VS CARD */
+.vs-wrap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; }
+.vs-card { background: var(--card2); border: 1px solid var(--border2); border-radius: 12px; padding: 18px; }
+.vs-hdr { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.vs-mid { display: flex; align-items: center; justify-content: center; width: 36px; flex-shrink: 0; }
+.vs-dot { width: 36px; height: 36px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--amber); }
+.vs-row { font-size: 13px; color: var(--text2); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.vs-row:last-child { border-bottom: none; }
+.vs-key { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+
+/* MINDMAP */
+.mm-center { background: linear-gradient(135deg, var(--teal), var(--sky)); border-radius: 16px; padding: 14px 24px; text-align: center; font-weight: 700; font-size: 15px; color: #fff; width: fit-content; margin: 0 auto 24px; }
+.mm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.mm-node { background: var(--card2); border-radius: 12px; overflow: hidden; border: 1px solid var(--border2); }
+.mm-hdr { padding: 10px 14px; font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 7px; }
+.mm-body { padding: 10px 14px 12px; }
+.mm-body li { list-style: none; font-size: 12.5px; color: var(--text2); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.mm-body li:last-child { border-bottom: none; }
+.mn-teal .mm-hdr { background: var(--teal-bg); color: #5EEAD4; }
+.mn-blue .mm-hdr { background: var(--sky-bg);  color: #93C5FD; }
+.mn-amber .mm-hdr { background: var(--amber-bg); color: #FCD34D; }
+.mn-red .mm-hdr   { background: var(--danger-bg); color: #FCA5A5; }
+.mn-purple .mm-hdr { background: var(--purple-bg); color: #D8B4FE; }
+.mn-green .mm-hdr  { background: var(--success-bg); color: #86EFAC; }
+
+/* PROCESS STEPS */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step { display: flex; gap: 14px; }
+.step-left { display: flex; flex-direction: column; align-items: center; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--teal-bg); border: 1px solid rgba(0,168,150,0.4); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #5EEAD4; flex-shrink: 0; }
+.step-line { width: 1px; background: var(--border2); flex: 1; min-height: 16px; margin: 4px 0; }
+.step:last-child .step-line { display: none; }
+.step-body { padding-bottom: 18px; flex: 1; }
+.step-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: var(--text2); }
+
+/* ACCORDION */
+.acc { margin-bottom: 10px; }
+.acc-btn { width: 100%; background: var(--card2); border: 1px solid var(--border2); border-radius: 10px; padding: 13px 17px; text-align: left; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+.acc-btn:hover { background: rgba(255,255,255,0.04); }
+.acc-btn.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: rgba(0,168,150,0.4); }
+.acc-body { background: var(--card); border: 1px solid rgba(0,168,150,0.28); border-top: none; border-radius: 0 0 10px 10px; padding: 16px; display: none; }
+.acc-body.open { display: block; }
+.chv { transition: transform 0.2s; }
+.acc-btn.open .chv { transform: rotate(180deg); }
+
+/* QUIZ */
+.qprog { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.pbar { flex: 1; height: 5px; background: var(--border2); border-radius: 3px; overflow: hidden; }
+.pfill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--sky)); border-radius: 3px; transition: width 0.4s ease; }
+.qnum { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.qcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 26px; }
+.qq { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 22px; line-height: 1.55; }
+.qopts { display: flex; flex-direction: column; gap: 9px; }
+.qopt { background: var(--card2); border: 1px solid var(--border2); border-radius: 10px; padding: 12px 16px; cursor: pointer; font-size: 13.5px; color: var(--text2); transition: all 0.14s; text-align: left; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; gap: 11px; }
+.qopt:hover { border-color: var(--teal); color: #fff; background: var(--teal-bg); }
+.qopt.correct { border-color: var(--green); background: var(--success-bg); color: #86EFAC; pointer-events: none; }
+.qopt.wrong   { border-color: var(--red); background: var(--danger-bg); color: #FCA5A5; pointer-events: none; }
+.qopt.disabled { pointer-events: none; opacity: 0.45; }
+.qltr { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+.qex { margin-top: 14px; padding: 11px 15px; background: var(--teal-bg); border: 1px solid rgba(0,168,150,0.22); border-radius: 9px; font-size: 13px; color: #5EEAD4; display: none; }
+.qnav { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; gap: 10px; }
+.btn { background: var(--teal); color: #fff; border: none; padding: 10px 24px; border-radius: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: background 0.18s; }
+.btn:hover { background: #00BFB3; }
+.btn-out { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
+.btn-out:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.qscore { display: none; text-align: center; padding: 40px 20px; }
+.scircle { width: 118px; height: 118px; border-radius: 50%; background: conic-gradient(var(--teal) var(--pct,0%), var(--border2) 0); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.sinner { width: 88px; height: 88px; border-radius: 50%; background: var(--card); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: #5EEAD4; }
+.smsg { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.ssub { font-size: 14px; color: var(--text2); margin-bottom: 22px; }
+
+/* CHECKLIST */
+.chklist { display: flex; flex-direction: column; gap: 7px; }
+.chk-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--card2); border: 1px solid var(--border); border-radius: 9px; font-size: 13.5px; }
+.chk-y { color: #86EFAC; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.chk-n { color: #FCA5A5; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* RESPONSIVE */
+@media (max-width:620px) { .vs-wrap { grid-template-columns: 1fr; } .f-row { flex-direction: column; } .f-arr { transform: rotate(90deg); } }
+::-webkit-scrollbar { width: 5px; height: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈ DGCA CPL Exam Prep</div>
+  <h1>Chapter 16 — <span>Airworthiness of Aircraft</span></h1>
+  <p>Certificate of Airworthiness · Annex 8 · Type Certificate · DGCA Powers · Modifications</p>
+  <div class="hero-chips">
+    <span class="chip">ICAO Annex 8</span>
+    <span class="chip">C of A Rules</span>
+    <span class="chip">Type Certificate</span>
+    <span class="chip">DGCA Powers</span>
+    <span class="chip">Modifications & Repairs</span>
+    <span class="chip">Special Flight Permit</span>
+  </div>
+</div>
+
+<div class="nav-bar" id="nav">
+  <button class="nav-btn active" onclick="show('overview')">📋 Overview</button>
+  <button class="nav-btn" onclick="show('icao')">🌐 ICAO Framework</button>
+  <button class="nav-btn" onclick="show('coa')">📜 Certificate of A/W</button>
+  <button class="nav-btn" onclick="show('powers')">⚡ DGCA Powers</button>
+  <button class="nav-btn" onclick="show('special')">🛫 Special Permits</button>
+  <button class="nav-btn" onclick="show('compare')">⚖️ Quick Reference</button>
+  <button class="nav-btn" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ====== OVERVIEW ====== -->
+<div class="section active" id="section-overview">
+  <div class="sec-head">
+    <div class="sec-icon">📋</div>
+    <div>
+      <div class="sec-title">What is Airworthiness?</div>
+      <div class="sec-sub">Fitness to fly · Design · Construction · Maintenance · Operation</div>
+    </div>
+  </div>
+
+  <!-- DEFINITION CARD -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Core Definition</div>
+    <div class="g2">
+      <div>
+        <div class="alert alert-teal" style="margin-bottom:12px;">
+          <strong>Airworthiness</strong> means an aircraft is <strong>fit and safe to fly</strong>. When DGCA is satisfied, it issues a <strong>Certificate of Airworthiness (C of A)</strong>.
+        </div>
+        <div class="chklist">
+          <div class="chk-item"><span class="chk-y">✓</span><div><strong>Properly designed</strong> — meets type certification standards</div></div>
+          <div class="chk-item"><span class="chk-y">✓</span><div><strong>Properly constructed</strong> — built to approved drawings</div></div>
+          <div class="chk-item"><span class="chk-y">✓</span><div><strong>Properly maintained</strong> — kept to approved schedule</div></div>
+          <div class="chk-item"><span class="chk-y">✓</span><div><strong>Properly operated</strong> — within approved limitations</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin:0;background:var(--card2);">
+          <div class="card-h" style="margin-bottom:10px;"><span class="pip" style="background:var(--amber)"></span>C of A — Who issues it?</div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">The owner/operator applies → DGCA evaluates → issues:</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="padding:10px 14px;background:var(--card);border:1px solid rgba(0,168,150,0.3);border-radius:9px;">
+              <div style="font-weight:700;color:#5EEAD4;font-size:13px;">Certificate of Airworthiness</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px;">Standard — fully meets requirements</div>
+            </div>
+            <div style="padding:10px 14px;background:var(--card);border:1px solid rgba(245,158,11,0.3);border-radius:9px;">
+              <div style="font-weight:700;color:#FCD34D;font-size:13px;">Special Certificate of Airworthiness</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px;">Cannot fully qualify but may operate under conditions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIRWORTHINESS MIND MAP -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Airworthiness at a Glance</div>
+    <div class="mm-center">Airworthiness Framework</div>
+    <div class="mm-grid">
+      <div class="mm-node mn-teal">
+        <div class="mm-hdr">🌐 ICAO Framework</div>
+        <div class="mm-body">
+          <li>Annex 8 — Airworthiness <span class="b b-teal">Engineering</span></li>
+          <li>Annex 6 — Operations <span class="b b-blue">Operational</span></li>
+          <li>State of Registry responsibility <span class="b b-teal">Mandatory</span></li>
+        </div>
+      </div>
+      <div class="mm-node mn-blue">
+        <div class="mm-hdr">📜 Certificates</div>
+        <div class="mm-body">
+          <li>C of A (standard) <span class="b b-green">DGCA</span></li>
+          <li>Special C of A <span class="b b-amber">Conditional</span></li>
+          <li>Type Certificate <span class="b b-blue">State of Design</span></li>
+        </div>
+      </div>
+      <div class="mm-node mn-amber">
+        <div class="mm-hdr">⚡ DGCA Powers</div>
+        <div class="mm-body">
+          <li>Suspend C of A <span class="b b-red">Power</span></li>
+          <li>Cancel C of A <span class="b b-red">Power</span></li>
+          <li>Order modifications <span class="b b-amber">Power</span></li>
+        </div>
+      </div>
+      <div class="mm-node mn-red">
+        <div class="mm-hdr">🚫 Prohibitions</div>
+        <div class="mm-body">
+          <li>Fly with suspended C of A <span class="b b-red">Illegal</span></li>
+          <li>Safety mod without approval <span class="b b-red">Illegal</span></li>
+          <li>Major defect — must ground <span class="b b-red">Mandatory</span></li>
+        </div>
+      </div>
+      <div class="mm-node mn-green">
+        <div class="mm-hdr">🛫 Special Provisions</div>
+        <div class="mm-body">
+          <li>Special Flight Permit <span class="b b-green">Ferry / Maint</span></li>
+          <li>Flight Manual endorsement <span class="b b-teal">Required</span></li>
+          <li>Instruments & equipment fit <span class="b b-blue">Mandatory</span></li>
+        </div>
+      </div>
+      <div class="mm-node mn-purple">
+        <div class="mm-hdr">🔒 Security Features</div>
+        <div class="mm-body">
+          <li>Reinforced cockpit doors <span class="b b-purple">Post-9/11</span></li>
+          <li>Least-risk bomb location <span class="b b-purple">Design</span></li>
+          <li>Critical system protection <span class="b b-purple">Mandatory</span></li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ICAO FRAMEWORK ====== -->
+<div class="section" id="section-icao">
+  <div class="sec-head">
+    <div class="sec-icon">🌐</div>
+    <div>
+      <div class="sec-title">ICAO Framework</div>
+      <div class="sec-sub">Annex 6 vs Annex 8 · Type Certificate · Applicability · Annex 8 Structure</div>
+    </div>
+  </div>
+
+  <!-- ANNEX 6 vs 8 -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Annex 6 vs Annex 8 — The Most Important Distinction</div>
+    <div class="vs-wrap">
+      <div class="vs-card" style="border-color:rgba(13,126,232,0.3);">
+        <div class="vs-hdr" style="color:#93C5FD;">📘 Annex 6</div>
+        <div class="vs-key">Focus</div>
+        <div class="vs-row">Operations &amp; safety</div>
+        <div class="vs-key" style="margin-top:8px;">Covers</div>
+        <div class="vs-row">How aircraft is <strong style="color:#fff;">operated</strong></div>
+        <div class="vs-row">Crew duties, fuel, weather minima</div>
+        <div class="vs-row">Flight time limitations</div>
+      </div>
+      <div class="vs-mid"><div class="vs-dot">VS</div></div>
+      <div class="vs-card" style="border-color:rgba(0,168,150,0.3);">
+        <div class="vs-hdr" style="color:#5EEAD4;">📗 Annex 8</div>
+        <div class="vs-key">Focus</div>
+        <div class="vs-row">Engineering &amp; airworthiness</div>
+        <div class="vs-key" style="margin-top:8px;">Covers</div>
+        <div class="vs-row">How aircraft is <strong style="color:#fff;">designed &amp; maintained</strong></div>
+        <div class="vs-row">Type certification standards</div>
+        <div class="vs-row">Continued airworthiness</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:14px;margin-bottom:0;">
+      <div class="mem-ico">🧠</div>
+      <div>
+        <div class="mem-title">Memory Trick</div>
+        <div class="mem-f">Annex 6 = HOW you FLY it &nbsp;|&nbsp; Annex 8 = HOW it's BUILT</div>
+        <div class="mem-txt" style="font-size:12px;color:var(--text3);margin-top:4px;">6 = Operations · 8 = Engineering (8 looks like a wrench 🔧)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE CERTIFICATE -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Type Certificate (TC)</div>
+    <div class="g2">
+      <div>
+        <div class="alert alert-teal" style="margin-bottom:12px;">
+          <strong>Issued by:</strong> State of Design (the country where the aircraft was designed, e.g. USA for Boeing)
+        </div>
+        <div class="chklist">
+          <div class="chk-item"><span class="chk-y">✓</span>Confirms aircraft design complies with airworthiness standards</div>
+          <div class="chk-item"><span class="chk-y">✓</span>Confirms the design is approved</div>
+          <div class="chk-item"><span class="chk-y">✓</span>Can also apply to <strong>engine type</strong></div>
+          <div class="chk-item"><span class="chk-y">✓</span>Can also apply to <strong>propeller type</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber" style="margin-bottom:12px;">
+          <strong>Important:</strong> Type Certificate is about the <em>design</em>. A C of A is about a specific <em>aircraft</em>. An aircraft gets a C of A <em>because</em> it is built to an approved Type Certificate.
+        </div>
+        <div class="alert alert-blue" style="margin-bottom:0;">
+          <strong>International Obligations:</strong> ICAO places responsibility on the <strong>State of Registry</strong> to recognize airworthiness certificates and ensure aircraft meet ICAO standards. Countries should NOT impose stricter requirements on visiting aircraft if ICAO minimums are met.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNEX 8 APPLICABILITY -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Annex 8 Applicability</div>
+    <div class="g2">
+      <div>
+        <div class="stat" style="margin-bottom:12px;">
+          <div class="stat-n">5700</div>
+          <div class="stat-u">kg MTOM</div>
+          <div class="stat-l">Annex 8 applies primarily to multi-engine aeroplanes above this weight</div>
+        </div>
+        <div class="alert alert-amber" style="margin-bottom:0;">
+          <strong>Exam Tip:</strong> Annex 8 = multi-engine aeroplanes with MTOM &gt; 5700 kg
+        </div>
+      </div>
+      <div>
+        <div class="card-h" style="margin-bottom:10px;"><span class="pip" style="background:var(--sky)"></span>Standards Cover</div>
+        <div class="g2" style="gap:8px;">
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Performance</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Flying qualities</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Structural design</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Construction</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Engines</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Propellers</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Systems</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Equipment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNEX 8 STRUCTURE -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Annex 8 Structure</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Part</th><th>Content</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-teal">Part I</span></td><td>Definitions</td></tr>
+          <tr><td><span class="b b-blue">Part II</span></td><td>Certification and Continuing Airworthiness</td></tr>
+          <tr><td><span class="b b-amber">Part III</span></td><td>Certification requirements for <strong>new large aeroplanes</strong></td></tr>
+          <tr><td><span class="b b-purple">Part IV</span></td><td>Helicopters</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECURITY FEATURES -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--purple)"></span>Special Security Features (Post-Hijack Era)</div>
+    <div class="alert alert-blue" style="margin-bottom:14px;">
+      After hijack and terrorist incidents, modern aircraft designs incorporate these mandatory features:
+    </div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="chk-y">🔒</span><div><strong>Reinforced cockpit doors</strong> — resists forced entry</div></div>
+        <div class="chk-item"><span class="chk-y">🪑</span><div><strong>Cabin security improvements</strong></div></div>
+        <div class="chk-item"><span class="chk-y">⚡</span><div><strong>Protection of critical systems</strong></div></div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item"><span class="chk-y">💣</span><div><strong>Least-risk bomb location</strong> — designated area to place a suspected device</div></div>
+        <div class="chk-item"><span class="chk-y">🏗️</span><div><strong>Strengthened cabin floors and ceilings</strong></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CERTIFICATE OF AIRWORTHINESS ====== -->
+<div class="section" id="section-coa">
+  <div class="sec-head">
+    <div class="sec-icon">📜</div>
+    <div>
+      <div class="sec-title">Certificate of Airworthiness</div>
+      <div class="sec-sub">Application · Conditions · Suspension · Modifications · Flight Manual</div>
+    </div>
+  </div>
+
+  <!-- APPLICATION PROCESS -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>C of A Application & Issue Process</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Owner/Operator applies to DGCA</div>
+          <div class="step-desc">Application submitted with required documents and evidence of airworthiness.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">DGCA evaluates two conditions</div>
+          <div class="step-desc">
+            <div class="g2" style="gap:8px;margin-top:6px;">
+              <div class="alert alert-teal" style="margin:0;">
+                <strong>(a)</strong> Required documents/evidence are submitted
+              </div>
+              <div class="alert alert-teal" style="margin:0;">
+                <strong>(b)</strong> Aircraft is airworthy and safe for operation
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">DGCA issues one of two certificates</div>
+          <div class="step-desc">
+            <div class="g2" style="gap:8px;margin-top:6px;">
+              <div style="padding:12px;background:var(--card2);border:1px solid rgba(0,168,150,0.35);border-radius:10px;">
+                <div style="font-weight:700;color:#5EEAD4;font-size:13px;margin-bottom:4px;">✅ Certificate of Airworthiness</div>
+                <div style="font-size:12px;color:var(--text2);">Aircraft fully meets all airworthiness requirements</div>
+              </div>
+              <div style="padding:12px;background:var(--card2);border:1px solid rgba(245,158,11,0.35);border-radius:10px;">
+                <div style="font-weight:700;color:#FCD34D;font-size:13px;margin-bottom:4px;">⚠️ Special Certificate of A/W</div>
+                <div style="font-size:12px;color:var(--text2);">Cannot fully qualify for normal C of A but may safely operate under specified conditions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUSPENSION GROUNDS -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--red)"></span>Grounds for Suspension / Cancellation of C of A</div>
+    <div class="alert alert-red" style="margin-bottom:14px;">
+      <strong>A C of A SHALL be suspended if aircraft:</strong>
+    </div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Ground</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="b b-red">(a)</span></td>
+            <td>Fails to comply with rules relating to: <strong>Operation, Maintenance, Modification, Repair, Replacement, Overhaul, Inspection</strong></td>
+          </tr>
+          <tr>
+            <td><span class="b b-red">(b)</span></td>
+            <td>Is modified or repaired <strong>contrary to regulations</strong></td>
+          </tr>
+          <tr>
+            <td><span class="b b-red">(c)</span></td>
+            <td>Suffers <strong>major damage</strong></td>
+          </tr>
+          <tr>
+            <td><span class="b b-red">(d)</span></td>
+            <td>Develops a <strong>major defect affecting safety</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-red" style="margin-top:14px;margin-bottom:0;">
+      <strong>Critical Rule:</strong> Aircraft shall <strong>NOT be flown</strong> when C of A is suspended or deemed suspended.
+    </div>
+  </div>
+
+  <!-- MODIFICATIONS & REPAIRS -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--amber)"></span>Modifications and Repairs</div>
+    <div class="g2">
+      <div>
+        <div class="alert alert-amber" style="margin-bottom:12px;">
+          <strong>Rule:</strong> No person shall carry out any modification or repair affecting safety unless:<br><br>
+          (a) It is required under rules, OR<br>
+          (b) Prior approval of DGCA is obtained.
+        </div>
+        <div class="alert alert-red" style="margin-bottom:0;">
+          <strong>Exam Point:</strong> Safety-affecting modifications ALWAYS require DGCA approval. No exceptions.
+        </div>
+      </div>
+      <div>
+        <div class="mem" style="margin:0;">
+          <div class="mem-ico">🧠</div>
+          <div>
+            <div class="mem-title">Memory Trick</div>
+            <div class="mem-txt">If it affects <strong>safety</strong> → DGCA must <strong>approve</strong> it first.<br>No approval = illegal modification.</div>
+            <div class="mem-f">Safety mod → DGCA approval = Mandatory</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLIGHT MANUAL -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--sky)"></span>Flight Manual</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:13.5px;color:var(--text2);margin-bottom:12px;">When a Flight Manual is required, <strong style="color:#fff;">DGCA endorses the Certificate of Airworthiness</strong> accordingly.</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th colspan="2">Flight Manual Contains</th></tr></thead>
+            <tbody>
+              <tr><td>Aircraft limitations</td><td><span class="b b-blue">Mandatory</span></td></tr>
+              <tr><td>Normal procedures</td><td><span class="b b-teal">Required</span></td></tr>
+              <tr><td>Performance data</td><td><span class="b b-teal">Required</span></td></tr>
+              <tr><td>Emergency procedures</td><td><span class="b b-blue">Mandatory</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card-h" style="margin-bottom:10px;"><span class="pip" style="background:var(--sky)"></span>Instruments & Equipment</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Every aircraft shall be fitted with required instruments and equipment according to intended use, type of operation, and flight conditions:</div>
+        <div class="g2" style="gap:8px;">
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Altimeter</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Airspeed indicator</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Compass</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Radio equipment</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--text2);">Navigation equipment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DGCA POWERS ====== -->
+<div class="section" id="section-powers">
+  <div class="sec-head">
+    <div class="sec-icon">⚡</div>
+    <div>
+      <div class="sec-title">DGCA Powers</div>
+      <div class="sec-sub">Reasonable doubt · Suspension · Cancellation · Orders DGCA can make</div>
+    </div>
+  </div>
+
+  <!-- POWERS FLOWCHART -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--amber)"></span>DGCA Powers — Decision Flowchart</div>
+    <div class="flow">
+      <div class="f-row" style="margin-bottom:16px;">
+        <div class="f-box red" style="min-width:220px;">
+          <div class="fn" style="font-size:15px;">Reasonable Doubt</div>
+          <div class="fl">DGCA not satisfied with aircraft safety</div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:20px;color:var(--text3);margin-bottom:12px;">↓</div>
+      <div class="f-row" style="gap:16px;">
+        <div class="f-box amber" style="flex:1;max-width:250px;padding:14px;">
+          <div class="fn" style="font-size:14px;">Option A</div>
+          <div class="fl">Suspend or Cancel C of A immediately</div>
+        </div>
+        <div style="display:flex;align-items:center;font-size:14px;color:var(--amber);font-weight:700;">OR</div>
+        <div class="f-box teal" style="flex:1;max-width:320px;padding:14px;">
+          <div class="fn" style="font-size:14px;">Option B — Order any of:</div>
+          <div style="text-align:left;margin-top:8px;font-size:12px;color:#5EEAD4;display:flex;flex-direction:column;gap:3px;">
+            <span>• Modification</span>
+            <span>• Repair</span>
+            <span>• Replacement</span>
+            <span>• Overhaul</span>
+            <span>• Inspection</span>
+            <span>• Flight tests</span>
+            <span>• Examination</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--text3);margin-top:14px;">All must be completed before C of A remains valid</div>
+    </div>
+  </div>
+
+  <!-- IMPORTANT RULES -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--red)"></span>Critical Rules — Exam Favourites</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Situation</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>C of A suspended</td>
+            <td><strong style="color:#FCA5A5;">Aircraft shall NOT be flown</strong></td>
+          </tr>
+          <tr>
+            <td>C of A deemed suspended</td>
+            <td><strong style="color:#FCA5A5;">Aircraft shall NOT be flown</strong></td>
+          </tr>
+          <tr>
+            <td>Safety-affecting modification</td>
+            <td><strong style="color:#FCD34D;">Prior DGCA approval mandatory</strong></td>
+          </tr>
+          <tr>
+            <td>Aircraft has major damage</td>
+            <td><strong style="color:#FCA5A5;">C of A shall be suspended</strong></td>
+          </tr>
+          <tr>
+            <td>Major defect affecting safety</td>
+            <td><strong style="color:#FCA5A5;">C of A shall be suspended</strong></td>
+          </tr>
+          <tr>
+            <td>DGCA has reasonable doubt on safety</td>
+            <td><strong style="color:#FCD34D;">DGCA may suspend/cancel OR order remedial action</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SPECIAL PERMITS ====== -->
+<div class="section" id="section-special">
+  <div class="sec-head">
+    <div class="sec-icon">🛫</div>
+    <div>
+      <div class="sec-title">Special Flight Permit & Other Provisions</div>
+      <div class="sec-sub">When C of A is suspended · Ferry flights · Who applies · Uses</div>
+    </div>
+  </div>
+
+  <!-- SPECIAL FLIGHT PERMIT -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Special Flight Permit</div>
+    <div class="g2">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-left"><div class="step-num" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#FCD34D;">!</div><div class="step-line"></div></div>
+            <div class="step-body">
+              <div class="step-title">C of A is suspended</div>
+              <div class="step-desc">Normal flying is now prohibited</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-left"><div class="step-num">→</div><div class="step-line"></div></div>
+            <div class="step-body">
+              <div class="step-title">Owner/Operator applies to DGCA</div>
+              <div class="step-desc">Application made specifically for a Special Flight Permit</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-left"><div class="step-num">✓</div></div>
+            <div class="step-body">
+              <div class="step-title">DGCA may issue Special Flight Permit</div>
+              <div class="step-desc">Allowing limited, specific flight operations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-h" style="margin-bottom:10px;"><span class="pip" style="background:var(--sky)"></span>Permitted Uses</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="chk-y">✓</span><strong>Ferry flights</strong> — fly to maintenance base</div>
+          <div class="chk-item"><span class="chk-y">✓</span><strong>Maintenance flights</strong> — required for upkeep</div>
+          <div class="chk-item"><span class="chk-y">✓</span><strong>Repositioning flights</strong> — move to another location</div>
+          <div class="chk-item"><span class="chk-y">✓</span><strong>Inspection flights</strong> — for evaluation purposes</div>
+        </div>
+        <div class="alert alert-amber" style="margin-top:12px;margin-bottom:0;">
+          <strong>Note:</strong> The Special Flight Permit is NOT a blanket permission. It covers only specific, limited operations as approved by DGCA.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL C OF A -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--amber)"></span>Special Certificate of Airworthiness</div>
+    <div class="g2">
+      <div>
+        <div class="alert alert-amber">
+          <strong>Issued when:</strong> Aircraft cannot fully qualify for a normal C of A, but may safely operate under <strong>specified conditions</strong>.
+        </div>
+        <div style="font-size:13px;color:var(--text2);margin-top:10px;">Examples of when a Special C of A may be issued:</div>
+        <div class="chklist" style="margin-top:8px;">
+          <div class="chk-item"><span class="chk-y">→</span>Experimental aircraft</div>
+          <div class="chk-item"><span class="chk-y">→</span>Aircraft under development</div>
+          <div class="chk-item"><span class="chk-y">→</span>Aircraft not meeting all standards but operationally safe</div>
+        </div>
+      </div>
+      <div>
+        <div class="mem" style="margin:0;">
+          <div class="mem-ico">🧠</div>
+          <div>
+            <div class="mem-title">Quick Distinction</div>
+            <div class="mem-txt"><strong style="color:#5EEAD4;">C of A</strong> — meets all requirements fully<br><strong style="color:#FCD34D;">Special C of A</strong> — cannot fully qualify but safe under conditions<br><strong style="color:#93C5FD;">Special Flight Permit</strong> — C of A is suspended, limited ops only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== QUICK REFERENCE ====== -->
+<div class="section" id="section-compare">
+  <div class="sec-head">
+    <div class="sec-icon">⚖️</div>
+    <div>
+      <div class="sec-title">Quick Reference & Exam Traps</div>
+      <div class="sec-sub">Master comparison · High-yield facts · DGCA traps</div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATES COMPARISON -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>Three Types of Airworthiness Certificates — Comparison</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead>
+          <tr><th>Certificate</th><th>Issued by</th><th>When?</th><th>For?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="b b-teal">Type Certificate</span></td>
+            <td>State of Design</td>
+            <td>Design meets airworthiness standards</td>
+            <td>Aircraft type, engine type, propeller type</td>
+          </tr>
+          <tr>
+            <td><span class="b b-green">C of A (Standard)</span></td>
+            <td>DGCA</td>
+            <td>Specific aircraft fully meets requirements</td>
+            <td>Normal commercial / private operations</td>
+          </tr>
+          <tr>
+            <td><span class="b b-amber">Special C of A</span></td>
+            <td>DGCA</td>
+            <td>Cannot fully qualify for standard C of A</td>
+            <td>Operations under specified conditions only</td>
+          </tr>
+          <tr>
+            <td><span class="b b-blue">Special Flight Permit</span></td>
+            <td>DGCA</td>
+            <td>C of A is suspended</td>
+            <td>Ferry / maintenance / inspection flights only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ANNEX COMPARISON -->
+  <div class="card">
+    <div class="card-h"><span class="pip"></span>ICAO Annexes — Airworthiness Relevant</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Annex</th><th>Title</th><th>Focus</th><th>Key Content</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="b b-blue">Annex 6</span></td>
+            <td>Operation of Aircraft</td>
+            <td>How aircraft is <strong>operated</strong></td>
+            <td>Crew duties, fuel policy, weather minima, flight time limits</td>
+          </tr>
+          <tr>
+            <td><span class="b b-teal">Annex 8</span></td>
+            <td>Airworthiness of Aircraft</td>
+            <td>How aircraft is <strong>designed &amp; maintained</strong></td>
+            <td>Design standards, type certification, continued airworthiness</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HIGH YIELD FACTS -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--amber)"></span>⭐ High-Yield Facts — Master List</div>
+    <div class="g2">
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Topic</th><th>Fact</th></tr></thead>
+          <tbody>
+            <tr><td>Licensing authority (India)</td><td>DGCA / Central Government</td></tr>
+            <tr><td>Annex for airworthiness</td><td><strong>Annex 8</strong></td></tr>
+            <tr><td>Annex for operations</td><td><strong>Annex 6</strong></td></tr>
+            <tr><td>Type Certificate issued by</td><td>State of Design</td></tr>
+            <tr><td>C of A issued by</td><td>DGCA (owner applies)</td></tr>
+            <tr><td>Annex 8 applies primarily to</td><td>Multi-engine, MTOM &gt; 5700 kg</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Topic</th><th>Fact</th></tr></thead>
+          <tbody>
+            <tr><td>Safety mod without DGCA approval</td><td>❌ Illegal</td></tr>
+            <tr><td>Flying with suspended C of A</td><td>❌ Prohibited</td></tr>
+            <tr><td>Special Flight Permit used for</td><td>Ferry / maintenance only</td></tr>
+            <tr><td>State of Registry responsibility</td><td>Recognise C of A, meet ICAO std</td></tr>
+            <tr><td>Annex 8 Part I</td><td>Definitions</td></tr>
+            <tr><td>Annex 8 Part III</td><td>New large aeroplanes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DGCA EXAM TRAPS -->
+  <div class="card">
+    <div class="card-h"><span class="pip" style="background:var(--red)"></span>⚠️ DGCA Exam Traps — Chapter 16</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="background:var(--danger-bg);border:1px solid rgba(239,68,68,0.22);border-radius:10px;padding:13px;display:flex;gap:12px;">
+        <span style="font-size:18px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:3px;">Annex 6 vs Annex 8</div>
+          <div style="font-size:13px;color:var(--text2);">Students mix these up. <strong style="color:#fff;">Annex 8 = Airworthiness / Engineering</strong>. Annex 6 = Operations. Never swap them.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(239,68,68,0.22);border-radius:10px;padding:13px;display:flex;gap:12px;">
+        <span style="font-size:18px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:3px;">Type Certificate vs C of A</div>
+          <div style="font-size:13px;color:var(--text2);"><strong style="color:#fff;">TC</strong> = issued by State of Design for the <em>type</em>. <strong style="color:#fff;">C of A</strong> = issued by DGCA for a <em>specific aircraft</em>. They are not the same.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(239,68,68,0.22);border-radius:10px;padding:13px;display:flex;gap:12px;">
+        <span style="font-size:18px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:3px;">Special C of A vs Special Flight Permit</div>
+          <div style="font-size:13px;color:var(--text2);">Different documents! Special C of A = aircraft cannot fully qualify. Special Flight Permit = C of A is suspended and only limited ops allowed.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(239,68,68,0.22);border-radius:10px;padding:13px;display:flex;gap:12px;">
+        <span style="font-size:18px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:3px;">Modification Approval</div>
+          <div style="font-size:13px;color:var(--text2);">Any modification <strong style="color:#fff;">affecting safety</strong> requires DGCA approval. Not just "major" modifications — any safety-affecting one.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(239,68,68,0.22);border-radius:10px;padding:13px;display:flex;gap:12px;">
+        <span style="font-size:18px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:3px;">Who applies for Special Flight Permit?</div>
+          <div style="font-size:13px;color:var(--text2);">The <strong style="color:#fff;">owner/operator</strong> applies to DGCA. DGCA may (or may not) issue it. It is not automatic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== QUIZ ====== -->
+<div class="section" id="section-quiz">
+  <div class="sec-head">
+    <div class="sec-icon">🧠</div>
+    <div>
+      <div class="sec-title">Practice Quiz</div>
+      <div class="sec-sub">20 DGCA-style questions on Chapter 16</div>
+    </div>
+  </div>
+
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 20</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:5%"></div></div>
+      <span id="qlive" style="font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-out" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle">
+      <div class="sinner" id="sinner">0/20</div>
+    </div>
+    <div class="smsg" id="smsg"></div>
+    <div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+const qs = [
+  {q:"Airworthiness means an aircraft is:",opts:["Equipped with all modern avionics","Fit and safe to fly","Registered with DGCA","Insured for commercial operations"],ans:1,exp:"Airworthiness means an aircraft is fit and safe to fly. DGCA issues a Certificate of Airworthiness when satisfied."},
+  {q:"Who issues the Certificate of Airworthiness in India?",opts:["ICAO","Airports Authority of India","DGCA / Central Government","Ministry of Civil Aviation"],ans:2,exp:"DGCA / Central Government issues the C of A in India after the owner/operator applies and conditions are met."},
+  {q:"ICAO Annex 8 deals with:",opts:["Operations of aircraft","Airworthiness of aircraft","Air traffic services","Aeronautical meteorology"],ans:1,exp:"Annex 8 = Airworthiness of Aircraft (engineering, design, maintenance). Annex 6 = Operations."},
+  {q:"ICAO Annex 6 deals with:",opts:["Airworthiness and design","Engineering standards","Operations of aircraft","Airport services"],ans:2,exp:"Annex 6 = Operation of Aircraft. It covers how aircraft are operated. Annex 8 covers how they are built and maintained."},
+  {q:"A Type Certificate is issued by the:",opts:["DGCA","State of Registry","State of Design","ICAO secretariat"],ans:2,exp:"The Type Certificate is issued by the State of Design — the country where the aircraft was designed (e.g., USA for Boeing aircraft)."},
+  {q:"A Type Certificate confirms that:",opts:["A specific aircraft is safe to fly","The aircraft design complies with airworthiness standards","The aircraft has been insured","The pilot is qualified"],ans:1,exp:"A TC confirms that the aircraft DESIGN complies with airworthiness standards. It is about the type/design, not a specific aircraft."},
+  {q:"Annex 8 applies primarily to multi-engine aeroplanes with MTOM:",opts:["Above 2700 kg","Above 3700 kg","Above 5700 kg","Above 7700 kg"],ans:2,exp:"Annex 8 applies primarily to multi-engine aeroplanes with Maximum Take-Off Mass (MTOM) greater than 5700 kg."},
+  {q:"Who is responsible for recognizing airworthiness certificates under ICAO?",opts:["State of Design","State of Manufacture","State of Registry","State of Operator"],ans:2,exp:"ICAO places responsibility on the State of Registry to recognise airworthiness certificates and ensure aircraft meet ICAO standards."},
+  {q:"A Special Certificate of Airworthiness is issued when:",opts:["The C of A has expired","The aircraft cannot fully qualify for a normal C of A but may operate under conditions","The aircraft is grounded","The owner refuses normal inspection"],ans:1,exp:"A Special C of A is issued when an aircraft cannot fully qualify for a normal C of A but can safely operate under specified conditions."},
+  {q:"A modification affecting safety may be carried out:",opts:["By the owner at any time","Only by licensed engineers","Only if required under rules OR with prior DGCA approval","After notifying DGCA within 30 days"],ans:2,exp:"No person shall carry out any modification affecting safety unless (a) required under rules or (b) prior DGCA approval is obtained. Prior approval is mandatory."},
+  {q:"A C of A shall be suspended if the aircraft:",opts:["Is older than 20 years","Suffers major damage","Changes ownership","Is grounded for more than 90 days"],ans:1,exp:"A C of A shall be suspended if the aircraft suffers major damage. Other grounds include major defects affecting safety, non-compliance with maintenance rules, and unauthorised modifications."},
+  {q:"When a C of A is suspended, the aircraft:",opts:["May fly under special approval","Shall NOT be flown","May fly for ferry operations only","May fly with extra crew"],ans:1,exp:"Aircraft shall NOT be flown when the C of A is suspended or deemed suspended. A Special Flight Permit is needed even for ferry flights."},
+  {q:"If DGCA has reasonable doubt about an aircraft's safety, it may:",opts:["Issue a warning only","Suspend/cancel the C of A OR order modification/inspection/flight tests","Reduce the aircraft's passenger capacity","Require additional crew"],ans:1,exp:"If DGCA has reasonable doubt, it may either (1) suspend or cancel the C of A, or (2) order modification, repair, replacement, overhaul, inspection, flight tests, or examination."},
+  {q:"A Special Flight Permit may be issued when:",opts:["The pilot's licence is expired","The C of A is suspended and specific flights are needed","The aircraft needs a new paint job","The aircraft is imported"],ans:1,exp:"A Special Flight Permit is issued upon application by the owner/operator when the C of A is suspended. It permits specific flights like ferry, maintenance, repositioning, or inspection."},
+  {q:"Who applies for a Special Flight Permit?",opts:["The pilot-in-command","DGCA on its own motion","The owner or operator","ICAO"],ans:2,exp:"The owner or operator applies to DGCA for a Special Flight Permit when the C of A is suspended."},
+  {q:"The Flight Manual is endorsed on the Certificate of Airworthiness by:",opts:["The manufacturer","The pilot","DGCA","ICAO"],ans:2,exp:"When a Flight Manual is required, DGCA endorses the Certificate of Airworthiness accordingly."},
+  {q:"Which Annex 8 Part covers certification of new large aeroplanes?",opts:["Part I","Part II","Part III","Part IV"],ans:2,exp:"Annex 8 Part III covers certification requirements for new large aeroplanes. Part I = Definitions, Part II = Certification & Continuing A/W, Part IV = Helicopters."},
+  {q:"Special security features required in modern aircraft design include:",opts:["Only fire suppression systems","Reinforced cockpit doors, least-risk bomb location, critical system protection","Advanced weather radar only","Extra fuel tanks"],ans:1,exp:"Post-hijack security features include reinforced cockpit doors, cabin security improvements, protection of critical systems, least-risk bomb location, and strengthened cabin floors/ceilings."},
+  {q:"A C of A shall be suspended if an aircraft is modified:",opts:["Under DGCA approval","Contrary to regulations","By a licensed engineer","With manufacturer consent"],ans:1,exp:"A C of A shall be suspended if the aircraft is modified or repaired contrary to regulations. Modifications require DGCA approval to be lawful."},
+  {q:"Which statement is correct about the Type Certificate and C of A?",opts:["Both are issued by DGCA","TC is for a specific aircraft, C of A is for the type","TC is issued by State of Design for the type; C of A by DGCA for a specific aircraft","Both are issued by the State of Registry"],ans:2,exp:"TC = State of Design issues it for the aircraft TYPE/DESIGN. C of A = DGCA issues it for a SPECIFIC aircraft. These are different instruments serving different purposes."}
+];
+
+let cur=0,sc=0;
+function renderQ() {
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo'); o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');
+    b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);
+    o.appendChild(b);
+  });
+}
+function pick(i) {
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans) document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');
+  e.textContent='💡 '+q.exp; e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ() {
+  cur++;
+  if(cur>=qs.length) showResult();
+  else renderQ();
+}
+function showResult() {
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore'); rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=90){msg='🏆 Excellent!';sub='Outstanding preparation for Chapter 16!';}
+  else if(pct>=75){msg='✈️ Well Done!';sub='Strong grasp. Review any missed questions.';}
+  else if(pct>=60){msg='📚 Good Start!';sub='Revise Annex differences and DGCA powers.';}
+  else{msg='🔄 Keep Going!';sub='Focus on certificate types and DGCA powers.';}
+  document.getElementById('smsg').textContent=msg;
+  document.getElementById('ssub').textContent=sub;
+}
+function restartQ() {
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

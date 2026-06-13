@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 21: Facilitation (Annex 9)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E1A;--bg2:#091426;--bg3:#0C1830;
+  --card:#0F1E38;--card2:#122440;
+  --teal:#14B8A6;--sky:#0EA5E9;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--purple:#A855F7;
+  --indigo:#6366F1;--blue:#3B82F6;--orange:#F97316;
+  --text:#D8E8FA;--text2:#7A9CC0;--text3:#3C5878;
+  --bdr:rgba(255,255,255,0.055);--bdr2:rgba(255,255,255,0.10);
+  --teal-bg:rgba(20,184,166,.11);--sky-bg:rgba(14,165,233,.11);
+  --green-bg:rgba(34,197,94,.11);--amber-bg:rgba(245,158,11,.11);
+  --red-bg:rgba(239,68,68,.11);--purple-bg:rgba(168,85,247,.11);
+  --indigo-bg:rgba(99,102,241,.11);--blue-bg:rgba(59,130,246,.11);
+  --orange-bg:rgba(249,115,22,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(20,184,166,.13) 0%,transparent 50%),radial-gradient(ellipse at 80% 0%,rgba(14,165,233,.10) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,.14);border:1px solid rgba(20,184,166,.35);color:#5EEAD4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#5EEAD4;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:13px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--teal);color:#5EEAD4;}
+.nb.active{background:var(--teal);border-color:var(--teal);color:#000;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 64px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#5EEAD4;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(20,184,166,.13);color:#5EEAD4;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(20,184,166,.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-t{background:var(--teal-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.25);}
+.b-s{background:var(--sky-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.25);}
+.b-g{background:var(--green-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.25);}
+.b-a{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-r{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-p{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-i{background:var(--indigo-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.25);}
+.b-b{background:var(--blue-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.25);}
+.b-o{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-t{background:var(--teal-bg);border-color:var(--teal);}
+.al-a{background:var(--amber-bg);border-color:var(--amber);}
+.al-r{background:var(--red-bg);border-color:var(--red);}
+.al-g{background:var(--green-bg);border-color:var(--green);}
+.al-b{background:var(--blue-bg);border-color:var(--blue);}
+.al-p{background:var(--purple-bg);border-color:var(--purple);}
+.al strong{color:#FCD34D;}.al-t strong{color:#5EEAD4;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#86EFAC;}.al-b strong{color:#93C5FD;}.al-p strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#5EEAD4;}
+/* DEFINITION CARDS */
+.def-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.def-box{background:var(--card2);border:1px solid var(--bdr2);border-radius:11px;padding:14px;transition:transform .15s;}
+.def-box:hover{transform:translateY(-2px);}
+.def-word{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;margin-bottom:5px;}
+.def-meaning{font-size:12.5px;color:var(--text2);line-height:1.5;}
+.def-note{font-size:11px;color:var(--text3);margin-top:5px;font-style:italic;}
+/* CHANNEL VISUAL */
+.channel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ch-box{border-radius:13px;padding:20px;text-align:center;border:2px solid;}
+.ch-green{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.4);}
+.ch-red{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.4);}
+.ch-icon{font-size:36px;margin-bottom:8px;}
+.ch-name{font-size:20px;font-weight:700;margin-bottom:6px;}
+.ch-green .ch-name{color:#86EFAC;}
+.ch-red .ch-name{color:#FCA5A5;}
+.ch-rule{font-size:13px;}
+/* DOCUMENT FLOW */
+.doc-flow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;padding:16px;}
+.doc-pill{background:var(--card2);border:1px solid var(--bdr2);border-radius:20px;padding:9px 16px;font-size:12.5px;font-weight:600;text-align:center;}
+.doc-plus{color:var(--text3);font-size:18px;font-weight:700;}
+/* GENDEC CONTENTS */
+.gendec-sections{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+.gendec-sec{background:var(--card2);border:1px solid var(--bdr2);border-radius:10px;padding:13px;}
+.gendec-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.gendec-items{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text2);}
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;gap:0;padding-left:28px;position:relative;}
+.tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--teal),var(--sky),var(--amber));}
+.tl-item{position:relative;margin-bottom:16px;}
+.tl-dot{position:absolute;left:-24px;width:14px;height:14px;border-radius:50%;top:3px;border:2px solid;}
+.tl-content{font-size:13px;}
+.tl-time{font-weight:700;color:#fff;margin-bottom:2px;}
+.tl-desc{color:var(--text2);font-size:12.5px;}
+/* TRAP */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--teal);color:#fff;background:var(--teal-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--teal-bg);border:1px solid rgba(20,184,166,.2);border-radius:8px;font-size:12.5px;color:#5EEAD4;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--teal);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#2DD4BF;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--teal) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#5EEAD4;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.channel-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈ DGCA CPL Exam Prep</div>
+  <h1>Chapter 21 — <span>Facilitation (Annex 9)</span></h1>
+  <p>Definitions · Documents · Customs · Immigration · Cargo Rules · Indian National Provisions · CMC · MRTD</p>
+  <div class="hero-chips">
+    <span class="chip">Annex 9 Purpose</span><span class="chip">Key Definitions</span>
+    <span class="chip">GENDEC Contents</span><span class="chip">Max 3 Copies</span>
+    <span class="chip">Green / Red Channel</span><span class="chip">4 Working Hours</span>
+    <span class="chip">CMC Identification</span><span class="chip">MRTD Biometrics</span>
+    <span class="chip">First Landing Rule</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('overview')">📋 Overview</button>
+  <button class="nb" onclick="show('definitions')">📖 Definitions</button>
+  <button class="nb" onclick="show('documents')">📄 Documents</button>
+  <button class="nb" onclick="show('india')">🇮🇳 India Rules</button>
+  <button class="nb" onclick="show('customs')">🛃 Customs</button>
+  <button class="nb" onclick="show('tech')">🔐 Tech & Security</button>
+  <button class="nb" onclick="show('numbers')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ======= OVERVIEW ======= -->
+<div class="section active" id="section-overview">
+  <div class="sh">
+    <div class="si" style="background:var(--teal-bg);border:1px solid rgba(20,184,166,.3);">📋</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">What is Facilitation? — Annex 9</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Purpose · Key documents NOT required · Max copies · Crew Member Certificate</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Purpose of Facilitation (Annex 9)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-t" style="margin-bottom:12px;">
+          <strong>Facilitation</strong> = Simplifying and speeding up international air transport procedures related to Customs, Immigration, Public Health, Agriculture/Quarantine, and Cargo clearance.
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">Main Objective — REDUCE:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Delays</div>
+          <div class="chk-item"><span class="cy">✓</span>Paperwork</div>
+          <div class="chk-item"><span class="cy">✓</span>Unnecessary formalities</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">Annex 9 covers procedures for:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-t">Customs</span><span class="b b-t">Immigration</span>
+          <span class="b b-t">Public Health</span><span class="b b-t">Agriculture / Quarantine</span>
+          <span class="b b-t">Cargo Clearance</span>
+        </div>
+        <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Memory</div>
+          <div class="mf">Annex 9 = CIPAQ (Customs · Immigration · Public health · Agriculture · Quarantine)</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>What States SHALL NOT Require</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">States shall NOT normally require:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Passenger Manifest</strong> — not normally required</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Cargo Manifest</strong> — if required, must accept Annex 9 format</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Stores Declaration</strong> — written declaration of stores remaining onboard</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Baggage List</strong> — list of accompanied or mishandled baggage</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Additional documents</strong> — beyond Annex 9 requirements</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="stat" style="border-color:rgba(20,184,166,.5);background:rgba(20,184,166,.1);margin-bottom:12px;">
+          <div class="sn">3</div>
+          <div class="su">maximum copies</div>
+          <div class="sl">States shall NOT require MORE than 3 copies of aircraft documents</div>
+        </div>
+        <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Max Copies Rule</div>
+          <div class="mf">Never more than 3 copies of any aircraft document</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Crew Member Certificate (CMC)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-p" style="margin-bottom:10px;"><strong>CMC is NOT a licence.</strong> Its primary purpose is as an <strong>identification document</strong> for crew members.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Crew members can review stored CMC data</div>
+          <div class="chk-item"><span class="cy">✓</span>Can request corrections to their records</div>
+          <div class="chk-item"><span class="cy">✓</span>States maintain secure electronic records of CMCs</div>
+          <div class="chk-item"><span class="cy">✓</span>Records include: identity documents, suspensions, withdrawals</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Crew Facilitation Rules:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><div><strong>Visa waiver</strong> for crew arriving in duty status to join assigned flight</div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>States must <strong>expedite inspection</strong> of crew and baggage</div></div>
+          <div class="chk-item"><span class="cy">✓</span><div><strong>Foreign technical personnel</strong> allowed temporary entry to make aircraft airworthy</div></div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">DGCA Trap</div>
+          <div class="mf">CMC = Identification document (NOT a licence)</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Quick Reference — Top 10 DGCA One-Liners</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>DGCA Question</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><td>Cargo excludes?</td><td>Mail · Stores · Accompanied baggage</td></tr>
+          <tr><td>Deportee means?</td><td>Person ordered by authorities to leave a State</td></tr>
+          <tr><td>Direct Transit Area?</td><td>Area where passenger stays without entering the State</td></tr>
+          <tr><td>Passenger Manifest normally required?</td><td><span class="b b-r">❌ No</span></td></tr>
+          <tr><td>Max document copies required?</td><td><span class="num">3</span></td></tr>
+          <tr><td>General Declaration info limited to?</td><td>Annex 9 elements only</td></tr>
+          <tr><td>CMC mainly serves as?</td><td>Identification document</td></tr>
+          <tr><td>Visa waiver for?</td><td>Crew arriving in duty status</td></tr>
+          <tr><td>MRTD should contain?</td><td>Biometric data</td></tr>
+          <tr><td>ABC system uses?</td><td>PKD + Biometrics + INTERPOL SLTD</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======= DEFINITIONS ======= -->
+<div class="section" id="section-definitions">
+  <div class="sh">
+    <div class="si" style="background:var(--sky-bg);border:1px solid rgba(14,165,233,.3);">📖</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Key Definitions — Annex 9</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Cargo · Deportee · Direct Transit · Embarkation · Disembarkation · Loading · Unloading</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Core Definitions — Learn All of These</div>
+    <div class="def-grid">
+      <div class="def-box" style="border-color:rgba(20,184,166,.3);">
+        <div class="def-word" style="color:#5EEAD4;">CARGO</div>
+        <div class="def-meaning">Any property carried on an aircraft <strong>OTHER THAN:</strong> Mail · Stores · Accompanied baggage · Mishandled baggage</div>
+        <div class="def-note">🧠 Cargo = property EXCLUDING mail, stores, baggage</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(239,68,68,.3);">
+        <div class="def-word" style="color:#FCA5A5;">DEPORTEE</div>
+        <div class="def-meaning">A person who <strong>legally or illegally entered a State</strong> and was later <strong>ordered to leave</strong> by competent authority</div>
+        <div class="def-note">🧠 Deportee = ordered OUT by authorities</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(99,102,241,.3);">
+        <div class="def-word" style="color:#A5B4FC;">DIRECT TRANSIT AREA</div>
+        <div class="def-meaning">Special airport area where transit passengers remain <strong>without entering</strong> the country. No immigration formalities.</div>
+        <div class="def-note">🧠 Direct Transit = stays airside, no country entry</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(34,197,94,.3);">
+        <div class="def-word" style="color:#86EFAC;">EMBARKATION</div>
+        <div class="def-meaning">Boarding an aircraft to commence a flight</div>
+        <div class="def-note">🧠 Embark = get ON aircraft</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(34,197,94,.3);">
+        <div class="def-word" style="color:#86EFAC;">DISEMBARKATION</div>
+        <div class="def-meaning">Leaving an aircraft after landing</div>
+        <div class="def-note">🧠 Disembark = get OFF aircraft</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(245,158,11,.3);">
+        <div class="def-word" style="color:#FCD34D;">LOADING</div>
+        <div class="def-meaning">Placing <strong>cargo, mail, baggage, or stores</strong> onto an aircraft</div>
+        <div class="def-note">🧠 Loading = putting things ON</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(245,158,11,.3);">
+        <div class="def-word" style="color:#FCD34D;">UNLOADING</div>
+        <div class="def-meaning">Removing <strong>cargo, mail, baggage, or stores</strong> from an aircraft after landing</div>
+        <div class="def-note">🧠 Unloading = taking things OFF</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(59,130,246,.3);">
+        <div class="def-word" style="color:#93C5FD;">INTERNATIONAL AIRPORT</div>
+        <div class="def-meaning">Airport designated for <strong>entry/departure of international traffic</strong> where Customs, Immigration, Public Health, and Quarantine formalities are carried out</div>
+        <div class="def-note">🧠 4 formalities = Customs+Immigration+Health+Quarantine</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(168,85,247,.3);">
+        <div class="def-word" style="color:#D8B4FE;">CLEARANCE OF GOODS</div>
+        <div class="def-meaning">Completion of customs formalities allowing goods to enter a country, be exported, or be placed under another customs procedure</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(249,115,22,.3);">
+        <div class="def-word" style="color:#FDB785;">COMMISSARY SUPPLIES</div>
+        <div class="def-meaning">Items used for passenger comfort and catering: Food · Drinks · Disposable service items</div>
+        <div class="def-note">🧠 Commissary = aircraft catering supplies</div>
+      </div>
+      <div class="def-box" style="border-color:rgba(20,184,166,.3);">
+        <div class="def-word" style="color:#5EEAD4;">COMMENCEMENT OF JOURNEY</div>
+        <div class="def-meaning">The point where a passenger begins the journey. Transit passengers continuing the journey remain on the same journey if staying inside the transit area.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Cargo — What IS and IS NOT Included</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">✅ IS Cargo:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Commercial freight / goods shipments</div>
+          <div class="chk-item"><span class="cy">✓</span>Unaccompanied baggage (shipped separately)</div>
+          <div class="chk-item"><span class="cy">✓</span>Any property not excluded below</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">❌ NOT Cargo (Excluded):</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Mail</strong> — postal items</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Stores</strong> — commissary/aircraft supplies</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Accompanied baggage</strong> — passenger's checked bags</div></div>
+          <div class="chk-item"><span class="cn">✗</span><div><strong>Mishandled baggage</strong> — lost/delayed bags forwarded separately</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Cargo Exclusions</div>
+      <div class="mf">Cargo EXCLUDES: Mail · Stores · Accompanied baggage · Mishandled baggage</div>
+      <div class="mc" style="font-size:11px;color:var(--text3);margin-top:3px;">Memory: "M-S-A-M" = Mail, Stores, Accompanied, Mishandled</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= DOCUMENTS ======= -->
+<div class="section" id="section-documents">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">📄</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Documents — GENDEC, Manifests & Rules</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">General Declaration · Passenger/Cargo Manifest · What states CAN/CANNOT require</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>General Declaration (GENDEC) — Contents</div>
+    <div class="al al-a" style="margin-bottom:14px;">
+      <strong>GENDEC</strong> is used for Customs, Immigration, and Health clearance. Information must be limited to <strong>Annex 9 format elements only</strong>. Accepted in electronic or paper form.
+    </div>
+    <div class="gendec-sections">
+      <div class="gendec-sec" style="border-color:rgba(20,184,166,.3);">
+        <div class="gendec-hdr" style="color:#5EEAD4;">✈ Aircraft Info</div>
+        <div class="gendec-items">
+          <span>Operator</span><span>Registration</span>
+          <span>Flight Number</span><span>Date</span>
+        </div>
+      </div>
+      <div class="gendec-sec" style="border-color:rgba(14,165,233,.3);">
+        <div class="gendec-hdr" style="color:#7DD3FC;">🗺 Flight Routing</div>
+        <div class="gendec-items">
+          <span>Origin</span>
+          <span>Every en-route stop</span>
+          <span>Destination</span>
+        </div>
+      </div>
+      <div class="gendec-sec" style="border-color:rgba(245,158,11,.3);">
+        <div class="gendec-hdr" style="color:#FCD34D;">👨‍✈️ Crew Info</div>
+        <div class="gendec-items">
+          <span>Total number of crew</span>
+        </div>
+      </div>
+      <div class="gendec-sec" style="border-color:rgba(168,85,247,.3);">
+        <div class="gendec-hdr" style="color:#D8B4FE;">🧑‍🤝‍🧑 Passenger Info</div>
+        <div class="gendec-items">
+          <span>Embarking passengers</span>
+          <span>Through passengers</span>
+          <span>Disembarking passengers</span>
+        </div>
+      </div>
+      <div class="gendec-sec" style="border-color:rgba(239,68,68,.3);">
+        <div class="gendec-hdr" style="color:#FCA5A5;">🏥 Declaration of Health</div>
+        <div class="gendec-items">
+          <span>Ill passengers info</span>
+          <span>Fever · Rash · Chills</span>
+          <span>Diarrhoea</span>
+          <span>Communicable diseases</span>
+        </div>
+      </div>
+      <div class="gendec-sec" style="border-color:rgba(34,197,94,.3);">
+        <div class="gendec-hdr" style="color:#86EFAC;">🦟 Disinsection Info</div>
+        <div class="gendec-items">
+          <span>Place</span><span>Date</span>
+          <span>Time</span><span>Method</span>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">GENDEC Routing Memory</div>
+      <div class="mf">O-E-D = Origin → Every en-route stop → Destination</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Passenger Manifest & Cargo Manifest Contents</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">PASSENGER MANIFEST contains:</div>
+        <div class="chklist" style="gap:4px;">
+          <div class="chk-item"><span class="cy">→</span>Operator · Registration · Flight No. · Date</div>
+          <div class="chk-item"><span class="cy">→</span>Embarkation point</div>
+          <div class="chk-item"><span class="cy">→</span>Disembarkation point</div>
+          <div class="chk-item"><span class="cy">→</span>Passenger names</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FDB785;margin-bottom:8px;">CARGO MANIFEST contains:</div>
+        <div class="chklist" style="gap:4px;">
+          <div class="chk-item"><span class="cy">→</span>Operator · Registration · Flight No. · Date</div>
+          <div class="chk-item"><span class="cy">→</span>Loading point · Unloading point</div>
+          <div class="chk-item"><span class="cy">→</span>Air waybill number</div>
+          <div class="chk-item"><span class="cy">→</span>Number of packages</div>
+          <div class="chk-item"><span class="cy">→</span>Nature of goods</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Document Rules — What States SHALL NOT Require</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Document</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>Passenger Manifest</td><td><span class="b b-r">Normally NOT required</span></td></tr>
+          <tr><td>Cargo Manifest</td><td>If required — must accept Annex 9 format</td></tr>
+          <tr><td>Stores Declaration</td><td><span class="b b-r">NOT required</span> (written declaration)</td></tr>
+          <tr><td>Baggage List</td><td><span class="b b-r">NOT required</span> (accompanied or mishandled)</td></tr>
+          <tr><td>Mail Declaration</td><td>Only Universal Postal Union requirements</td></tr>
+          <tr><td>Document copies</td><td><strong>Maximum 3 copies</strong> — no more</td></tr>
+          <tr><td>Document form</td><td>Accepted in <strong>Electronic OR Paper</strong> form</td></tr>
+          <tr><td>Additional documents</td><td><span class="b b-r">NOT required</span> beyond Annex 9</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======= INDIA RULES ======= -->
+<div class="section" id="section-india">
+  <div class="sh">
+    <div class="si" style="background:var(--orange-bg);border:1px solid rgba(249,115,22,.3);">🇮🇳</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Indian National Provisions</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">First landing rule · Customs aerodrome · Departure clearance · 111 Rule · 6-month exemption</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>First Landing & Departure Rules — India</div>
+    <div class="g2">
+      <div>
+        <div class="stat" style="border-color:rgba(249,115,22,.5);background:rgba(249,115,22,.1);margin-bottom:10px;">
+          <div class="sn" style="color:#FDB785;font-size:16px;">First Landing</div>
+          <div class="sl">Aircraft entering India must first land at an <strong>International Aerodrome</strong></div>
+        </div>
+        <div class="stat" style="border-color:rgba(249,115,22,.5);background:rgba(249,115,22,.1);">
+          <div class="sn" style="color:#FDB785;font-size:16px;">Last Departure</div>
+          <div class="sl">Aircraft leaving India must make final departure from an <strong>International Aerodrome</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="al al-a" style="margin-bottom:10px;"><strong>Customs Aerodrome:</strong> Aircraft may also land at or depart from any notified Customs Aerodrome.</div>
+        <div class="al al-r" style="margin-bottom:10px;"><strong>Domestic Pick-up Restriction:</strong> International flights are NOT permitted to pick up passengers at one Indian city and drop them at another Indian city without special authorization.</div>
+        <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">India Entry/Exit Rule</div>
+          <div class="mf">FIRST IN = International Aerodrome &nbsp;|&nbsp; LAST OUT = International Aerodrome</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Documents Required — The "111 Rule"</div>
+    <div class="al al-t" style="margin-bottom:14px;">
+      For each authority (Customs, Immigration, Health) — <strong>1 copy each</strong> of these 3 documents:
+    </div>
+    <div class="doc-flow">
+      <div class="doc-pill" style="border-color:rgba(20,184,166,.4);color:#5EEAD4;background:var(--teal-bg);">
+        <div style="font-size:18px;margin-bottom:2px;">📋</div>
+        <div>General Declaration</div>
+        <div style="font-size:11px;color:var(--text3);">1 copy</div>
+      </div>
+      <div class="doc-plus">+</div>
+      <div class="doc-pill" style="border-color:rgba(14,165,233,.4);color:#7DD3FC;background:var(--sky-bg);">
+        <div style="font-size:18px;margin-bottom:2px;">🧑‍🤝‍🧑</div>
+        <div>Passenger Manifest</div>
+        <div style="font-size:11px;color:var(--text3);">1 copy</div>
+      </div>
+      <div class="doc-plus">+</div>
+      <div class="doc-pill" style="border-color:rgba(249,115,22,.4);color:#FDB785;background:var(--orange-bg);">
+        <div style="font-size:18px;margin-bottom:2px;">📦</div>
+        <div>Cargo Manifest</div>
+        <div style="font-size:11px;color:var(--text3);">1 copy</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">111 Rule</div>
+      <div class="mf">1 GENDEC + 1 Pax Manifest + 1 Cargo Manifest = 1+1+1 per authority</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Departure Clearance & Customs Duty Rules</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Before leaving India — aircraft MUST have:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><div><strong>Immigration clearance</strong> on the General Declaration</div></div>
+          <div class="chk-item"><span class="cy">✓</span><div><strong>Customs clearance</strong> on the General Declaration</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">Customs Duty Exemption — Foreign Aircraft:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Not registered in India</div>
+          <div class="chk-item"><span class="cy">✓</span>Not intended to be registered in India</div>
+          <div class="chk-item"><span class="cy">✓</span>Will leave India <strong>within 6 months</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>Written declaration submitted on arrival</div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">6-Month Duty Exemption</div>
+          <div class="mf">Foreign aircraft leaving within 6 months = no customs duty</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= CUSTOMS ======= -->
+<div class="section" id="section-customs">
+  <div class="sh">
+    <div class="si" style="background:var(--green-bg);border:1px solid rgba(34,197,94,.3);">🛃</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Customs — Passengers, Crew & Cargo</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Green/Red channel · Crew declarations · Transit rules · 4-hour cargo rule · Export certificate</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Green & Red Channel System</div>
+    <div class="channel-grid">
+      <div class="ch-box ch-green">
+        <div class="ch-icon">🟢</div>
+        <div class="ch-name">GREEN CHANNEL</div>
+        <div class="ch-rule" style="color:#86EFAC;font-weight:700;font-size:14px;margin-bottom:4px;">Nothing to Declare</div>
+        <div class="ch-rule" style="color:var(--text2);font-size:13px;">Passenger carrying <strong>NO dutiable goods</strong></div>
+      </div>
+      <div class="ch-box ch-red">
+        <div class="ch-icon">🔴</div>
+        <div class="ch-name">RED CHANNEL</div>
+        <div class="ch-rule" style="color:#FCA5A5;font-weight:700;font-size:14px;margin-bottom:4px;">Goods to Declare</div>
+        <div class="ch-rule" style="color:var(--text2);font-size:13px;">Passenger carrying <strong>dutiable goods</strong></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Channel Memory</div>
+      <div class="mf">Green = Go through (nothing to declare) &nbsp;|&nbsp; Red = Stop (declare goods)</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Cargo Export — The 4-Hour Rule</div>
+    <div class="g2">
+      <div>
+        <div class="stat" style="border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.1);">
+          <div class="sn">4</div>
+          <div class="su">working hours</div>
+          <div class="sl">Cargo must be presented to Customs <strong>at least 4 working hours</strong> before scheduled departure</div>
+        </div>
+        <div class="al al-a" style="margin-top:10px;margin-bottom:0;font-size:12px;">
+          Applies to: Export goods including <strong>unaccompanied baggage</strong>. Must be presented to customs sufficiently early.
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Crew Declarations at Arrival & Departure:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><strong>Currency</strong></div>
+          <div class="chk-item"><span class="cy">✓</span><strong>Gold ornaments</strong></div>
+          <div class="chk-item"><span class="cy">✓</span><strong>Electronic goods</strong></div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Crew Declares</div>
+          <div class="mf">CGE = Currency · Gold · Electronics</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Passenger Customs Rules</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">INCOMING Passengers:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>All imported goods subject to customs clearance</div>
+          <div class="chk-item"><span class="cy">✓</span>Exception: duty-free allowance</div>
+          <div class="chk-item"><span class="cy">→</span>Use Green Channel if nothing dutiable</div>
+          <div class="chk-item"><span class="cy">→</span>Use Red Channel if dutiable goods carried</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FDB785;margin-bottom:8px;">OUTGOING Passengers:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Must clear customs</div>
+          <div class="chk-item"><span class="cy">✓</span>Only <strong>bona fide baggage</strong> may be cleared</div>
+          <div class="chk-item"><span class="cy">✓</span>Passengers with jewellery/high-value items may get <strong>Export Certificate</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Transit Passenger Rules</div>
+    <div class="al al-r" style="margin-bottom:12px;">
+      <strong>Transit passengers MUST remain in the customs area.</strong> They cannot leave the airport building and cannot hand over items to others.
+    </div>
+    <div class="chklist">
+      <div class="chk-item"><span class="cn">✗</span><div>Cannot leave airport building</div></div>
+      <div class="chk-item"><span class="cn">✗</span><div>Cannot hand over items to other persons</div></div>
+      <div class="chk-item"><span class="cy">✓</span><div>Must remain in customs/transit area</div></div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Transit Passenger</div>
+      <div class="mf">Transit = Stay INSIDE airport = No country entry</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= TECH & SECURITY ======= -->
+<div class="section" id="section-tech">
+  <div class="sh">
+    <div class="si" style="background:var(--purple-bg);border:1px solid rgba(168,85,247,.3);">🔐</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Technology, Security & Border Control</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">MRTD · Biometrics · ABC · PKD · INTERPOL SLTD · Security measures</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Machine Readable Travel Documents (MRTD)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-p" style="margin-bottom:10px;"><strong>States should include biometric data</strong> in machine-readable travel documents.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>MRTD = passport with machine-readable zone</div>
+          <div class="chk-item"><span class="cy">✓</span>Contains biometric data (fingerprint, iris, facial)</div>
+          <div class="chk-item"><span class="cy">✓</span>Verified using ICAO PKD</div>
+          <div class="chk-item"><span class="cy">✓</span>Checked against INTERPOL SLTD database</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Automated Border Control (ABC):</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-p">Purpose</span><div>Facilitate passenger clearance</div></div>
+          <div class="chk-item"><span class="b b-p">ICAO PKD</span><div>Public Key Directory — verifies MRTDs</div></div>
+          <div class="chk-item"><span class="b b-p">INTERPOL SLTD</span><div>Stolen and Lost Travel Documents database</div></div>
+          <div class="chk-item"><span class="b b-p">Biometric</span><div>Facial/fingerprint/iris verification</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">ABC System Memory</div>
+      <div class="mf">ABC = PKD (verify doc) + Biometrics (verify person) + SLTD (check stolen docs)</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Security Considerations in Facilitation</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">When designing procedures, States must consider:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><strong>Aviation Security</strong></div>
+          <div class="chk-item"><span class="cy">✓</span><strong>Narcotics Control Measures</strong></div>
+        </div>
+      </div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Term</th><th>Full Form & Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><span class="num">MRTD</span></td><td>Machine Readable Travel Document</td></tr>
+            <tr><td><span class="num">ABC</span></td><td>Automated Border Control</td></tr>
+            <tr><td><span class="num">PKD</span></td><td>Public Key Directory — verifies MRTDs</td></tr>
+            <tr><td><span class="num">SLTD</span></td><td>Stolen & Lost Travel Documents (INTERPOL)</td></tr>
+            <tr><td><span class="num">CMC</span></td><td>Crew Member Certificate — ID document only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MASTER REF ======= -->
+<div class="section" id="section-numbers">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Master Reference & Exam Traps</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Every critical number and fact from Chapter 21 in one place</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Critical Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Max document copies</td><td><span class="num">3 copies</span></td></tr>
+            <tr><td>Documents for Customs/Immigration/Health (India)</td><td><span class="num">1 each</span> (111 Rule)</td></tr>
+            <tr><td>Cargo presentation before departure</td><td><span class="num">4 working hours</span></td></tr>
+            <tr><td>Foreign aircraft customs duty exemption</td><td>Leaves within <span class="num">6 months</span></td></tr>
+            <tr><td>Passenger Manifest normally required?</td><td><strong style="color:#FCA5A5;">No</strong></td></tr>
+            <tr><td>CMC primary purpose</td><td>Identification document</td></tr>
+            <tr><td>MRTD must contain</td><td>Biometric data</td></tr>
+            <tr><td>ABC uses database</td><td>PKD + INTERPOL SLTD</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Key Rules — YES / NO Summary</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Rule</th><th>Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Passenger Manifest normally required?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Stores Declaration required?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Baggage List required?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Documents beyond Annex 9 required?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Green Channel = no dutiable goods?</td><td><span class="b b-g">YES</span></td></tr>
+            <tr><td>Transit pax can leave airport?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Visa waiver for crew in duty status?</td><td><span class="b b-g">YES</span></td></tr>
+            <tr><td>CMC is a licence?</td><td><span class="b b-r">NO</span></td></tr>
+            <tr><td>Documents accepted in electronic form?</td><td><span class="b b-g">YES</span></td></tr>
+            <tr><td>Foreign aircraft needs departure clearance?</td><td><span class="b b-g">YES (within 6 months)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Definitions Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Term</th><th>Key Definition</th></tr></thead>
+          <tbody>
+            <tr><td>Cargo</td><td>Property excluding: mail, stores, accompanied baggage, mishandled baggage</td></tr>
+            <tr><td>Deportee</td><td>Person ordered by authority to leave a State</td></tr>
+            <tr><td>Direct Transit Area</td><td>Airside area — no entry into State</td></tr>
+            <tr><td>Embarkation</td><td>Boarding an aircraft (getting ON)</td></tr>
+            <tr><td>Disembarkation</td><td>Leaving an aircraft (getting OFF)</td></tr>
+            <tr><td>Loading</td><td>Placing cargo/mail/baggage/stores onto aircraft</td></tr>
+            <tr><td>Unloading</td><td>Removing cargo/mail/baggage/stores from aircraft</td></tr>
+            <tr><td>Commissary Supplies</td><td>Food, drinks, disposable items for passengers</td></tr>
+            <tr><td>GENDEC routing</td><td>Origin + every en-route stop + destination</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--orange)"></span>India-Specific Rules</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Rule</th><th>Requirement</th></tr></thead>
+          <tbody>
+            <tr><td>First landing in India</td><td>International Aerodrome</td></tr>
+            <tr><td>Last departure from India</td><td>International Aerodrome</td></tr>
+            <tr><td>Alternative departure</td><td>Notified Customs Aerodrome</td></tr>
+            <tr><td>Before leaving India</td><td>Immigration + Customs clearance on GENDEC</td></tr>
+            <tr><td>Documents per authority</td><td>1 GENDEC + 1 Pax Manifest + 1 Cargo Manifest</td></tr>
+            <tr><td>Crew declares</td><td>Currency + Gold ornaments + Electronics</td></tr>
+            <tr><td>Export cargo presentation</td><td>At least 4 working hours before departure</td></tr>
+            <tr><td>Customs duty exemption</td><td>Foreign aircraft leaving within 6 months</td></tr>
+            <tr><td>Domestic pick-up</td><td>NOT permitted for international flights</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 21</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Cargo does NOT include mail and baggage</div><div class="trap-text">Cargo = property on aircraft EXCLUDING: mail, stores, accompanied baggage, mishandled baggage. DGCA loves testing this definition.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Passenger Manifest is NOT normally required</div><div class="trap-text">States shall NOT normally require presentation of a Passenger Manifest. Very counter-intuitive and frequently asked.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">CMC is NOT a licence</div><div class="trap-text">The Crew Member Certificate (CMC) is primarily an <strong>identification document</strong> — it is NOT a licence. Students often confuse it with a pilot licence or medical certificate.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Max 3 copies of any aircraft document</div><div class="trap-text">States shall NOT require more than <strong>3 copies</strong> of aircraft documents. The actual India rule is <strong>1 copy each</strong> (GENDEC + Pax Manifest + Cargo Manifest) per authority.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Cargo must be presented 4 working hours before departure</div><div class="trap-text"><strong>4 working hours</strong> — not 2, not 6. Specifically for export cargo including unaccompanied baggage.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">6 months = customs duty exemption for foreign aircraft</div><div class="trap-text">A foreign aircraft not registered in India and leaving within 6 months is exempt from customs duty — provided a written declaration is submitted on arrival.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">GENDEC routing must include every en-route stop</div><div class="trap-text">GENDEC flight routing must show: Origin → <strong>every</strong> en-route stop → Destination. Not just origin and destination.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ ======= -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--teal-bg);border:1px solid rgba(20,184,166,.3);">🧠</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Practice Quiz</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">25 DGCA-style questions covering all Chapter 21 topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"What is the primary purpose of Annex 9 (Facilitation)?",opts:["Establish airworthiness standards","Simplify and speed up international air transport procedures related to Customs, Immigration, Public Health and Cargo","Regulate pilot licensing requirements","Define rules for aircraft accident investigation"],ans:1,exp:"Annex 9 = Facilitation. Its purpose is to simplify and speed up international air transport procedures related to Customs, Immigration, Public Health, Agriculture/Quarantine, and Cargo clearance."},
+  {q:"Which of the following is NOT included in the definition of 'Cargo'?",opts:["Commercial freight","Unaccompanied baggage shipped separately","Mail and accompanied baggage","Industrial equipment being exported"],ans:2,exp:"Cargo excludes: Mail, Stores, Accompanied baggage, and Mishandled baggage. These are treated separately. Everything else carried on the aircraft as property is cargo."},
+  {q:"A 'Deportee' is a person who:",opts:["Has been refused entry at a border","Has legally or illegally entered a State and was later ordered to leave by competent authority","Is in transit through an airport","Has a cancelled travel document"],ans:1,exp:"Deportee = a person who legally or illegally entered a State and was later ordered to leave by competent authority. Entry first, then ordered out."},
+  {q:"In a Direct Transit Area, passengers:",opts:["Go through full immigration clearance","May enter the country temporarily","Remain in a special area without entering the country","Must collect and re-check their baggage"],ans:2,exp:"Direct Transit Area = passengers remain airside without entering the country. No immigration or customs clearance for the transit country is needed."},
+  {q:"States shall NOT normally require presentation of which document?",opts:["General Declaration","Passenger Manifest","Air Operator Permit","Health certificate for the aircraft"],ans:1,exp:"Contracting States shall NOT normally require presentation of a Passenger Manifest. This is a classic DGCA trap — it seems like it should be required but it's not normally."},
+  {q:"The maximum number of copies of aircraft documents a State may require is:",opts:["1","2","3","5"],ans:2,exp:"States shall NOT require more than 3 copies of aircraft documents. This is the Annex 9 maximum."},
+  {q:"If States require a General Declaration, the information must be limited to:",opts:["National requirements of that State","Annex 9 format elements only","Whatever the airline chooses to include","ICAO Annex 2 requirements"],ans:1,exp:"General Declaration information must be limited to Annex 9 format elements only. States cannot add extra requirements beyond what Annex 9 specifies."},
+  {q:"The Crew Member Certificate (CMC) primarily serves as:",opts:["A pilot licence","A medical certificate","An identification document","An authorization to fly"],ans:2,exp:"CMC is primarily an IDENTIFICATION document — NOT a licence, NOT a medical certificate, NOT a flight authorization. This is a very common DGCA trap."},
+  {q:"Visa requirements should be waived for crew members who are:",opts:["Any foreign crew member","Crew arriving in duty status to join their assigned flight","Crew members with ATPL licences only","All aviation personnel"],ans:1,exp:"States should waive visa requirements for crew arriving in duty status and entering temporarily to join their assigned flight."},
+  {q:"Machine Readable Travel Documents (MRTDs) should contain:",opts:["Pilot licence information","Biometric data","Aircraft type ratings","Medical examination details"],ans:1,exp:"States should include biometric data in machine-readable travel documents. This allows automated verification of identity at border control."},
+  {q:"The ABC (Automated Border Control) system uses:",opts:["Only passport scans","ICAO PKD, biometric verification, and INTERPOL SLTD database","Flight crew data only","IATA passenger records"],ans:1,exp:"ABC uses: ICAO PKD (Public Key Directory) to verify MRTDs, biometric verification, and INTERPOL SLTD (Stolen and Lost Travel Documents) database."},
+  {q:"INTERPOL SLTD stands for:",opts:["Special Limited Travel Document","Stolen and Lost Travel Documents database","Standard Licence and Travel Data","Security Level Travel Documents"],ans:1,exp:"SLTD = Stolen and Lost Travel Documents database, maintained by INTERPOL. Used in Automated Border Control to check if a travel document has been reported stolen or lost."},
+  {q:"Aircraft entering India must first land at:",opts:["Any aerodrome approved by DGCA","Any notified aerodrome","An International Aerodrome","The nearest customs post"],ans:2,exp:"Aircraft entering India must make their FIRST LANDING at an International Aerodrome. Similarly, aircraft leaving India must make their FINAL DEPARTURE from an International Aerodrome."},
+  {q:"Before leaving India, the aircraft must obtain clearance on the General Declaration from:",opts:["DGCA and Airport Authority","Immigration and Customs","Police and Airport Security","Ministry of Civil Aviation"],ans:1,exp:"Before leaving India, the flight must obtain IMMIGRATION clearance AND CUSTOMS clearance, both endorsed on the General Declaration."},
+  {q:"Under the '111 Rule' for India, each authority (Customs, Immigration, Health) receives:",opts:["1 copy of General Declaration only","3 copies of each document","1 General Declaration + 1 Passenger Manifest + 1 Cargo Manifest","2 copies of the Passenger Manifest"],ans:2,exp:"The '111 Rule': each authority receives 1 General Declaration + 1 Passenger Manifest + 1 Cargo Manifest. That's 1+1+1 per authority."},
+  {q:"A foreign aircraft not registered in India is exempt from customs duty if it:",opts:["Is operated by a foreign airline","Will leave India within 6 months and submits a written declaration on arrival","Has a valid AOC from its home state","Is in India for maintenance only"],ans:1,exp:"Customs duty exemption for foreign aircraft: Not registered (or intended to be registered) in India + will leave within 6 MONTHS + written declaration submitted on arrival."},
+  {q:"The Green Channel at customs is for passengers who:",opts:["Are in transit only","Have diplomatic immunity","Have no dutiable goods to declare","Are crew members"],ans:2,exp:"Green Channel = passengers with NO dutiable goods to declare. Nothing to declare = go through Green. Dutiable goods = Red Channel."},
+  {q:"The Red Channel at customs is for passengers who:",opts:["Are frequent flyers","Have dutiable goods to declare","Are returning from medical treatment abroad","Have lost their baggage"],ans:1,exp:"Red Channel = passengers with dutiable goods to declare. They must stop and declare their goods to customs officers."},
+  {q:"Airline crew members must declare which items at arrival and departure in India?",opts:["Personal medication and food items","Currency, gold ornaments, and electronic goods","All personal belongings above 5 kg","Flight documents and manuals"],ans:1,exp:"Crew members must declare: Currency + Gold ornaments + Electronic goods. Memory: CGE = Currency · Gold · Electronics."},
+  {q:"Transit passengers at Indian airports:",opts:["May enter the city for up to 24 hours","Must stay inside the customs/transit area and cannot leave the airport building","Can collect their baggage and re-check it","Have full freedom of movement"],ans:1,exp:"Transit passengers must remain in the customs/transit area. They CANNOT leave the airport building and CANNOT hand over items to other persons."},
+  {q:"Export cargo (including unaccompanied baggage) must be presented to Customs how long before departure?",opts:["1 working hour","2 working hours","4 working hours","6 working hours"],ans:2,exp:"Export cargo must be presented to Customs at least 4 WORKING HOURS before scheduled departure. This is a favourite DGCA number question."},
+  {q:"The General Declaration flight routing section must include:",opts:["Only origin and destination","Origin, every en-route stop, and destination","Just the departure and arrival airports","The complete flight plan including alternates"],ans:2,exp:"GENDEC routing = Origin + EVERY en-route stop + Destination. The memory trick is O-E-D. It must include every intermediate stop, not just departure and arrival."},
+  {q:"PKD in the context of Facilitation stands for:",opts:["Pilot Knowledge Document","Public Key Directory","Passenger Key Data","Pre-departure Knowledge Database"],ans:1,exp:"PKD = Public Key Directory — maintained by ICAO. Used to verify the authenticity of Machine Readable Travel Documents (MRTDs) in Automated Border Control systems."},
+  {q:"International flights operating within India (picking up passengers in one Indian city and dropping them in another) are:",opts:["Permitted if the airline has a domestic licence","Not permitted without special authorization","Permitted for IATA member airlines","Permitted if the flight originated outside India"],ans:1,exp:"International flights are NOT permitted to pick up passengers at one place in India and drop them at another — this would be domestic operations requiring special authorization (cabotage restrictions)."},
+  {q:"Aircraft documents under Annex 9 may be accepted in:",opts:["Paper form only","Electronic form only","Either electronic or paper form","Only through SITA messaging"],ans:2,exp:"Aircraft documents may be accepted in electronic form OR paper form OR manually completed Annex 9 format. States cannot insist on paper-only or electronic-only."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=92){msg='🏆 Excellent!';sub='Chapter 21 fully mastered. DGCA ready!';}
+  else if(pct>=76){msg='✈️ Strong!';sub='Great work. Review any India-specific rules you missed.';}
+  else if(pct>=60){msg='📚 Good!';sub='Focus on the numbers (3 copies, 4 hrs, 6 months) and CMC definition.';}
+  else{msg='🔄 Keep Revising!';sub='Use the Master Reference section to drill all definitions and numbers.';}
+  document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 4: Rules of the Air</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --sky:#0EA5E9;--teal:#14B8A6;--green:#22C55E;--amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --purple:#A855F7;--indigo:#6366F1;--cyan:#06B6D4;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --sk-bg:rgba(14,165,233,.11);--tl-bg:rgba(20,184,166,.11);--gn-bg:rgba(34,197,94,.11);
+  --am-bg:rgba(245,158,11,.11);--rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --pu-bg:rgba(168,85,247,.11);--in-bg:rgba(99,102,241,.11);--cy-bg:rgba(6,182,212,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(14,165,233,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(20,184,166,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,.15);border:1px solid rgba(14,165,233,.4);color:#7DD3FC;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#7DD3FC;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 9px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--sky);color:#7DD3FC;}
+.nb.active{background:var(--sky);border-color:var(--sky);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.g5{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);}.al-sk strong{color:#7DD3FC;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);}.al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);}.al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);}.al-am strong{color:#FCD34D;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);}.al-tl strong{color:#5EEAD4;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);}.al-pu strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#7DD3FC;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--sky),var(--teal));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--sky);color:#fff;background:var(--sk-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--sk-bg);border:1px solid rgba(14,165,233,.22);border-radius:8px;font-size:12.5px;color:#7DD3FC;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--sky);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#38BDF8;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--sky) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#7DD3FC;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.nb{font-size:9px;padding:4px 6px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">✈️ DGCA CPL · Rules of the Air</div>
+  <h1>Chapter 4 — <span>Rules of the Air</span></h1>
+  <p>ICAO Annex 2 · Right-of-Way · VMC Minima · Flight Plans · Radio Failure · VFR/IFR · Signals · Cruising Levels</p>
+  <div class="hero-chips">
+    <span class="chip">Balloon = Highest priority</span>
+    <span class="chip">Head-on = Both turn RIGHT</span>
+    <span class="chip">See right = Give way</span>
+    <span class="chip">Aerobatics = 2000ft · 2NM · 6000ft</span>
+    <span class="chip">Formation vertical = 30m (100ft)</span>
+    <span class="chip">Nav lights: Red=Left · Green=Right · White=Tail</span>
+    <span class="chip">FPL = 3hr before · delay = 15min</span>
+    <span class="chip">Radio fail VMC = Land ASAP · Radar = 7min · Non-radar = 20min</span>
+    <span class="chip">VFR above 10000ft = 8km · below = 5km</span>
+    <span class="chip">SVFR = 1500m · Heli = 1000m</span>
+    <span class="chip">East=Odd · West=Even · RVSM FL290-410</span>
+    <span class="chip">MAYDAY=distress · PAN PAN=urgency</span>
+  </div>
+</div>
+<div class="nav-bar">
+  <button class="nb active" onclick="show('row')">⚖️ Right-of-Way</button>
+  <button class="nb" onclick="show('aerobatics')">✈️ Aerobatics</button>
+  <button class="nb" onclick="show('lights')">💡 Lights</button>
+  <button class="nb" onclick="show('fpl')">📋 Flight Plans</button>
+  <button class="nb" onclick="show('rcf')">📻 Radio Failure</button>
+  <button class="nb" onclick="show('vmc')">🌤 VMC Minima</button>
+  <button class="nb" onclick="show('vfr')">👁 VFR/SVFR/IFR</button>
+  <button class="nb" onclick="show('signals')">🚦 Signals</button>
+  <button class="nb" onclick="show('cruising')">🧭 Cruising Levels</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+<div class="content">
+
+<!-- RIGHT OF WAY -->
+<div class="section active" id="section-row">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">⚖️</div>
+  <div><div class="st">Right-of-Way Rules</div>
+  <div class="ss">Priority order · Head-on · Converging · Overtaking · Landing · B-G-A-P</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Priority Order — Visual (Highest = Bottom)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Lower priority gives way to higher priority — B-G-A-P (Balloon is King)</text>
+        <!-- Powered lowest -->
+        <rect x="20" y="25" width="165" height="60" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="102" y="50" fill="#7DD3FC" font-family="sans-serif" font-size="22" text-anchor="middle">✈️</text>
+        <text x="102" y="68" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">POWERED AC</text>
+        <text x="102" y="82" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Lowest priority</text>
+        <line x1="185" y1="55" x2="225" y2="55" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <polygon points="225,49 237,55 225,61" fill="rgba(255,255,255,.2)"/>
+        <!-- Airship -->
+        <rect x="237" y="25" width="140" height="60" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="307" y="50" fill="#D8B4FE" font-family="sans-serif" font-size="22" text-anchor="middle">🚢</text>
+        <text x="307" y="68" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">AIRSHIP</text>
+        <line x1="377" y1="55" x2="417" y2="55" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <polygon points="417,49 429,55 417,61" fill="rgba(255,255,255,.2)"/>
+        <!-- Glider -->
+        <rect x="429" y="25" width="140" height="60" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="499" y="50" fill="#86EFAC" font-family="sans-serif" font-size="22" text-anchor="middle">🪂</text>
+        <text x="499" y="68" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">GLIDER</text>
+        <line x1="569" y1="55" x2="609" y2="55" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <polygon points="609,49 621,55 609,61" fill="rgba(255,255,255,.2)"/>
+        <!-- Balloon highest -->
+        <rect x="621" y="20" width="119" height="70" rx="10" fill="rgba(245,158,11,.14)" stroke="rgba(245,158,11,.55)" stroke-width="2.5"/>
+        <text x="680" y="48" fill="#FCD34D" font-family="sans-serif" font-size="26" text-anchor="middle">🎈</text>
+        <text x="680" y="68" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">BALLOON</text>
+        <text x="680" y="82" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Highest ★</text>
+        <!-- Special cases row -->
+        <rect x="20" y="115" width="225" height="68" rx="9" fill="rgba(239,68,68,.07)" stroke="rgba(239,68,68,.25)" stroke-width="1"/>
+        <text x="132" y="138" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TOWING aircraft</text>
+        <text x="132" y="155" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Has priority over ordinary</text>
+        <text x="132" y="171" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">powered aircraft ★</text>
+        <rect x="265" y="115" width="225" height="68" rx="9" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.25)" stroke-width="1"/>
+        <text x="377" y="138" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">EMERGENCY LANDING</text>
+        <text x="377" y="155" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Everyone gives way</text>
+        <text x="377" y="171" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Immediately ★</text>
+        <rect x="510" y="115" width="230" height="68" rx="9" fill="rgba(14,165,233,.07)" stroke="rgba(14,165,233,.25)" stroke-width="1"/>
+        <text x="625" y="138" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">LANDING aircraft</text>
+        <text x="625" y="155" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Aircraft in flight gives way</text>
+        <text x="625" y="171" fill="#7DD3FC" font-family="monospace" font-size="11" text-anchor="middle">Lower = priority ★</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Priority Memory</div>
+      <div class="mf">B-G-A-P: Balloon &gt; Glider &gt; Airship &gt; Powered · Balloon is King</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Manoeuvring Rules — 4 Situations</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.09);">
+          <span style="font-size:18px;">⬅️➡️</span>
+          <div><strong>HEAD-ON: Both turn RIGHT ★</strong><br>Memory: Head-on = Right-on</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);">
+          <span style="font-size:18px;">🔀</span>
+          <div><strong>CONVERGING: Aircraft with other on its RIGHT gives way ★</strong><br>Memory: See right = Give way</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07);">
+          <span style="font-size:18px;">💨</span>
+          <div><strong>OVERTAKING: Pass on the RIGHT ★</strong><br>Overtaking aircraft &lt;70° rear · gives way</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.35);background:rgba(14,165,233,.07);">
+          <span style="font-size:18px;">🛬</span>
+          <div><strong>LANDING: Lower aircraft has priority</strong><br>But cannot abuse rule to cut in front</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>Ground Right-of-Way (Taxiing)</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);">
+          <span style="font-size:16px;">⬅️➡️</span>
+          <div><strong>Taxi head-on: Both stop or turn RIGHT ★</strong></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07);">
+          <span style="font-size:16px;">🔀</span>
+          <div><strong>Taxi converging: Aircraft with other on RIGHT gives way</strong></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07);">
+          <span style="font-size:16px;">➡️</span>
+          <div>Taxi overtaking: Being overtaken has right-of-way</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.09);">
+          <span class="cn">✗</span>
+          <div><strong>Stop bar illuminated: DO NOT CROSS ★</strong></div>
+        </div>
+        <div class="chk-item">
+          <span class="cy">→</span>
+          <div>Taxiing aircraft gives way to aircraft taking off / about to take off</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Formation Flying Limits</div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:10px;">
+        <div class="sn" style="color:#7DD3FC;font-size:18px;">0.5 NM</div><div class="su">Lateral max</div>
+      </div>
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:10px;">
+        <div class="sn" style="color:#7DD3FC;font-size:18px;">0.5 NM</div><div class="su">Longitudinal max</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;">30 m</div><div class="su">Vertical max = 100ft ★</div>
+      </div>
+      <div class="stat" style="padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:14px;">Single AC</div><div class="sl">Formation treated as one for nav/reporting</div>
+      </div>
+    </div>
+    <div class="al al-rd" style="margin-bottom:0;"><strong>Civil formation flying in India = generally prohibited.</strong> ICAO permits under conditions. Towing another aircraft in flight = NOT permitted in India ★</div>
+  </div>
+</div>
+
+<!-- AEROBATICS -->
+<div class="section" id="section-aerobatics">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">✈️</div>
+  <div><div class="st">Aerobatics & Special Operations</div>
+  <div class="ss">2000ft min · 2NM from aerodrome · 6000ft near aerodrome · Parachutes · Towing</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Aerobatics — Memory: 2-6-Public Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="160" fill="#07101c"/>
+        <!-- Aerodrome circle -->
+        <circle cx="380" cy="100" r="60" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <text x="380" y="95" fill="#7DD3FC" font-family="sans-serif" font-size="22" text-anchor="middle">🏢</text>
+        <text x="380" y="115" fill="#7DD3FC" font-family="monospace" font-size="11" text-anchor="middle">AERODROME</text>
+        <!-- 2NM circle -->
+        <circle cx="380" cy="100" r="95" fill="rgba(239,68,68,.04)" stroke="rgba(239,68,68,.4)" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="480" y="45" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">2 NM</text>
+        <text x="480" y="58" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">No aerobatics</text>
+        <text x="480" y="70" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">unless above 6000ft</text>
+        <!-- 2000ft floor -->
+        <rect x="20" y="128" width="200" height="24" rx="7" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="120" y="144" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Min 2000ft AGL ★</text>
+        <!-- City prohibition -->
+        <rect x="540" y="128" width="200" height="24" rx="7" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="640" y="144" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">No aerobatics over public ★</text>
+      </svg>
+    </div>
+    <div class="g3" style="margin-top:0;">
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:18px;">2000 ft</div><div class="su">Min AGL for aerobatics ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;">2 NM</div><div class="su">No aerobatics within of aerodrome ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:18px;">6000 ft</div><div class="su">Must be above when within 2 NM ★</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Aerobatics Memory: 2-6-Public</div>
+      <div class="mf">2 NM near aerodrome · 6000 ft if within 2 NM · No aerobatics over public gatherings · Min 2000 ft AGL</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Aerobatics Requirements</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">→</span><div>Pilot must hold <strong>licence or be under instructor supervision</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Passengers must provide <strong>written consent</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Passengers must be secured with <strong>seat belts and safety restraints</strong></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Other Restrictions</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <span class="cn">✗</span><div><strong>Towing another aircraft in India = NOT permitted ★</strong></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <span class="cn">✗</span><div>Parachute descent NOT allowed except <strong>Emergency or Government-authorized</strong></div>
+        </div>
+        <div class="chk-item"><span class="cy">→</span><div>Dropping/spraying: Only if <strong>permitted by regulations and approved by ATS</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Simulated IF flight: Requires <strong>dual controls + qualified safety pilot</strong> ★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTS -->
+<div class="section" id="section-lights">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">💡</div>
+  <div><div class="st">Aircraft Lights</div>
+  <div class="ss">Red=Left · Green=Right · White=Tail · Anti-collision day+night · Night identification</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Navigation Lights — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Aircraft top view -->
+        <ellipse cx="380" cy="90" rx="160" ry="28" fill="rgba(14,165,233,.06)" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <!-- Wings -->
+        <path d="M320,90 L120,50 L90,57 L305,93" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <path d="M320,90 L120,130 L90,123 L305,87" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <path d="M440,90 L640,50 L670,57 L455,93" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <path d="M440,90 L640,130 L670,123 L455,87" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <!-- Tail -->
+        <line x1="540" y1="90" x2="640" y2="90" stroke="rgba(14,165,233,.2)" stroke-width="1.5"/>
+        <!-- RED LEFT WING -->
+        <circle cx="95" cy="90" r="14" fill="#EF4444" opacity=".9"/>
+        <text x="95" y="95" fill="white" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">RED</text>
+        <rect x="10" y="40" width="130" height="36" rx="8" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <text x="75" y="56" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">LEFT WING</text>
+        <text x="75" y="70" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">PORT · 110° ★</text>
+        <line x1="95" y1="76" x2="95" y2="90" stroke="rgba(239,68,68,.5)" stroke-width="1.5"/>
+        <!-- GREEN RIGHT WING -->
+        <circle cx="665" cy="90" r="14" fill="#22C55E" opacity=".9"/>
+        <text x="665" y="95" fill="white" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">GRN</text>
+        <rect x="620" y="40" width="130" height="36" rx="8" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.4)" stroke-width="1.5"/>
+        <text x="685" y="56" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RIGHT WING</text>
+        <text x="685" y="70" fill="#86EFAC" font-family="monospace" font-size="11" text-anchor="middle">STARBOARD · 110° ★</text>
+        <line x1="665" y1="76" x2="665" y2="90" stroke="rgba(34,197,94,.5)" stroke-width="1.5"/>
+        <!-- WHITE TAIL -->
+        <circle cx="640" cy="90" r="12" fill="white" opacity=".85"/>
+        <text x="640" y="95" fill="#060C18" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">WHT</text>
+        <rect x="610" y="118" width="140" height="36" rx="8" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <text x="680" y="133" fill="white" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TAIL</text>
+        <text x="680" y="147" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">WHITE · 140° ★</text>
+        <line x1="640" y1="102" x2="665" y2="118" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Light Memory: Port=Red · Starboard=Green · Tail=White</div>
+      <div class="mf">Red Left Red · Green Right Green · White Tail = Away</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Night Identification</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.11);"><tr><th style="color:#7DD3FC;">Lights Seen</th><th style="color:#7DD3FC;">Meaning</th><th style="color:#7DD3FC;">Action</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(239,68,68,.05);"><td>Red + Green</td><td>HEAD-ON ★</td><td>Turn RIGHT immediately</td></tr>
+            <tr><td>White only</td><td>Aircraft moving AWAY ★</td><td>Safe</td></tr>
+            <tr><td>Green + White</td><td>Seeing STARBOARD side</td><td>Aircraft moving left to right</td></tr>
+            <tr><td>Red + White</td><td>Seeing PORT side</td><td>Aircraft moving right to left</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Anti-Collision Light Rule</div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.09);margin-bottom:10px;">
+        <span style="font-size:18px;">💡</span>
+        <div><strong>Anti-collision lights must be used during DAYTIME ★</strong> (if aircraft is fitted with them) — not only at night</div>
+      </div>
+      <div class="chk-item">
+        <span class="cy">→</span>
+        <div>Pilot may reduce intensity if lights adversely affect performance of duties or cause dazzling</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLIGHT PLANS -->
+<div class="section" id="section-fpl">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">📋</div>
+  <div><div class="st">Flight Plans</div>
+  <div class="ss">3 hr before EOBT · 15min delay · ETA ±2min · Mach ±0.02 · TAS ±10kt</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Flight Plan Submission Timeline</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="100" fill="#07101c"/>
+        <line x1="30" y1="50" x2="730" y2="50" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+        <!-- Earliest 120hr -->
+        <circle cx="60" cy="50" r="10" fill="rgba(168,85,247,.3)" stroke="rgba(168,85,247,.6)" stroke-width="2"/>
+        <line x1="60" y1="40" x2="60" y2="18" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+        <rect x="5" y="5" width="110" height="14" rx="4" fill="rgba(168,85,247,.12)"/>
+        <text x="60" y="17" fill="#D8B4FE" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">120 hr (5 days)</text>
+        <text x="60" y="68" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Earliest</text>
+        <!-- Latest 180 min -->
+        <circle cx="380" cy="50" r="10" fill="rgba(245,158,11,.3)" stroke="rgba(245,158,11,.6)" stroke-width="2"/>
+        <line x1="380" y1="40" x2="380" y2="18" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+        <rect x="310" y="5" width="140" height="14" rx="4" fill="rgba(245,158,11,.12)"/>
+        <text x="380" y="17" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">180 min (3 hr) ★</text>
+        <text x="380" y="68" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Latest</text>
+        <!-- Delay 15min -->
+        <circle cx="560" cy="50" r="10" fill="rgba(239,68,68,.3)" stroke="rgba(239,68,68,.6)" stroke-width="2"/>
+        <line x1="560" y1="60" x2="560" y2="82" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <rect x="490" y="83" width="140" height="14" rx="4" fill="rgba(239,68,68,.12)"/>
+        <text x="560" y="95" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Delay ≥ 15 min → notify ATC ★</text>
+        <!-- EOBT -->
+        <circle cx="710" cy="50" r="12" fill="rgba(34,197,94,.3)" stroke="rgba(34,197,94,.6)" stroke-width="2.5"/>
+        <text x="710" y="55" fill="white" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">EOBT</text>
+        <text x="710" y="72" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">Departure</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Deviation Reporting Limits</div>
+      <div class="g2" style="gap:8px;">
+        <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+          <div class="sn" style="color:#FCA5A5;font-size:18px;">±0.02</div><div class="su">Mach → Notify ATS ★</div>
+        </div>
+        <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+          <div class="sn" style="color:#FCD34D;font-size:18px;">±10 kt</div><div class="su">TAS → Notify ATS ★</div>
+        </div>
+        <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+          <div class="sn" style="color:#86EFAC;font-size:18px;">&gt;2 min</div><div class="su">ETA change → Notify ATS ★</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#D8B4FE;font-size:16px;">Arrival</div><div class="sl">Submit arrival report to close FPL → prevents SAR</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>VMC below VMC in Controlled Airspace</div>
+      <div style="font-size:12px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">VFR flight encounters weather below VMC options:</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="b b-gn">1</span><div>Request amended clearance to <strong>continue in VMC</strong></div></div>
+        <div class="chk-item"><span class="b b-sk">2</span><div><strong>Leave controlled airspace</strong></div></div>
+        <div class="chk-item"><span class="b b-am">3</span><div>Request <strong>Special VFR (SVFR)</strong></div></div>
+        <div class="chk-item"><span class="b b-rd">4</span><div><strong>Convert to IFR</strong></div></div>
+      </div>
+      <div class="al al-am" style="margin-top:6px;margin-bottom:0;"><strong>UTC</strong> used for all aviation. ATS clock accuracy: <strong>±30 seconds</strong> · Data link: <strong>±1 second</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- RADIO FAILURE -->
+<div class="section" id="section-rcf">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">📻</div>
+  <div><div class="st">Radio Communication Failure (RCF)</div>
+  <div class="ss">VMC = Land ASAP · Radar = 7min · Non-radar = 20min · Land within 30min · Squawk 7600</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Radio Failure Procedures — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="190" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Squawk 7600 on transponder · Declare intentions on guard 121.5 MHz</text>
+        <!-- VMC box -->
+        <rect x="10" y="28" width="235" height="150" rx="12" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.38)" stroke-width="2"/>
+        <text x="122" y="54" fill="#86EFAC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">VMC</text>
+        <text x="122" y="72" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Radio fails in VMC</text>
+        <text x="122" y="102" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Continue VMC</text>
+        <text x="122" y="120" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Land NEAREST ★</text>
+        <text x="122" y="138" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">suitable aerodrome</text>
+        <text x="122" y="162" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">Report arrival ASAP</text>
+        <!-- Radar box -->
+        <rect x="263" y="28" width="222" height="150" rx="12" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.42)" stroke-width="2"/>
+        <text x="374" y="54" fill="#FCD34D" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">IMC — RADAR</text>
+        <text x="374" y="80" fill="#FCD34D" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">7</text>
+        <text x="374" y="110" fill="#FCD34D" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">MINUTES ★</text>
+        <text x="374" y="130" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Maintain last assigned</text>
+        <text x="374" y="145" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">speed + level</text>
+        <text x="374" y="162" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">from later of: level reached/7600/report</text>
+        <!-- Non-radar box -->
+        <rect x="503" y="28" width="247" height="150" rx="12" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.42)" stroke-width="2"/>
+        <text x="626" y="54" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">IMC — NON-RADAR</text>
+        <text x="626" y="80" fill="#FCA5A5" font-family="monospace" font-size="40" font-weight="bold" text-anchor="middle">20</text>
+        <text x="626" y="110" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">MINUTES ★</text>
+        <text x="626" y="130" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Maintain last assigned</text>
+        <text x="626" y="145" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">speed + level</text>
+        <text x="626" y="162" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">after missing report at compulsory point</text>
+      </svg>
+    </div>
+    <div class="g3" style="margin-top:0;">
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:18px;">7 min</div><div class="su">Radar airspace ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;font-size:18px;">20 min</div><div class="su">Non-radar airspace ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+        <div class="sn" style="color:#D8B4FE;font-size:18px;">30 min</div><div class="su">Land within of EAT/ETA ★</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">RCF Memory</div>
+      <div class="mf">VMC=Land ASAP · Radar=7min · Non-radar=20min · Land within 30min of EAT/ETA</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- VMC MINIMA -->
+<div class="section" id="section-vmc">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🌤</div>
+  <div><div class="st">VMC Minima</div>
+  <div class="ss">Above 10000ft=8km · Below 10000ft=5km · Clear of cloud below 3000ft · Helicopter 1500m</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>VMC Minima — Altitude Zones Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#07101c"/>
+        <!-- Altitude axis -->
+        <line x1="70" y1="10" x2="70" y2="210" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <!-- 10000ft line -->
+        <line x1="70" y1="100" x2="750" y2="100" stroke="rgba(245,158,11,.4)" stroke-width="1.5" stroke-dasharray="7,5"/>
+        <text x="48" y="104" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">10,000</text>
+        <text x="48" y="117" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">ft</text>
+        <!-- 3000ft line -->
+        <line x1="70" y1="165" x2="750" y2="165" stroke="rgba(168,85,247,.35)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="48" y="169" fill="#D8B4FE" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">3,000</text>
+        <text x="48" y="182" fill="#D8B4FE" font-family="monospace" font-size="10" text-anchor="middle">ft</text>
+
+        <!-- Zone 1: Above 10000ft -->
+        <rect x="80" y="14" width="660" height="80" rx="8" fill="rgba(239,68,68,.07)"/>
+        <text x="410" y="44" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">ABOVE 10,000 ft</text>
+        <text x="410" y="66" fill="#FCA5A5" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">8 km visibility ★</text>
+        <text x="410" y="86" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">1500m horizontal · 1000ft vertical cloud clearance</text>
+
+        <!-- Zone 2: 3000-10000ft -->
+        <rect x="80" y="107" width="660" height="50" rx="8" fill="rgba(245,158,11,.07)"/>
+        <text x="410" y="128" fill="#FCD34D" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">3,000 ft to 10,000 ft</text>
+        <text x="410" y="150" fill="#FCD34D" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">5 km visibility ★</text>
+
+        <!-- Zone 3: Below 3000ft -->
+        <rect x="80" y="172" width="660" height="40" rx="8" fill="rgba(168,85,247,.07)"/>
+        <text x="300" y="192" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Below 3,000 ft (Class F/G)</text>
+        <text x="580" y="192" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">5 km · Clear of cloud · Surface in sight ★</text>
+      </svg>
+    </div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;font-size:18px;">8 km</div><div class="su">Above 10,000 ft ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:18px;">5 km</div><div class="su">Below 10,000 ft ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:18px;">3 km</div><div class="su">Low-level exception</div>
+      </div>
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:10px;">
+        <div class="sn" style="color:#7DD3FC;font-size:16px;">1500 m</div><div class="su">Helicopter exception</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">VMC Memory</div>
+      <div class="mf">Above 10000ft=8km · Below 10000ft=5km · Low-level exception=3km · Helicopter=1500m</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- VFR/SVFR/IFR -->
+<div class="section" id="section-vfr">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">👁</div>
+  <div><div class="st">VFR · SVFR · IFR</div>
+  <div class="ss">VFR max=FL150 · CTR ceiling=1500ft · SVFR=1500m · IFR mountain=2000ft · Obstacle radius=8km</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>VFR / SVFR / IFR Key Numbers — Side by Side</div>
+    <div class="g3">
+      <div style="background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.38);border-radius:12px;padding:16px;">
+        <div style="font-size:18px;font-weight:700;color:#86EFAC;margin-bottom:10px;">VFR</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(34,197,94,.3);"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">FL150</span><div>Max normal VFR level ★</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">1500ft</span><div>Min ceiling in CTR ★</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">5 km</span><div>Min visibility in CTR ★</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">1000ft</span><div>Min over cities (600m radius)</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">500ft</span><div>Min elsewhere</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-family:'JetBrains Mono',monospace;color:#86EFAC;font-weight:700;">100NM</span><div>Max offshore (controlled)</div></div>
+        </div>
+      </div>
+      <div style="background:rgba(14,165,233,.07);border:2px solid rgba(14,165,233,.42);border-radius:12px;padding:16px;">
+        <div style="font-size:18px;font-weight:700;color:#7DD3FC;margin-bottom:10px;">SVFR ★★</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);">
+            <span style="font-family:'JetBrains Mono',monospace;color:#FCA5A5;font-weight:700;">1500m</span>
+            <div>Min visibility — aircraft ★</div>
+          </div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);">
+            <span style="font-family:'JetBrains Mono',monospace;color:#FCA5A5;font-weight:700;">1000m</span>
+            <div>Min visibility — helicopter ★</div>
+          </div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-size:13px;">🎓</span><div>Pilot needs IR / AFI / FI rating</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-size:13px;">📍</span><div>Only within a Control Zone</div></div>
+          <div class="chk-item" style="padding:7px 10px;"><span style="font-size:13px;">📡</span><div>Individually authorized by ATC</div></div>
+        </div>
+      </div>
+      <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.35);border-radius:12px;padding:16px;">
+        <div style="font-size:18px;font-weight:700;color:#FCA5A5;margin-bottom:10px;">IFR</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+            <span style="font-family:'JetBrains Mono',monospace;color:#FCA5A5;font-weight:700;">2000ft</span>
+            <div>Mountain/high terrain (8km) ★</div>
+          </div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+            <span style="font-family:'JetBrains Mono',monospace;color:#FCA5A5;font-weight:700;">1000ft</span>
+            <div>Other areas (8km) ★</div>
+          </div>
+          <div class="chk-item" style="padding:7px 10px;">
+            <span style="font-family:'JetBrains Mono',monospace;color:#FCA5A5;font-weight:700;">8 km</span>
+            <div>Obstacle assessment radius</div>
+          </div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cn">!</span><div>Cannot cancel IFR immediately on entering VMC ★</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">VFR/SVFR/IFR Memory</div>
+      <div class="mf">VFR: 15-5-150 (1500ft/5km/FL150) · SVFR: 15-10 (1500m/1000m) · IFR: 2K mountain/1K plain</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- SIGNALS -->
+<div class="section" id="section-signals">
+  <div class="sh"><div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🚦</div>
+  <div><div class="st">Signals — Ground, Distress & Interception</div>
+  <div class="ss">MAYDAY · PAN PAN · Visual ground signals · Interception wing rock · ADIZ</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Distress vs Urgency</div>
+      <div class="g2" style="gap:8px;">
+        <div style="background:rgba(239,68,68,.10);border:2px solid rgba(239,68,68,.5);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:6px;">🚨</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#FCA5A5;margin-bottom:5px;">MAYDAY</div>
+          <div style="font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:5px;">DISTRESS ★</div>
+          <div style="font-size:12px;color:var(--text2);">Grave &amp; Imminent Danger<br>Immediate assistance needed<br>SOS · Red rockets · Red flare</div>
+        </div>
+        <div style="background:rgba(245,158,11,.09);border:2px solid rgba(245,158,11,.45);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:6px;">⚠️</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:#FCD34D;margin-bottom:5px;">PAN PAN</div>
+          <div style="font-size:13px;font-weight:700;color:#FCD34D;margin-bottom:5px;">URGENCY ★</div>
+          <div style="font-size:12px;color:var(--text2);">Problem — priority needed<br>NOT immediate rescue<br>XXX (morse) · flashing lights</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Emergency Frequencies</div>
+      <div class="g2" style="gap:8px;">
+        <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);padding:10px;">
+          <div class="sn" style="color:#FCA5A5;font-size:18px;">121.5</div><div class="su">MHz — Civil emergency ★</div>
+        </div>
+        <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+          <div class="sn" style="color:#D8B4FE;font-size:18px;">243</div><div class="su">MHz — Military emergency ★</div>
+        </div>
+      </div>
+      <div class="al al-rd" style="margin-top:8px;margin-bottom:0;"><strong>Interception transponder code: 7700 ★</strong> (unless ATC instructs otherwise)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Visual Interception Signals — Series</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Series</th><th style="color:#FCD34D;">Interceptor Does</th><th style="color:#FCD34D;">Meaning</th><th style="color:#FCD34D;">Response</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(34,197,94,.04);"><td><span class="b b-gn">1</span></td><td>Rocks wings + flashes nav lights</td><td><strong>Follow me ★</strong></td><td>Rock wings + follow</td></tr>
+          <tr style="background:rgba(14,165,233,.04);"><td><span class="b b-sk">2</span></td><td>Sharp breakaway turn</td><td><strong>You may proceed ★</strong></td><td>Rock wings</td></tr>
+          <tr style="background:rgba(245,158,11,.04);"><td><span class="b b-am">3</span></td><td>Gear down + landing lights + overflies runway</td><td><strong>Land here ★</strong></td><td>Follow and land</td></tr>
+          <tr style="background:rgba(239,68,68,.04);"><td><span class="b b-rd">4</span></td><td>(Intercepted raises gear after S3)</td><td><strong>Aerodrome unsuitable ★</strong></td><td>Interceptor uses S1</td></tr>
+          <tr><td><span class="b b-pu">5</span></td><td>(Intercepted flashes all lights regularly)</td><td>Cannot comply</td><td>Interceptor uses S2</td></tr>
+          <tr><td><span class="b b-in">6</span></td><td>(Intercepted flashes all lights irregularly)</td><td>In distress</td><td>Interceptor uses S2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Ground Visual Signals</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(249,115,22,.11);"><tr><th style="color:#FDB785;">Signal</th><th style="color:#FDB785;">Description</th><th style="color:#FDB785;">Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-rd">Yellow X on Red</span></td><td>Red square with yellow X</td><td>Landing prohibited ★</td></tr>
+          <tr><td><span class="b b-am">One Diagonal</span></td><td>Red square with 1 diagonal</td><td>Special precautions required</td></tr>
+          <tr><td><span class="b b-sk">White Dumbbell</span></td><td>White dumbbell shape</td><td>Use runways and taxiways only ★</td></tr>
+          <tr><td><span class="b b-sk">Dumbbell+Bars</span></td><td>Dumbbell with black bars</td><td>T/O and L/D on runway only</td></tr>
+          <tr><td><span class="b b-rd">Cross (X)</span></td><td>White or yellow cross</td><td>Runway/taxiway CLOSED ★</td></tr>
+          <tr><td><span class="b b-gn">T Shape</span></td><td>White/orange T</td><td>Landing direction indicator ★</td></tr>
+          <tr><td><span class="b b-or">Number</span></td><td>e.g. 12</td><td>Multiply by 10 = magnetic track ★</td></tr>
+          <tr><td><span class="b b-pu">Right Arrow</span></td><td>Arrow pointing right</td><td>Right-hand traffic circuit</td></tr>
+          <tr><td><span class="b b-am">Black C on Yellow</span></td><td>Letter C on yellow bg</td><td>ATS Reporting Office ★</td></tr>
+          <tr><td><span class="b b-tl">Double White Cross</span></td><td>Two white crosses</td><td>Glider operations in progress ★</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al al-am" style="margin-bottom:0;"><strong>Red + Green projectiles at 10-second intervals:</strong> You are entering or flying in a prohibited/restricted/danger area</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>ADIZ (Air Defence Identification Zone)</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(99,102,241,.35);background:rgba(99,102,241,.07);"><span style="font-size:16px;">✈️</span><div>India has 5 ADIZ + Sub-ADIZ South East (6 total)</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">★</span><div>Must obtain <strong>ADC (Air Defence Clearance)</strong> before departure</div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Enter Indian airspace <strong>at least 10 min before</strong></div></div>
+      </div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(99,102,241,.11);"><tr><th style="color:#A5B4FC;">ADC Validity</th><th style="color:#A5B4FC;">Window</th></tr></thead>
+          <tbody>
+            <tr><td>Scheduled flight</td><td><span class="num">-15 to +45 min EOBT ★</span></td></tr>
+            <tr><td>Non-scheduled domestic</td><td><span class="num">-15 to +3 hr EOBT</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CRUISING LEVELS -->
+<div class="section" id="section-cruising">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">🧭</div>
+  <div><div class="st">Cruising Levels — Semi-Circular Rule</div>
+  <div class="ss">East=Odd · West=Even · VFR=+500ft · RVSM FL290-410=1000ft</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Semi-Circular Rule — Visual Compass</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="250" fill="#07101c"/>
+        <!-- Compass circle -->
+        <circle cx="380" cy="125" r="95" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
+        <text x="380" y="30" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="12" text-anchor="middle">N 360°/000°</text>
+        <text x="380" y="230" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="12" text-anchor="middle">S 180°</text>
+        <text x="700" y="130" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="12" text-anchor="middle">E 090°</text>
+        <text x="50" y="130" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="12" text-anchor="middle">W 270°</text>
+        <!-- East half (right) = ODD -->
+        <path d="M380,125 L380,30 A95,95 0 0,1 380,220 Z" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="510" y="120" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">EAST</text>
+        <text x="510" y="138" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">000°-179°</text>
+        <text x="510" y="158" fill="#FCA5A5" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">ODD ★</text>
+        <text x="510" y="176" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">FL010/030/050...</text>
+        <!-- West half (left) = EVEN -->
+        <path d="M380,125 L380,30 A95,95 0 0,0 380,220 Z" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+        <text x="250" y="120" fill="#7DD3FC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">WEST</text>
+        <text x="250" y="138" fill="#7DD3FC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">180°-359°</text>
+        <text x="250" y="158" fill="#7DD3FC" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">EVEN ★</text>
+        <text x="250" y="176" fill="var(--text2)" font-family="monospace" font-size="11" text-anchor="middle">FL020/040/060...</text>
+        <!-- VFR note -->
+        <rect x="300" y="92" width="160" height="24" rx="8" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.35)" stroke-width="1"/>
+        <text x="380" y="108" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">VFR = IFR + 500ft ★</text>
+      </svg>
+    </div>
+    <div class="g2" style="margin-top:0;">
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Track</th><th style="color:#FCD34D;">IFR</th><th style="color:#FCD34D;">VFR</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(239,68,68,.04);"><td>000°–179° (East)</td><td><span class="num">ODD ★</span></td><td>Odd + 500ft</td></tr>
+            <tr style="background:rgba(14,165,233,.04);"><td>180°–359° (West)</td><td><span class="num">EVEN ★</span></td><td>Even + 500ft</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin:0;">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>RVSM</div>
+        <div class="g2" style="gap:8px;">
+          <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+            <div class="sn" style="color:#FCA5A5;font-size:16px;">FL290-FL410</div><div class="su">RVSM band ★</div>
+          </div>
+          <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08);padding:10px;">
+            <div class="sn" style="color:#86EFAC;font-size:18px;">1000ft</div><div class="su">RVSM vertical sep ★</div>
+          </div>
+        </div>
+        <div class="al al-am" style="margin-top:8px;margin-bottom:0;"><strong>East heading 090° → ODD (FL290/310/330...)<br>West heading 270° → EVEN (FL300/320/340...)</strong></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Cruising Levels Memory</div>
+      <div class="mf">East=Odd · West=Even · VFR=IFR+500ft · RVSM=FL290-410=1000ft separation</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- MASTER REF -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference</div>
+  <div class="ss">Every critical number from Chapter 4</div></div></div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>All Critical Facts</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">Question</th><th style="color:#7DD3FC;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Highest right-of-way priority</td><td><span class="num">Balloon ★</span></td></tr>
+            <tr><td>Head-on action</td><td>Both turn RIGHT ★</td></tr>
+            <tr><td>Converging — who gives way</td><td>Aircraft with other on its RIGHT ★</td></tr>
+            <tr><td>Overtaking passes on</td><td>RIGHT side ★</td></tr>
+            <tr><td>Overtaking: definition</td><td>Approaching from rear within &lt;70° of symmetry plane</td></tr>
+            <tr><td>Formation lateral max</td><td><span class="num">0.5 NM (1 km)</span></td></tr>
+            <tr><td>Formation vertical max</td><td><span class="num">30m (100ft) ★</span></td></tr>
+            <tr><td>Towing aircraft in India</td><td>NOT permitted ★</td></tr>
+            <tr><td>Aerobatics min height AGL</td><td><span class="num">2000 ft ★</span></td></tr>
+            <tr><td>Aerobatics near aerodrome</td><td>Not within 2 NM unless above 6000ft ★</td></tr>
+            <tr><td>Nav light: Left wing</td><td>RED (110°) ★</td></tr>
+            <tr><td>Nav light: Right wing</td><td>GREEN (110°) ★</td></tr>
+            <tr><td>Nav light: Tail</td><td>WHITE (140°) ★</td></tr>
+            <tr><td>Anti-collision lights daytime</td><td>Required if fitted ★</td></tr>
+            <tr><td>Flight plan: latest submission</td><td><span class="num">180 min (3hr) before EOBT ★</span></td></tr>
+            <tr><td>Flight plan: earliest submission</td><td><span class="num">120 hr (5 days) before EOBT</span></td></tr>
+            <tr><td>Flight plan: delay notify ATC</td><td><span class="num">≥ 15 min ★</span></td></tr>
+            <tr><td>ETA change notify ATS</td><td><span class="num">&gt; 2 min ★</span></td></tr>
+            <tr><td>Mach change notify ATS</td><td><span class="num">± 0.02 ★</span></td></tr>
+            <tr><td>TAS change notify ATS</td><td><span class="num">± 10 kt ★</span></td></tr>
+            <tr><td>ATS clock accuracy</td><td><span class="num">± 30 sec ★</span></td></tr>
+            <tr><td>Data link time accuracy</td><td><span class="num">± 1 sec ★</span></td></tr>
+            <tr><td>Radio failure code</td><td><span class="num">7600</span></td></tr>
+            <tr><td>Radio failure VMC</td><td>Land nearest ASAP ★</td></tr>
+            <tr><td>Radio failure radar IMC</td><td><span class="num">7 min ★</span></td></tr>
+            <tr><td>Radio failure non-radar IMC</td><td><span class="num">20 min ★</span></td></tr>
+            <tr><td>Land within of EAT/ETA</td><td><span class="num">30 min ★</span></td></tr>
+            <tr><td>VMC above 10,000ft</td><td><span class="num">8 km ★</span></td></tr>
+            <tr><td>VMC below 10,000ft</td><td><span class="num">5 km ★</span></td></tr>
+            <tr><td>VFR max level</td><td><span class="num">FL150 ★</span></td></tr>
+            <tr><td>VFR CTR min ceiling</td><td><span class="num">1500 ft ★</span></td></tr>
+            <tr><td>VFR CTR min visibility</td><td><span class="num">5 km ★</span></td></tr>
+            <tr><td>VFR over cities/towns</td><td><span class="num">1000 ft (600m radius) ★</span></td></tr>
+            <tr><td>VFR elsewhere</td><td><span class="num">500 ft AGL ★</span></td></tr>
+            <tr><td>SVFR min visibility</td><td><span class="num">1500 m ★</span></td></tr>
+            <tr><td>SVFR helicopter</td><td><span class="num">1000 m ★</span></td></tr>
+            <tr><td>IFR min obstacle clearance mountain</td><td><span class="num">2000 ft (8km) ★</span></td></tr>
+            <tr><td>IFR min obstacle clearance other</td><td><span class="num">1000 ft (8km) ★</span></td></tr>
+            <tr><td>Eastbound track → IFR</td><td>ODD levels ★</td></tr>
+            <tr><td>Westbound track → IFR</td><td>EVEN levels ★</td></tr>
+            <tr><td>RVSM band</td><td>FL290 – FL410 ★</td></tr>
+            <tr><td>RVSM vertical separation</td><td><span class="num">1000 ft ★</span></td></tr>
+            <tr><td>Standard circuit direction</td><td>LEFT ★</td></tr>
+            <tr><td>Distress signal</td><td>MAYDAY · SOS ★</td></tr>
+            <tr><td>Urgency signal</td><td>PAN PAN · XXX ★</td></tr>
+            <tr><td>Civil emergency frequency</td><td><span class="num">121.5 MHz ★</span></td></tr>
+            <tr><td>Military emergency frequency</td><td><span class="num">243 MHz ★</span></td></tr>
+            <tr><td>Interception transponder code</td><td><span class="num">7700 ★</span></td></tr>
+            <tr><td>Wing rock by interceptor = </td><td>Follow me ★</td></tr>
+            <tr><td>Breakaway by interceptor = </td><td>You may proceed ★</td></tr>
+            <tr><td>Gear down + lights + runway = </td><td>Land here ★</td></tr>
+            <tr><td>ADC scheduled validity</td><td>-15 to +45 min EOBT ★</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Head-on = BOTH turn RIGHT (not just one aircraft)</div><div class="trap-d">In a head-on situation, BOTH aircraft turn right. Not just one. Similarly, in taxi head-on both stop or alter course to the right.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Radio failure radar = 7 min · Non-radar = 20 min (not swapped)</div><div class="trap-d">Radar = 7 minutes. Non-radar = 20 minutes. Examiner frequently swaps these. RVSM = FL290-410 (not FL200 or FL250).</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Anti-collision lights required DAYTIME too (if fitted)</div><div class="trap-d">Common wrong answer: "only at night." Anti-collision lights (beacon, strobes) must be used even in daylight if the aircraft is fitted with them.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">SVFR = 1500m · Helicopter SVFR = 1000m (not 1500m for both)</div><div class="trap-d">Standard SVFR = 1500m visibility minimum. Helicopter SVFR = 1000m. The helicopter exception has lower visibility.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">ETA change = &gt;2 min · Delay = ≥15 min (different thresholds)</div><div class="trap-d">ETA change requiring notification = MORE THAN 2 minutes. Flight plan delay requiring notification = 15 MINUTES OR MORE. Two different triggers.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Cannot cancel IFR immediately upon entering VMC</div><div class="trap-d">Pilot SHALL NOT cancel IFR merely because VMC is encountered. Must intend to remain in VMC for a reasonable period before cancelling IFR.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 4</div><div class="ss">30 DGCA-style questions</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">&#8617; Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next &#8594;</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"In a right-of-way priority order, which aircraft has the HIGHEST priority?",opts:["Glider","Balloon","Airship","Powered aircraft"],ans:1,exp:"B-G-A-P: Balloon has highest priority. Glider next, then Airship, then Powered aircraft (lowest priority). Memory: Balloon is King."},
+{q:"Two aircraft approaching head-on. What action should both take?",opts:["Both turn LEFT","Both turn RIGHT","Only the larger aircraft turns","The lower aircraft turns"],ans:1,exp:"Head-on = Both turn RIGHT. Memory: Head-on = Right-on. This applies both in the air and during taxiing on the ground."},
+{q:"Aircraft are converging. Which aircraft gives way?",opts:["The larger aircraft","The aircraft with the other on its LEFT","The aircraft with the other on its RIGHT","The higher aircraft"],ans:2,exp:"Converging: The aircraft that has the OTHER aircraft on its RIGHT gives way. Memory: See right = Give way."},
+{q:"An overtaking aircraft must pass on which side?",opts:["Left","Right","Either side","Above"],ans:1,exp:"Overtaking aircraft passes on the RIGHT. Overtaking is defined as approaching from behind within less than 70° of the symmetry plane."},
+{q:"Maximum vertical separation within a formation flight is:",opts:["50 ft (15m)","100 ft (30m)","200 ft (60m)","500 ft (150m)"],ans:1,exp:"Maximum vertical separation in formation = 30m (100ft). Maximum lateral = 0.5 NM (1 km). Maximum longitudinal = 0.5 NM (1 km)."},
+{q:"Minimum height AGL for aerobatic flight is:",opts:["1000 ft","1500 ft","2000 ft","3000 ft"],ans:2,exp:"Minimum height for aerobatics = 2000 ft (600m) AGL. Near an aerodrome within 2NM, must be above 6000ft. Memory: 2-6-Public."},
+{q:"Aerobatic flight is NOT permitted within what distance of an aerodrome perimeter?",opts:["1 NM","2 NM","3 NM","5 NM"],ans:1,exp:"No aerobatics within 2 NM of aerodrome perimeter — UNLESS above 6000 ft. Memory: 2 NM / 6000 ft pair."},
+{q:"The left wing navigation light is:",opts:["Green","White","Red","Blue"],ans:2,exp:"Left wing (port) = RED light (110°). Right wing (starboard) = GREEN. Tail = WHITE. Memory: Port=Red (both associated with left side)."},
+{q:"You observe RED + GREEN lights together on another aircraft at night. This indicates:",opts:["The aircraft is moving away","The aircraft's starboard side","Head-on collision risk — turn RIGHT","The aircraft is landing"],ans:2,exp:"Red + Green visible simultaneously = head-on collision risk. Turn RIGHT immediately. White only = aircraft moving away. Green + White = starboard side."},
+{q:"Anti-collision lights (beacon/strobes) must be used:",opts:["Only at night","Only in IMC","Day and night if the aircraft is fitted with them","Only during approach"],ans:2,exp:"Anti-collision lights must be used day AND night if the aircraft is fitted with them. Common trap: students say 'only at night.'"},
+{q:"A flight plan must be submitted NOT LATER THAN:",opts:["30 min before EOBT","1 hour before EOBT","180 min (3 hours) before EOBT","24 hours before EOBT"],ans:2,exp:"Latest FPL submission = 180 min (3 hours) before EOBT. Earliest = 120 hours (5 days) before. Drone FPL = at least 24 hours before."},
+{q:"If flight is delayed by 15 minutes or more after filing a flight plan, the pilot must:",opts:["Cancel and refile","Inform ATC and amend if necessary","Proceed without notifying","Wait until departure"],ans:1,exp:"Delay of 15 minutes or more = notify ATC and amend flight plan if necessary. This prevents unnecessary SAR action."},
+{q:"ATC must be notified when ETA changes by more than:",opts:["1 minute","2 minutes","5 minutes","10 minutes"],ans:1,exp:"ETA change of MORE THAN 2 MINUTES requires ATS notification. Mach ±0.02 and TAS ±10kt also trigger notification."},
+{q:"Mach number change requiring ATS notification is:",opts:["±0.01","±0.02","±0.05","±0.1"],ans:1,exp:"Mach ±0.02 triggers notification. TAS ±10 kt triggers notification. ETA >2 min triggers notification. Three separate limits for three different parameters."},
+{q:"Radio failure in VMC — correct procedure is:",opts:["Follow IFR procedures","Set transponder 7700 and continue","Continue in VMC and land at nearest suitable aerodrome","Climb to cruising level and wait"],ans:2,exp:"VMC radio failure = continue in VMC + land at nearest suitable aerodrome + report arrival ASAP. Squawk 7600 (radio failure code)."},
+{q:"In radar airspace, how long must a pilot maintain last assigned level after radio failure in IMC?",opts:["2 minutes","7 minutes","20 minutes","30 minutes"],ans:1,exp:"Radar airspace = 7 MINUTES. Non-radar = 20 MINUTES. Then proceed on current flight plan. Land within 30 min of EAT/ETA."},
+{q:"In non-radar airspace, radio failure IMC procedure requires maintaining level for:",opts:["7 minutes","10 minutes","20 minutes","30 minutes"],ans:2,exp:"Non-radar = 20 MINUTES. Radar = 7 minutes. Common trap: examiner swaps these. After the period, proceed on flight plan to destination."},
+{q:"VMC minimum visibility above 10,000 ft is:",opts:["3 km","5 km","8 km","10 km"],ans:2,exp:"Above 10,000 ft = 8 km visibility (plus 1500m horizontal, 1000ft vertical cloud clearance). Below 10,000 ft = 5 km. Memory: Above 10,000 = 8 km."},
+{q:"Maximum normal VFR flight level is:",opts:["FL100","FL120","FL150","FL200"],ans:2,exp:"Maximum normal VFR level = FL150. VFR shall not operate above FL150 unless authorized. Also not at transonic/supersonic speeds or more than 100 NM offshore in controlled airspace."},
+{q:"Minimum ceiling for VFR operations in a control zone without ATC clearance is:",opts:["500 ft","1000 ft","1500 ft","3000 ft"],ans:2,exp:"VFR CTR minimum ceiling = 1500 ft. Minimum ground visibility = 5 km. Without these conditions, ATC clearance is required (SVFR)."},
+{q:"Minimum visibility for SVFR in a control zone (fixed-wing aircraft) is:",opts:["500 m","1000 m","1500 m","3000 m"],ans:2,exp:"SVFR minimum visibility = 1500 m for fixed-wing aircraft. Helicopter SVFR = 1000 m. SVFR requires individual ATC authorization."},
+{q:"IFR minimum obstacle clearance in mountainous terrain (within 8 km) is:",opts:["500 ft","1000 ft","1500 ft","2000 ft"],ans:3,exp:"IFR mountainous terrain = 2000 ft above highest obstacle within 8 km. Other areas = 1000 ft within 8 km. Memory: 2K Mountain, 1K Plain."},
+{q:"An IFR aircraft on eastbound track 090° should use:",opts:["Even flight levels","Odd flight levels","Any level assigned by ATC","VFR levels"],ans:1,exp:"East (000°-179°) = ODD levels. West (180°-359°) = EVEN levels. Memory: East=Odd, West=Even. VFR adds 500ft to IFR levels."},
+{q:"RVSM (Reduced Vertical Separation Minimum) applies between:",opts:["FL100 and FL200","FL200 and FL290","FL290 and FL410","FL410 and FL600"],ans:2,exp:"RVSM band in India = FL290 to FL410. Vertical separation within RVSM = 1000 ft (instead of normal 2000 ft above FL290)."},
+{q:"The distress radiotelephony call is:",opts:["PAN PAN","MAYDAY","SECURITE","SOS"],ans:1,exp:"MAYDAY = radiotelephony distress call. PAN PAN = urgency. SECURITE = safety/navigational warning. SOS = Morse code distress. MAYDAY is repeated three times."},
+{q:"When intercepted by a military aircraft, what transponder code should be set?",opts:["7500","7600","7700","2000"],ans:2,exp:"Interception transponder code = 7700 (unless ATC instructs otherwise). Also try emergency frequency 121.5 MHz, then 243 MHz. 7500=Hijack, 7600=Radio failure, 7700=General emergency."},
+{q:"An intercepting aircraft rocks its wings. This means:",opts:["You may proceed","Land at this aerodrome","Follow me","Cannot comply"],ans:2,exp:"Wing rock + flashing nav lights by interceptor = FOLLOW ME (Series 1). Breakaway = You may proceed (Series 2). Gear down + landing lights + runway overfly = Land here (Series 3)."},
+{q:"A white dumbbell signal on an aerodrome means:",opts:["Landing prohibited","Runway closed","Use runways and taxiways only","Right-hand circuit"],ans:2,exp:"White dumbbell = use runways and taxiways only. Yellow X on Red = landing prohibited. White/yellow cross = closed runway/taxiway. Orange T = landing direction."},
+{q:"The standard traffic circuit direction at an aerodrome is:",opts:["Right","Left","Either","Straight in only"],ans:1,exp:"Standard traffic circuit = LEFT HAND turns. If right arrow signal is displayed on the aerodrome, use RIGHT-hand circuit. Memory: Standard = Left."},
+{q:"Can an IFR flight immediately cancel IFR upon entering VMC?",opts:["Yes, anytime","Yes, but only in Class G","No — must intend to remain in VMC for a reasonable period","Yes, if below FL100"],ans:2,exp:"Pilot SHALL NOT cancel IFR merely because VMC is encountered. Must intend to CONTINUE in VMC for a reasonable period before cancelling. Common exam trap."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML='<span class="qltr">'+l+'</span>'+q.opts[i];b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='Excellent!';sub='Chapter 4 mastered!';}else if(pct>=75){msg='Strong!';sub='Review RCF times and VMC minima.';}else if(pct>=60){msg='Good!';sub='Drill the numbers table.';}else{msg='Keep Revising!';sub='Focus on right-of-way, RCF, and VMC minima.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

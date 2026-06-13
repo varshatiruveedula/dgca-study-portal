@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 23: Human Performance & Limitations</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B18;--bg2:#091122;--bg3:#0B162C;
+  --card:#0E1A30;--card2:#112038;
+  --pink:#EC4899;--purple:#A855F7;--indigo:#6366F1;
+  --sky:#0EA5E9;--teal:#14B8A6;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --text:#D0E6FA;--text2:#6890BA;--text3:#30506A;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --pk-bg:rgba(236,72,153,.11);--pu-bg:rgba(168,85,247,.11);
+  --in-bg:rgba(99,102,241,.11);--sk-bg:rgba(14,165,233,.11);
+  --tl-bg:rgba(20,184,166,.11);--gn-bg:rgba(34,197,94,.11);
+  --am-bg:rgba(245,158,11,.11);--rd-bg:rgba(239,68,68,.11);
+  --or-bg:rgba(249,115,22,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 0,rgba(236,72,153,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(168,85,247,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.4);color:#F9A8D4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#F9A8D4;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.nb:hover{border-color:var(--pink);color:#F9A8D4;}
+.nb.active{background:var(--pink);border-color:var(--pink);color:#fff;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(188px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:16px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-pk{background:var(--pk-bg);color:#F9A8D4;border:1px solid rgba(236,72,153,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-pk{background:var(--pk-bg);border-color:var(--pink);} .al-pk strong{color:#F9A8D4;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);} .al-pu strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#F9A8D4;}
+/* DISCIPLINE CARDS */
+.disc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px;}
+.disc-box{border-radius:12px;padding:16px;border:1px solid;text-align:center;}
+.disc-icon{font-size:30px;margin-bottom:8px;}
+.disc-name{font-size:13px;font-weight:700;margin-bottom:5px;}
+.disc-def{font-size:11.5px;color:var(--text2);margin-bottom:7px;line-height:1.4;}
+.disc-apps{font-size:11px;color:var(--text3);}
+/* PIE CHART VISUAL */
+.pie-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+/* PILOT QUALITIES GRID */
+.quality-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;}
+.quality-box{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:10px 12px;display:flex;align-items:center;gap:8px;}
+.quality-icon{font-size:18px;flex-shrink:0;}
+.quality-text{font-size:12.5px;font-weight:600;}
+/* SVG wrap */
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+/* TRAP */
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--pink);color:#fff;background:var(--pk-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--pk-bg);border:1px solid rgba(236,72,153,.22);border-radius:8px;font-size:12.5px;color:#F9A8D4;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--pink);color:#fff;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;}
+.btn:hover{background:#F472B6;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--pink) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#F9A8D4;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🧠 DGCA CPL Exam Prep</div>
+  <h1>Chapter 23 — <span>Human Performance & Limitations</span></h1>
+  <p>Human Factors · Disciplines · Pilot Qualities · Accident Statistics · Environmental Effects · CFIT</p>
+  <div class="hero-chips">
+    <span class="chip">&gt;73% accidents = Human Error</span>
+    <span class="chip">Anthropometry = Body Measurements</span>
+    <span class="chip">No O₂ → Death in 5-8 min</span>
+    <span class="chip">6 Disciplines of HF</span>
+    <span class="chip">CFIT Definition</span>
+    <span class="chip">Pilot Qualities</span>
+    <span class="chip">Body Response to Altitude</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('overview')">🧠 Overview</button>
+  <button class="nb" onclick="show('disciplines')">🔬 Disciplines</button>
+  <button class="nb" onclick="show('qualities')">✈️ Pilot Qualities</button>
+  <button class="nb" onclick="show('accidents')">📊 Accidents</button>
+  <button class="nb" onclick="show('environment')">🌍 Environment</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ===== OVERVIEW ===== -->
+<div class="section active" id="section-overview">
+  <div class="sh">
+    <div class="si" style="background:var(--pk-bg);border:1px solid rgba(236,72,153,.3);">🧠</div>
+    <div><div class="st">What is Human Performance & Limitations?</div>
+    <div class="ss">Definitions · Why it matters · Human in aviation</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--pink)"></span>Core Definitions</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.06);">
+          <span class="b b-pk">HP</span>
+          <div><strong>Human Performance</strong> — How efficiently a pilot can perform tasks in the aviation environment</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+          <span class="b b-pu">HL</span>
+          <div><strong>Human Limitations</strong> — Physical and psychological factors that reduce performance and may lead to errors</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+          <span class="b b-sk">HF</span>
+          <div><strong>Human Factors</strong> — Study of human capabilities, limitations, and interaction between humans and aviation systems</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>Why Human Factors Matters</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Humans are the <strong>most adaptable</strong> part of aviation</div>
+        <div class="chk-item"><span class="cn">!</span>Humans are also the <strong>most vulnerable</strong> part</div>
+        <div class="chk-item"><span class="cn">!</span><strong>Most aviation accidents</strong> are linked to human error</div>
+        <div class="chk-item"><span class="cy">✓</span>Understanding HF <strong>improves safety and efficiency</strong></div>
+        <div class="chk-item"><span class="cy">✓</span>Goal: Reduce human error, improve performance</div>
+      </div>
+      <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+        <div class="mt">One-Line Definition</div>
+        <div class="mf">Human Factors = Study of human capabilities + limitations + human-system interaction</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- HUMAN IN AVIATION SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--pink)"></span>The Human in Aviation — The Central Link</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#080f1c"/>
+        <!-- Central human figure -->
+        <circle cx="380" cy="110" r="45" fill="rgba(236,72,153,.12)" stroke="rgba(236,72,153,.4)" stroke-width="2"/>
+        <text x="380" y="100" fill="#F9A8D4" font-family="sans-serif" font-size="28" text-anchor="middle">🧑‍✈️</text>
+        <text x="380" y="124" fill="#F9A8D4" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">PILOT</text>
+        <text x="380" y="138" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Central element</text>
+        <!-- ADAPTABLE label -->
+        <rect x="170" y="90" width="130" height="44" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="235" y="109" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Most Adaptable</text>
+        <text x="235" y="126" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">flexible & creative</text>
+        <line x1="300" y1="112" x2="335" y2="112" stroke="rgba(34,197,94,.4)" stroke-width="1.5"/>
+        <!-- VULNERABLE label -->
+        <rect x="460" y="90" width="130" height="44" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="525" y="109" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Most Vulnerable</text>
+        <text x="525" y="126" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">errors & limitations</text>
+        <line x1="425" y1="112" x2="460" y2="112" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <!-- Three pillars below -->
+        <rect x="80" y="190" width="175" height="48" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <text x="167" y="210" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SAFETY</text>
+        <text x="167" y="228" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Reduce accidents</text>
+        <line x1="290" y1="155" x2="240" y2="190" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+
+        <rect x="292" y="190" width="175" height="48" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+        <text x="379" y="210" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">EFFICIENCY</text>
+        <text x="379" y="228" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Improve performance</text>
+        <line x1="380" y1="155" x2="380" y2="190" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+
+        <rect x="504" y="190" width="175" height="48" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <text x="591" y="210" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">ERROR REDUCTION</text>
+        <text x="591" y="228" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">TEM · CRM</text>
+        <line x1="465" y1="155" x2="520" y2="190" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <!-- Goals label -->
+        <text x="380" y="18" fill="var(--text2)" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Goals of Human Factors Study</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DISCIPLINES ===== -->
+<div class="section" id="section-disciplines">
+  <div class="sh">
+    <div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🔬</div>
+    <div><div class="st">6 Disciplines of Human Factors</div>
+    <div class="ss">Psychology · Engineering · Physiology · Medicine · Sociology · Anthropometry</div></div>
+  </div>
+
+  <!-- DISCIPLINES VISUAL SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Human Factors is Multidisciplinary — Visual Map</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="300" fill="#080f1c"/>
+        <!-- Central HF circle -->
+        <circle cx="380" cy="150" r="52" fill="rgba(236,72,153,.12)" stroke="rgba(236,72,153,.4)" stroke-width="2.5"/>
+        <text x="380" y="145" fill="#F9A8D4" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">HUMAN</text>
+        <text x="380" y="162" fill="#F9A8D4" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">FACTORS</text>
+        <!-- 6 orbiting discipline nodes -->
+        <!-- Psychology - top left -->
+        <circle cx="195" cy="65" r="38" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="195" y="60" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Psychology</text>
+        <text x="195" y="75" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Mind &amp; behaviour</text>
+        <line x1="228" y1="86" x2="332" y2="118" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <!-- Engineering - top right -->
+        <circle cx="565" cy="65" r="38" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="565" y="60" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Engineering</text>
+        <text x="565" y="75" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Equipment design</text>
+        <line x1="532" y1="86" x2="428" y2="118" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+        <!-- Physiology - left -->
+        <circle cx="100" cy="170" r="38" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="100" y="165" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Physiology</text>
+        <text x="100" y="180" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Body functions</text>
+        <line x1="136" y1="165" x2="328" y2="150" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <!-- Medicine - right -->
+        <circle cx="660" cy="170" r="38" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="660" y="165" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Medicine</text>
+        <text x="660" y="180" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Prevention &amp; treatment</text>
+        <line x1="624" y1="165" x2="432" y2="150" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <!-- Sociology - bottom left -->
+        <circle cx="195" cy="258" r="38" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="195" y="253" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Sociology</text>
+        <text x="195" y="268" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Groups &amp; behaviour</text>
+        <line x1="228" y1="240" x2="335" y2="188" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <!-- Anthropometry - bottom right -->
+        <circle cx="565" cy="258" r="38" fill="rgba(20,184,166,.10)" stroke="rgba(20,184,166,.35)" stroke-width="1.5"/>
+        <text x="565" y="253" fill="#5EEAD4" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Anthropometry</text>
+        <text x="565" y="268" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Body measurements</text>
+        <line x1="532" y1="240" x2="425" y2="188" stroke="rgba(20,184,166,.3)" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- DETAILED CARDS -->
+  <div class="disc-grid">
+    <div class="disc-box" style="background:rgba(168,85,247,.07);border-color:rgba(168,85,247,.35);">
+      <div class="disc-icon">🧠</div>
+      <div class="disc-name" style="color:#D8B4FE;">Psychology</div>
+      <div class="disc-def">Study of mind and behaviour</div>
+      <div class="disc-apps">Pilot selection · Training · Decision making · Stress · Human errors</div>
+    </div>
+    <div class="disc-box" style="background:rgba(14,165,233,.07);border-color:rgba(14,165,233,.35);">
+      <div class="disc-icon">⚙️</div>
+      <div class="disc-name" style="color:#7DD3FC;">Engineering</div>
+      <div class="disc-def">Application of science to design equipment</div>
+      <div class="disc-apps">Cockpit design · Instrument layout · Controls · Simulators</div>
+    </div>
+    <div class="disc-box" style="background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.35);">
+      <div class="disc-icon">🫀</div>
+      <div class="disc-name" style="color:#86EFAC;">Physiology</div>
+      <div class="disc-def">Study of body functions</div>
+      <div class="disc-apps">Hypoxia · Fatigue · Vision · Hearing · Environmental effects</div>
+    </div>
+    <div class="disc-box" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.35);">
+      <div class="disc-icon">⚕️</div>
+      <div class="disc-name" style="color:#FCA5A5;">Medicine</div>
+      <div class="disc-def">Prevention and treatment of disease</div>
+      <div class="disc-apps">Medical fitness · Health monitoring · Aviation medicine</div>
+    </div>
+    <div class="disc-box" style="background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.35);">
+      <div class="disc-icon">👥</div>
+      <div class="disc-name" style="color:#FCD34D;">Sociology</div>
+      <div class="disc-def">Study of human groups and behaviour</div>
+      <div class="disc-apps">CRM · Crew coordination · Teamwork · Passenger behaviour</div>
+    </div>
+    <div class="disc-box" style="background:rgba(20,184,166,.07);border-color:rgba(20,184,166,.35);">
+      <div class="disc-icon">📏</div>
+      <div class="disc-name" style="color:#5EEAD4;">Anthropometry</div>
+      <div class="disc-def">Study of human body size, shape &amp; measurements</div>
+      <div class="disc-apps">Seat design · Reach distances · Cockpit ergonomics</div>
+    </div>
+  </div>
+
+  <div class="al al-am" style="margin-top:4px;">
+    <strong>DGCA Favourite:</strong> Anthropometry = Study of human body size, shape and measurements. This definition is asked directly.
+  </div>
+
+  <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+    <div class="mt">6 Disciplines Memory</div>
+    <div class="mf">P.E.P.M.S.A = Psychology · Engineering · Physiology · Medicine · Sociology · Anthropometry</div>
+  </div></div>
+</div>
+
+<!-- ===== PILOT QUALITIES ===== -->
+<div class="section" id="section-qualities">
+  <div class="sh">
+    <div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">✈️</div>
+    <div><div class="st">Qualities of a Professional Pilot</div>
+    <div class="ss">Situational Awareness · CRM · TEM · Decision Making · All 14 qualities</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>14 Qualities — All DGCA Relevant</div>
+    <div class="quality-grid">
+      <div class="quality-box" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.06);">
+        <div class="quality-icon">🎯</div>
+        <div class="quality-text" style="color:#F9A8D4;">Situational Awareness</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+        <div class="quality-icon">🔄</div>
+        <div class="quality-text" style="color:#D8B4FE;">Flexibility</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+        <div class="quality-icon">⚠️</div>
+        <div class="quality-text" style="color:#7DD3FC;">Risk Management</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+        <div class="quality-icon">🛡</div>
+        <div class="quality-text" style="color:#86EFAC;">Threat &amp; Error Mgmt (TEM)</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <div class="quality-icon">💬</div>
+        <div class="quality-text" style="color:#FCD34D;">Communication Skills</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+        <div class="quality-icon">📋</div>
+        <div class="quality-text" style="color:#FDB785;">Responsibility</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.06);">
+        <div class="quality-icon">🕹</div>
+        <div class="quality-text" style="color:#A5B4FC;">Aircraft Handling Skills</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+        <div class="quality-icon">⚖️</div>
+        <div class="quality-text" style="color:#5EEAD4;">Sound Judgement</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.06);">
+        <div class="quality-icon">🔥</div>
+        <div class="quality-text" style="color:#F9A8D4;">Motivation</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+        <div class="quality-icon">💪</div>
+        <div class="quality-text" style="color:#86EFAC;">Physical Fitness</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+        <div class="quality-icon">✅</div>
+        <div class="quality-text" style="color:#7DD3FC;">Reliability</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <div class="quality-icon">⚡</div>
+        <div class="quality-text" style="color:#FCD34D;">Quick Reflexes</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+        <div class="quality-icon">🧭</div>
+        <div class="quality-text" style="color:#D8B4FE;">Decision Making</div>
+      </div>
+      <div class="quality-box" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+        <div class="quality-icon">👥</div>
+        <div class="quality-text" style="color:#FDB785;">Crew Resource Management (CRM)</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:14px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Key Qualities Memory</div>
+      <div class="mf">SA · CRM · TEM · Risk · Decision · Communication · Fitness · Reliability</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Key Terms Defined</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.06);">
+          <span class="b b-pk">SA</span>
+          <div><strong>Situational Awareness</strong> — Knowing what is happening around you, now and in the future. The pilot's picture of the world.</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+          <span class="b b-or">CRM</span>
+          <div><strong>Crew Resource Management</strong> — Effective use of all available resources (people, information, equipment) to ensure safe flight.</div>
+        </div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+          <span class="b b-gn">TEM</span>
+          <div><strong>Threat and Error Management</strong> — Proactively identifying threats and errors before they develop into accidents.</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-rd">CFIT</span>
+          <div><strong>Controlled Flight Into Terrain</strong> — Aircraft flown under control into terrain due to pilot error or loss of situational awareness.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ACCIDENTS ===== -->
+<div class="section" id="section-accidents">
+  <div class="sh">
+    <div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">📊</div>
+    <div><div class="st">Human Error & Aviation Accidents</div>
+    <div class="ss">Statistics · CFIT · Human error percentage · 1 per million movements</div></div>
+  </div>
+
+  <!-- ACCIDENT PIE CHART SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Accident Cause Statistics — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="280" fill="#080f1c"/>
+        <!-- PIE CHART (simplified donut) -->
+        <!-- 73% Human error arc -->
+        <circle cx="230" cy="140" r="100" fill="transparent" stroke="#EF4444" stroke-width="40"
+          stroke-dasharray="458 628" stroke-dashoffset="157" opacity=".9"/>
+        <!-- Remaining 27% -->
+        <circle cx="230" cy="140" r="100" fill="transparent" stroke="#374151" stroke-width="40"
+          stroke-dasharray="170 628" stroke-dashoffset="-301"/>
+        <!-- Center label -->
+        <circle cx="230" cy="140" r="65" fill="#0d1a2e"/>
+        <text x="230" y="130" fill="#FCA5A5" font-family="monospace" font-size="26" font-weight="bold" text-anchor="middle">&gt;73%</text>
+        <text x="230" y="150" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Human</text>
+        <text x="230" y="166" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Error</text>
+
+        <!-- Legend -->
+        <rect x="380" y="70" width="18" height="18" rx="3" fill="#EF4444" opacity=".9"/>
+        <text x="406" y="83" fill="#FCA5A5" font-family="sans-serif" font-size="13" font-weight="bold">&gt;73% — Human error / human factors</text>
+        <rect x="380" y="100" width="18" height="18" rx="3" fill="#374151"/>
+        <text x="406" y="113" fill="var(--text2)" font-family="sans-serif" font-size="13">&lt;27% — Technical / environmental / other</text>
+
+        <!-- Key fact boxes -->
+        <rect x="370" y="140" width="360" height="50" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="550" y="162" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Human Factors → &gt; 73% of accidents</text>
+        <text x="550" y="180" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Figure has remained constant over many decades</text>
+
+        <rect x="370" y="204" width="360" height="50" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <text x="550" y="224" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">~1 accident per million aircraft movements</text>
+        <text x="550" y="242" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Modern aviation safety record</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- CFIT CARD -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>CFIT — Controlled Flight Into Terrain</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#080f1c"/>
+        <!-- terrain -->
+        <polygon points="0,200 150,200 300,80 450,130 600,60 760,150 760,200" fill="#1a2a10" opacity=".8"/>
+        <polygon points="0,200 150,200 300,80 450,130 600,60 760,150 760,200" fill="none" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <!-- aircraft approaching terrain normally (controlled) -->
+        <g transform="translate(350,55)">
+          <ellipse cx="0" cy="0" rx="32" ry="8" fill="#7DD3FC" opacity=".9"/>
+          <ellipse cx="0" cy="0" rx="9" ry="5" fill="#93C5FD"/>
+          <line x1="5" y1="0" x2="-28" y2="-14" stroke="#7DD3FC" stroke-width="3"/>
+          <line x1="5" y1="0" x2="-28" y2="14" stroke="#7DD3FC" stroke-width="3"/>
+        </g>
+        <!-- flight path arrow INTO terrain -->
+        <path d="M290,52 Q360,65 430,90" fill="none" stroke="#EF4444" stroke-width="2.5"/>
+        <polygon points="430,90 418,82 422,96" fill="#EF4444"/>
+        <!-- CONTROLLED label -->
+        <rect x="140" y="15" width="120" height="24" rx="5" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.35)" stroke-width="1"/>
+        <text x="200" y="31" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">CONTROLLED ✅</text>
+        <!-- INSTRUMENTS FUNCTIONING label -->
+        <rect x="540" y="15" width="190" height="24" rx="5" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.3)" stroke-width="1"/>
+        <text x="635" y="31" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">INSTRUMENTS WORKING ✅</text>
+        <!-- but -->
+        <rect x="310" y="110" width="175" height="36" rx="8" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <text x="397" y="126" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">PILOT UNAWARE OF TERRAIN</text>
+        <text x="397" y="140" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">Loss of Situational Awareness</text>
+        <!-- Impact point -->
+        <circle cx="435" cy="95" r="12" fill="rgba(239,68,68,.4)" stroke="#EF4444" stroke-width="2"/>
+        <text x="435" y="100" fill="white" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">💥</text>
+        <!-- definition at bottom -->
+        <rect x="0" y="168" width="760" height="32" fill="rgba(239,68,68,.07)"/>
+        <text x="380" y="188" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">CFIT = Aircraft in controlled flight, crew unaware, flown into terrain / water / obstacle</text>
+      </svg>
+    </div>
+    <div class="al al-rd" style="margin-bottom:0;"><strong>CFIT Key Point:</strong> The aircraft was airworthy and under control — the accident happened because the pilot had no awareness of the terrain ahead. Prevention = Situational Awareness + GPWS/EGPWS.</div>
+  </div>
+</div>
+
+<!-- ===== ENVIRONMENT ===== -->
+<div class="section" id="section-environment">
+  <div class="sh">
+    <div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🌍</div>
+    <div><div class="st">Environmental Changes & Body Adaptation</div>
+    <div class="ss">Reduced pressure · Temperature · Motion · Body response · 5-8 minute survival</div></div>
+  </div>
+
+  <!-- ALTITUDE EFFECTS SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Environmental Changes in Flight — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="280" fill="#080f1c"/>
+        <!-- Altitude axis -->
+        <line x1="80" y1="20" x2="80" y2="240" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <text x="45" y="248" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Ground</text>
+        <text x="45" y="30" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">High</text>
+        <text x="62" y="135" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle" transform="rotate(-90,62,135)">ALTITUDE</text>
+
+        <!-- REDUCED PRESSURE bar (purple) -->
+        <rect x="100" y="60" width="140" height="165" rx="8" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="170" y="85" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Reduced</text>
+        <text x="170" y="100" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Pressure</text>
+        <!-- effects list -->
+        <text x="170" y="122" fill="#EF4444" font-family="sans-serif" font-size="11" text-anchor="middle">→ Hypoxia</text>
+        <text x="170" y="138" fill="#F97316" font-family="sans-serif" font-size="11" text-anchor="middle">→ Gas expansion</text>
+        <text x="170" y="154" fill="#FCD34D" font-family="sans-serif" font-size="11" text-anchor="middle">→ Decomp sickness</text>
+        <!-- O2 decrease visualization -->
+        <text x="170" y="178" fill="#D8B4FE" font-family="monospace" font-size="10" text-anchor="middle">O₂ molecules ↓</text>
+        <g fill="#D8B4FE" opacity=".5">
+          <circle cx="140" cy="200" r="3"/><circle cx="155" cy="208" r="3"/>
+          <circle cx="170" cy="198" r="3"/><circle cx="185" cy="210" r="3"/>
+          <circle cx="200" cy="202" r="3"/>
+        </g>
+        <text x="170" y="218" fill="rgba(168,85,247,.7)" font-family="monospace" font-size="9" text-anchor="middle">Fewer at altitude</text>
+
+        <!-- TEMPERATURE -->
+        <rect x="265" y="90" width="140" height="135" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="335" y="115" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Temperature</text>
+        <text x="335" y="130" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Variations</text>
+        <text x="335" y="152" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">→ Comfort affected</text>
+        <text x="335" y="168" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">→ Performance affected</text>
+        <text x="335" y="184" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">→ Survival affected</text>
+        <text x="335" y="208" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Cold/hot extremes</text>
+
+        <!-- HIGH-SPEED MOTION -->
+        <rect x="430" y="70" width="155" height="155" rx="8" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="507" y="95" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">High-Speed</text>
+        <text x="507" y="110" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Motion (3D)</text>
+        <text x="507" y="132" fill="#FCA5A5" font-family="sans-serif" font-size="11" text-anchor="middle">→ Motion sickness</text>
+        <text x="507" y="148" fill="#FCA5A5" font-family="sans-serif" font-size="11" text-anchor="middle">→ Spatial disorientation</text>
+        <text x="507" y="164" fill="#FCA5A5" font-family="sans-serif" font-size="11" text-anchor="middle">→ Vestibular illusions</text>
+        <!-- motion spiral -->
+        <path d="M497,180 Q517,195 507,210 Q487,215 480,200" fill="none" stroke="rgba(14,165,233,.5)" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="507" y="218" fill="rgba(14,165,233,.6)" font-family="monospace" font-size="9" text-anchor="middle">inner ear confused</text>
+
+        <!-- KEY NUMBERS box -->
+        <rect x="610" y="70" width="140" height="155" rx="8" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="680" y="95" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">No Oxygen</text>
+        <text x="680" y="125" fill="#FCA5A5" font-family="monospace" font-size="32" font-weight="bold" text-anchor="middle">5–8</text>
+        <text x="680" y="148" fill="#FCA5A5" font-family="monospace" font-size="12" text-anchor="middle">minutes</text>
+        <line x1="625" y1="158" x2="735" y2="158" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+        <text x="680" y="176" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Death without</text>
+        <text x="680" y="191" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">any oxygen</text>
+        <text x="680" y="215" fill="rgba(239,68,68,.7)" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">DGCA FAVOURITE</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- BODY RESPONSE TO ALTITUDE -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Body's Response to Altitude — Two Stages</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#080f1c"/>
+        <!-- Stage labels -->
+        <text x="380" y="22" fill="var(--text2)" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">When oxygen decreases at altitude, the body adapts in two stages:</text>
+        <!-- IMMEDIATE response -->
+        <rect x="40" y="40" width="310" height="130" rx="12" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="195" y="68" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">IMMEDIATE RESPONSE</text>
+        <text x="195" y="86" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">(Within seconds to minutes)</text>
+        <!-- lungs breathing animation hint -->
+        <text x="195" y="120" font-family="sans-serif" font-size="38" text-anchor="middle">🫁</text>
+        <text x="195" y="155" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">↑ Breathing Rate</div>
+        <text x="195" y="170" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Hyperventilation response</text>
+        <!-- LATER response -->
+        <rect x="410" y="40" width="310" height="130" rx="12" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="565" y="68" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">LATER RESPONSE</text>
+        <text x="565" y="86" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">(Days to weeks of exposure)</text>
+        <text x="565" y="120" font-family="sans-serif" font-size="38" text-anchor="middle">🩸</text>
+        <text x="565" y="155" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">↑ Red Blood Cells</text>
+        <text x="565" y="170" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Improves O₂ transport capacity</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Body Response Memory</div>
+      <div class="mf">Immediate = ↑ Breathing rate · Later = ↑ Red Blood Cells (better O₂ transport)</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh">
+    <div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div class="st">Master Reference & Exam Traps</div>
+    <div class="ss">Every key fact from Chapter 23 in one place</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--pink)"></span>Critical Facts Table</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(236,72,153,.12);"><tr><th style="color:#F9A8D4;">DGCA Question</th><th style="color:#F9A8D4;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Human factors contribution to accidents</td><td><span class="num">&gt; 73%</span></td></tr>
+            <tr><td>Accident rate (modern aviation)</td><td><span class="num">~1 per million movements</span></td></tr>
+            <tr><td>No oxygen survival time</td><td><span class="num">5–8 minutes</span></td></tr>
+            <tr><td>Anthropometry definition</td><td>Study of body size, shape &amp; measurements</td></tr>
+            <tr><td>CFIT definition</td><td>Controlled flight into terrain (no instrument failure)</td></tr>
+            <tr><td>Immediate altitude response</td><td>Increased breathing rate</td></tr>
+            <tr><td>Later altitude response</td><td>Increased red blood cell production</td></tr>
+            <tr><td>Human Factors goal</td><td>Improve safety, efficiency, reduce error</td></tr>
+            <tr><td>Number of HF disciplines</td><td>6</td></tr>
+            <tr><td>HF definition</td><td>Study of capabilities, limitations &amp; human-system interaction</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>6 Disciplines Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(168,85,247,.12);"><tr><th style="color:#D8B4FE;">Discipline</th><th style="color:#D8B4FE;">Studies</th><th style="color:#D8B4FE;">Aviation Application</th></tr></thead>
+          <tbody>
+            <tr><td><span class="b b-pu">Psychology</span></td><td>Mind &amp; behaviour</td><td>Pilot selection · Decision making · Stress</td></tr>
+            <tr><td><span class="b b-sk">Engineering</span></td><td>Equipment design</td><td>Cockpit layout · Controls · Simulators</td></tr>
+            <tr><td><span class="b b-gn">Physiology</span></td><td>Body functions</td><td>Hypoxia · Fatigue · Vision · Hearing</td></tr>
+            <tr><td><span class="b b-rd">Medicine</span></td><td>Disease prevention</td><td>Medical fitness · Aviation medicine</td></tr>
+            <tr><td><span class="b b-am">Sociology</span></td><td>Group behaviour</td><td>CRM · Crew coordination · Teamwork</td></tr>
+            <tr><td><span class="b b-tl">Anthropometry</span></td><td>Body measurements</td><td>Seat design · Cockpit ergonomics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 23</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Anthropometry definition</div><div class="trap-d">Anthropometry = Study of human body SIZE, SHAPE and MEASUREMENTS — specifically for cockpit/seat design. Often confused with physiology (body functions).</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">&gt;73% vs other figures</div><div class="trap-d">Human factors contribute to MORE THAN 73% of accidents. Sometimes worded as "70%" in options — the correct answer per ICAO/DGCA notes is &gt;73%.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">CFIT — aircraft is NOT malfunctioning</div><div class="trap-d">In CFIT, the aircraft is airworthy and under full control. The accident happens because the crew is unaware of terrain. It is NOT a technical failure.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">No oxygen = 5–8 minutes (not 3–4)</div><div class="trap-d">Complete absence of oxygen causes death in approximately 5–8 minutes. Don't confuse with time of useful consciousness at altitude (which is different).</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Immediate vs later altitude response</div><div class="trap-d">Immediate = ↑ Breathing rate (fast response). Later = ↑ Red blood cell production (slow, takes days/weeks). Students often confuse the order.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Sociology vs Psychology discipline</div><div class="trap-d">Sociology = groups, CRM, teamwork, crew behaviour. Psychology = individual mind, decisions, stress, pilot selection. CRM belongs to Sociology, not Psychology.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--pk-bg);border:1px solid rgba(236,72,153,.3);">🧠</div>
+    <div><div class="st">Practice Quiz — Chapter 23</div>
+    <div class="ss">20 DGCA-style questions covering all HPL introduction topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 20</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:5%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/20</div></div>
+    <div class="smsg" id="smsg"></div>
+    <div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"Human Factors is defined as the study of:",opts:["Aircraft systems and maintenance","Human capabilities, limitations, and interaction between humans and aviation systems","Aviation weather phenomena","Air traffic control procedures"],ans:1,exp:"Human Factors = Study of human capabilities, limitations, and the interaction between humans and aviation systems. Goal: Improve safety, efficiency, reduce human error."},
+  {q:"Human factors contribute to what percentage of aviation accidents?",opts:["About 30%","About 50%","More than 73%","About 90%"],ans:2,exp:"Human factors contribute to MORE THAN 73% of aviation accidents. This figure has remained relatively constant over many decades."},
+  {q:"Anthropometry is the study of:",opts:["Human mind and behaviour","Prevention and treatment of disease","Human body size, shape and measurements","Human groups and social behaviour"],ans:2,exp:"Anthropometry = Study of human body size, shape and measurements. Aviation application: seat design, cockpit ergonomics, reach distances. DGCA favourite."},
+  {q:"Which discipline of Human Factors covers CRM and crew coordination?",opts:["Psychology","Medicine","Engineering","Sociology"],ans:3,exp:"Sociology = study of human groups and behaviour. Applications: CRM, crew coordination, teamwork, passenger behaviour. Note: CRM belongs to Sociology, NOT Psychology."},
+  {q:"Which discipline covers hypoxia, fatigue, and hearing?",opts:["Medicine","Physiology","Sociology","Engineering"],ans:1,exp:"Physiology = study of body functions. Aviation application: hypoxia, fatigue, vision, hearing, and environmental effects on the body."},
+  {q:"CFIT stands for:",opts:["Controlled Flight In Training","Controlled Flight Into Terrain","Critical Flight Instrument Test","Cockpit Flight Instrument Training"],ans:1,exp:"CFIT = Controlled Flight Into Terrain. The aircraft is under full control and all instruments are functioning — but the crew has no awareness of terrain ahead. Common accident type."},
+  {q:"In CFIT, the aircraft:",opts:["Has instrument failure","Is out of control","Is airworthy and under control — crew unaware of terrain","Experiences engine failure"],ans:2,exp:"In CFIT, the aircraft is completely airworthy and under full crew control. The accident happens solely because the crew is unaware of nearby terrain. Prevention = Situational Awareness + GPWS."},
+  {q:"Complete absence of oxygen can cause death in approximately:",opts:["1–2 minutes","3–4 minutes","5–8 minutes","10–15 minutes"],ans:2,exp:"Complete absence of oxygen causes death in approximately 5–8 minutes. This is a key DGCA fact. Note: time of useful consciousness at altitude is different (and shorter)."},
+  {q:"The IMMEDIATE body response to reduced oxygen at altitude is:",opts:["Increased red blood cell production","Increased breathing rate","Decreased heart rate","Increased blood pressure only"],ans:1,exp:"Immediate response = INCREASED BREATHING RATE (hyperventilation). The later/slower response (days to weeks) = increased red blood cell production for better O₂ transport."},
+  {q:"The LATER body response to altitude (days/weeks) is:",opts:["Increased breathing rate","Decreased heart rate","Increased red blood cell production","Decreased blood pressure"],ans:2,exp:"Later response (days to weeks of altitude exposure) = INCREASED RED BLOOD CELL PRODUCTION. This improves oxygen transport capacity over time. Immediate = ↑ breathing rate."},
+  {q:"High-speed motion in three dimensions can cause:",opts:["Improved spatial awareness","Motion sickness, spatial disorientation and vestibular illusions","Better night vision","Increased alertness"],ans:1,exp:"High-speed 3D motion causes: motion sickness, spatial disorientation, and vestibular illusions. The inner ear (vestibular system) becomes confused."},
+  {q:"Reduced atmospheric pressure at altitude can directly cause:",opts:["Improved concentration","Hypoxia, gas expansion, and decompression sickness","Better vision","Reduced heart rate"],ans:1,exp:"Reduced pressure at altitude can cause: Hypoxia (insufficient oxygen), gas expansion (barotrauma), and decompression sickness. These are key physiological hazards."},
+  {q:"The study of human body functions (related to hypoxia, fatigue, vision) is called:",opts:["Psychology","Medicine","Physiology","Anthropometry"],ans:2,exp:"Physiology = study of body functions. Applications include hypoxia, fatigue, vision, and hearing. Different from medicine (disease prevention/treatment)."},
+  {q:"Cockpit design, instrument layout, and simulator design fall under which discipline?",opts:["Sociology","Medicine","Psychology","Engineering"],ans:3,exp:"Engineering = application of science to design equipment. Aviation applications: cockpit design, instrument layout, control systems, simulator design."},
+  {q:"The approximate accident rate in modern aviation is:",opts:["1 per 10,000 movements","1 per 100,000 movements","1 per million movements","1 per 10 million movements"],ans:2,exp:"Approximately 1 accident per million aircraft movements is the modern aviation safety record. A remarkable achievement given the scale of operations."},
+  {q:"Situational Awareness (SA) means:",opts:["The ability to fly blindly in clouds","Knowing what is happening around you now and predicting what will happen next","Reading instruments accurately","Communicating with ATC"],ans:1,exp:"Situational Awareness (SA) = knowing and understanding everything happening around you in real time, and being able to predict future states. Loss of SA leads to CFIT and many other accidents."},
+  {q:"TEM stands for:",opts:["Total Error Management","Threat and Error Management","Terminal Error Minimization","Traffic Emergency Management"],ans:1,exp:"TEM = Threat and Error Management. It involves proactively identifying threats and errors before they develop into accidents. One of the key modern safety frameworks."},
+  {q:"CRM stands for:",opts:["Cockpit Resource Monitoring","Crew Response Management","Crew Resource Management","Critical Risk Management"],ans:2,exp:"CRM = Crew Resource Management. The effective use of all available resources — people, information, equipment — to ensure safe and efficient flight operations."},
+  {q:"Which of the following is a quality expected of a professional pilot?",opts:["Overconfidence","Avoidance of checklists","Sound judgement and reliable decision making","Dependence on auto-pilot only"],ans:2,exp:"Professional pilot qualities include: Situational Awareness, Sound Judgement, Decision Making, CRM, TEM, Risk Management, Communication, Physical Fitness, Reliability, Quick Reflexes, Motivation, and more."},
+  {q:"Human Factors is described as 'multidisciplinary' because:",opts:["It covers aircraft from multiple manufacturers","It involves study from six different fields: psychology, engineering, physiology, medicine, sociology, and anthropometry","It applies to multiple types of aircraft","It is taught in multiple countries"],ans:1,exp:"Human Factors is multidisciplinary because it draws from 6 different fields: Psychology, Engineering, Physiology, Medicine, Sociology, and Anthropometry. Memory: P.E.P.M.S.A."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg,sub;
+  if(pct>=90){msg='🏆 Excellent!';sub='Chapter 23 mastered. DGCA ready!';}
+  else if(pct>=75){msg='✅ Strong!';sub='Review the 6 disciplines and CFIT definition.';}
+  else if(pct>=60){msg='📚 Good!';sub='Focus on Anthropometry, 73% statistic, and 5-8 min survival.';}
+  else{msg='🔄 Keep Revising!';sub='Use the Disciplines and Master Reference sections.';}
+  document.getElementById('smsg').textContent=msg;
+  document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

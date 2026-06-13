@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 18: Special Operational Procedures & Hazards</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070D1B;--bg2:#0B1324;--bg3:#0D172C;
+  --card:#0F1E35;--card2:#122240;
+  --fire:#EF4444;--ice:#38BDF8;--sky:#3B82F6;
+  --teal:#10B981;--amber:#F59E0B;--orange:#F97316;
+  --purple:#A855F7;--red:#EF4444;--green:#22C55E;
+  --pink:#EC4899;--yellow:#EAB308;
+  --text:#DDE8F8;--text2:#8AA4C8;--text3:#4A6282;
+  --bdr:rgba(255,255,255,0.06);--bdr2:rgba(255,255,255,0.11);
+  --teal-bg:rgba(16,185,129,.1);--sky-bg:rgba(59,130,246,.1);
+  --fire-bg:rgba(239,68,68,.1);--ice-bg:rgba(56,189,248,.1);
+  --amber-bg:rgba(245,158,11,.1);--green-bg:rgba(34,197,94,.1);
+  --purple-bg:rgba(168,85,247,.1);--orange-bg:rgba(249,115,22,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(239,68,68,.12) 0%,transparent 50%),radial-gradient(ellipse at 85% 0%,rgba(56,189,248,.1) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.13);border:1px solid rgba(239,68,68,.33);color:#FCA5A5;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(23px,4.5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#FCD34D;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:13px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:13px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--amber);color:#FCD34D;}
+.nb.active{background:var(--amber);border-color:var(--amber);color:#000;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 64px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.si-fire{background:var(--fire-bg);border:1px solid rgba(239,68,68,.3);}
+.si-ice{background:var(--ice-bg);border:1px solid rgba(56,189,248,.3);}
+.si-sky{background:var(--sky-bg);border:1px solid rgba(59,130,246,.3);}
+.si-teal{background:var(--teal-bg);border:1px solid rgba(16,185,129,.3);}
+.si-amber{background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);}
+.si-purple{background:var(--purple-bg);border:1px solid rgba(168,85,247,.3);}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#FCD34D;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(245,158,11,.13);color:#FCD34D;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(245,158,11,.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-a{background:var(--teal-bg);color:#6EE7B7;border:1px solid rgba(16,185,129,.25);}
+.b-r{background:var(--fire-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-y{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-b{background:var(--sky-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.25);}
+.b-p{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-i{background:var(--ice-bg);color:#7DD3FC;border:1px solid rgba(56,189,248,.25);}
+.b-o{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-a{background:var(--amber-bg);border-color:var(--amber);color:var(--text);}
+.al-r{background:var(--fire-bg);border-color:var(--red);color:var(--text);}
+.al-t{background:var(--teal-bg);border-color:var(--teal);color:var(--text);}
+.al-i{background:var(--ice-bg);border-color:var(--ice);color:var(--text);}
+.al-b{background:var(--sky-bg);border-color:var(--sky);color:var(--text);}
+.al strong{color:#FCD34D;}.al-r strong{color:#FCA5A5;}.al-t strong{color:#6EE7B7;}.al-i strong{color:#7DD3FC;}.al-b strong{color:#93C5FD;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#6EE7B7;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;}
+/* FIRE CLASS CARDS */
+.fire-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.fc{border-radius:12px;padding:16px;border:1px solid;}
+.fc-a{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);}
+.fc-b{background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.3);}
+.fc-c{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.3);}
+.fc-d{background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.3);}
+.fc-letter{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;margin-bottom:6px;}
+.fc-a .fc-letter{color:#6EE7B7;}.fc-b .fc-letter{color:#FDB785;}.fc-c .fc-letter{color:#93C5FD;}.fc-d .fc-letter{color:#D8B4FE;}
+.fc-name{font-size:12px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px;}
+.fc-items{font-size:12px;color:var(--text2);display:flex;flex-direction:column;gap:3px;}
+.fc-ext{font-size:11px;font-weight:600;margin-top:8px;padding:5px 10px;border-radius:6px;display:inline-block;}
+.fc-a .fc-ext{background:rgba(16,185,129,.15);color:#6EE7B7;}
+.fc-b .fc-ext{background:rgba(249,115,22,.15);color:#FDB785;}
+.fc-c .fc-ext{background:rgba(59,130,246,.15);color:#93C5FD;}
+.fc-d .fc-ext{background:rgba(168,85,247,.15);color:#D8B4FE;}
+.fc-smoke{font-size:11px;color:var(--text3);margin-top:5px;font-style:italic;}
+/* ALTITUDE LADDER */
+.alt-ladder{display:flex;flex-direction:column;gap:0;}
+.alt-row{display:flex;align-items:stretch;gap:12px;position:relative;}
+.alt-row::before{content:'';position:absolute;left:43px;top:32px;bottom:-1px;width:2px;background:var(--bdr2);}
+.alt-row:last-child::before{display:none;}
+.alt-ft{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#FCD34D;width:88px;text-align:right;padding-top:8px;flex-shrink:0;}
+.alt-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:11px;position:relative;z-index:1;}
+.alt-body{flex:1;padding:8px 0 16px;}
+.alt-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.alt-desc{font-size:12px;color:var(--text2);}
+/* WAKE TABLE */
+.wake-cat{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px;}
+.wc{border-radius:11px;padding:14px;border:1px solid;}
+.wc-s{background:rgba(236,72,153,.08);border-color:rgba(236,72,153,.3);}
+.wc-h{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);}
+.wc-m{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);}
+.wc-l{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);}
+.wc-label{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;margin-bottom:4px;}
+.wc-s .wc-label{color:#F9A8D4;}.wc-h .wc-label{color:#FCA5A5;}.wc-m .wc-label{color:#FCD34D;}.wc-l .wc-label{color:#6EE7B7;}
+.wc-title{font-size:12px;font-weight:700;margin-bottom:6px;}
+.wc-weight{font-size:11.5px;color:var(--text2);}
+.wc-example{font-size:10.5px;color:var(--text3);margin-top:4px;font-style:italic;}
+/* WIND SHEAR VISUAL */
+.ws-grid{display:grid;grid-template-columns:80px 1fr 100px;gap:8px;align-items:center;}
+.ws-agl{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text2);}
+.ws-bar-wrap{background:var(--card2);border-radius:6px;height:24px;overflow:hidden;}
+.ws-bar{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#000;transition:width .5s ease;}
+.ws-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;text-align:right;}
+/* MICROBURST SEQUENCE */
+.mb-seq{display:flex;gap:0;align-items:stretch;}
+.mb-box{flex:1;padding:14px 10px;text-align:center;position:relative;}
+.mb-box:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px;z-index:1;}
+.mb-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:4px;}
+.mb-name{font-size:13px;font-weight:700;margin-bottom:6px;}
+.mb-effect{font-size:11px;color:var(--text2);}
+/* TRAP */
+.trap{background:var(--fire-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--fire),var(--amber));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--amber);color:#fff;background:var(--amber-bg);}
+.qopt.correct{border-color:var(--teal);background:var(--teal-bg);color:#6EE7B7;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--fire-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--amber-bg);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12.5px;color:#FCD34D;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;}
+.btn{background:var(--amber);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#FCD34D;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--amber) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FCD34D;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.mb-seq{flex-direction:column;}.mb-box:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-12px;transform:translateX(-50%);}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">⚠ DGCA CPL Exam Prep</div>
+  <h1>Chapter 18 — <span>Special Operational Procedures & Hazards</span></h1>
+  <p>MEL · Icing · Fire · Decompression · Wind Shear · Microburst · Wake Turbulence · Fuel Dump</p>
+  <div class="hero-chips">
+    <span class="chip">MEL / MMEL</span><span class="chip">De-Icing & Anti-Icing</span>
+    <span class="chip">Fire Classes A-D</span><span class="chip">Decompression</span>
+    <span class="chip">Wind Shear 25-40-50</span><span class="chip">Microburst</span>
+    <span class="chip">Wake Turbulence</span><span class="chip">Fuel Dumping</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('overview')">📋 Overview</button>
+  <button class="nb" onclick="show('icing')">❄️ Icing</button>
+  <button class="nb" onclick="show('fire')">🔥 Fire</button>
+  <button class="nb" onclick="show('decomp')">💨 Decompression</button>
+  <button class="nb" onclick="show('windshear')">🌪 Wind Shear</button>
+  <button class="nb" onclick="show('wake')">✈️ Wake Turbulence</button>
+  <button class="nb" onclick="show('hazards')">⚡ Other Hazards</button>
+  <button class="nb" onclick="show('numbers')">🔢 Numbers</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ====== OVERVIEW ====== -->
+<div class="section active" id="section-overview">
+  <div class="sh"><div class="si si-amber">📋</div><div><div class="st">Overview & MEL / AFM</div><div class="ss">MEL · MMEL · AFM · Bird Strike · Noise Abatement</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>MEL vs MMEL</div>
+      <div class="tw" style="margin-bottom:12px;">
+        <table>
+          <thead><tr><th>Feature</th><th>MEL</th><th>MMEL</th></tr></thead>
+          <tbody>
+            <tr><td>Stands for</td><td>Minimum Equipment List</td><td>Master Minimum Equipment List</td></tr>
+            <tr><td>Prepared by</td><td>Operator</td><td><strong>Manufacturer</strong></td></tr>
+            <tr><td>Approved by</td><td><strong>DGCA</strong></td><td><strong>DGCA</strong></td></tr>
+            <tr><td>Used by</td><td>Pilot (Go/No-Go)</td><td>Basis for operator MEL</td></tr>
+            <tr><td>Scope</td><td>Operator-specific</td><td>Master document</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory Trick</div><div class="mf">MMEL → Manufacturer &nbsp;|&nbsp; MEL → Operator</div><div class="mc" style="font-size:12px;color:var(--text3);margin-top:4px;">MEL allows PIC to decide: Can I commence / continue flight with inoperative equipment?</div></div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Aeroplane Flight Manual (AFM)</div>
+      <div class="chklist" style="margin-bottom:12px;">
+        <div class="chk-item"><span class="cy">✓</span>Aircraft shall be operated <strong>according to AFM</strong></div>
+        <div class="chk-item"><span class="cy">✓</span>Within <strong>approved operating limitations</strong></div>
+        <div class="chk-item"><span class="cy">✓</span>In accordance with <strong>Certificate of Airworthiness</strong></div>
+      </div>
+      <div style="font-size:12.5px;font-weight:600;color:var(--text2);margin-bottom:8px;">Performance factors AFM considers:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        <span class="b b-b">Aircraft mass</span><span class="b b-b">Pressure altitude</span><span class="b b-b">Ambient temp</span>
+        <span class="b b-b">Wind</span><span class="b b-b">Runway slope</span><span class="b b-b">Surface condition</span>
+        <span class="b b-b">Snow / Slush / Ice</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Bird Strike & Noise Abatement — Key Facts</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">🐦 Bird Strike</div>
+        <div class="chklist" style="margin-bottom:10px;">
+          <div class="chk-item"><span class="cy">✓</span><div><strong>90% of bird strikes</strong> occur below <span class="num">500 m (500 ft)</span></div></div>
+          <div class="chk-item"><span class="cy">✓</span>Birds move away about <span class="num">2 seconds</span> before aircraft arrival (at ~135 kt)</div>
+          <div class="chk-item"><span class="cy">✓</span>Most effective scaring method: <strong>Shell Crackers</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>Highest risk: <strong>Migration periods</strong></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">🔊 Noise Abatement</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Noise abatement departure NOT below <span class="num">240 m (800 ft)</span> AAE</div>
+          <div class="chk-item"><span class="cn">✗</span>Not used when wind shear or downburst exists</div>
+          <div class="chk-item"><span class="cy">✓</span>Final landing config: after outer marker OR <span class="num">5 NM</span> from threshold</div>
+          <div class="chk-item"><span class="cy">✓</span>Noise abatement does NOT override if crosswind <span class="num">&gt;15 kt</span>, tailwind <span class="num">&gt;5 kt</span>, or runway not dry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ICING ====== -->
+<div class="section" id="section-icing">
+  <div class="sh"><div class="si si-ice">❄️</div><div><div class="st">Ground De-Icing & Anti-Icing</div><div class="ss">ADF · AAF · Cold soaking · Performance effects · 0.40 mm</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--ice)"></span>De-Icing vs Anti-Icing</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);border-radius:10px;padding:14px;">
+          <div style="font-weight:700;color:#7DD3FC;font-size:14px;margin-bottom:8px;">DE-ICING</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;">Removes <strong>existing</strong> contamination</div>
+          <div style="font-size:11.5px;font-weight:700;color:#7DD3FC;background:rgba(56,189,248,.12);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px;">Uses: ADF (Aircraft De-Icing Fluid)</div>
+          <div style="font-size:11.5px;color:var(--text2);">Removes: Frost · Snow · Ice · Slush</div>
+        </div>
+        <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:14px;">
+          <div style="font-weight:700;color:#FCD34D;font-size:14px;margin-bottom:8px;">ANTI-ICING</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;">Prevents <strong>future</strong> contamination</div>
+          <div style="font-size:11.5px;font-weight:700;color:#FCD34D;background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px;">Uses: AAF (Aircraft Anti-Icing Fluid)</div>
+          <div style="font-size:11.5px;color:var(--text2);">Applied on <em>clean</em> surface only</div>
+        </div>
+      </div>
+      <div class="al al-i" style="margin-bottom:0;">
+        <strong>De/Anti-icing fluids only needed until aircraft becomes airborne.</strong> After takeoff, onboard anti-icing systems take over.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--ice)"></span>Effects of Ice on Aircraft</div>
+      <div class="g2" style="gap:8px;margin-bottom:10px;">
+        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:11px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:4px;">⬇</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;">Lift DECREASES</div>
+        </div>
+        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:11px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:4px;">⬆</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;">Drag INCREASES</div>
+        </div>
+        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:11px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:4px;">⬆</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;">Stall speed INCREASES</div>
+        </div>
+        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:9px;padding:11px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:4px;">⬇</div>
+          <div style="font-weight:700;color:#FCA5A5;font-size:12px;">Maneuverability DECREASES</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="sn">0.40 mm</div>
+        <div class="su">roughness (1/64 inch)</div>
+        <div class="sl">Even this much ice can seriously affect aircraft performance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--ice)"></span>Cold Soaking & Clear Ice</div>
+    <div class="g2">
+      <div>
+        <div class="al al-i" style="margin-bottom:10px;"><strong>Cold Soaking:</strong> Ice can form even when OAT &gt; 0°C because wing skin may be below freezing from cold fuel in tanks.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">→</span>Long cruise at high altitude</div>
+          <div class="chk-item"><span class="cy">→</span>Cold fuel in wing tanks</div>
+          <div class="chk-item"><span class="cy">→</span>Rapid descent into humid air</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">Clear Ice — The Invisible Danger</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">!</span><div>Often <strong>difficult to see</strong> — can only be detected by tactile inspection or GIDS</div></div>
+          <div class="chk-item"><span class="cn">!</span><div>Ice sheets can be <strong>ingested into engines</strong> → flameout or engine damage</div></div>
+          <div class="chk-item"><span class="cn">!</span><div>Can damage <strong>Horizontal Stabilizer</strong></div></div>
+        </div>
+        <div class="al al-r" style="margin-top:10px;margin-bottom:0;font-size:12px;"><strong>GIDS</strong> = Ground Ice Detection System · Also detected by <strong>tactile (touch) inspection</strong></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory Trick</div><div class="mf">DE = Delete ice &nbsp;|&nbsp; ANTI = Avoid future ice &nbsp;|&nbsp; OAT &gt; 0°C ≠ no ice (cold soaking!)</div></div></div>
+  </div>
+</div>
+
+<!-- ====== FIRE ====== -->
+<div class="section" id="section-fire">
+  <div class="sh"><div class="si si-fire">🔥</div><div><div class="st">Fire Classes & Extinguishers</div><div class="ss">Fire triangle · Classes A-D · Halon · Overheated brakes</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--fire)"></span>The Fire Triangle</div>
+    <div class="g2">
+      <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:18px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">🔥</div>
+        <div style="display:flex;justify-content:center;gap:16px;margin-bottom:12px;">
+          <div style="text-align:center;"><div style="font-size:20px;">⛽</div><div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-top:3px;">FUEL</div></div>
+          <div style="text-align:center;"><div style="font-size:20px;">🌡️</div><div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-top:3px;">HEAT</div></div>
+          <div style="text-align:center;"><div style="font-size:20px;">💨</div><div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-top:3px;">OXYGEN</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Remove <strong style="color:#fff;">any ONE</strong> element → Fire extinguished</div>
+      </div>
+      <div>
+        <div class="mem" style="margin-bottom:10px;"><div class="mi">🧠</div><div><div class="mt">Memory</div><div class="mf">OHF = Oxygen + Heat + Fuel</div></div></div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Cut off fuel supply → Fire stops</div>
+          <div class="chk-item"><span class="cy">✓</span>Remove oxygen → Fire stops</div>
+          <div class="chk-item"><span class="cy">✓</span>Temperature below ignition point → Fire stops</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--fire)"></span>Fire Classes A · B · C · D</div>
+    <div class="fire-grid">
+      <div class="fc fc-a">
+        <div class="fc-letter">A</div>
+        <div class="fc-name" style="color:#6EE7B7;">Ash / Solid Materials</div>
+        <div class="fc-items">
+          <span>Wood · Paper · Cloth · Plastic</span>
+          <span style="color:#6EE7B7;margin-top:4px;font-weight:600;">💧 Water / Water-Glycol</span>
+          <span style="color:#EF4444;font-size:11px;margin-top:3px;">❌ No alcohol-based liquids</span>
+        </div>
+        <div class="fc-ext">Smoke: Grey/Brown</div>
+      </div>
+      <div class="fc fc-b">
+        <div class="fc-letter">B</div>
+        <div class="fc-name" style="color:#FDB785;">Boiling Liquids</div>
+        <div class="fc-items">
+          <span>Fuel · Oil · Hydraulic fluid · Tar</span>
+          <span style="color:#FDB785;margin-top:4px;font-weight:600;">🟢 Foam / Halon</span>
+          <span style="color:#EF4444;font-size:11px;margin-top:3px;">❌ NEVER use Water</span>
+        </div>
+        <div class="fc-ext">Smoke: Black + Oil smell</div>
+      </div>
+      <div class="fc fc-c">
+        <div class="fc-letter">C</div>
+        <div class="fc-name" style="color:#93C5FD;">Current (Electrical)</div>
+        <div class="fc-items">
+          <span>Wiring · Avionics · Panels</span>
+          <span style="color:#93C5FD;margin-top:4px;font-weight:600;">🟢 Halon / CO₂</span>
+          <span style="color:#FDB785;font-size:11px;margin-top:3px;">Non-conductive agents only</span>
+        </div>
+        <div class="fc-ext">Smoke: White/Grey, bluish</div>
+      </div>
+      <div class="fc fc-d">
+        <div class="fc-letter">D</div>
+        <div class="fc-name" style="color:#D8B4FE;">Dangerous Metals</div>
+        <div class="fc-items">
+          <span>Sodium · Magnesium · Lithium</span>
+          <span style="color:#D8B4FE;margin-top:4px;font-weight:600;">🔵 Dry Powder ONLY</span>
+          <span style="color:#EF4444;font-size:11px;margin-top:3px;">❌ NEVER use Halon</span>
+        </div>
+        <div class="fc-ext">Flammable metal fire</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory — Fire Classes</div><div class="mf">A=Ash · B=Boiling · C=Current · D=Dangerous metals</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--fire)"></span>Fire Extinguisher Types & Colours</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead><tr><th>Type</th><th>Colour</th><th>Used For</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Halon / BCF</strong></td><td><span class="b b-a">Green</span></td><td>A, B, C</td><td>3× more effective than CO₂ · Must use PBE in confined areas</td></tr>
+          <tr><td><strong>CO₂</strong></td><td><span class="b" style="background:rgba(0,0,0,.3);color:#9CA3AF;border:1px solid rgba(156,163,175,.3);">Black</span></td><td>B, C</td><td>—</td></tr>
+          <tr><td><strong>Dry Powder</strong></td><td><span class="b b-b">Blue</span></td><td>D</td><td>Only for metal fires</td></tr>
+          <tr><td><strong>Dry Chemical</strong></td><td><span class="b b-b">Blue</span></td><td>A, B, C</td><td>Multi-purpose</td></tr>
+          <tr><td><strong>Water</strong></td><td><span class="b b-r">Red</span></td><td>A only</td><td>Never use on B or C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g3">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);">
+        <div class="sn" style="color:#FCA5A5;">8–25 sec</div>
+        <div class="sl">Extinguisher discharge time — select correctly immediately!</div>
+      </div>
+      <div class="stat" style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.07);">
+        <div class="sn" style="color:#6EE7B7;">3×</div>
+        <div class="sl">Halon more effective than CO₂ (same quantity)</div>
+      </div>
+      <div class="stat">
+        <div class="sn">1+</div>
+        <div class="sl">Min 1 Halon 1211 on flight deck. Also galley + cargo compartment</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Overheated Brakes</div>
+    <div class="g2">
+      <div>
+        <div class="al al-a" style="margin-bottom:10px;">Occurs after: Rejected Takeoff (RTO) · Heavy landing · Aborted takeoff. Brakes convert <strong>Kinetic Energy → Heat</strong>.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">!</span>Fire · Tyre burst · Tyre deflation · Brake failure</div>
+          <div class="chk-item"><span class="cn">!</span>Runway excursion · Ground collision</div>
+          <div class="chk-item"><span class="cn">!</span>Crew may not detect smoke from landing gear</div>
+        </div>
+      </div>
+      <div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>May request <strong>Fire &amp; Rescue Services</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>May order <strong>Emergency Evacuation</strong> if fire detected after high-energy braking</div>
+          <div class="chk-item"><span class="cy">!</span>Most common aircraft fires: <strong>Class A &amp; Class C</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECOMPRESSION ====== -->
+<div class="section" id="section-decomp">
+  <div class="sh"><div class="si si-sky">💨</div><div><div class="st">Cabin Pressurization & Decompression</div><div class="ss">Explosive &lt;0.5 sec · 10k / 13k / 15k ft · Hypoxia · Crew actions</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Types of Decompression</div>
+    <div class="g3">
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#FCA5A5;font-size:13px;margin-bottom:6px;">💥 Explosive</div>
+        <div style="font-size:12.5px;color:var(--text2);">Occurs in <span class="num">&lt;0.5 seconds</span><br>May cause <strong>lung damage</strong><br>Fog · Dust · Debris · Temp drop · Crew dazed</div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#FCD34D;font-size:13px;margin-bottom:6px;">⚡ Rapid</div>
+        <div style="font-size:12.5px;color:var(--text2);">Faster than lungs can decompress<br>May cause lung damage<br>Same effects as explosive</div>
+      </div>
+      <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#93C5FD;font-size:13px;margin-bottom:6px;">🌀 Slow</div>
+        <div style="font-size:12.5px;color:var(--text2);">Occurs more gradually<br>Similar effects<br><strong>Crew actions remain the same</strong></div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:12px;">
+      <div>
+        <div class="ch" style="margin-bottom:8px;"><span class="pip" style="background:var(--red)"></span>Causes of Decompression</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-r">A</span><div><strong>Structural failure</strong> — window, door, pressure bulkhead, explosion</div></div>
+          <div class="chk-item"><span class="b b-r">B</span><div><strong>Pressurization system failure</strong> — outflow valve, pressurization component</div></div>
+          <div class="chk-item"><span class="b b-r">C</span><div><strong>Deliberate</strong> — Captain depressurizes to clear cabin smoke</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="al al-r" style="margin-bottom:8px;"><strong>Main Danger:</strong> Hypoxia — oxygen loss rapidly incapacitates crew and passengers. TUC (Time of Useful Consciousness) decreases in explosive decompression.</div>
+        <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory</div><div class="mf">Explosive = &lt; 0.5 sec</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Cabin Altitude — Critical Thresholds</div>
+    <div class="alt-ladder">
+      <div class="alt-row">
+        <div class="alt-ft">10,000 ft</div>
+        <div class="alt-dot" style="background:var(--amber);border:2px solid #FCD34D;"></div>
+        <div class="alt-body"><div class="alt-title">⚠️ Cabin Altitude Warning</div><div class="alt-desc">Warning device activates. Crew must take action immediately.</div></div>
+      </div>
+      <div class="alt-row">
+        <div class="alt-ft">13,200–<br>14,000 ft</div>
+        <div class="alt-dot" style="background:var(--orange);border:2px solid var(--orange);"></div>
+        <div class="alt-body"><div class="alt-title">😷 Passenger Oxygen Masks Deploy</div><div class="alt-desc">Masks automatically drop when cabin altitude reaches 13,200–14,000 ft.</div></div>
+      </div>
+      <div class="alt-row">
+        <div class="alt-ft">15,000 ft</div>
+        <div class="alt-dot" style="background:var(--red);border:2px solid var(--red);"></div>
+        <div class="alt-body"><div class="alt-title">🚨 Maximum Deployment Altitude</div><div class="alt-desc">Masks must deploy no later than 15,000 ft cabin altitude.</div></div>
+      </div>
+      <div class="alt-row">
+        <div class="alt-ft" style="color:#6EE7B7;">10,000 ft</div>
+        <div class="alt-dot" style="background:var(--teal);border:2px solid var(--teal);"></div>
+        <div class="alt-body"><div class="alt-title" style="color:#6EE7B7;">✅ Emergency Descent Target</div><div class="alt-desc">Descend to 10,000 ft — where occupants can breathe without supplemental oxygen.</div></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">10–13–15 Rule</div><div class="mf">Warning=10,000 · Masks=13,200–14,000 · Never above=15,000</div><div class="mc" style="font-size:12px;color:var(--text3);margin-top:3px;">Crew actions: OXYGEN MASK ON → EMERGENCY DESCENT to 10,000 ft</div></div></div>
+  </div>
+</div>
+
+<!-- ====== WIND SHEAR ====== -->
+<div class="section" id="section-windshear">
+  <div class="sh"><div class="si si-teal">🌪</div><div><div class="st">Wind Shear & Microburst</div><div class="ss">25–40–50 rule · Microburst sequence · VIRGA · 6000 ft/min</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Wind Shear Criteria — The 25-40-50 Rule</div>
+    <div style="padding:16px;background:var(--card2);border-radius:12px;margin-bottom:12px;">
+      <div class="ws-grid" style="margin-bottom:8px;font-size:11px;font-weight:700;color:var(--text3);">
+        <div>ALTITUDE</div><div>WIND VECTOR</div><div style="text-align:right;">VALUE</div>
+      </div>
+      <div class="ws-grid" style="margin-bottom:8px;">
+        <div class="ws-agl">500 ft AGL</div>
+        <div class="ws-bar-wrap"><div class="ws-bar" style="width:50%;background:#EF4444;">25 kt</div></div>
+        <div class="ws-val" style="color:#FCA5A5;">25 kt</div>
+      </div>
+      <div class="ws-grid" style="margin-bottom:8px;">
+        <div class="ws-agl">1000 ft AGL</div>
+        <div class="ws-bar-wrap"><div class="ws-bar" style="width:80%;background:#F97316;">40 kt</div></div>
+        <div class="ws-val" style="color:#FDB785;">40 kt</div>
+      </div>
+      <div class="ws-grid" style="margin-bottom:8px;">
+        <div class="ws-agl">1500 ft AGL</div>
+        <div class="ws-bar-wrap"><div class="ws-bar" style="width:100%;background:#EAB308;">50 kt</div></div>
+        <div class="ws-val" style="color:#FCD34D;">50 kt</div>
+      </div>
+      <div class="ws-grid">
+        <div class="ws-agl" style="font-size:11px;">IAS ±20 kt</div>
+        <div style="font-size:12px;color:var(--text2);">Within 1500 ft AGL → Report to ATC immediately</div>
+        <div class="ws-val" style="color:#86EFAC;">≥20 kt</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory</div><div class="mf">500→25 · 1000→40 · 1500→50 &nbsp; (multiply by ~0.05: 500×0.05=25)</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Microburst — Characteristics & Sequence</div>
+    <div class="g4" style="margin-bottom:14px;">
+      <div class="stat"><div class="sn">1 NM</div><div class="sl">Diameter at 2000 ft AGL</div></div>
+      <div class="stat"><div class="sn">2–2.5</div><div class="su">NM</div><div class="sl">Surface horizontal extent</div></div>
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);"><div class="sn" style="color:#FCA5A5;">6000</div><div class="su">ft/min</div><div class="sl">Vertical wind (max)</div></div>
+      <div class="stat"><div class="sn">45 kt</div><div class="sl">Horizontal wind (max)</div></div>
+      <div class="stat"><div class="sn">2–4 min</div><div class="sl">Peak intensity duration</div></div>
+      <div class="stat"><div class="sn">&lt;15 min</div><div class="sl">Total life cycle</div></div>
+    </div>
+
+    <div style="font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:10px;">Aircraft Encounter Sequence (Takeoff/Landing)</div>
+    <div class="mb-seq" style="margin-bottom:14px;">
+      <div class="mb-box" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;">
+        <div class="mb-num">PHASE 1</div>
+        <div class="mb-name" style="color:#6EE7B7;">Headwind ➡</div>
+        <div class="mb-effect">⬆ Airspeed ↑<br>⬆ Performance ↑<br>Pilot may reduce power</div>
+      </div>
+      <div class="mb-box" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:10px;">
+        <div class="mb-num">PHASE 2</div>
+        <div class="mb-name" style="color:#FCD34D;">Downdraft ⬇</div>
+        <div class="mb-effect">⬇ Aircraft pushed down<br>⬇ Performance ↓</div>
+      </div>
+      <div class="mb-box" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;">
+        <div class="mb-num">PHASE 3 ⚠️</div>
+        <div class="mb-name" style="color:#FCA5A5;">Tailwind ⬅</div>
+        <div class="mb-effect">⬇ Airspeed ↓↓<br>⬇ Lift ↓↓<br>⬇⬇ ACCIDENTS HERE</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Sequence to memorize</div><div class="mf">Headwind → Downdraft → Tailwind &nbsp;(worst at tailwind phase)</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Wet vs Dry Microburst</div>
+    <div class="g2">
+      <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.28);border-radius:10px;padding:14px;">
+        <div style="font-weight:700;color:#93C5FD;margin-bottom:6px;">🌧 Wet Microburst</div>
+        <div style="font-size:13px;color:var(--text2);">Associated with heavy rain and humid air. Visible rain shaft.</div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:14px;">
+        <div style="font-weight:700;color:#FCD34D;margin-bottom:6px;">🏜 Dry Microburst — VIRGA</div>
+        <div style="font-size:13px;color:var(--text2);">Rain evaporates before reaching ground. Called <strong style="color:#FCA5A5;">VIRGA</strong>. No visible rain at surface — very dangerous.</div>
+      </div>
+    </div>
+    <div class="al al-r" style="margin-top:10px;margin-bottom:0;"><strong>Recovery:</strong> Full power + pitch attitude near maximum AOA limits. Best defense = <strong>avoid completely</strong>. Once inside, expect multiple microbursts nearby.</div>
+  </div>
+</div>
+
+<!-- ====== WAKE TURBULENCE ====== -->
+<div class="section" id="section-wake">
+  <div class="sh"><div class="si si-purple">✈️</div><div><div class="st">Wake Turbulence</div><div class="ss">Categories · Separation · HCS rule · Vortex avoidance</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Wake Turbulence Categories</div>
+    <div class="wake-cat">
+      <div class="wc wc-s">
+        <div class="wc-label">S</div>
+        <div class="wc-title" style="color:#F9A8D4;">Super Heavy</div>
+        <div class="wc-weight">&gt;560,000 kg MTOW</div>
+        <div class="wc-example">Only: Airbus A380-800</div>
+      </div>
+      <div class="wc wc-h">
+        <div class="wc-label">H</div>
+        <div class="wc-title" style="color:#FCA5A5;">Heavy</div>
+        <div class="wc-weight">≥136,000 kg MTOW</div>
+        <div class="wc-example">B747 · B777 · B787 · A330 · A340 · A350</div>
+      </div>
+      <div class="wc wc-m">
+        <div class="wc-label">M</div>
+        <div class="wc-title" style="color:#FCD34D;">Medium</div>
+        <div class="wc-weight">7,000–136,000 kg</div>
+        <div class="wc-example">B737 · A320 · ATR-72 · Dash-8</div>
+      </div>
+      <div class="wc wc-l">
+        <div class="wc-label">L</div>
+        <div class="wc-title" style="color:#6EE7B7;">Light</div>
+        <div class="wc-weight">&lt;7,000 kg</div>
+        <div class="wc-example">Cessna · King Air · Piper Navajo</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Strongest wake turbulence (HCS Rule)</div><div class="mf">HCS = Heavy + Clean (flaps up) + Slow</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Wake Turbulence Separation — Time Based</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#F9A8D4;margin-bottom:8px;">ARRIVING AIRCRAFT</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Leading</th><th>Following</th><th>Sep.</th></tr></thead>
+            <tbody>
+              <tr><td>A380</td><td>Medium</td><td><span class="num">3 min</span></td></tr>
+              <tr><td>A380</td><td>Light</td><td><span class="num">4 min</span></td></tr>
+              <tr><td>Heavy</td><td>Medium</td><td><span class="num">2 min</span></td></tr>
+              <tr><td>Heavy/Medium</td><td>Light</td><td><span class="num">3 min</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">DEPARTING AIRCRAFT</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Leading</th><th>Following</th><th>Sep.</th></tr></thead>
+            <tbody>
+              <tr><td>A380</td><td>Non-A380 Heavy</td><td><span class="num">2 min</span></td></tr>
+              <tr><td>A380</td><td>Medium/Light</td><td><span class="num">3 min</span></td></tr>
+              <tr><td>Heavy</td><td>Medium/Light</td><td><span class="num">2 min</span></td></tr>
+              <tr><td>Medium</td><td>Light</td><td><span class="num">2 min</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Distance-Based Separation</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead><tr><th>Leading</th><th>Following</th><th>Distance</th></tr></thead>
+        <tbody>
+          <tr><td>A380</td><td>Non-A380 Heavy</td><td><span class="num">6 NM</span></td></tr>
+          <tr><td>A380</td><td>Medium</td><td><span class="num">7 NM</span></td></tr>
+          <tr><td>A380</td><td>Light</td><td><span class="num">8 NM</span></td></tr>
+          <tr><td>Heavy</td><td>Heavy</td><td><span class="num">5 NM</span></td></tr>
+          <tr><td>Heavy</td><td>Medium</td><td><span class="num">5 NM</span></td></tr>
+          <tr><td>Heavy</td><td>Light</td><td><span class="num">6 NM</span></td></tr>
+          <tr><td>Medium</td><td>Light</td><td><span class="num">5 NM</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al al-b" style="margin-bottom:0;"><strong>No wake restriction needed for:</strong> Medium behind Medium/Heavy · Light behind any aircraft — radar separation applies instead.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Vortex Behaviour & Avoidance Rules</div>
+    <div class="g2">
+      <div>
+        <div class="chklist" style="margin-bottom:10px;">
+          <div class="chk-item"><span class="cy">↓</span><div>Vortices <strong>sink 500–900 ft</strong> below generating aircraft's flight path</div></div>
+          <div class="chk-item"><span class="cy">→</span>Persist for <strong>up to 5 miles</strong> behind aircraft</div>
+          <div class="chk-item"><span class="cy">!</span><div><strong>Left vortex:</strong> Clockwise (viewed from behind) · <strong>Right vortex:</strong> Counter-clockwise</div></div>
+        </div>
+        <div class="al al-a" style="margin-bottom:0;font-size:12px;"><strong>Light quartering tailwind</strong> = most dangerous wind condition for wake turbulence encounters.</div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:8px;">Avoidance Rules:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">T/O</span><div>Rotate <strong>before</strong> heavy aircraft · Climb <strong>above</strong> its flight path</div></div>
+          <div class="chk-item"><span class="cy">LDG</span><div>Touch down <strong>beyond</strong> heavy aircraft's touchdown point</div></div>
+          <div class="chk-item"><span class="cy">ILS</span><div>Stay <strong>at or above</strong> glideslope</div></div>
+          <div class="chk-item"><span class="cy">XNG</span><div>Cross <strong>above</strong> the other aircraft's flight path</div></div>
+          <div class="chk-item"><span class="cn">!</span><div>Light crosswind: <strong>upwind vortex remains on runway</strong></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Ultra-short memory</div><div class="mf">T/O: Before+Above · LDG: Beyond · ILS: At or above · Cross: Above</div></div></div>
+  </div>
+</div>
+
+<!-- ====== OTHER HAZARDS ====== -->
+<div class="section" id="section-hazards">
+  <div class="sh"><div class="si si-amber">⚡</div><div><div class="st">Other Hazards & Procedures</div><div class="ss">Fuel dumping · Wet runway · Hydroplaning · Dangerous goods</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Fuel Jettisoning (Dumping)</div>
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="stat"><div class="sn">6000</div><div class="su">ft</div><div class="sl">Minimum altitude for fuel dumping</div></div>
+      <div class="stat"><div class="sn">10 NM</div><div class="sl">Horizontal separation from other aircraft</div></div>
+      <div class="stat"><div class="sn">1000</div><div class="su">ft above</div><div class="sl">If within 50 NM or 15 min of dumping aircraft</div></div>
+      <div class="stat"><div class="sn">3000</div><div class="su">ft below</div><div class="sl">Alternative vertical separation</div></div>
+    </div>
+    <div class="al al-a" style="margin-bottom:0;">ATC must coordinate: Route · Level · Duration before fuel dump commences.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Wet Runway & Hydroplaning</div>
+    <div class="g2">
+      <div>
+        <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);margin-bottom:10px;">
+          <div class="sn" style="color:#FCA5A5;">115%</div>
+          <div class="sl">Wet runway: landing distance available must be ≥ 115% of required landing distance</div>
+        </div>
+        <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory</div><div class="mf">Wet Runway = ×1.15</div></div></div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">Dynamic Hydroplaning</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">!</span><div>Tyres ride on standing water</div></div>
+          <div class="chk-item"><span class="cn">!</span><div>Directional control lost</div></div>
+          <div class="chk-item"><span class="cn">!</span><div>Braking becomes ineffective</div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>Anti-skid systems help reduce effects</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Dangerous Goods</div>
+    <div class="chklist">
+      <div class="chk-item"><span class="cn">✗</span><div>ICAO-prohibited items forbidden unless exempted</div></div>
+      <div class="chk-item"><span class="cn">✗</span><div>Infected live animals forbidden unless exempted</div></div>
+      <div class="chk-item"><span class="cy">✓</span><div>Dangerous Goods List must be carried and <strong>reported to PIC before flight</strong></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== NUMBERS ====== -->
+<div class="section" id="section-numbers">
+  <div class="sh"><div class="si si-amber">🔢</div><div><div class="st">Master Numbers Reference</div><div class="ss">Every critical number from Chapter 18 in one place</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Icing & Bird Strike</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Ice roughness affecting performance</td><td><span class="num">0.40 mm (1/64 in)</span></td></tr>
+            <tr><td>Bird strikes occur below</td><td><span class="num">500 m (90%)</span></td></tr>
+            <tr><td>Bird reaction time</td><td><span class="num">2 seconds</span></td></tr>
+            <tr><td>Bird study speed</td><td><span class="num">135 kt</span></td></tr>
+            <tr><td>Best bird-scaring method</td><td><strong>Shell Crackers</strong></td></tr>
+            <tr><td>Noise abatement minimum height</td><td><span class="num">240 m / 800 ft</span></td></tr>
+            <tr><td>Crosswind override limit</td><td><span class="num">15 kt</span></td></tr>
+            <tr><td>Tailwind override limit</td><td><span class="num">5 kt</span></td></tr>
+            <tr><td>Final landing config</td><td><span class="num">Outer Marker or 5 NM</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--fire)"></span>Fire</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Extinguisher discharge time</td><td><span class="num">8–25 seconds</span></td></tr>
+            <tr><td>Halon vs CO₂ effectiveness</td><td><span class="num">3× more effective</span></td></tr>
+            <tr><td>Min Halon on flight deck</td><td><span class="num">1 (Halon 1211)</span></td></tr>
+            <tr><td>Most common aircraft fires</td><td><strong>Class A &amp; Class C</strong></td></tr>
+            <tr><td>Class A extinguisher</td><td>Water (Red)</td></tr>
+            <tr><td>Class B extinguisher</td><td>Foam / Halon (Green)</td></tr>
+            <tr><td>Class C extinguisher</td><td>Halon / CO₂ (Green/Black)</td></tr>
+            <tr><td>Class D extinguisher</td><td>Dry Powder (Blue) ONLY</td></tr>
+            <tr><td>Never use on Class D</td><td><strong style="color:#FCA5A5;">NEVER Halon</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Decompression & Wind Shear</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Explosive decompression</td><td><span class="num">&lt;0.5 seconds</span></td></tr>
+            <tr><td>Cabin altitude warning</td><td><span class="num">10,000 ft</span></td></tr>
+            <tr><td>Passenger masks deploy</td><td><span class="num">13,200–14,000 ft</span></td></tr>
+            <tr><td>Max mask deployment altitude</td><td><span class="num">15,000 ft</span></td></tr>
+            <tr><td>Emergency descent target</td><td><span class="num">10,000 ft</span></td></tr>
+            <tr><td>Wind shear at 500 ft AGL</td><td><span class="num">25 kt</span></td></tr>
+            <tr><td>Wind shear at 1000 ft AGL</td><td><span class="num">40 kt</span></td></tr>
+            <tr><td>Wind shear at 1500 ft AGL</td><td><span class="num">50 kt</span></td></tr>
+            <tr><td>IAS gain/loss to report</td><td><span class="num">≥20 kt within 1500 ft</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>Microburst, Wake & Other</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Microburst diameter @ 2000 ft</td><td><span class="num">~1 NM</span></td></tr>
+            <tr><td>Microburst surface extent</td><td><span class="num">2–2.5 NM</span></td></tr>
+            <tr><td>Microburst vertical wind</td><td><span class="num">up to 6000 ft/min</span></td></tr>
+            <tr><td>Microburst horizontal wind</td><td><span class="num">up to 45 kt</span></td></tr>
+            <tr><td>Microburst peak intensity</td><td><span class="num">2–4 min</span></td></tr>
+            <tr><td>Microburst total life cycle</td><td><span class="num">&lt;15 min</span></td></tr>
+            <tr><td>Wake vortex sink rate</td><td><span class="num">500–900 ft below</span></td></tr>
+            <tr><td>Wake persistence</td><td><span class="num">up to 5 miles</span></td></tr>
+            <tr><td>Fuel dump altitude</td><td><span class="num">6000 ft</span></td></tr>
+            <tr><td>Fuel dump separation</td><td><span class="num">10 NM horizontal</span></td></tr>
+            <tr><td>Wet runway factor</td><td><span class="num">115%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ DGCA Exam Traps — Chapter 18</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">MMEL vs MEL — who prepares?</div><div class="trap-text"><strong style="color:#fff;">MMEL</strong> = prepared by <strong style="color:#fff;">Manufacturer</strong>, approved by DGCA. <strong style="color:#fff;">MEL</strong> = prepared by <strong style="color:#fff;">Operator</strong>, approved by DGCA. Very common mix-up.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Class D fire — Never Halon</div><div class="trap-text">Metal fires (Class D) require <strong style="color:#fff;">Dry Powder ONLY</strong>. Halon is <strong style="color:#FCA5A5;">NEVER</strong> used on Class D. Using wrong agent can worsen the fire.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Explosive vs Rapid decompression</div><div class="trap-text">Explosive = <strong style="color:#fff;">&lt;0.5 seconds</strong>. Rapid = faster than lungs can decompress (may also cause lung damage). Both require same crew actions.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Mask deployment altitudes</div><div class="trap-text">Warning = <strong style="color:#fff;">10,000 ft</strong>. Masks = <strong style="color:#fff;">13,200–14,000 ft</strong>. Maximum = <strong style="color:#fff;">15,000 ft</strong>. Emergency descent target = <strong style="color:#fff;">10,000 ft</strong>. All four numbers commonly asked.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">VIRGA</div><div class="trap-text">VIRGA = rain evaporating before reaching the ground = <strong style="color:#fff;">dry microburst</strong>. No rain visible at surface but severe wind shear below.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Wake turbulence vortex rotation</div><div class="trap-text">Viewed from behind: <strong style="color:#fff;">Left vortex = Clockwise</strong>. <strong style="color:#fff;">Right vortex = Counter-clockwise</strong>. In light crosswind, <strong style="color:#fff;">upwind vortex</strong> remains on runway.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== QUIZ ====== -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si si-amber">🧠</div><div><div class="st">Practice Quiz</div><div class="ss">30 DGCA-style questions on Chapter 18</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"The MMEL (Master Minimum Equipment List) is prepared by the:",opts:["DGCA","Operator","Manufacturer","ICAO"],ans:2,exp:"MMEL is prepared by the Manufacturer and approved by DGCA. The operator then creates their own MEL based on the MMEL. MMEL = Manufacturer. MEL = Operator."},
+  {q:"De-Icing fluids are needed until:",opts:["Aircraft reaches cruise altitude","Aircraft becomes airborne","De-icing is complete on ground","Pilot confirms clean aircraft"],ans:1,exp:"De/Anti-icing fluids are only needed until the aircraft becomes airborne. After takeoff, onboard anti-icing systems take over."},
+  {q:"What is the minimum ice roughness that can seriously affect aircraft performance?",opts:["1 mm","0.80 mm","0.40 mm (1/64 inch)","2 mm"],ans:2,exp:"Even roughness of 0.40 mm (1/64 inch) can seriously affect aircraft performance. This is a DGCA favourite — 'there is no such thing as insignificant ice.'"},
+  {q:"Cold soaking occurs when:",opts:["OAT is below -20°C","Ice forms even when OAT is above 0°C due to cold wing surfaces from cold fuel","Aircraft descends from high altitude rapidly","Frost forms on windshield"],ans:1,exp:"Cold soaking occurs when cold fuel in wing tanks cools the wing skin below freezing, allowing ice to form even when OAT is above 0°C."},
+  {q:"What percentage of bird strikes occur below 500 m?",opts:["50%","70%","80%","90%"],ans:3,exp:"90% of bird strikes occur below 500 m. Bird activity is highest during migration periods."},
+  {q:"The most effective bird-scaring method is:",opts:["Loud horns","Bright flashing lights","Shell crackers","Distress calls of birds"],ans:2,exp:"Shell crackers are the most effective bird-scaring method. This is a classic DGCA favourite question."},
+  {q:"Noise abatement departure procedures shall NOT be executed below:",opts:["100 m (300 ft)","150 m (500 ft)","240 m (800 ft)","500 m (1500 ft)"],ans:2,exp:"Noise abatement departure shall NOT be executed below 240 m (800 ft) above aerodrome elevation."},
+  {q:"Noise abatement runway selection must be overridden when crosswind exceeds:",opts:["5 kt","10 kt","15 kt","20 kt"],ans:2,exp:"Noise abatement must NOT determine runway selection if crosswind exceeds 15 kt, tailwind exceeds 5 kt, or runway is not clear/dry."},
+  {q:"A fire requires which three elements?",opts:["Fuel, Electricity, Oxygen","Fuel, Heat, Oxygen","Heat, Water, Oxygen","Fuel, Pressure, Heat"],ans:1,exp:"The Fire Triangle: Fuel + Heat + Oxygen. Remove any ONE element and the fire is extinguished."},
+  {q:"Class B fires involve:",opts:["Wood, paper, cloth","Electrical equipment","Flammable liquids — fuel, oil, hydraulic fluid","Combustible metals"],ans:2,exp:"Class B fires involve flammable liquids: aircraft fuel, oil, hydraulic fluid, tar. Use Foam or Halon. NEVER use water on Class B fires."},
+  {q:"What extinguisher is used for Class C (electrical) fires?",opts:["Water","Dry Powder","Halon / CO₂","Foam"],ans:2,exp:"Class C (electrical) fires require non-conductive agents — Halon or CO₂. Never use water on electrical fires."},
+  {q:"Class D (metal) fires require which extinguisher?",opts:["Halon","CO₂","Foam","Dry Powder ONLY"],ans:3,exp:"Class D fires (flammable metals — sodium, magnesium, lithium) require Dry Powder ONLY. NEVER use Halon on Class D fires."},
+  {q:"Halon is how many times more effective than CO₂?",opts:["Same effectiveness","2 times","3 times","5 times"],ans:2,exp:"Halon is approximately 3 times more effective than CO₂ for the same quantity of agent."},
+  {q:"How long do handheld fire extinguishers typically discharge agent?",opts:["2–5 seconds","8–25 seconds","30–60 seconds","1–2 minutes"],ans:1,exp:"Handheld fire extinguishers discharge agent for 8–25 seconds. This is why selecting the correct extinguisher immediately is critical."},
+  {q:"The most common aircraft fires are:",opts:["Class B and D","Class A and C","Class B and C","Class A and B"],ans:1,exp:"The most common aircraft fires are Class A (solids: wood, paper, cloth) and Class C (electrical). Both are very common onboard."},
+  {q:"Explosive decompression is defined as decompression occurring in:",opts:["Less than 1 second","Less than 0.5 seconds","Less than 2 seconds","Less than 5 seconds"],ans:1,exp:"Explosive decompression occurs in less than 0.5 seconds. This is faster than the lungs can decompress and may cause lung damage."},
+  {q:"Passenger oxygen masks automatically deploy when cabin altitude reaches:",opts:["10,000 ft","12,000 ft","13,200–14,000 ft","15,000 ft"],ans:2,exp:"Passenger oxygen masks deploy automatically when cabin altitude reaches 13,200–14,000 ft, but no later than 15,000 ft."},
+  {q:"The cabin altitude warning device activates at:",opts:["8,000 ft","10,000 ft","12,000 ft","15,000 ft"],ans:1,exp:"The cabin altitude warning activates when cabin altitude exceeds 10,000 ft. Emergency descent target is also 10,000 ft."},
+  {q:"The correct crew actions during decompression, in order, are:",opts:["Descend first, then put on oxygen mask","Oxygen mask ON, then emergency descent","Broadcast Mayday, then descend","Check instruments, then put on mask"],ans:1,exp:"OXYGEN MASK ON FIRST, then Emergency Descent to 10,000 ft. Mask first — without it, crew may be incapacitated within seconds. Descent second."},
+  {q:"Wind shear criteria: at 500 ft AGL, the minimum wind vector magnitude is:",opts:["15 kt","20 kt","25 kt","40 kt"],ans:2,exp:"Significant wind shear criteria: 25 kt within 500 ft AGL, 40 kt within 1000 ft AGL, 50 kt within 1500 ft AGL. Memory: 25-40-50."},
+  {q:"What is VIRGA?",opts:["A type of fog","Rain that evaporates before reaching the ground — dry microburst","A form of freezing rain","A type of thunderstorm"],ans:1,exp:"VIRGA is rain that evaporates before reaching the ground, associated with a dry microburst. It is very dangerous because there is no visible rain at the surface, but severe wind shear exists below."},
+  {q:"The maximum vertical wind speed in a microburst can be:",opts:["1000 ft/min","3000 ft/min","6000 ft/min","10,000 ft/min"],ans:2,exp:"Microburst vertical wind can reach up to 6,000 ft/min. Horizontal wind up to 45 kt. This is why microbursts are so dangerous."},
+  {q:"What is the correct sequence when an aircraft encounters a microburst on takeoff?",opts:["Tailwind → Headwind → Downdraft","Headwind → Downdraft → Tailwind","Downdraft → Headwind → Tailwind","Tailwind → Downdraft → Headwind"],ans:1,exp:"Microburst encounter sequence: Headwind (performance up, pilot reduces power) → Downdraft (aircraft pushed down) → Tailwind (airspeed and lift collapse = accident zone)."},
+  {q:"Wingtip vortices sink approximately how far below the generating aircraft?",opts:["100–200 ft","200–400 ft","500–900 ft","1000–1500 ft"],ans:2,exp:"Wake vortices sink approximately 500–900 ft below the generating aircraft's flight path and can persist for up to 5 miles behind."},
+  {q:"What is the wake turbulence category for an aircraft with MTOW of 150,000 kg?",opts:["Light","Medium","Heavy","Super Heavy"],ans:2,exp:"Heavy category = 136,000 kg MTOW or more. 150,000 kg falls in the Heavy category. Medium = 7,000–136,000 kg."},
+  {q:"What is the only aircraft in the Super Heavy wake turbulence category?",opts:["Boeing 747-8","Airbus A380-800","Airbus A340-600","Boeing 777-9"],ans:1,exp:"Only the Airbus A380-800 (MTOW > 560,000 kg) is in the Super Heavy (S) category."},
+  {q:"When taking off behind a large aircraft, the correct action is to:",opts:["Rotate after its rotation point and fly parallel","Rotate before its lift-off point and climb above its flight path","Use the full runway and take off normally","Wait 5 minutes before taking off"],ans:1,exp:"Rotate BEFORE the heavy aircraft's rotation point and climb ABOVE its flight path. The vortices start at the point of rotation and settle below — you must stay above them."},
+  {q:"The most dangerous wind condition for wake turbulence encounters is:",opts:["Strong headwind","Strong tailwind","Light quartering tailwind","Light crosswind"],ans:2,exp:"Light quartering tailwind is the most dangerous wind for wake turbulence. It keeps the vortices over the runway and drifting slowly, maximizing exposure time."},
+  {q:"What is the minimum altitude for fuel jettisoning?",opts:["3000 ft","4000 ft","5000 ft","6000 ft"],ans:3,exp:"The minimum altitude for fuel dumping (jettisoning) is 6,000 ft. Horizontal separation from other aircraft must be at least 10 NM."},
+  {q:"For a wet runway, the landing distance available must be at least what percentage of the required landing distance?",opts:["105%","110%","115%","120%"],ans:2,exp:"For a wet runway, landing distance available must be at least 115% of the required landing distance. Memory: Wet Runway = ×1.15."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=90){msg='🏆 Excellent!';sub='Chapter 18 mastered. Outstanding preparation!';}
+  else if(pct>=75){msg='✈️ Strong!';sub='Great grasp. Review any missed numbers.';}
+  else if(pct>=60){msg='📚 Good!';sub='Focus on fire classes, decompression altitudes and wake separation.';}
+  else{msg='🔄 Keep Revising!';sub='Drill the Numbers section — this chapter is all about figures!';}
+  document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

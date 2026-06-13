@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA HPL Sample Paper 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --indigo:#6366F1;--sky:#0EA5E9;--green:#22C55E;--amber:#F59E0B;--red:#EF4444;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.11);
+  --in-bg:rgba(99,102,241,.10);--gn-bg:rgba(34,197,94,.10);
+  --rd-bg:rgba(239,68,68,.10);--am-bg:rgba(245,158,11,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+
+/* ─── EXAM HEADER ─── */
+.exam-header{background:var(--bg2);border-bottom:2px solid var(--bdr2);padding:0;position:sticky;top:0;z-index:200;}
+.exam-top{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;flex-wrap:wrap;gap:10px;}
+.exam-title{display:flex;flex-direction:column;}
+.exam-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;}
+.exam-sub{font-size:11px;color:var(--text2);margin-top:1px;}
+.exam-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.em-pill{background:var(--card);border:1px solid var(--bdr2);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--text2);}
+.em-pill strong{color:var(--text);}
+.timer-pill{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:6px 14px;display:flex;align-items:center;gap:7px;}
+.timer-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;}
+.timer-lbl{font-size:10px;color:var(--text2);}
+/* progress strip */
+.progress-strip{height:4px;background:var(--bdr);width:100%;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--sky));transition:width .5s;}
+
+/* ─── QUESTION PALETTE ─── */
+.palette-bar{background:var(--bg3);border-bottom:1px solid var(--bdr);padding:10px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pal-label{font-size:11px;color:var(--text3);font-weight:600;margin-right:4px;flex-shrink:0;}
+.pal-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--bdr2);background:var(--card2);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .12s;flex-shrink:0;}
+.pal-btn:hover{border-color:var(--indigo);color:#A5B4FC;}
+.pal-btn.answered{background:rgba(99,102,241,.2);border-color:var(--indigo);color:#A5B4FC;}
+.pal-btn.current{background:var(--indigo);border-color:var(--indigo);color:#fff;}
+.pal-legend{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);}
+.leg-dot{width:10px;height:10px;border-radius:3px;}
+
+/* ─── MAIN CONTENT ─── */
+.exam-body{max-width:860px;margin:0 auto;padding:24px 16px 100px;}
+.qpanel{display:none;}
+.qpanel.active{display:block;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:28px;margin-bottom:14px;}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.qnum-badge{background:var(--in-bg);border:1px solid rgba(99,102,241,.3);color:#A5B4FC;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.q-marks{font-size:12px;color:var(--text3);}
+.qtext{font-size:16px;font-weight:600;color:#fff;line-height:1.7;margin-bottom:24px;}
+.qopts{display:flex;flex-direction:column;gap:10px;}
+.qopt{background:var(--card2);border:2px solid var(--bdr2);border-radius:12px;padding:14px 18px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s;display:flex;align-items:flex-start;gap:14px;font-family:'Space Grotesk',sans-serif;line-height:1.55;}
+.qopt:hover{border-color:var(--indigo);color:#fff;background:var(--in-bg);}
+.qopt.selected{border-color:var(--indigo);background:var(--in-bg);color:#A5B4FC;}
+.qopt.selected .olbl{background:var(--indigo);border-color:var(--indigo);color:#fff;}
+.olbl{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px;transition:all .15s;}
+
+/* ─── BOTTOM NAV ─── */
+.exam-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--bdr2);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:100;}
+.nav-left{display:flex;gap:8px;}
+.btn-nav{background:var(--card);border:1px solid var(--bdr2);color:var(--text2);padding:9px 18px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .13s;}
+.btn-nav:hover{border-color:var(--sky);color:#7DD3FC;}
+.btn-nav:disabled{opacity:.3;pointer-events:none;}
+.btn-submit{background:var(--green);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .13s;}
+.btn-submit:hover{background:#16A34A;color:#fff;}
+.btn-clear{background:transparent;border:1px solid rgba(239,68,68,.4);color:#FCA5A5;padding:9px 14px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
+.btn-clear:hover{background:var(--rd-bg);}
+
+/* ─── SUBMIT CONFIRM MODAL ─── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--bdr2);border-radius:18px;padding:32px;max-width:440px;width:90%;text-align:center;}
+.modal h2{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;}
+.modal p{font-size:14px;color:var(--text2);margin-bottom:6px;}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.ms{background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:12px;text-align:center;}
+.ms-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.ms-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.modal-btns{display:flex;gap:10px;justify-content:center;margin-top:6px;}
+.btn-confirm{background:var(--green);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-cancel{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:10px 20px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;cursor:pointer;}
+
+/* ─── RESULTS PAGE ─── */
+#results-page{display:none;}
+.results-hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:36px 24px;text-align:center;}
+.result-ring-wrap{display:flex;justify-content:center;margin-bottom:20px;}
+.result-ring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--c,var(--indigo)) var(--p,0%),rgba(255,255,255,.06) 0);display:flex;align-items:center;justify-content:center;}
+.ring-inner{width:112px;height:112px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-score{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;}
+.ring-pct{font-size:12px;color:var(--text3);margin-top:2px;}
+.result-grade{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px;}
+.result-msg{font-size:14px;color:var(--text2);margin-bottom:22px;}
+.result-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:0;}
+.rs{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:12px 20px;text-align:center;min-width:100px;}
+.rs-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.rs-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.results-body{max-width:860px;margin:0 auto;padding:28px 16px 60px;}
+.section-label{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--bdr);}
+/* review card */
+.rev-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:12px;}
+.rev-card.correct{border-color:rgba(34,197,94,.4);}
+.rev-card.wrong{border-color:rgba(239,68,68,.4);}
+.rev-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--bdr);}
+.rev-header.correct{background:rgba(34,197,94,.06);}
+.rev-header.wrong{background:rgba(239,68,68,.06);}
+.rev-qnum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text2);}
+.rev-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+.rev-badge.c{background:rgba(34,197,94,.15);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.rev-badge.w{background:rgba(239,68,68,.15);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.rev-body{padding:18px;}
+.rev-qtext{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.6;}
+.rev-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:0;}
+.rev-opt{font-size:13px;padding:10px 14px;border-radius:8px;display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.rev-opt.correct-ans{background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.3);color:#86EFAC;}
+.rev-opt.wrong-ans{background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;}
+.rev-opt.neutral{color:var(--text3);}
+.rev-opt-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;width:18px;}
+.rev-exp{margin-top:14px;padding:13px 16px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);border-radius:10px;font-size:13px;color:#A5B4FC;line-height:1.65;}
+.rev-exp-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#818CF8;margin-bottom:5px;}
+.restart-bar{background:var(--bg2);border-top:1px solid var(--bdr2);padding:14px 24px;display:flex;gap:10px;justify-content:center;}
+.btn-restart{background:var(--indigo);color:#fff;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.exam-top{flex-direction:column;align-items:flex-start;}.exam-meta{flex-wrap:wrap;}.qtext{font-size:14.5px;}.qopt{font-size:13px;}.palette-bar{padding:10px 14px;}}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ EXAM PAGE ════════════════ -->
+<div id="exam-page">
+
+<!-- Header -->
+<div class="exam-header">
+  <div class="exam-top">
+    <div class="exam-title">
+      <div class="exam-name">DGCA CPL &mdash; Sample Paper 3</div>
+      <div class="exam-sub">Human Performance &amp; Limitations &mdash; Set 3</div>
+    </div>
+    <div class="exam-meta">
+      <div class="em-pill"><strong>30</strong> Questions</div>
+      <div class="em-pill">Pass: <strong>75%</strong></div>
+      <div class="timer-pill">
+        <span style="font-size:14px;">&#9200;</span>
+        <div><div class="timer-val" id="tv">30:00</div><div class="timer-lbl">remaining</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+</div>
+
+<!-- Question Palette -->
+<div class="palette-bar">
+  <span class="pal-label">Questions:</span>
+  <div id="palette"></div>
+  <div class="pal-legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--indigo);"></div>Answered</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--card2);border:1px solid var(--bdr2);"></div>Not Answered</div>
+  </div>
+</div>
+
+<!-- Question Panels -->
+<div class="exam-body" id="exam-body"></div>
+
+<!-- Bottom Nav -->
+<div class="exam-nav">
+  <div class="nav-left">
+    <button class="btn-nav" id="btn-prev" onclick="nav(-1)" disabled>&#8592; Prev</button>
+    <button class="btn-nav" id="btn-next" onclick="nav(1)">Next &#8594;</button>
+    <button class="btn-clear" onclick="clearAns()">Clear</button>
+  </div>
+  <button class="btn-submit" onclick="openModal()">Submit Test &rarr;</button>
+</div>
+
+</div><!-- exam-page -->
+
+<!-- ════════════════ SUBMIT MODAL ════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Submit Test?</h2>
+    <p>You are about to submit your answers.</p>
+    <p style="color:var(--text3);font-size:12px;">You cannot change answers after submission.</p>
+    <div class="modal-stats">
+      <div class="ms"><div class="ms-v" style="color:#86EFAC;" id="m-ans">0</div><div class="ms-l">Answered</div></div>
+      <div class="ms"><div class="ms-v" style="color:#FCA5A5;" id="m-notans">30</div><div class="ms-l">Not Answered</div></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Go Back</button>
+      <button class="btn-confirm" onclick="submitTest()">Submit Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ RESULTS PAGE ════════════════ -->
+<div id="results-page">
+  <div class="results-hero">
+    <div class="result-ring-wrap">
+      <div class="result-ring" id="rring">
+        <div class="ring-inner">
+          <div class="ring-score" id="rscore">0/30</div>
+          <div class="ring-pct" id="rpct">0%</div>
+        </div>
+      </div>
+    </div>
+    <div class="result-grade" id="rgrade"></div>
+    <div class="result-msg" id="rmsg"></div>
+    <div class="result-stats">
+      <div class="rs"><div class="rs-v" style="color:#86EFAC;" id="rs-cor">0</div><div class="rs-l">Correct</div></div>
+      <div class="rs"><div class="rs-v" style="color:#FCA5A5;" id="rs-wrg">0</div><div class="rs-l">Wrong</div></div>
+      <div class="rs"><div class="rs-v" style="color:#6688B4;" id="rs-skp">0</div><div class="rs-l">Skipped</div></div>
+      <div class="rs"><div class="rs-v" style="color:#FCD34D;" id="rs-pct">0%</div><div class="rs-l">Score</div></div>
+    </div>
+  </div>
+
+  <div class="results-body">
+    <div id="correct-section"></div>
+    <div id="wrong-section"></div>
+    <div id="skipped-section"></div>
+  </div>
+
+  <div class="restart-bar">
+    <button class="btn-restart" onclick="restartExam()">&#8617; Restart Exam</button>
+  </div>
+</div>
+
+<script>
+const QS = [{"q": "The most dangerous symptoms of hypoxia at altitude are:", "o": ["Breathlessness and reduced night vision", "Euphoria and impairment of judgement", "Hyperventilation"], "a": 1, "e": "EUPHORIA and IMPAIRED JUDGEMENT are the most dangerous \u2014 the pilot feels well and cannot recognise they are hypoxic. This self-deception prevents corrective action. Breathlessness and hyperventilation at least signal a problem; euphoria gives false reassurance."}, {"q": "To safely supply the crew with oxygen, at which altitude is it necessary to breathe 100% oxygen PLUS pressure after a rapid decompression?", "o": ["Approximately 33,000 ft", "Approximately 38,000 ft", "Approximately 45,000 ft"], "a": 1, "e": "Above ~38,000\u201340,000 ft, even 100% O2 is insufficient because ambient pressure is too low for adequate gas exchange \u2014 PRESSURE BREATHING is required. Below 38,000 ft, 100% O2 without pressure is sufficient. Above the Armstrong Line (63,000 ft), no mask can help."}, {"q": "When the pilot suffers from hypothermia (loss of cabin heating):", "o": ["His oxygen need will not be affected", "His oxygen need will be raised and his tolerance to hypoxia will be increased", "His need for oxygen will be increased as long as he stays conscious"], "a": 2, "e": "Cold increases metabolic rate as the body tries to maintain core temperature \u2014 OXYGEN DEMAND RISES. Tolerance to hypoxia is actually DECREASED, not increased, in cold conditions. The body is already under physiological stress, leaving less reserve to handle oxygen deprivation."}, {"q": "'Tunnel vision' (loss of peripheral vision) can be observed if a pilot is subjected to more than:", "o": ["+3.5 Gy", "-3.5 Gz", "+3.5 Gz"], "a": 2, "e": "+Gz (positive G, head-to-toe direction) causes blood to pool away from the brain. Progression: +2-3G = grey-out \u2192 +3.5G = TUNNEL VISION (loss of peripheral vision) \u2192 +4-6G = black-out \u2192 G-LOC. Gz = vertical axis; Gy = lateral axis."}, {"q": "'Grey out' can be observed if a pilot is subjected to more than:", "o": ["+3 Gz", "-3 G", "+3 Gy"], "a": 0, "e": "GREY-OUT begins at approximately +3 Gz \u2014 loss of colour vision first, then peripheral dimming. Caused by reduced blood supply to the retina as positive G pulls blood away from the head. Tunnel vision follows at ~+3.5 Gz, then blackout at ~+4-6 Gz."}, {"q": "How can a pilot increase his tolerance to +Gz?", "o": ["Relax the muscles, duck the head and lean upper body forward", "Tightening of muscles, ducking the head and perform a kind of pressure breathing", "Take an upright seat position"], "a": 1, "e": "G-tolerance increases by: TENSING large muscle groups (especially legs and abdomen \u2014 Anti-G Straining Manoeuvre), DUCKING the head to shorten the distance between heart and brain, and PRESSURE BREATHING. Relaxing muscles does the opposite."}, {"q": "A passenger complains about a painful inflated belly at 8,000 feet. You advise him to:", "o": ["1, 2 and 4 are correct", "1, 2 and 3 are correct", "1 and 3 not advisable"], "a": 1, "e": "Options 1 (unbuckle/massage) and 2 (stand and pass gas) are reasonable relief measures. Option 3 (less gas-forming food and no carbonated drinks BEFORE flight) is the correct PREVENTIVE advice. Option 4 (drink water) is wrong \u2014 water does not relieve intestinal gas. So 1, 2 and 3 are correct."}, {"q": "In the pulmonary artery there is:", "o": ["Oxygen poor and carbon dioxide rich blood", "Oxygen poor and carbon dioxide poor blood", "Oxygen rich and carbon dioxide rich blood"], "a": 0, "e": "The PULMONARY ARTERY carries DEOXYGENATED blood FROM the right ventricle TO the lungs \u2014 it is oxygen-POOR and CO2-RICH. After passing through the lungs, the pulmonary VEIN carries oxygenated blood back to the left heart. Memory: arteries carry blood AWAY from the heart."}, {"q": "The transfer of carbon dioxide from the blood to the alveoli can be described by:", "o": ["Boyle's Law", "Dalton's Law", "The law of diffusion"], "a": 2, "e": "CO2 moves from blood to alveoli by DIFFUSION \u2014 following the concentration gradient from high (blood) to low (alveoli). Graham's Law (a form of diffusion law) governs this. Boyle's = pressure/volume. Dalton's = partial pressures. Diffusion = movement across membranes."}, {"q": "Some hours after rapid decompression at FL 300 you experience pain in the joints. Which answer is correct?", "o": ["This symptom indicates DCS and will disappear when you take some exercise", "You should ask for medical advice since this is a symptom of decompression sickness", "This phenomenon is treated by breathing 100% nitrogen"], "a": 1, "e": "Joint pain after decompression = DECOMPRESSION SICKNESS (the Bends \u2014 nitrogen bubbles in joints). SEEK MEDICAL ADVICE IMMEDIATELY. Exercise makes it WORSE (increases circulation, spreading bubbles). Treatment = hyperbaric recompression chamber with O2, NOT nitrogen."}, {"q": "Which symptom does NOT belong to the following list (i.e. is NOT a DCS symptom)?", "o": ["Leans", "Bends", "Chokes"], "a": 0, "e": "The LEANS is a VESTIBULAR ILLUSION (spatial disorientation), NOT a decompression sickness symptom. The BENDS = joint pain (DCS Type I). The CHOKES = pulmonary DCS (chest pain, cough, breathlessness \u2014 DCS Type II). Leans = the odd one out."}, {"q": "Which of the following statements is correct?", "o": ["Hearing is the sense which collects most information in man", "70% of information processed by man enters via the visual channel", "40% of information processed by man enters via the visual channel"], "a": 1, "e": "Approximately 70\u201380% of all information humans process enters via the VISUAL channel. This is why visual illusions are so dangerous in aviation, and why cockpit display design and lighting are critical. Hearing is secondary (~20%)."}, {"q": "Adaptation is:", "o": ["The adjustment of the crystalline lens to focus light on the retina", "The change of the diameter of the pupil", "The adjustment of the eyes to high or low levels of illumination"], "a": 2, "e": "ADAPTATION = the eye's adjustment to different light levels \u2014 both dark adaptation (rods taking ~30 min) and light adaptation (cones, very fast ~1 min). Option A = ACCOMMODATION (lens shape change for focus). Option B = PUPILLARY REFLEX (light quantity control)."}, {"q": "Occasional motion sickness may be relieved by:", "o": ["Keeping the head upright and still, if possible using eyes to orientate oneself", "Moving the head vigorously to loosen neck muscles", "Closing cockpit ventilators to decrease temperature"], "a": 0, "e": "Motion sickness relief: KEEP HEAD STILL and upright (reduces semicircular canal stimulation), use VISUAL REFERENCES to stabilise sensory input. Moving the head vigorously makes it worse. Cold fresh air HELPS (closing vents worsens nausea)."}, {"q": "To prevent the 'autokinetic phenomenon', the following can be done:", "o": ["Fix at the source of light, first with one eye, then with the other", "Look sideways to the source of light for better fixation", "Look out for additional references inside and/or outside the cockpit using peripheral vision"], "a": 2, "e": "Autokinesis = stationary light appears to move in a dark visual field. Prevention: use ADDITIONAL VISUAL REFERENCES (multiple reference points prevent the illusion). Also: move the eyes regularly (do not stare fixedly). Option A and B reinforce fixation on the single point \u2014 making it worse."}, {"q": "The time an eye needs to adapt fully to the dark is about:", "o": ["30 minutes", "7 minutes", "15 minutes"], "a": 0, "e": "Full DARK ADAPTATION = approximately 30 MINUTES. Cones adapt quickly (~7 min) but rods \u2014 which provide night vision \u2014 take the full 30 minutes. Brief exposure to white light can destroy dark adaptation. Red cockpit lighting preserves rod adaptation."}, {"q": "The part(s) of the eye responsible for night vision:", "o": ["Are the cones and rods", "Is the cornea", "Are rods"], "a": 2, "e": "RODS are solely responsible for night/scotopic vision. They are concentrated in the peripheral retina and are absent from the fovea centralis. Cones = colour/detail/bright light (photopic) vision. The cornea and lens focus light but do not detect it."}, {"q": "Empty field myopia is caused by:", "o": ["Atmospheric perspective", "Lack of distant focal points", "Flying over mountainous terrain"], "a": 1, "e": "Empty field myopia = the eye defaults to its REST FOCAL LENGTH (~2 metres) when there are no distant objects to focus on (e.g. haze, featureless sky, night). A distant aircraft at 6+ km appears blurred. Solution: scan systematically and shift focus deliberately."}, {"q": "The human ear is capable of perceiving vibrations between the frequencies:", "o": ["10\u201316 Hz", "16\u201320,000 Hz", "20,000\u2013420,000 Hz"], "a": 1, "e": "Human hearing range = 16\u201320,000 Hz (20 Hz to 20 kHz). Below 16 Hz = infrasound (felt, not heard). Above 20,000 Hz = ultrasound (bats, dolphins). Maximum sensitivity = 1,000\u20134,000 Hz. Hearing declines with age, especially at high frequencies (presbycusis)."}, {"q": "What is understood by air-sickness?", "o": ["A sensory conflict within the vestibular system accompanied by nausea, vomiting and fear", "An illness caused by evaporation of gases in the blood", "An illness caused by an infection of the middle ear"], "a": 0, "e": "Air-sickness = SENSORY CONFLICT between vestibular (inner ear), visual, and proprioceptive systems. The brain receives contradictory signals and responds with nausea, vomiting, pallor, sweating. Option B = DCS (gas evaporation). Option C = labyrinthitis (infection)."}, {"q": "Approaches at night without visual ground references and no landing aids can make the pilot believe they are:", "o": ["Lower than actual altitude with the risk of ducking under", "Lower than actual altitude with the risk of overshooting", "Higher than actual altitude with the risk of landing short ('ducking under')"], "a": 2, "e": "Black hole approach illusion: no visual references \u2192 pilot perceives themselves as HIGHER than actual \u2192 flies a LOWER/FLATTER approach \u2192 risk of flying into terrain short of the runway (ducking under). This illusion causes numerous night approach accidents. VASIS/PAPI prevent this."}, {"q": "Orientation in flight is accomplished by: (1)Eyes (2)Utriculus and sacculus (3)Semicircular canals (4)Seat-of-the-pants sense", "o": ["Only 1 and 4 are correct", "1, 2, 3 and 4 are correct", "1, 2, 3 and 4 are false, only 1 is correct"], "a": 1, "e": "All four contribute to spatial orientation: Eyes (primary visual cues), Utricle/Saccule (linear acceleration/gravity \u2014 otolith organs), Semicircular canals (angular acceleration/rotation), Proprioception/kinaesthetic (seat-of-pants). In IMC all non-visual cues can be misleading \u2014 instruments must dominate."}, {"q": "What can a pilot do to avoid 'Flicker vertigo' when flying in the clouds?", "o": ["Switch the cockpit lights off", "Dim the cockpit lights to avoid reflections", "Engage the autopilot until breaking the clouds"], "a": 0, "e": "Flicker vertigo is caused by strobe/anti-collision lights reflecting off cloud, creating flicker at 4\u201320 Hz. Solution = SWITCH OFF the offending lights (strobe/beacon) when in cloud. Dimming does not stop the flicker frequency. Autopilot does not prevent the light stimulus."}, {"q": "During flight in IMC, the most reliable sense to overcome illusions is the:", "o": ["Seat-of-the-pants sense", "Visual sense by looking outside", "Visual sense, interpreting the attitude indicator"], "a": 2, "e": "In IMC the ATTITUDE INDICATOR is the single most reliable reference. Vestibular senses (seat-of-pants) are UNRELIABLE in IMC \u2014 they generate most spatial disorientation illusions. Looking outside = no references in cloud. Trust the instruments. This is the core anti-disorientation principle."}, {"q": "It is inadvisable to fly when suffering from a cold. The reason is:", "o": ["Swollen tissue near nasal end of the Eustachian tube causes difficulty equalising middle ear pressure, causing pain and potential eardrum damage especially during fast descents", "Although pressure changes at lower altitudes are small, they increase at high altitudes causing eardrum damage in gentle descents", "Swollen tissue in the inner ear increases metabolic rate resulting in hyperventilation"], "a": 0, "e": "A cold causes SWELLING of the tissue around the Eustachian tube, preventing pressure equalisation of the middle ear during pressure changes (especially DESCENT when ambient pressure rises). This causes ear pain (aerotitis/otic barotrauma) and can rupture the eardrum."}, {"q": "The metabolisation of alcohol:", "o": ["Is quicker when used to it", "Is a question of time", "Can be influenced by easy to get medication"], "a": 1, "e": "Alcohol metabolism is a FIXED RATE determined by liver enzyme capacity \u2014 approximately 1 unit per hour regardless of tolerance, body weight, coffee, water, food, or medication. Tolerance affects perceived effects but NOT the metabolic rate. Only TIME removes alcohol from the system."}, {"q": "The first stage in the information processing sequence is:", "o": ["Perception", "The recognition of information", "Sensory stimulation"], "a": 2, "e": "Information processing sequence: SENSORY STIMULATION (raw stimulus hits sense organ) \u2192 Perception (brain interprets) \u2192 Recognition \u2192 Decision \u2192 Action. Sensory stimulation is the first stage \u2014 the physical stimulus must reach the receptor before any processing begins."}, {"q": "Motor programmes are:", "o": ["Stored routines that enable patterns of behaviour to be executed without continuous conscious control", "Rules that enable us to deal with preconceived situations", "Stored routines that enable patterns of behaviour to be executed only under continuous conscious control"], "a": 0, "e": "Motor programmes = stored AUTOMATIC routines executed WITHOUT conscious control (e.g. landing flare, throttle movements after thousands of hours). They free up conscious resources for situational awareness. Errors occur when routines are interrupted or applied in wrong context."}, {"q": "Which human error rate can be described as both realistic and pretty good after methodical training?", "o": ["1 in 10 times", "1 in 100 times", "1 in 1000 times"], "a": 1, "e": "1 in 100 (1%) error rate is considered realistic and good for trained humans performing routine procedural tasks. 1 in 10 = too high/untrained. 1 in 1000 = unrealistically optimistic for repeated tasks. This is why redundancy (cross-checks, SOPs, checklists) is essential."}, {"q": "Acute stress quickly leads to:", "o": ["A decrease in the amount of resources mobilised to face the situation", "A state of over-activation beyond the control of willpower", "The mobilisation of resources required to cope with the stressors"], "a": 2, "e": "ACUTE (sudden/short-term) stress = immediate MOBILISATION of resources \u2014 adrenaline release, heightened alertness, increased heart rate/blood pressure (fight-or-flight). This is adaptive in the short term. Chronic stress depletes resources. Option B = burnout/exhaustion (chronic). Option A = wrong direction."}];
+
+let CUR = 0;
+let ANSWERS = new Array(QS.length).fill(null);
+let TL = 1800;
+let TI = null;
+
+// ── BUILD QUESTION PANELS ──
+function buildExam() {
+  const body = document.getElementById('exam-body');
+  const pal  = document.getElementById('palette');
+  const labs = ['A','B','C','D'];
+  body.innerHTML = '';
+  pal.innerHTML  = '';
+
+  QS.forEach(function(q, qi) {
+    // Palette button
+    var pb = document.createElement('button');
+    pb.className = 'pal-btn' + (qi === 0 ? ' current' : '');
+    pb.id = 'pb' + qi;
+    pb.textContent = qi + 1;
+    pb.onclick = (function(i){ return function(){ goTo(i); }; })(qi);
+    pal.appendChild(pb);
+
+    // Panel
+    var opts = '';
+    q.o.forEach(function(opt, oi) {
+      opts += '<div class="qopt" id="o' + qi + '_' + oi + '" onclick="pick(' + qi + ',' + oi + ')">'
+        + '<div class="olbl">' + labs[oi] + '</div>'
+        + '<div>' + opt + '</div></div>';
+    });
+
+    var panel = document.createElement('div');
+    panel.className = 'qpanel' + (qi === 0 ? ' active' : '');
+    panel.id = 'qp' + qi;
+    panel.innerHTML = '<div class="qcard">'
+      + '<div class="qmeta">'
+      + '<span class="qnum-badge">Question ' + (qi+1) + ' / ' + QS.length + '</span>'
+      + '<span class="q-marks">1 mark</span>'
+      + '</div>'
+      + '<div class="qtext">' + q.q + '</div>'
+      + '<div class="qopts">' + opts + '</div>'
+      + '</div>';
+    body.appendChild(panel);
+  });
+  updateNav();
+}
+
+function pick(qi, oi) {
+  // Deselect previous
+  if (ANSWERS[qi] !== null) {
+    var prev = document.getElementById('o' + qi + '_' + ANSWERS[qi]);
+    if (prev) { prev.classList.remove('selected'); }
+  }
+  ANSWERS[qi] = oi;
+  var el = document.getElementById('o' + qi + '_' + oi);
+  if (el) el.classList.add('selected');
+  // Mark palette
+  var pb = document.getElementById('pb' + qi);
+  if (pb) pb.classList.add('answered');
+  updateProgress();
+}
+
+function clearAns() {
+  if (ANSWERS[CUR] !== null) {
+    var prev = document.getElementById('o' + CUR + '_' + ANSWERS[CUR]);
+    if (prev) prev.classList.remove('selected');
+    ANSWERS[CUR] = null;
+    var pb = document.getElementById('pb' + CUR);
+    if (pb) pb.classList.remove('answered');
+    updateProgress();
+  }
+}
+
+function goTo(i) {
+  document.getElementById('qp' + CUR).classList.remove('active');
+  document.getElementById('pb' + CUR).classList.remove('current');
+  CUR = i;
+  document.getElementById('qp' + CUR).classList.add('active');
+  document.getElementById('pb' + CUR).classList.add('current');
+  updateNav();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nav(dir) { goTo(Math.max(0, Math.min(QS.length - 1, CUR + dir))); }
+
+function updateNav() {
+  document.getElementById('btn-prev').disabled = CUR === 0;
+  document.getElementById('btn-next').disabled = CUR === QS.length - 1;
+}
+
+function updateProgress() {
+  var done = ANSWERS.filter(function(a){ return a !== null; }).length;
+  document.getElementById('prog').style.width = (done / QS.length * 100) + '%';
+}
+
+// ── TIMER ──
+function startTimer() {
+  TI = setInterval(function() {
+    TL--;
+    var m = Math.floor(TL / 60), s = TL % 60;
+    var d = document.getElementById('tv');
+    if (d) {
+      d.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      if (TL <= 120) d.style.color = '#EF4444';
+    }
+    if (TL <= 0) { clearInterval(TI); submitTest(); }
+  }, 1000);
+}
+
+// ── MODAL ──
+function openModal() {
+  var ans = ANSWERS.filter(function(a){ return a !== null; }).length;
+  document.getElementById('m-ans').textContent    = ans;
+  document.getElementById('m-notans').textContent = QS.length - ans;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+// ── SUBMIT ──
+function submitTest() {
+  clearInterval(TI);
+  closeModal();
+  document.getElementById('exam-page').style.display = 'none';
+
+  var correct = 0, wrong = 0, skipped = 0;
+  var corrList = [], wrgList = [], skpList = [];
+  var labs = ['A','B','C','D'];
+
+  QS.forEach(function(q, qi) {
+    var sel = ANSWERS[qi];
+    if (sel === null) {
+      skipped++;
+      skpList.push({qi: qi, q: q, sel: sel});
+    } else if (sel === q.a) {
+      correct++;
+      corrList.push({qi: qi, q: q, sel: sel});
+    } else {
+      wrong++;
+      wrgList.push({qi: qi, q: q, sel: sel});
+    }
+  });
+
+  var pct = Math.round(correct / QS.length * 100);
+  var pass = pct >= 75;
+  var grade = pct >= 90 ? 'Distinction' : pct >= 80 ? 'Credit' : pct >= 75 ? 'Pass' : 'Fail';
+  var color = pass ? '#22C55E' : '#EF4444';
+  var msg = pct >= 90 ? 'Outstanding mastery of HP&L!' :
+            pct >= 80 ? 'Excellent work. Minor areas to review.' :
+            pct >= 75 ? 'Passed. Study the wrong answers carefully.' :
+            'Needs revision. Focus on the explanations below.';
+
+  document.getElementById('rring').style.setProperty('--p', pct + '%');
+  document.getElementById('rring').style.setProperty('--c', color);
+  document.getElementById('rscore').textContent = correct + '/' + QS.length;
+  document.getElementById('rscore').style.color = color;
+  document.getElementById('rpct').textContent = pct + '%';
+  document.getElementById('rgrade').textContent = (pass ? '&#10003; ' : '&#10007; ') + grade;
+  document.getElementById('rgrade').style.color = color;
+  document.getElementById('rmsg').textContent = msg;
+  document.getElementById('rs-cor').textContent = correct;
+  document.getElementById('rs-wrg').textContent = wrong;
+  document.getElementById('rs-skp').textContent = skipped;
+  document.getElementById('rs-pct').textContent = pct + '%';
+
+  function buildRevCard(item, type) {
+    var q = item.q, qi = item.qi, sel = item.sel;
+    var opts = '';
+    q.o.forEach(function(opt, oi) {
+      var cls = 'neutral';
+      var tag = '';
+      if (oi === q.a) { cls = 'correct-ans'; tag = ' &#10003;'; }
+      else if (oi === sel && sel !== q.a) { cls = 'wrong-ans'; tag = ' &#10007;'; }
+      opts += '<div class="rev-opt ' + cls + '"><span class="rev-opt-lbl">' + labs[oi] + '</span><div>' + opt + tag + '</div></div>';
+    });
+    return '<div class="rev-card ' + type + '">'
+      + '<div class="rev-header ' + type + '">'
+      + '<span class="rev-qnum">Q' + (qi + 1) + '</span>'
+      + '<span class="rev-badge ' + (type === 'correct' ? 'c' : 'w') + '">' + (type === 'correct' ? '&#10003; Correct' : type === 'wrong' ? '&#10007; Wrong' : '&#9633; Skipped') + '</span>'
+      + '</div>'
+      + '<div class="rev-body">'
+      + '<div class="rev-qtext">' + q.q + '</div>'
+      + '<div class="rev-opts">' + opts + '</div>'
+      + (type !== 'correct' ? '<div class="rev-exp"><div class="rev-exp-h">Explanation</div>' + q.e + '</div>' : '')
+      + '</div></div>';
+  }
+
+  // Wrong answers section (shown first — most important)
+  var wSec = document.getElementById('wrong-section');
+  if (wrgList.length > 0) {
+    var wHTML = '<div class="section-label">&#10007; Wrong Answers (' + wrgList.length + ')</div>';
+    wrgList.forEach(function(item) { wHTML += buildRevCard(item, 'wrong'); });
+    wSec.innerHTML = wHTML;
+  }
+
+  // Skipped section
+  var sSec = document.getElementById('skipped-section');
+  if (skpList.length > 0) {
+    var sHTML = '<div class="section-label">&#9633; Skipped (' + skpList.length + ')</div>';
+    skpList.forEach(function(item) {
+      var q = item.q, qi = item.qi;
+      var opts = '';
+      q.o.forEach(function(opt, oi) {
+        var cls = oi === q.a ? 'correct-ans' : 'neutral';
+        var tag = oi === q.a ? ' &#10003;' : '';
+        opts += '<div class="rev-opt ' + cls + '"><span class="rev-opt-lbl">' + labs[oi] + '</span><div>' + opt + tag + '</div></div>';
+      });
+      sHTML += '<div class="rev-card wrong">'
+        + '<div class="rev-header wrong"><span class="rev-qnum">Q' + (qi+1) + '</span><span class="rev-badge w">&#9633; Skipped</span></div>'
+        + '<div class="rev-body"><div class="rev-qtext">' + q.q + '</div><div class="rev-opts">' + opts + '</div>'
+        + '<div class="rev-exp"><div class="rev-exp-h">Explanation</div>' + q.e + '</div></div></div>';
+    });
+    sSec.innerHTML = sHTML;
+  }
+
+  // Correct answers section (compact, at bottom)
+  var cSec = document.getElementById('correct-section');
+  if (corrList.length > 0) {
+    var cHTML = '<div class="section-label">&#10003; Correct Answers (' + corrList.length + ')</div>';
+    corrList.forEach(function(item) { cHTML += buildRevCard(item, 'correct'); });
+    cSec.innerHTML = cHTML;
+  }
+
+  document.getElementById('results-page').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function restartExam() {
+  ANSWERS = new Array(QS.length).fill(null);
+  CUR = 0;
+  TL = 1800;
+  document.getElementById('results-page').style.display = 'none';
+  document.getElementById('exam-page').style.display    = 'block';
+  var tv = document.getElementById('tv');
+  tv.textContent = '30:00';
+  tv.style.color = '#FCA5A5';
+  buildExam();
+  startTimer();
+  window.scrollTo({top: 0});
+}
+
+// ── INIT ──
+buildExam();
+startTimer();
+</script>
+</body>
+</html>

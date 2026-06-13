@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA HPL &mdash; Sample Paper 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --acc:#F97316;--sky:#0EA5E9;--green:#22C55E;--red:#EF4444;--purple:#A855F7;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.11);
+  --ac-bg:rgba(249,115,22,.10);--gn-bg:rgba(34,197,94,.10);--rd-bg:rgba(239,68,68,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+/* ─ HEADER ─ */
+.ehdr{background:var(--bg2);border-bottom:2px solid var(--bdr2);position:sticky;top:0;z-index:200;}
+.etop{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;flex-wrap:wrap;gap:10px;}
+.etitle{display:flex;flex-direction:column;}
+.ename{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;}
+.esub{font-size:11px;color:var(--text2);margin-top:1px;}
+.emeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.epill{background:var(--card);border:1px solid var(--bdr2);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--text2);}
+.epill strong{color:var(--text);}
+.tclock{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:6px 14px;display:flex;align-items:center;gap:7px;}
+.tval{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;}
+.tlbl{font-size:10px;color:var(--text2);}
+.estrip{height:4px;background:var(--bdr);}
+.efill{height:100%;background:linear-gradient(90deg,var(--acc),var(--purple));transition:width .5s;}
+/* ─ PALETTE ─ */
+.palbar{background:var(--bg3);border-bottom:1px solid var(--bdr);padding:9px 20px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.pal-lbl{font-size:11px;color:var(--text3);font-weight:600;margin-right:4px;flex-shrink:0;}
+.pb{width:30px;height:30px;border-radius:6px;border:1px solid var(--bdr2);background:var(--card2);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .12s;flex-shrink:0;}
+.pb:hover{border-color:var(--acc);color:#FB923C;}
+.pb.ans{background:rgba(249,115,22,.18);border-color:var(--acc);color:#FB923C;}
+.pb.cur{background:var(--acc);border-color:var(--acc);color:#000;}
+.pleg{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;}
+.pleg-i{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);}
+.pleg-d{width:10px;height:10px;border-radius:3px;}
+/* ─ BODY ─ */
+.ebody{max-width:860px;margin:0 auto;padding:24px 16px 100px;}
+.qpanel{display:none;}.qpanel.active{display:block;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:28px;margin-bottom:14px;}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.qbadge{background:var(--ac-bg);border:1px solid rgba(249,115,22,.3);color:#FB923C;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.qmark{font-size:12px;color:var(--text3);}
+.qtxt{font-size:16px;font-weight:600;color:#fff;line-height:1.7;margin-bottom:24px;}
+.qopts{display:flex;flex-direction:column;gap:10px;}
+.qopt{background:var(--card2);border:2px solid var(--bdr2);border-radius:12px;padding:14px 18px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s;display:flex;align-items:flex-start;gap:14px;font-family:'Space Grotesk',sans-serif;line-height:1.55;}
+.qopt:hover{border-color:var(--acc);color:#fff;background:var(--ac-bg);}
+.qopt.sel{border-color:var(--acc);background:var(--ac-bg);color:#FB923C;}
+.qopt.sel .olbl{background:var(--acc);border-color:var(--acc);color:#000;}
+.olbl{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px;transition:all .15s;}
+/* ─ NAV ─ */
+.enav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--bdr2);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:100;}
+.nleft{display:flex;gap:8px;}
+.nbtn{background:var(--card);border:1px solid var(--bdr2);color:var(--text2);padding:9px 18px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .13s;}
+.nbtn:hover{border-color:var(--sky);color:#7DD3FC;}
+.nbtn:disabled{opacity:.3;pointer-events:none;}
+.clrbtn{background:transparent;border:1px solid rgba(239,68,68,.4);color:#FCA5A5;padding:9px 14px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
+.clrbtn:hover{background:var(--rd-bg);}
+.subbtn{background:var(--green);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .13s;}
+.subbtn:hover{background:#16A34A;color:#fff;}
+/* ─ MODAL ─ */
+.moverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;align-items:center;justify-content:center;}
+.moverlay.open{display:flex;}
+.mbox{background:var(--card);border:1px solid var(--bdr2);border-radius:18px;padding:32px;max-width:440px;width:90%;text-align:center;}
+.mbox h2{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;}
+.mbox p{font-size:14px;color:var(--text2);margin-bottom:4px;}
+.mstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.mst{background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:12px;text-align:center;}
+.mst-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.mst-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.mbtns{display:flex;gap:10px;justify-content:center;margin-top:6px;}
+.mbtn-ok{background:var(--green);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.mbtn-cancel{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:10px 20px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;cursor:pointer;}
+/* ─ RESULTS ─ */
+#rpage{display:none;}
+.rhero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:36px 24px;text-align:center;}
+.rring-w{display:flex;justify-content:center;margin-bottom:20px;}
+.rring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--rc,var(--acc)) var(--rp,0%),rgba(255,255,255,.06) 0);display:flex;align-items:center;justify-content:center;}
+.rinner{width:112px;height:112px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.rscore{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;}
+.rpct{font-size:12px;color:var(--text3);margin-top:2px;}
+.rgrade{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px;}
+.rmsg{font-size:14px;color:var(--text2);margin-bottom:22px;}
+.rstats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.rst{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:12px 20px;text-align:center;min-width:90px;}
+.rst-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.rst-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.rbody{max-width:860px;margin:0 auto;padding:28px 16px 60px;}
+.sec-lbl{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bdr);}
+/* review cards */
+.rcard{background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:10px;}
+.rcard.correct{border-color:rgba(34,197,94,.4);}
+.rcard.wrong{border-color:rgba(239,68,68,.4);}
+.rchead{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--bdr);}
+.rchead.correct{background:rgba(34,197,94,.05);}
+.rchead.wrong{background:rgba(239,68,68,.05);}
+.rcqnum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text2);}
+.rcbadge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+.rcbadge.c{background:rgba(34,197,94,.15);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.rcbadge.w{background:rgba(239,68,68,.15);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.rcbody{padding:18px;}
+.rcqtxt{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.6;}
+.rcopts{display:flex;flex-direction:column;gap:6px;}
+.rcopt{font-size:13px;padding:10px 14px;border-radius:8px;display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.rcopt.cor{background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.28);color:#86EFAC;}
+.rcopt.wrg{background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.28);color:#FCA5A5;}
+.rcopt.dim{color:var(--text3);}
+.rcopt-l{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;width:18px;}
+.rcexp{margin-top:14px;padding:13px 16px;background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:10px;font-size:13px;color:#FB923C;line-height:1.65;}
+.rcexp-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#F97316;margin-bottom:5px;}
+.rbar{background:var(--bg2);border-top:1px solid var(--bdr2);padding:14px 24px;display:flex;gap:10px;justify-content:center;}
+.rbtn{background:var(--acc);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.etop{flex-direction:column;align-items:flex-start;}.qtxt{font-size:14.5px;}.qopt{font-size:13px;}.palbar{padding:9px 14px;}}
+</style>
+</head>
+<body>
+
+<!-- ══ EXAM PAGE ══ -->
+<div id="epage">
+  <div class="ehdr">
+    <div class="etop">
+      <div class="etitle">
+        <div class="ename">DGCA CPL &mdash; Sample Paper 4</div>
+        <div class="esub">Human Performance &amp; Limitations &mdash; Set 4 &nbsp;|&nbsp; Arousal &middot; Fatigue &middot; Automation &middot; CRM &middot; Physiology</div>
+      </div>
+      <div class="emeta">
+        <div class="epill"><strong>30</strong> Questions</div>
+        <div class="epill">Pass: <strong>75%</strong></div>
+        <div class="tclock">
+          <span style="font-size:14px;">&#9200;</span>
+          <div><div class="tval" id="tv">30:00</div><div class="tlbl">remaining</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="estrip"><div class="efill" id="efill" style="width:0%"></div></div>
+  </div>
+
+  <div class="palbar">
+    <span class="pal-lbl">Questions:</span>
+    <div id="pal"></div>
+    <div class="pleg">
+      <div class="pleg-i"><div class="pleg-d" style="background:var(--acc);"></div>Answered</div>
+      <div class="pleg-i"><div class="pleg-d" style="background:var(--card2);border:1px solid var(--bdr2);"></div>Not Answered</div>
+    </div>
+  </div>
+
+  <div class="ebody" id="ebody"></div>
+
+  <div class="enav">
+    <div class="nleft">
+      <button class="nbtn" id="bprev" onclick="nav(-1)" disabled>&#8592; Prev</button>
+      <button class="nbtn" id="bnext" onclick="nav(1)">Next &#8594;</button>
+      <button class="clrbtn" onclick="clr()">Clear</button>
+    </div>
+    <button class="subbtn" onclick="openModal()">Submit Test &rarr;</button>
+  </div>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="moverlay" id="modal">
+  <div class="mbox">
+    <h2>Submit Test?</h2>
+    <p>You are about to submit your answers.</p>
+    <p style="color:var(--text3);font-size:12px;">Answers cannot be changed after submission.</p>
+    <div class="mstats">
+      <div class="mst"><div class="mst-v" style="color:#86EFAC;" id="m-a">0</div><div class="mst-l">Answered</div></div>
+      <div class="mst"><div class="mst-v" style="color:#FCA5A5;" id="m-u">30</div><div class="mst-l">Not Answered</div></div>
+    </div>
+    <div class="mbtns">
+      <button class="mbtn-cancel" onclick="closeModal()">Go Back</button>
+      <button class="mbtn-ok" onclick="submit()">Submit Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULTS PAGE ══ -->
+<div id="rpage">
+  <div class="rhero">
+    <div class="rring-w">
+      <div class="rring" id="rring">
+        <div class="rinner">
+          <div class="rscore" id="rsc">0/30</div>
+          <div class="rpct" id="rpt">0%</div>
+        </div>
+      </div>
+    </div>
+    <div class="rgrade" id="rgr"></div>
+    <div class="rmsg"   id="rmsg"></div>
+    <div class="rstats">
+      <div class="rst"><div class="rst-v" style="color:#86EFAC;" id="r-cor">0</div><div class="rst-l">Correct</div></div>
+      <div class="rst"><div class="rst-v" style="color:#FCA5A5;" id="r-wrg">0</div><div class="rst-l">Wrong</div></div>
+      <div class="rst"><div class="rst-v" style="color:#6688B4;" id="r-skp">0</div><div class="rst-l">Skipped</div></div>
+      <div class="rst"><div class="rst-v" style="color:#FCD34D;" id="r-pct">0%</div><div class="rst-l">Score</div></div>
+    </div>
+  </div>
+  <div class="rbody">
+    <div id="sec-wrong"></div>
+    <div id="sec-skip"></div>
+    <div id="sec-correct"></div>
+  </div>
+  <div class="rbar">
+    <button class="rbtn" onclick="restart()">&#8617; Restart Exam</button>
+  </div>
+</div>
+
+<script>
+const QS = [{"q": "In a complex task, high levels of arousal:", "o": ["Reduce failures", "Lead to better decision-making", "Narrows the span of attention"], "a": 2, "e": "Yerkes-Dodson Law: in COMPLEX tasks, high arousal NARROWS attention (tunnel vision), reducing the ability to monitor multiple cues. Moderate arousal is optimal for complex tasks. Only for simple/routine tasks does high arousal improve performance."}, {"q": "If during flight a pilot is in a mental condition of 'optimum arousal', he/she will be:", "o": ["Unprepared to handle a difficult situation", "Prepared best to cope with a difficult task", "In a confused mental state"], "a": 1, "e": "OPTIMUM AROUSAL = peak of the Yerkes-Dodson inverted-U curve = best performance for the task at hand. Neither under-aroused (bored, sluggish) nor over-aroused (anxious, tunnel vision). This is the target state for all operational flying."}, {"q": "Experiencing stress depends on:", "o": ["The individual interpretation of the situation", "The fragility of individuals to certain types of stimulation", "The individual's state of tiredness"], "a": 0, "e": "Stress is determined primarily by the INDIVIDUAL'S INTERPRETATION of the situation \u2014 the same event is stressful to one person and routine to another. This cognitive appraisal (Lazarus model) explains why stress is subjective and why CRM addresses attitude and perception."}, {"q": "What is the effect of tiredness on attention?", "o": ["It increases the ability to manage multiple matters", "It leads to one's attention being dispersed between different centres of interest", "It reduces the ability to manage multiple matters"], "a": 2, "e": "Fatigue REDUCES the ability to manage multiple concurrent tasks \u2014 it degrades divided attention, working memory, and cognitive flexibility. This is why fatigued crew miss callouts, forget checklist items, and lose situational awareness."}, {"q": "In order to completely resynchronise with local time after zone crossing, circadian rhythms require:", "o": ["About one week per 2.5 hours of time shift", "Less time when flying from east to west", "About one day per 2.5 hours of time shift"], "a": 1, "e": "The body resynchronises at approximately 1\u20131.5 hours per day (eastward) or 1.5\u20132 hours per day (westward). This means a 2.5-hour shift needs roughly 2 days westbound or more days eastbound. Westward is EASIER because we extend the day (body's natural >24hr cycle). Option B is correct."}, {"q": "During paradoxical sleep (REM sleep):", "o": ["Rapid eye movements can be observed", "The tone of the muscles is similar to that in the waking state", "The rhythm of the heart is very regular"], "a": 0, "e": "REM (paradoxical) sleep = RAPID EYE MOVEMENTS are the defining observable feature. Also: brain is highly active (as in waking), BUT muscles are PARALYSED (atonia \u2014 opposite of waking tone). Heart rhythm is IRREGULAR. It is called 'paradoxical' because the brain acts awake while the body is paralysed."}, {"q": "The physiological rhythms of a pilot in a new time zone will resynchronise at a rate of about:", "o": ["2\u20132.5 hours a day", "1.5\u20132 hours a day", "1\u20131.5 hours a day"], "a": 2, "e": "Circadian resynchronisation rate = approximately 1\u20131.5 hours per day when travelling EASTWARD (advancing the clock). Westward is slightly faster: 1.5\u20132 hours per day. Complete resynchronisation after a large time zone shift takes many days \u2014 sleep, light exposure, and melatonin can assist."}, {"q": "The duration of a period of sleep is governed primarily by:", "o": ["The point within your circadian rhythm at which you try to sleep", "The amount of time you have been awake", "The number of points you have in your credit/deficit system"], "a": 0, "e": "Sleep DURATION is governed primarily by WHERE in the circadian rhythm sleep occurs \u2014 sleeping at the wrong circadian phase (e.g. daytime after eastward flight) produces shorter, fragmented sleep. Sleep PRESSURE (time awake) affects DEPTH and ONSET more than duration. Circadian phase governs how long you stay asleep."}, {"q": "A high degree of cockpit automation may alter the traditional tasks of the pilots in a way that:", "o": ["It is guaranteed that the crew maintains situational awareness", "The attention of the cockpit crew will become reduced with the consequence of being out of the loop", "The crew can pay more attention to abnormal situations without monitoring automatic systems"], "a": 1, "e": "Automation complacency: crews shift to PASSIVE MONITORING, attention drifts, SA degrades \u2014 'out of the loop'. This is a well-documented automation hazard (AF447, Asiana 214). Automation does NOT guarantee SA \u2014 it demands active monitoring strategies to prevent passivity."}, {"q": "Which drawbacks are associated with automation? (1)Reduced proficiency in manual control (2)Increased slips while programming (3)Difficulty adapting to side stick (4)General decrease in technical reliability", "o": ["2, 3 and 4", "1 and 3 only", "1 and 2 only"], "a": 2, "e": "Known automation drawbacks: (1) REDUCED MANUAL FLYING PROFICIENCY \u2014 crews who rarely hand-fly lose skills; (2) INCREASED PROGRAMMING SLIPS \u2014 data entry errors (wrong altitude, heading) in FMS/automation. Options 3 and 4 are NOT standard automation drawbacks. Answer = 1 and 2."}, {"q": "Attitudes are defined as:", "o": ["Tendencies to respond to people, institutions or events either positively or negatively", "The conditions necessary for carrying out an activity", "A synonym for behaviour"], "a": 0, "e": "Attitudes = learned TENDENCIES to respond to people, institutions or events positively or negatively. They precede and predict behaviour but are not behaviour itself. CRM aims to develop POSITIVE attitudes toward safety, communication, and authority \u2014 attitudes can be modified through training."}, {"q": "Disturbance of the biological clock appears after: (1)Bad night's sleep (2)Day flight Delhi\u2013London (3)Day flight Delhi\u2013Colombo (4)Night flight London\u2013Delhi", "o": ["1, 2 and 3 are correct", "1 and 3 are correct", "2 and 4 are correct"], "a": 2, "e": "Biological clock disturbance requires TRANSMERIDIAN travel (crossing multiple time zones). (2) Delhi\u2013London = large eastward time zone crossing = jet lag. (4) Night flight London\u2013Delhi = large westward crossing = jet lag. (1) Bad sleep = fatigue, not jet lag. (3) Delhi\u2013Colombo = same/near time zone, minimal disruption. Answer = 2 and 4."}, {"q": "Flying Bengaluru to Moscow with a 4-day layover \u2014 what time measure is relevant for your circadian rhythm on the 3rd day?", "o": ["ZT (Zonal Time)", "LT (Local Time)", "UTC (Universal Coordinated Time)"], "a": 1, "e": "After 3 days in Moscow, the body has begun partially resynchronising to LOCAL TIME (Moscow time). The circadian rhythm adapts to the local light-dark cycle, meal times, and social cues. ZT and UTC do not relate to local environmental cues that reset the circadian clock."}, {"q": "Decompression leads to:", "o": ["Hypoxia", "Release of nitrogen bubbles in the body", "Instability of the aircraft"], "a": 0, "e": "DECOMPRESSION (cabin pressure loss) = HYPOXIA \u2014 the primary and immediate physiological threat. At altitude, ambient pressure drops, O2 partial pressure drops, O2 delivery to tissues fails. Nitrogen bubbles (DCS) can also occur but require prolonged or deep decompression at altitude \u2014 hypoxia is the IMMEDIATE consequence."}, {"q": "Decompression sickness is pronounced when the aircraft decompresses:", "o": ["From MSL to 7,000 feet", "From 7,000 feet to 35,000 feet", "From MSL to 15,000 feet"], "a": 1, "e": "DCS is most significant when decompressing to altitudes ABOVE 25,000\u201330,000 ft. The range 7,000\u201335,000 ft represents a large pressure drop with high altitude exposure. DCS requires sufficient altitude and time for nitrogen to come out of solution. MSL to 7,000 ft or 15,000 ft = insufficient altitude for significant DCS."}, {"q": "Depth in vision is achieved through:", "o": ["Visual memory", "Peripheral vision", "Binocular vision"], "a": 2, "e": "BINOCULAR VISION (stereopsis) provides depth perception by combining slightly different images from both eyes. The brain interprets the disparity as distance/depth. Monocular cues (perspective, size, overlap) also contribute but binocular vision is the primary physiological mechanism for accurate depth perception."}, {"q": "What is the role of RBCs (Red Blood Cells) in blood?", "o": ["Fight foreign bacteria", "Clot blood", "Transport oxygen"], "a": 2, "e": "RBCs contain HAEMOGLOBIN which binds and transports OXYGEN from lungs to tissues. White blood cells fight infection. Platelets facilitate clotting. CO poisoning is dangerous because CO binds haemoglobin 200\u2013250x more strongly than O2, blocking oxygen transport."}, {"q": "Types of hypoxia include:", "o": ["Stagnant hypoxia only", "Anaemic hypoxia only", "Both stagnant and anaemic hypoxia"], "a": 2, "e": "There are FOUR types of hypoxia: (1) HYPOXIC \u2014 reduced O2 in air (altitude); (2) HYPEMIC/ANAEMIC \u2014 reduced O2 carrying capacity of blood (CO poisoning, anaemia); (3) STAGNANT \u2014 poor circulation/delivery (heart failure, +G); (4) HISTOTOXIC \u2014 cells cannot use O2 (cyanide, alcohol). All four are valid types."}, {"q": "A person smoking one packet of cigarettes a day reduces O2 transport capacity by:", "o": ["0.5% to 2%", "5% to 8%", "12% to 18%"], "a": 1, "e": "Smoking one pack/day raises blood carboxyhaemoglobin (COHb) to approximately 5\u20138%, effectively reducing O2 transport capacity by 5\u20138%. This means a smoker at sea level has the physiological equivalent of being at 5,000\u20138,000 ft altitude. For pilots this is highly relevant for night vision and high-altitude performance."}, {"q": "Cold clammy skin is indicative of:", "o": ["Hypoxia", "Decompression sickness", "Hyperventilating"], "a": 2, "e": "Cold clammy skin = classic sign of HYPERVENTILATION \u2014 caused by reduced CO2 causing vasoconstriction and increased sweating. Hypoxia causes flushed/cyanotic skin. DCS causes joint pain, skin mottling. Cold + clammy + tingling + dizziness = hyperventilation triad."}, {"q": "Four important disciplines from which information is drawn in understanding human performance and behaviour are:", "o": ["Psychology, engineering, physiology, and anthropometry", "Sociology, mathematics, biology and industrial design", "Physics, biochemistry, physiology, and anthropometry"], "a": 0, "e": "The four core Human Factors disciplines are: PSYCHOLOGY (behaviour, cognition), ENGINEERING (systems, ergonomics), PHYSIOLOGY (body function, limits), and ANTHROPOMETRY (body dimensions). This is the ICAO/JAA standard framework for Human Factors in aviation training."}, {"q": "Technological advances in cockpit automation have:", "o": ["Significantly eliminated human errors", "Given rise to new forms of error", "Aimed to eliminate pilots from the cockpit"], "a": 1, "e": "Automation has GIVEN RISE TO NEW ERROR TYPES \u2014 data entry errors (FMS programming), mode confusion, automation surprise, and skill degradation. It has not eliminated human error; it has changed its nature. The error-producing mechanism shifted from stick-and-rudder to human-machine interface."}, {"q": "About what proportion of civil air accidents result from inadequate human performance?", "o": ["89%", "73%", "57%"], "a": 1, "e": "Approximately 70\u201380% of civil aviation accidents involve human performance failures. The ICAO/industry figure commonly cited is approximately 73\u201380%. This statistic underpins the entire Human Factors and CRM training requirement in aviation."}, {"q": "What is meant by the 'authority gradient'?", "o": ["The authority exercised by captain over all flight operations", "The authority relationship between captain and other crew members", "The authority relationship between captain and first officer"], "a": 2, "e": "The AUTHORITY GRADIENT specifically describes the power differential between CAPTAIN and FIRST OFFICER. Too STEEP = F/O will not challenge captain's errors (Tenerife). Too FLAT = no clear command structure, role confusion. Optimal gradient = F/O can speak freely while captain maintains clear command."}, {"q": "Introducing automation in a cockpit:", "o": ["Always reduces potential for human error and workload", "Generally relocates potential for error and increases workload in some areas", "Eliminates human error but workload increases"], "a": 1, "e": "Automation RELOCATES error potential (from flying errors to programming/monitoring errors) and INCREASES workload in some areas (FMS programming, mode management). It does not uniformly reduce error or workload. New high-workload phases = FMS programming during descent and approach."}, {"q": "High Arousal Overload results in:", "o": ["A real danger of attention becoming narrowed", "Attention becoming sharpest", "Optimum arousal for difficult cognitive tasks"], "a": 0, "e": "HIGH AROUSAL OVERLOAD = NARROWING of attention (tunnel vision/cognitive tunnelling). The pilot focuses on one cue while missing others. This is the danger zone on the right side of the Yerkes-Dodson curve \u2014 too much arousal degrades complex task performance and breadth of attention."}, {"q": "The most common symptoms of work overload are:", "o": ["Failures of interpersonal skills, communications, decision-making, and leadership", "Sharp degradation of performance, funnelling of attention, regression, mental blocking", "Difficulty of task, duration, fatigue and level of arousal"], "a": 1, "e": "Work overload symptoms: SHARP performance degradation, FUNNELLING of attention (focus narrows to one thing), REGRESSION (reverting to earlier less-sophisticated habits), MENTAL BLOCKING (inability to process new information). Option C describes CAUSES of overload, not symptoms. Option A = symptoms of poor CRM, not specifically overload."}, {"q": "Conditioned reflexes are:", "o": ["Instinctive natural reflexes, such as blinking", "Reflexes that may be increased by repeated practice", "Reflexes that may be learned"], "a": 2, "e": "CONDITIONED REFLEXES = LEARNED responses through conditioning (Pavlov). They are acquired through training and experience. Natural reflexes (blinking, knee-jerk) = unconditioned/instinctive. Conditioned reflexes can be strengthened by practice but the defining feature is that they are LEARNED, not innate."}, {"q": "Learning to fly:", "o": ["Involves motivation, attention, observation, practice and corrective feedback", "To sharpen skills, a trainee pilot should face challenging situations and take calculated risks", "Involves motor programmes, processing, actions and feedback"], "a": 0, "e": "Effective flight training requires: MOTIVATION (drive to learn), ATTENTION (focus), OBSERVATION (perceive correctly), PRACTICE (repetition builds motor programmes), and CORRECTIVE FEEDBACK (essential for improvement and error correction). This is the standard learning cycle in aviation education."}, {"q": "Pilots will feel more confident intervening (when they think a colleague has missed something) if they know that:", "o": ["The colleague acted irresponsibly and needs reprimanding", "It is common for everyone to miss obvious things, and the colleague also knows this", "No intervention is required if the colleague is a senior captain"], "a": 1, "e": "CRM ADVOCACY: pilots intervene more confidently when there is a SHARED UNDERSTANDING that error is normal and universal \u2014 not a sign of incompetence. When both crew members accept that 'everyone misses things sometimes,' the psychological barrier to speaking up is removed. This is a core CRM culture principle."}];
+const LABS = ['A','B','C','D'];
+let CUR=0, ANS=new Array(QS.length).fill(null), TL=1800, TI=null;
+
+function build(){
+  var body=document.getElementById('ebody'), pal=document.getElementById('pal');
+  body.innerHTML=''; pal.innerHTML='';
+  QS.forEach(function(q,qi){
+    var pb=document.createElement('button');
+    pb.className='pb'+(qi===0?' cur':''); pb.id='pb'+qi; pb.textContent=qi+1;
+    pb.onclick=(function(i){return function(){goTo(i);};})(qi);
+    pal.appendChild(pb);
+    var opts='';
+    q.o.forEach(function(opt,oi){
+      opts+='<div class="qopt" id="o'+qi+'_'+oi+'" onclick="pick('+qi+','+oi+')">'
+           +'<div class="olbl">'+LABS[oi]+'</div><div>'+opt+'</div></div>';
+    });
+    var p=document.createElement('div');
+    p.className='qpanel'+(qi===0?' active':''); p.id='qp'+qi;
+    p.innerHTML='<div class="qcard">'
+      +'<div class="qmeta"><span class="qbadge">Question '+(qi+1)+' / '+QS.length+'</span><span class="qmark">1 mark</span></div>'
+      +'<div class="qtxt">'+q.q+'</div>'
+      +'<div class="qopts">'+opts+'</div></div>';
+    body.appendChild(p);
+  });
+  updateNav();
+}
+
+function pick(qi,oi){
+  if(ANS[qi]!==null){var prev=document.getElementById('o'+qi+'_'+ANS[qi]);if(prev)prev.classList.remove('sel');}
+  ANS[qi]=oi;
+  var el=document.getElementById('o'+qi+'_'+oi); if(el)el.classList.add('sel');
+  var pb=document.getElementById('pb'+qi); if(pb)pb.classList.add('ans');
+  var done=ANS.filter(function(a){return a!==null;}).length;
+  document.getElementById('efill').style.width=(done/QS.length*100)+'%';
+}
+
+function clr(){
+  if(ANS[CUR]!==null){
+    var prev=document.getElementById('o'+CUR+'_'+ANS[CUR]); if(prev)prev.classList.remove('sel');
+    ANS[CUR]=null;
+    var pb=document.getElementById('pb'+CUR); if(pb)pb.classList.remove('ans');
+    var done=ANS.filter(function(a){return a!==null;}).length;
+    document.getElementById('efill').style.width=(done/QS.length*100)+'%';
+  }
+}
+
+function goTo(i){
+  document.getElementById('qp'+CUR).classList.remove('active');
+  document.getElementById('pb'+CUR).classList.remove('cur');
+  CUR=i;
+  document.getElementById('qp'+CUR).classList.add('active');
+  document.getElementById('pb'+CUR).classList.add('cur');
+  updateNav(); window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nav(d){goTo(Math.max(0,Math.min(QS.length-1,CUR+d)));}
+function updateNav(){document.getElementById('bprev').disabled=CUR===0;document.getElementById('bnext').disabled=CUR===QS.length-1;}
+
+function startTimer(){
+  TI=setInterval(function(){
+    TL--;
+    var m=Math.floor(TL/60),s=TL%60;
+    var d=document.getElementById('tv');
+    if(d){d.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;if(TL<=120)d.style.color='#EF4444';}
+    if(TL<=0){clearInterval(TI);submit();}
+  },1000);
+}
+
+function openModal(){
+  var a=ANS.filter(function(x){return x!==null;}).length;
+  document.getElementById('m-a').textContent=a;
+  document.getElementById('m-u').textContent=QS.length-a;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+function submit(){
+  clearInterval(TI); closeModal();
+  document.getElementById('epage').style.display='none';
+  var cor=0,wrg=0,skp=0,cL=[],wL=[],sL=[];
+  QS.forEach(function(q,qi){
+    var s=ANS[qi];
+    if(s===null){skp++;sL.push({qi:qi,q:q,sel:s});}
+    else if(s===q.a){cor++;cL.push({qi:qi,q:q,sel:s});}
+    else{wrg++;wL.push({qi:qi,q:q,sel:s});}
+  });
+  var pct=Math.round(cor/QS.length*100), pass=pct>=75;
+  var color=pass?'#22C55E':'#EF4444';
+  var grade=pct>=90?'Distinction':pct>=80?'Credit':pct>=75?'Pass':'Fail';
+  var msg=pct>=90?'Outstanding! Full command of Set 4.':pct>=80?'Excellent. Minor areas to revise.':pct>=75?'Passed. Study wrong answers below.':'Needs revision. Focus on arousal, automation and CRM topics.';
+  document.getElementById('rring').style.setProperty('--rp',pct+'%');
+  document.getElementById('rring').style.setProperty('--rc',color);
+  document.getElementById('rsc').textContent=cor+'/'+QS.length;
+  document.getElementById('rsc').style.color=color;
+  document.getElementById('rpt').textContent=pct+'%';
+  document.getElementById('rgr').textContent=(pass?'✓ ':'✗ ')+grade;
+  document.getElementById('rgr').style.color=color;
+  document.getElementById('rmsg').textContent=msg;
+  document.getElementById('r-cor').textContent=cor;
+  document.getElementById('r-wrg').textContent=wrg;
+  document.getElementById('r-skp').textContent=skp;
+  document.getElementById('r-pct').textContent=pct+'%';
+
+  function card(item,type){
+    var q=item.q,qi=item.qi,sel=item.sel,opts='';
+    q.o.forEach(function(opt,oi){
+      var c='dim',tag='';
+      if(oi===q.a){c='cor';tag=' ✓';}
+      else if(oi===sel&&sel!==q.a){c='wrg';tag=' ✗';}
+      opts+='<div class="rcopt '+c+'"><span class="rcopt-l">'+LABS[oi]+'</span><div>'+opt+tag+'</div></div>';
+    });
+    var showExp=type!=='correct';
+    return '<div class="rcard '+type+'">'
+      +'<div class="rchead '+type+'"><span class="rcqnum">Q'+(qi+1)+'</span>'
+      +'<span class="rcbadge '+(type==='correct'?'c':'w')+'">'+(type==='correct'?'✓ Correct':type==='wrong'?'✗ Wrong':'□ Skipped')+'</span></div>'
+      +'<div class="rcbody"><div class="rcqtxt">'+q.q+'</div><div class="rcopts">'+opts+'</div>'
+      +(showExp?'<div class="rcexp"><div class="rcexp-h">Explanation</div>'+q.e+'</div>':'')
+      +'</div></div>';
+  }
+
+  var wHTML='';
+  if(wL.length){wHTML='<div class="sec-lbl">✗ Wrong Answers ('+wL.length+')</div>';wL.forEach(function(i){wHTML+=card(i,'wrong');});}
+  document.getElementById('sec-wrong').innerHTML=wHTML;
+
+  var sHTML='';
+  if(sL.length){sHTML='<div class="sec-lbl">□ Skipped ('+sL.length+')</div>';sL.forEach(function(i){sHTML+=card(i,'skipped');});}
+  document.getElementById('sec-skip').innerHTML=sHTML;
+
+  var cHTML='';
+  if(cL.length){cHTML='<div class="sec-lbl">✓ Correct Answers ('+cL.length+')</div>';cL.forEach(function(i){cHTML+=card(i,'correct');});}
+  document.getElementById('sec-correct').innerHTML=cHTML;
+
+  document.getElementById('rpage').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function restart(){
+  ANS=new Array(QS.length).fill(null); CUR=0; TL=1800;
+  document.getElementById('rpage').style.display='none';
+  document.getElementById('epage').style.display='block';
+  var tv=document.getElementById('tv'); tv.textContent='30:00'; tv.style.color='#FCA5A5';
+  build(); startTimer(); window.scrollTo({top:0});
+}
+
+build(); startTimer();
+</script>
+</body>
+</html>

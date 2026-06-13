@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 19: Communications</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E1C;--bg2:#091525;--bg3:#0C1A2E;
+  --card:#0E1F38;--card2:#112540;
+  --cyan:#06B6D4;--blue:#3B82F6;--green:#10B981;
+  --amber:#F59E0B;--red:#EF4444;--purple:#A855F7;
+  --indigo:#6366F1;--teal:#14B8A6;--orange:#F97316;
+  --text:#D9E8FA;--text2:#7FA0C5;--text3:#3E5A7A;
+  --bdr:rgba(255,255,255,0.05);--bdr2:rgba(255,255,255,0.10);
+  --cyan-bg:rgba(6,182,212,.10);--blue-bg:rgba(59,130,246,.10);
+  --green-bg:rgba(16,185,129,.10);--amber-bg:rgba(245,158,11,.10);
+  --red-bg:rgba(239,68,68,.10);--purple-bg:rgba(168,85,247,.10);
+  --indigo-bg:rgba(99,102,241,.10);--teal-bg:rgba(20,184,166,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(6,182,212,.13) 0%,transparent 50%),radial-gradient(ellipse at 80% 0%,rgba(99,102,241,.10) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(6,182,212,.14);border:1px solid rgba(6,182,212,.35);color:#67E8F9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(23px,4.5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#67E8F9;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:13px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--cyan);color:#67E8F9;}
+.nb.active{background:var(--cyan);border-color:var(--cyan);color:#000;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 64px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.si-c{background:var(--cyan-bg);border:1px solid rgba(6,182,212,.3);}
+.si-b{background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);}
+.si-g{background:var(--green-bg);border:1px solid rgba(16,185,129,.3);}
+.si-p{background:var(--purple-bg);border:1px solid rgba(168,85,247,.3);}
+.si-a{background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);}
+.si-i{background:var(--indigo-bg);border:1px solid rgba(99,102,241,.3);}
+.si-t{background:var(--teal-bg);border:1px solid rgba(20,184,166,.3);}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#67E8F9;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(6,182,212,.12);color:#67E8F9;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(6,182,212,.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-c{background:var(--cyan-bg);color:#67E8F9;border:1px solid rgba(6,182,212,.25);}
+.b-g{background:var(--green-bg);color:#6EE7B7;border:1px solid rgba(16,185,129,.25);}
+.b-r{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-a{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-p{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-b{background:var(--blue-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.25);}
+.b-i{background:var(--indigo-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-c{background:var(--cyan-bg);border-color:var(--cyan);}
+.al-a{background:var(--amber-bg);border-color:var(--amber);}
+.al-r{background:var(--red-bg);border-color:var(--red);}
+.al-g{background:var(--green-bg);border-color:var(--green);}
+.al strong{color:#FCD34D;}.al-c strong{color:#67E8F9;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#6EE7B7;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#6EE7B7;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#67E8F9;}
+/* Q-CODE CARDS */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.qc{background:var(--card2);border:1px solid var(--bdr2);border-radius:11px;padding:14px;position:relative;overflow:hidden;}
+.qc::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;}
+.qc-nav::before{background:var(--cyan);}
+.qc-alt::before{background:var(--amber);}
+.qcode{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;margin-bottom:4px;}
+.qc-nav .qcode{color:#67E8F9;}.qc-alt .qcode{color:#FCD34D;}
+.qmean{font-size:12.5px;color:var(--text);font-weight:600;margin-bottom:3px;}
+.qtrick{font-size:11px;color:var(--text3);font-style:italic;}
+/* PRIORITY LADDER */
+.prio-box{border-radius:12px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;}
+.prio-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;width:44px;flex-shrink:0;text-align:center;}
+.prio-word{font-size:22px;font-weight:700;margin-bottom:3px;}
+.prio-desc{font-size:12.5px;color:var(--text2);}
+/* PRONUNCIATION TABLE */
+.pron-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:7px;}
+.pron-item{background:var(--card2);border:1px solid var(--bdr2);border-radius:8px;padding:9px;text-align:center;}
+.pron-dig{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#67E8F9;line-height:1;}
+.pron-say{font-size:11px;color:var(--text2);margin-top:3px;font-weight:600;}
+/* PHRASE TABLE */
+.phrase-item{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;background:var(--card2);border:1px solid var(--bdr);border-radius:9px;margin-bottom:6px;}
+.phrase-word{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#67E8F9;min-width:120px;flex-shrink:0;}
+.phrase-mean{font-size:13px;color:var(--text2);}
+/* READABILITY */
+.read-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--bdr);}
+.read-row:last-child{border-bottom:none;}
+.read-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;width:36px;flex-shrink:0;}
+.read-bar{flex:1;height:8px;border-radius:4px;overflow:hidden;background:rgba(255,255,255,.05);}
+.read-fill{height:100%;border-radius:4px;}
+.read-label{font-size:13px;color:var(--text2);width:180px;flex-shrink:0;}
+/* FREQ TABLE */
+.freq-item{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;margin-bottom:6px;}
+.freq-name{font-size:13px;font-weight:600;color:var(--text);}
+.freq-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#67E8F9;}
+.freq-band{font-size:11px;color:var(--text3);}
+/* WAVE BANDS */
+.band-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bdr);}
+.band-row:last-child{border-bottom:none;}
+.band-name{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:52px;flex-shrink:0;}
+.band-range{font-size:12.5px;color:var(--text2);flex:1;}
+.band-use{font-size:11.5px;}
+/* SSR CODES */
+.ssr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.ssr-box{border-radius:12px;padding:16px;text-align:center;border:1px solid;}
+.ssr-7500{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);}
+.ssr-7600{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);}
+.ssr-7700{background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.3);}
+.ssr-code{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;margin-bottom:6px;}
+.ssr-7500 .ssr-code{color:#FCA5A5;}.ssr-7600 .ssr-code{color:#FCD34D;}.ssr-7700 .ssr-code{color:#D8B4FE;}
+.ssr-label{font-size:13px;font-weight:700;margin-bottom:4px;}
+.ssr-7500 .ssr-label{color:#FCA5A5;}.ssr-7600 .ssr-label{color:#FCD34D;}.ssr-7700 .ssr-label{color:#D8B4FE;}
+/* TRAP */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--indigo));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--cyan);color:#fff;background:var(--cyan-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#6EE7B7;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--cyan-bg);border:1px solid rgba(6,182,212,.2);border-radius:8px;font-size:12.5px;color:#67E8F9;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--cyan);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#22D3EE;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--cyan) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#67E8F9;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.ssr-grid{grid-template-columns:1fr;}.pron-grid{grid-template-columns:repeat(5,1fr);}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">📡 DGCA CPL Exam Prep</div>
+  <h1>Chapter 19 — <span>Communications</span></h1>
+  <p>Q-Codes · Phraseology · Readback · Weather Reports · SSR Codes · Frequencies · SATCOM · ADS</p>
+  <div class="hero-chips">
+    <span class="chip">Q-Codes</span><span class="chip">MAYDAY / PAN PAN</span>
+    <span class="chip">ICAO Phraseology</span><span class="chip">Call Signs</span>
+    <span class="chip">Readback Rules</span><span class="chip">METAR/SIGMET</span>
+    <span class="chip">SSR 7500/7600/7700</span><span class="chip">Freq Bands</span>
+    <span class="chip">CPDLC / ADS</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('qcodes')">📻 Q-Codes</button>
+  <button class="nb" onclick="show('phraseology')">🗣 Phraseology</button>
+  <button class="nb" onclick="show('callsigns')">🏷 Call Signs</button>
+  <button class="nb" onclick="show('weather')">🌦 Weather</button>
+  <button class="nb" onclick="show('emergency')">🚨 Emergency</button>
+  <button class="nb" onclick="show('radio')">📡 Radio Theory</button>
+  <button class="nb" onclick="show('freqs')">🔢 Frequencies</button>
+  <button class="nb" onclick="show('numbers')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ======= Q-CODES ======= -->
+<div class="section active" id="section-qcodes">
+  <div class="sh"><div class="si si-c">📻</div><div><div class="st">Q-Codes & Altimeter Settings</div><div class="ss">QDM · QDR · QTE · QNH · QFE · QNE — Most asked DGCA topics</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Navigation Q-Codes</div>
+    <div class="qgrid">
+      <div class="qc qc-nav">
+        <div class="qcode">QDM</div>
+        <div class="qmean">Magnetic heading TO station</div>
+        <div class="qtrick">🧠 QDM = Direct Me → steer to reach me</div>
+      </div>
+      <div class="qc qc-nav">
+        <div class="qcode">QDR</div>
+        <div class="qmean">Magnetic bearing FROM station</div>
+        <div class="qtrick">🧠 QDR = Direction from (radial)</div>
+      </div>
+      <div class="qc qc-nav">
+        <div class="qcode">QTE</div>
+        <div class="qmean">TRUE bearing FROM station</div>
+        <div class="qtrick">🧠 QTE = True (external) bearing</div>
+      </div>
+      <div class="qc qc-nav">
+        <div class="qcode">QUJ</div>
+        <div class="qmean">True track TO station</div>
+        <div class="qtrick">🧠 QUJ = true track approaching station</div>
+      </div>
+      <div class="qc qc-nav">
+        <div class="qcode">QFU</div>
+        <div class="qmean">Magnetic direction of runway</div>
+        <div class="qtrick">🧠 QFU = runway heading / Facing Upwind</div>
+      </div>
+      <div class="qc qc-nav">
+        <div class="qcode">QDL</div>
+        <div class="qmean">Series of bearings intended</div>
+        <div class="qtrick">Rarely asked</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Altimeter Q-Codes — Most Examined</div>
+    <div class="g3">
+      <div class="qc qc-alt" style="border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+        <div class="qcode">QNH</div>
+        <div class="qmean">Altimeter reads aerodrome elevation (MSL) when on ground</div>
+        <div style="margin-top:8px;font-size:11.5px;font-weight:600;color:#FCD34D;">Used below transition altitude</div>
+        <div class="qtrick" style="margin-top:4px;">🧠 QNH = N = "N"aut above sea level</div>
+      </div>
+      <div class="qc qc-alt" style="border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+        <div class="qcode" style="color:#FCA5A5;">QFE</div>
+        <div class="qmean">Altimeter reads ZERO at aerodrome touchdown</div>
+        <div style="margin-top:8px;font-size:11.5px;font-weight:600;color:#FCA5A5;">Height above aerodrome</div>
+        <div class="qtrick" style="margin-top:4px;">🧠 QFE = Field Elevation = Zero on ground</div>
+      </div>
+      <div class="qc qc-alt" style="border:1px solid rgba(99,102,241,.3);background:rgba(99,102,241,.07);">
+        <div class="qcode" style="color:#A5B4FC;">QNE</div>
+        <div class="qmean">Standard pressure 1013.25 hPa / 29.92 inHg</div>
+        <div style="margin-top:8px;font-size:11.5px;font-weight:600;color:#A5B4FC;">Used above transition altitude (Flight Levels)</div>
+        <div class="qtrick" style="margin-top:4px;">🧠 QNE = "Eleven Three" = 1013</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;">
+      <div class="mi">🧠</div>
+      <div><div class="mt">Altimeter Quick Memory</div>
+      <div class="mf">QNH = MSL height &nbsp;|&nbsp; QFE = Zero at field &nbsp;|&nbsp; QNE = 1013.25 (FL)</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Complete Q-Code Quick Reference</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Q-Code</th><th>Meaning</th><th>Memory Trick</th></tr></thead>
+        <tbody>
+          <tr><td><span class="num">QDM</span></td><td>Magnetic heading <strong>TO</strong> station</td><td>Direct Me</td></tr>
+          <tr><td><span class="num">QDR</span></td><td>Magnetic bearing <strong>FROM</strong> station</td><td>Direction from (Radial)</td></tr>
+          <tr><td><span class="num">QTE</span></td><td>TRUE bearing <strong>FROM</strong> station</td><td>True External bearing</td></tr>
+          <tr><td><span class="num">QUJ</span></td><td>True track <strong>TO</strong> station</td><td>True track approaching</td></tr>
+          <tr><td><span class="num">QFU</span></td><td>Magnetic runway direction</td><td>Facing Upwind runway</td></tr>
+          <tr><td><span class="num">QNH</span></td><td>Altimeter reads elevation above MSL</td><td>N = Nautical (MSL)</td></tr>
+          <tr><td><span class="num">QFE</span></td><td>Altimeter reads ZERO at aerodrome</td><td>Field Elevation</td></tr>
+          <tr><td><span class="num">QNE</span></td><td>Standard pressure 1013.25 hPa</td><td>"Eleven Three"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Message Priority Order</div>
+    <div class="prio-box" style="background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.3);">
+      <div class="prio-num" style="color:#FCA5A5;">1</div>
+      <div><div class="prio-word" style="color:#FCA5A5;">MAYDAY MAYDAY MAYDAY</div><div class="prio-desc">Grave and imminent danger · Requires immediate assistance · Repeated 3 times</div></div>
+    </div>
+    <div class="prio-box" style="background:rgba(245,158,11,.09);border:1px solid rgba(245,158,11,.3);">
+      <div class="prio-num" style="color:#FCD34D;">2</div>
+      <div><div class="prio-word" style="color:#FCD34D;">PAN PAN PAN PAN PAN PAN</div><div class="prio-desc">Urgent situation · No immediate danger · Engine problem · Low fuel · Medical (PAN PAN MEDICAL)</div></div>
+    </div>
+    <div class="prio-box" style="background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.3);">
+      <div class="prio-num" style="color:#6EE7B7;">3</div>
+      <div><div class="prio-word" style="color:#6EE7B7;">SECURITE SECURITE SECURITE</div><div class="prio-desc">Safety information · Navigation hazards · Weather warnings · Floating obstacles</div></div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Priority Order</div><div class="mf">MAYDAY &gt; PAN PAN &gt; SECURITE &nbsp;(D &gt; U &gt; S)</div></div></div>
+  </div>
+</div>
+
+<!-- ======= PHRASEOLOGY ======= -->
+<div class="section" id="section-phraseology">
+  <div class="sh"><div class="si si-b">🗣</div><div><div class="st">ICAO Standard Phraseology</div><div class="ss">Number pronunciation · Standard words · DGCA traps · ROGER vs WILCO</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Number Pronunciation (ICAO Standard)</div>
+    <div class="pron-grid">
+      <div class="pron-item"><div class="pron-dig">0</div><div class="pron-say">ZE-RO</div></div>
+      <div class="pron-item"><div class="pron-dig">1</div><div class="pron-say">WUN</div></div>
+      <div class="pron-item"><div class="pron-dig">2</div><div class="pron-say">TOO</div></div>
+      <div class="pron-item"><div class="pron-dig">3</div><div class="pron-say">TREE</div></div>
+      <div class="pron-item"><div class="pron-dig">4</div><div class="pron-say">FOW-ER</div></div>
+      <div class="pron-item"><div class="pron-dig">5</div><div class="pron-say">FIFE</div></div>
+      <div class="pron-item"><div class="pron-dig">6</div><div class="pron-say">SIX</div></div>
+      <div class="pron-item"><div class="pron-dig">7</div><div class="pron-say">SEVEN</div></div>
+      <div class="pron-item"><div class="pron-dig">8</div><div class="pron-say">AIT</div></div>
+      <div class="pron-item"><div class="pron-dig">9</div><div class="pron-say">NINER</div></div>
+    </div>
+    <div class="g2" style="margin-top:12px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#67E8F9;margin-bottom:8px;">DGCA FAVOURITES</div>
+        <div class="chklist">
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">150°</span><div>→ WUN FIFE ZE-RO</div></div>
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">080°</span><div>→ ZE-RO AIT ZE-RO</div></div>
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">FL180</span><div>→ Flight Level WUN AIT ZE-RO</div></div>
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">RWY23L</span><div>→ Runway TOO TREE LEFT</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#67E8F9;margin-bottom:8px;">QNH PRONUNCIATION</div>
+        <div class="chklist">
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">984</span><div>→ NINER AIT FOW-ER</div></div>
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">1027</span><div>→ WUN ZE-RO TOO SEVEN</div></div>
+          <div class="chk-item"><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;">128.3</span><div>→ WUN TOO AIT DAYSEEMAL TREE</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Standard ICAO Phraseology — Complete Reference</div>
+    <div class="g2">
+      <div>
+        <div class="phrase-item"><div class="phrase-word">AFFIRM</div><div class="phrase-mean"><strong>YES</strong></div></div>
+        <div class="phrase-item"><div class="phrase-word">NEGATIVE</div><div class="phrase-mean">No / Permission denied / Not correct</div></div>
+        <div class="phrase-item"><div class="phrase-word">ROGER</div><div class="phrase-mean">Message received (NOT yes, NOT no, NOT a readback)</div></div>
+        <div class="phrase-item"><div class="phrase-word">WILCO</div><div class="phrase-mean">Will Comply — includes ROGER (so "Roger Wilco" = wrong)</div></div>
+        <div class="phrase-item"><div class="phrase-word">APPROVED</div><div class="phrase-mean">Permission granted</div></div>
+        <div class="phrase-item"><div class="phrase-word">CLEARED</div><div class="phrase-mean">Authorized to proceed</div></div>
+        <div class="phrase-item"><div class="phrase-word">SAY AGAIN</div><div class="phrase-mean">Repeat transmission</div></div>
+        <div class="phrase-item"><div class="phrase-word">I SAY AGAIN</div><div class="phrase-mean">Repeat for emphasis / clarity</div></div>
+        <div class="phrase-item"><div class="phrase-word">STANDBY</div><div class="phrase-mean">Wait — NOT approval, NOT denial</div></div>
+        <div class="phrase-item"><div class="phrase-word">MONITOR</div><div class="phrase-mean">Listen on frequency (no call needed)</div></div>
+      </div>
+      <div>
+        <div class="phrase-item"><div class="phrase-word">CONTACT</div><div class="phrase-mean">Establish communication with station</div></div>
+        <div class="phrase-item"><div class="phrase-word">DISREGARD</div><div class="phrase-mean">Ignore</div></div>
+        <div class="phrase-item"><div class="phrase-word">HOLD SHORT</div><div class="phrase-mean">Stop before specified location</div></div>
+        <div class="phrase-item"><div class="phrase-word">READ BACK</div><div class="phrase-mean">Repeat message exactly as received</div></div>
+        <div class="phrase-item"><div class="phrase-word">MAINTAIN</div><div class="phrase-mean">Continue as instructed (VFR / FL350)</div></div>
+        <div class="phrase-item"><div class="phrase-word">REPORT</div><div class="phrase-mean">Provide information (e.g. Report passing FL100)</div></div>
+        <div class="phrase-item"><div class="phrase-word">CORRECTION</div><div class="phrase-mean">Error made — correct version follows</div></div>
+        <div class="phrase-item"><div class="phrase-word">CANCEL</div><div class="phrase-mean">Ignore previous clearance</div></div>
+        <div class="phrase-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <div class="phrase-word" style="color:#FCA5A5;">GO AHEAD</div>
+          <div class="phrase-mean"><strong style="color:#FCA5A5;">❌ DELETED by ICAO</strong> — no longer used</div>
+        </div>
+        <div class="phrase-item"><div class="phrase-word">OVER / OUT</div><div class="phrase-mean">Not normally used in VHF aviation comms</div></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">DGCA Traps</div><div class="mf">ROGER ≠ YES · WILCO ⊇ ROGER · STANDBY ≠ clearance · GO AHEAD = deleted</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Key DGCA Trap Questions</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">YES in ICAO = ?</div><div class="trap-text"><strong style="color:#fff;">AFFIRM</strong> — NOT "Roger". Roger only means "message received".</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">ROGER WILCO is wrong</div><div class="trap-text">WILCO already includes ROGER. Saying "Roger Wilco" is redundant and incorrect.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">STANDBY is not a clearance</div><div class="trap-text">STANDBY means wait. It is <strong style="color:#fff;">NOT</strong> approval and <strong style="color:#fff;">NOT</strong> denial. Pilot must wait for further instruction.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">GO AHEAD is deleted</div><div class="trap-text">ICAO no longer uses "GO AHEAD". This phrase has been deleted from standard phraseology.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">MONITOR vs CONTACT</div><div class="trap-text">MONITOR = listen only, no call needed. CONTACT = must establish two-way communication.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= CALL SIGNS ======= -->
+<div class="section" id="section-callsigns">
+  <div class="sh"><div class="si si-g">🏷</div><div><div class="st">Call Signs, Readback & ATS Suffixes</div><div class="ss">Station suffixes · Readback rules · Abbreviated callsigns · Readability scale</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Aeronautical Station Call Sign Suffixes</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Service</th><th>Call Sign Suffix</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Aerodrome Control</td><td><span class="b b-c">TOWER</span></td><td>Delhi Tower</td></tr>
+          <tr><td>Surface Movement Control</td><td><span class="b b-g">GROUND</span></td><td>Mumbai Ground</td></tr>
+          <tr><td>Clearance Delivery</td><td><span class="b b-a">DELIVERY</span></td><td>Chennai Delivery</td></tr>
+          <tr><td>Approach Control</td><td><span class="b b-b">APPROACH</span></td><td>Chennai Approach</td></tr>
+          <tr><td>Approach Radar</td><td><span class="b b-b">APPROACH RADAR</span></td><td>Mumbai Approach Radar</td></tr>
+          <tr><td>Area Control Centre</td><td><span class="b b-p">CONTROL</span></td><td>Delhi Control</td></tr>
+          <tr><td>Radar (general)</td><td><span class="b b-p">RADAR</span></td><td>Kolkata Radar</td></tr>
+          <tr><td>Precision Approach Radar</td><td><span class="b b-p">PRECISION</span></td><td>—</td></tr>
+          <tr><td>Direction Finding Station</td><td><span class="b b-i">HOMER</span></td><td>—</td></tr>
+          <tr><td>Flight Information Service</td><td><span class="b b-i">INFORMATION</span></td><td>—</td></tr>
+          <tr><td>Apron Control</td><td><span class="b b-g">APRON</span></td><td>—</td></tr>
+          <tr><td>Aeronautical Station</td><td><span class="b b-c">RADIO</span></td><td>—</td></tr>
+          <tr><td>Flow Control</td><td><span class="b b-a">FLOW</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory — Aircraft Sequence</div><div class="mf">Ground → DELIVERY → GROUND → TOWER → APPROACH → CONTROL</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Mandatory Readback Items</div>
+    <div class="al al-r" style="margin-bottom:12px;"><strong>These MUST always be read back.</strong> The memory code is RQSHLS.</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="b b-r">R</span><div><strong>Route Clearance</strong> — e.g. Cleared via SID ABC</div></div>
+        <div class="chk-item"><span class="b b-r">Q</span><div><strong>QNH / QFE</strong> — altimeter settings always</div></div>
+        <div class="chk-item"><span class="b b-r">S</span><div><strong>SSR Codes (Squawk)</strong> — e.g. Squawk 4567</div></div>
+        <div class="chk-item"><span class="b b-r">H</span><div><strong>Heading Instructions</strong> — e.g. Heading 270</div></div>
+        <div class="chk-item"><span class="b b-r">L</span><div><strong>Level Instructions</strong> — Climb FL350 / Descend FL180</div></div>
+        <div class="chk-item"><span class="b b-r">S</span><div><strong>Speed Instructions</strong> — Maintain 220 knots</div></div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span><div>All <strong>runway-related clearances</strong> — enter, land, T/O, hold short, cross, backtrack, taxi on runway</div></div>
+        <div class="chk-item"><span class="cy">✓</span><div><strong>Runway-in-use</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div><strong>Transition level</strong></div></div>
+        <div class="chk-item"><span class="cn">!</span><div>Aircraft in controlled airspace cannot change frequency on its own — must obtain ATC permission</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Aircraft Call Sign Types & Abbreviated Forms</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead><tr><th>Type</th><th>Full Form</th><th>Abbreviated</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-c">Type A</span> Registration</td><td>VT-EJP</td><td>VJP (first + last two chars)</td></tr>
+          <tr><td><span class="b b-g">Type B</span> Company + Last 4</td><td>Air India TEJP</td><td>Air India JP (company + last 2)</td></tr>
+          <tr><td><span class="b b-a">Type C</span> Company + Flight#</td><td>Air India 809</td><td><strong style="color:#FCA5A5;">❌ No abbreviated form</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al al-r" style="margin-bottom:12px;"><strong>DGCA Trap:</strong> Flight identification call signs (Air India 809) have <strong>NO abbreviated form</strong>. Must always be stated in full.</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#67E8F9;margin-bottom:8px;">Wake Turbulence Call Signs</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-r">HEAVY</span><div>Added after callsign on initial contact — heavy aircraft (≥136,000 kg): "Air India 101 HEAVY"</div></div>
+          <div class="chk-item"><span class="b b-p">SUPER</span><div>Airbus A380 only: "Emirates 203 SUPER"</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#67E8F9;margin-bottom:8px;">Readability Scale</div>
+        <div class="read-row"><div class="read-num" style="color:#FCA5A5;">1</div><div class="read-bar"><div class="read-fill" style="width:20%;background:#EF4444;"></div></div><div class="read-label">Unreadable</div></div>
+        <div class="read-row"><div class="read-num" style="color:#F97316;">2</div><div class="read-bar"><div class="read-fill" style="width:40%;background:#F97316;"></div></div><div class="read-label">Readable now &amp; then</div></div>
+        <div class="read-row"><div class="read-num" style="color:#F59E0B;">3</div><div class="read-bar"><div class="read-fill" style="width:60%;background:#F59E0B;"></div></div><div class="read-label">Readable with difficulty</div></div>
+        <div class="read-row"><div class="read-num" style="color:#10B981;">4</div><div class="read-bar"><div class="read-fill" style="width:80%;background:#10B981;"></div></div><div class="read-label">Readable</div></div>
+        <div class="read-row"><div class="read-num" style="color:#06B6D4;">5</div><div class="read-bar"><div class="read-fill" style="width:100%;background:#06B6D4;"></div></div><div class="read-label">Perfectly readable</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= WEATHER ======= -->
+<div class="section" id="section-weather">
+  <div class="sh"><div class="si si-a">🌦</div><div><div class="st">Weather Reports, ATIS & Radar</div><div class="ss">METAR · SPECI · SIGMET · AIRMET · CAVOK · Cloud octas · ATIS · Radar vectoring</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Weather Report Types</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="b b-c">METAR</span><div><strong>Aviation Routine Weather Report</strong> — issued routinely at set times</div></div>
+        <div class="chk-item"><span class="b b-a">SPECI</span><div><strong>Special Weather Report</strong> — issued when significant change occurs</div></div>
+        <div class="chk-item"><span class="b b-g">TREND</span><div>Expected changes in <strong>next 2 hours</strong> — attached to METAR</div></div>
+        <div class="chk-item"><span class="b b-b">TAF</span><div><strong>Aerodrome Forecast</strong> — forecast for airport weather</div></div>
+        <div class="chk-item"><span class="b b-p">ROFOR</span><div><strong>Route Forecast</strong> — weather forecast along route</div></div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item"><span class="b b-r">SIGMET</span><div><strong>Significant Meteorological Information</strong> — severe turbulence, icing, volcanic ash, thunderstorms · All aircraft</div></div>
+        <div class="chk-item"><span class="b b-a">AIRMET</span><div><strong>Airmen's Meteorological Info</strong> — moderate weather, mainly low-level aircraft · Less severe than SIGMET</div></div>
+        <div class="chk-item"><span class="b b-c">VOLMET</span><div><strong>Voice weather broadcast</strong> for aircraft in flight via HF/VHF</div></div>
+      </div>
+    </div>
+    <div class="tw" style="margin-top:12px;margin-bottom:0;">
+      <table>
+        <thead><tr><th>SIGMET</th><th>AIRMET</th></tr></thead>
+        <tbody>
+          <tr><td>Significant / severe weather</td><td>Moderate weather</td></tr>
+          <tr><td>All aircraft</td><td>Mainly low-level aircraft</td></tr>
+          <tr><td>More severe</td><td>Less severe</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Cloud Coverage (Octas) & CAVOK</div>
+    <div class="g2">
+      <div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Term</th><th>Octas</th><th>Coverage</th></tr></thead>
+            <tbody>
+              <tr><td><span class="b b-g">FEW</span></td><td><span class="num">1–2</span></td><td>1/8 to 2/8</td></tr>
+              <tr><td><span class="b b-a">SCT</span></td><td><span class="num">3–4</span></td><td>3/8 to 4/8</td></tr>
+              <tr><td><span class="b b-b">BKN</span></td><td><span class="num">5–7</span></td><td>5/8 to 7/8</td></tr>
+              <tr><td><span class="b b-r">OVC</span></td><td><span class="num">8</span></td><td>8/8 (complete cover)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory</div><div class="mf">1-2 FEW · 3-4 SCT · 5-7 BKN · 8 OVC</div></div></div>
+      </div>
+      <div>
+        <div class="al al-c" style="margin-bottom:10px;"><strong>CAVOK</strong> = Ceiling And Visibility OK<br>✅ Visibility ≥ 10 km<br>✅ No cloud below 5000 ft or MSA (whichever higher)<br>✅ No CB clouds<br>✅ No significant weather</div>
+        <div class="mem" style="margin:0;"><div class="mi">🧠</div><div><div class="mt">CAVOK means</div><div class="mf">Good vis + No low cloud + No CB + No Sig Wx</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>VOLMET Contents & ATIS</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#67E8F9;margin-bottom:8px;">VOLMET Contents — Memory: SWVRWCTQT</div>
+        <div class="g2" style="gap:7px;">
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">S</span>Surface Wind</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">V</span>Visibility</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">R</span>RVR (if applicable)</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">W</span>Weather</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">C</span>Cloud</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">T</span>Temperature</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">Q</span>QNH</div>
+          <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">T</span>Trend</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">ATIS — Automatic Terminal Information Service</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Continuous recorded airport broadcast</div>
+          <div class="chk-item"><span class="cy">✓</span>Contains: runway in use · weather · visibility · QNH · NOTAM info</div>
+          <div class="chk-item"><span class="cy">✓</span>Characteristics: Continuous · Repetitive · Terminal info</div>
+          <div class="chk-item"><span class="b b-a">D-ATIS</span><div>Data Link ATIS via Pre-FANS data link</div></div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-top:10px;margin-bottom:6px;">ADS-C/CPDLC Available in India</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-c">Mumbai</span><span class="b b-c">Delhi</span><span class="b b-c">Kolkata</span><span class="b b-c">Chennai</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Radar Vectoring & Traffic Information</div>
+    <div class="g2">
+      <div>
+        <div class="al al-c" style="margin-bottom:8px;"><strong>Radar Vectoring</strong> = ATC assigns specific headings. Purpose: maintain separation, sequence traffic, delay, provide spacing.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">→</span>Ends with: <strong>"Resume Own Navigation direct DELHI"</strong></div>
+          <div class="chk-item"><span class="cy">→</span>Orbit (360° turn): used for delay/spacing</div>
+          <div class="chk-item"><span class="cn">!</span>Radar identification ≠ radar service</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#67E8F9;margin-bottom:8px;">Traffic Information Format</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-c">1</span>Relative bearing (clock: "2 o'clock")</div>
+          <div class="chk-item"><span class="b b-c">2</span>Distance ("5 miles")</div>
+          <div class="chk-item"><span class="b b-c">3</span>Direction of flight ("Eastbound")</div>
+          <div class="chk-item"><span class="b b-c">4</span>Speed / Type / Level (if known)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= EMERGENCY ======= -->
+<div class="section" id="section-emergency">
+  <div class="sh"><div class="si si-p">🚨</div><div><div class="st">Emergency, SSR Codes & Special Frequencies</div><div class="ss">7500 · 7600 · 7700 · 121.5 MHz · ELT · AIRREP · Position report</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Special Purpose SSR Squawk Codes</div>
+    <div class="ssr-grid">
+      <div class="ssr-box ssr-7500">
+        <div class="ssr-code">7500</div>
+        <div class="ssr-label">HIJACK</div>
+        <div style="font-size:12px;color:var(--text2);">Aircraft is subject to unlawful interference</div>
+        <div class="mem" style="margin:8px 0 0;padding:8px;font-size:11px;"><div style="color:#FCA5A5;font-weight:700;font-family:'JetBrains Mono',monospace;">75 = Gun 🔫</div></div>
+      </div>
+      <div class="ssr-box ssr-7600">
+        <div class="ssr-code">7600</div>
+        <div class="ssr-label">RADIO FAILURE</div>
+        <div style="font-size:12px;color:var(--text2);">Lost communications</div>
+        <div class="mem" style="margin:8px 0 0;padding:8px;font-size:11px;"><div style="color:#FCD34D;font-weight:700;font-family:'JetBrains Mono',monospace;">76 = Silent Radio 📻</div></div>
+      </div>
+      <div class="ssr-box ssr-7700">
+        <div class="ssr-code">7700</div>
+        <div class="ssr-label">EMERGENCY</div>
+        <div style="font-size:12px;color:var(--text2);">General emergency</div>
+        <div class="mem" style="margin:8px 0 0;padding:8px;font-size:11px;"><div style="color:#D8B4FE;font-weight:700;font-family:'JetBrains Mono',monospace;">77 = Serious Trouble ⚠️</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Distress & Emergency Frequencies</div>
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);">
+        <div class="sn" style="color:#FCA5A5;">121.5</div><div class="su">MHz</div><div class="sl">International VHF Distress</div>
+      </div>
+      <div class="stat">
+        <div class="sn">243</div><div class="su">MHz</div><div class="sl">International UHF Distress</div>
+      </div>
+      <div class="stat">
+        <div class="sn">2182</div><div class="su">kHz</div><div class="sl">MF Distress frequency</div>
+      </div>
+      <div class="stat">
+        <div class="sn">500</div><div class="su">kHz</div><div class="sl">Maritime Distress</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px;background:var(--card2);">
+      <div class="ch" style="margin-bottom:8px;"><span class="pip" style="background:var(--green)"></span>ELT Frequencies</div>
+      <div class="g3">
+        <div class="chk-item"><span class="cy">✓</span><div><span class="num">121.5 MHz</span> — VHF</div></div>
+        <div class="chk-item"><span class="cy">✓</span><div><span class="num">243 MHz</span> — UHF</div></div>
+        <div class="chk-item" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.07);"><span class="cy">⭐</span><div><span class="num">406 MHz</span> — <strong>Satellite monitored</strong> (DGCA favourite)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Voice Position Report Contents — IPTLNE</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">I</span>Aircraft <strong>Identification</strong></div>
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">P</span><strong>Position</strong></div>
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">T</span><strong>Time</strong></div>
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">L</span>Flight <strong>Level / Altitude</strong></div>
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">N</span><strong>Next position</strong> and ETA</div>
+        <div class="chk-item"><span style="color:#67E8F9;font-weight:700;font-family:'JetBrains Mono',monospace;">E</span><strong>Ensuing</strong> significant point</div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">AIRREP SPECIAL — Triggers</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="b b-r">Moderate/Severe Turbulence</span>
+          <span class="b b-r">Moderate/Severe Icing</span>
+          <span class="b b-a">Severe Mountain Wave</span>
+          <span class="b b-a">Thunderstorm (with or without hail)</span>
+          <span class="b b-a">Heavy Dust/Sandstorm</span>
+          <span class="b b-p">Volcanic Ash Cloud</span>
+          <span class="b b-p">Volcanic Eruption</span>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Position Report Memory</div><div class="mf">IPTLNE = I Passed Through Low Nose-up Eastbound</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Runway Braking Action Report</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Report</th><th>Braking</th><th>Directional Control</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-g">GOOD</span></td><td>Normal</td><td>Normal</td></tr>
+          <tr><td><span class="b b-c">GOOD TO MEDIUM</span></td><td>Between Good and Medium</td><td>—</td></tr>
+          <tr><td><span class="b b-a">MEDIUM</span></td><td>Noticeably reduced</td><td>Noticeably reduced</td></tr>
+          <tr><td><span class="b b-r">MEDIUM TO POOR</span></td><td>Between Medium and Poor</td><td>—</td></tr>
+          <tr><td><span class="b b-r">POOR</span></td><td>Significantly reduced</td><td>Significantly reduced</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======= RADIO THEORY ======= -->
+<div class="section" id="section-radio">
+  <div class="sh"><div class="si si-i">📡</div><div><div class="st">Radio Theory & Wave Propagation</div><div class="ss">Speed of light · f=c/λ · Frequency bands · Ground wave · Sky wave · LOS</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Core Radio Theory</div>
+    <div class="g3">
+      <div class="stat" style="border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.08);">
+        <div class="sn">3×10⁸</div><div class="su">m/s</div><div class="sl">Speed of all EM waves (speed of light)</div>
+      </div>
+      <div class="stat">
+        <div class="sn" style="font-size:18px;">f = c/λ</div><div class="sl">Frequency = Speed ÷ Wavelength</div>
+      </div>
+      <div class="stat">
+        <div class="sn" style="font-size:18px;">f↑ λ↓</div><div class="sl">Frequency & wavelength are inversely proportional</div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:12px;">
+      <div class="al al-c" style="margin:0;"><strong>Polarisation</strong> = Direction of the electrical field. EM wave has electrical and magnetic components, both perpendicular to each other and to direction of travel.</div>
+      <div class="al al-g" style="margin:0;"><strong>Refraction rule:</strong> Radio waves entering denser medium bend <strong>toward the normal</strong>. Entering less dense medium → bend away from normal.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Frequency Bands — Complete Table</div>
+    <div class="card" style="margin-bottom:12px;background:var(--card2);">
+      <div class="band-row"><div class="band-name" style="color:#6EE7B7;">VLF</div><div class="band-range">3–30 kHz</div><div class="band-use"><span class="b b-g">Very Low</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#6EE7B7;">LF</div><div class="band-range">30–300 kHz</div><div class="band-use"><span class="b b-g">NDB (partly)</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#67E8F9;">MF</div><div class="band-range">300 kHz–3 MHz</div><div class="band-use"><span class="b b-c">NDB · 500 kHz distress · 2182 kHz</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#A5B4FC;">HF</div><div class="band-range">3–30 MHz</div><div class="band-use"><span class="b b-i">Long range · Oceanic · VOLMET</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#FCD34D;">VHF</div><div class="band-range">30–300 MHz</div><div class="band-use"><span class="b b-a">ATC voice · 121.5 MHz · VOR · Localizer · ILS Marker</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#FDB785;">UHF</div><div class="band-range">300 MHz–3 GHz</div><div class="band-use"><span class="b b-o">Military · 243 MHz · DME · SSR · GPS · Glide Slope</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#F9A8D4;">SHF</div><div class="band-range">3–30 GHz</div><div class="band-use"><span class="b b-p">Radio altimeter · Weather radar · SATCOM (satellite–ground)</span></div></div>
+      <div class="band-row"><div class="band-name" style="color:#D8B4FE;">EHF</div><div class="band-range">30–300 GHz</div><div class="band-use"><span class="b b-p">Extremely High Frequency</span></div></div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Band sequence (Low → High)</div><div class="mf">VLF → LF → MF → HF → VHF → UHF → SHF → EHF</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>Wave Propagation Types</div>
+    <div class="g2">
+      <div style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.28);border-radius:11px;padding:15px;">
+        <div style="font-weight:700;color:#6EE7B7;font-size:14px;margin-bottom:8px;">🌍 Ground Wave</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Travels along Earth's surface</div>
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Used by <strong>LF and MF</strong></div>
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Long range · Follows earth curvature</div>
+        </div>
+      </div>
+      <div style="background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.28);border-radius:11px;padding:15px;">
+        <div style="font-weight:700;color:#A5B4FC;font-size:14px;margin-bottom:8px;">🌌 Sky Wave</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Refracted/reflected by ionosphere</div>
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Used by <strong>MF (partly) and HF</strong></div>
+          <div class="chk-item" style="font-size:12.5px;"><span class="cy">→</span>Very long range · Oceanic HF comms</div>
+        </div>
+      </div>
+    </div>
+    <div class="al al-c" style="margin-top:10px;margin-bottom:0;"><strong>LOS (Line of Sight) Range formula:</strong> Range = 1.25 × (√Ht + √Hr) nautical miles, where Ht = transmitter height (ft), Hr = receiver height (ft). Higher antenna = greater range.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>SATCOM, CPDLC & ADS</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#67E8F9;margin-bottom:8px;">SATCOM / SATVOICE</div>
+        <div class="chklist" style="margin-bottom:10px;">
+          <div class="chk-item"><span class="cy">✓</span>SATVOICE recognized as LRCS (Long Range Communication System)</div>
+          <div class="chk-item"><span class="cy">✓</span>May eventually replace HF for long range</div>
+          <div class="chk-item"><span class="cy">✓</span>Global coverage · Real-time data</div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">CPDLC</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Non-urgent ATC messages via data link</div>
+          <div class="chk-item"><span class="cy">✓</span>Messages displayed on cockpit screen</div>
+          <div class="chk-item"><span class="cn">✗</span>NOT for time-critical communication</div>
+          <div class="chk-item"><span class="cn">✗</span>Does NOT replace voice</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#6EE7B7;margin-bottom:8px;">ADS — Automatic Dependent Surveillance</div>
+        <div class="chklist" style="margin-bottom:10px;">
+          <div class="chk-item"><span class="cy">✓</span>Aircraft auto-sends position, intent, met info</div>
+          <div class="chk-item"><span class="cy">✓</span>Data source: <strong>FMS (Flight Management System)</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>Via VHF or satellite data link</div>
+          <div class="chk-item"><span class="b b-a">⭐</span><div>Must log in <strong>10 minutes before</strong> entering FIR</div></div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#A5B4FC;margin-bottom:8px;">RCP — Required Communication Performance</div>
+        <div class="chk-item"><span class="b b-i">RCP#</span><div>Number = <strong>max transaction time in seconds</strong> (ATC instruction → pilot acknowledgement)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= FREQUENCIES ======= -->
+<div class="section" id="section-freqs">
+  <div class="sh"><div class="si si-t">🔢</div><div><div class="st">Aviation Equipment Frequencies</div><div class="ss">VOR · ILS · DME · SSR · GPS · Radio Altimeter · SATCOM</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Equipment Frequency Reference — Master Table</div>
+    <div class="freq-item" style="border-color:rgba(6,182,212,.3);"><div><div class="freq-name">VHF Communication</div><div class="freq-band">VHF Band</div></div><div class="freq-val">118–137 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(245,158,11,.3);"><div><div class="freq-name">VOR</div><div class="freq-band">VHF Band</div></div><div class="freq-val">108–117.95 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(245,158,11,.3);"><div><div class="freq-name">ILS Localizer</div><div class="freq-band">VHF Band</div></div><div class="freq-val">108.1–111.95 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(245,158,11,.3);"><div><div class="freq-name">ILS Marker Beacon</div><div class="freq-band">VHF Band</div></div><div class="freq-val">75 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(239,68,68,.3);"><div><div class="freq-name">Distress (VHF)</div><div class="freq-band">VHF Band</div></div><div class="freq-val">121.5 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(249,115,22,.3);"><div><div class="freq-name">ILS Glide Slope</div><div class="freq-band">UHF Band</div></div><div class="freq-val">329.15–335 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(249,115,22,.3);"><div><div class="freq-name">Distress (UHF)</div><div class="freq-band">UHF Band</div></div><div class="freq-val">243 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(249,115,22,.3);"><div><div class="freq-name">DME</div><div class="freq-band">UHF Band</div></div><div class="freq-val">960–1213 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(249,115,22,.3);"><div><div class="freq-name">SSR (interrogation / reply)</div><div class="freq-band">UHF Band</div></div><div class="freq-val">1030 / 1090 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(168,85,247,.3);"><div><div class="freq-name">GPS L1</div><div class="freq-band">UHF Band</div></div><div class="freq-val">1575.42 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(168,85,247,.3);"><div><div class="freq-name">GPS L2</div><div class="freq-band">UHF Band</div></div><div class="freq-val">1227.6 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(168,85,247,.3);"><div><div class="freq-name">SATCOM Aircraft→Satellite</div><div class="freq-band">UHF Band</div></div><div class="freq-val">1500–1600 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(236,72,153,.3);"><div><div class="freq-name">Radio Altimeter</div><div class="freq-band">SHF Band</div></div><div class="freq-val">4200–4400 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(236,72,153,.3);"><div><div class="freq-name">Weather Radar</div><div class="freq-band">SHF Band</div></div><div class="freq-val">9375 MHz</div></div>
+    <div class="freq-item" style="border-color:rgba(236,72,153,.3);"><div><div class="freq-name">SATCOM Satellite→Ground</div><div class="freq-band">SHF Band</div></div><div class="freq-val">4000–6000 MHz</div></div>
+    <div class="freq-item"><div><div class="freq-name">ADF (NDB reception)</div><div class="freq-band">LF/MF Band</div></div><div class="freq-val">190–1750 kHz</div></div>
+    <div class="freq-item"><div><div class="freq-name">HF Communication</div><div class="freq-band">HF Band</div></div><div class="freq-val">2–25 MHz</div></div>
+  </div>
+</div>
+
+<!-- ======= MASTER NUMBERS ======= -->
+<div class="section" id="section-numbers">
+  <div class="sh"><div class="si si-a">⭐</div><div><div class="st">Master Reference & Exam Traps</div><div class="ss">Every key fact from Chapter 19 in one place</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Q-Code Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><span class="num">QDM</span></td><td>Magnetic heading TO station</td></tr>
+            <tr><td><span class="num">QDR</span></td><td>Magnetic bearing FROM station</td></tr>
+            <tr><td><span class="num">QTE</span></td><td>True bearing FROM station</td></tr>
+            <tr><td><span class="num">QUJ</span></td><td>True track TO station</td></tr>
+            <tr><td><span class="num">QFU</span></td><td>Magnetic runway direction</td></tr>
+            <tr><td><span class="num">QNH</span></td><td>Height above MSL</td></tr>
+            <tr><td><span class="num">QFE</span></td><td>Zero at aerodrome</td></tr>
+            <tr><td><span class="num">QNE</span></td><td>1013.25 hPa standard</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Emergency & SSR Codes</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>SSR Hijack</td><td><span class="num">7500</span></td></tr>
+            <tr><td>SSR Radio Failure</td><td><span class="num">7600</span></td></tr>
+            <tr><td>SSR Emergency</td><td><span class="num">7700</span></td></tr>
+            <tr><td>VHF Distress</td><td><span class="num">121.5 MHz</span></td></tr>
+            <tr><td>UHF Distress</td><td><span class="num">243 MHz</span></td></tr>
+            <tr><td>MF Distress</td><td><span class="num">2182 kHz</span></td></tr>
+            <tr><td>Maritime Distress</td><td><span class="num">500 kHz</span></td></tr>
+            <tr><td>ELT satellite monitored</td><td><span class="num">406 MHz</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Key Frequencies</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Equipment</th><th>Frequency</th></tr></thead>
+          <tbody>
+            <tr><td>VHF COM</td><td><span class="num">118–137 MHz</span></td></tr>
+            <tr><td>VOR</td><td><span class="num">108–117.95 MHz</span></td></tr>
+            <tr><td>ILS Localizer</td><td><span class="num">108.1–111.95 MHz</span></td></tr>
+            <tr><td>ILS Glide Slope</td><td><span class="num">329–335 MHz</span></td></tr>
+            <tr><td>ILS Marker</td><td><span class="num">75 MHz</span></td></tr>
+            <tr><td>DME</td><td><span class="num">960–1213 MHz</span></td></tr>
+            <tr><td>SSR</td><td><span class="num">1030/1090 MHz</span></td></tr>
+            <tr><td>GPS L1</td><td><span class="num">1575.42 MHz</span></td></tr>
+            <tr><td>Radio Altimeter</td><td><span class="num">4200–4400 MHz</span></td></tr>
+            <tr><td>Weather Radar</td><td><span class="num">9375 MHz</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--indigo)"></span>Radio Theory Facts</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Speed of EM waves</td><td><span class="num">3×10⁸ m/s</span></td></tr>
+            <tr><td>Frequency formula</td><td><span class="num">f = c/λ</span></td></tr>
+            <tr><td>f↑ means</td><td>λ↓ (inversely proportional)</td></tr>
+            <tr><td>Ground wave used by</td><td>LF / MF</td></tr>
+            <tr><td>Sky wave used by</td><td>HF</td></tr>
+            <tr><td>VHF propagation</td><td>Line of Sight</td></tr>
+            <tr><td>LOS range formula</td><td><span class="num">1.25(√Ht + √Hr)</span> NM</td></tr>
+            <tr><td>Dense medium refraction</td><td>Toward normal</td></tr>
+            <tr><td>ADS log-in before FIR</td><td><span class="num">10 minutes</span></td></tr>
+            <tr><td>CPDLC purpose</td><td>Non-urgent ATC msgs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 19</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">QDM vs QDR — TO vs FROM</div><div class="trap-text">QDM = magnetic heading <strong style="color:#fff;">TO</strong> station (Direct Me). QDR = magnetic bearing <strong style="color:#fff;">FROM</strong> station (like a radial). Very common mix-up.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">ROGER ≠ YES</div><div class="trap-text">ROGER only means "message received". <strong style="color:#fff;">AFFIRM = YES</strong>. Using ROGER instead of AFFIRM is a classic wrong answer in DGCA MCQs.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">WILCO includes ROGER</div><div class="trap-text">WILCO = "received and will comply." Since it includes received, saying "Roger Wilco" is <strong style="color:#FCA5A5;">incorrect</strong>.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Flight number call signs have NO abbreviated form</div><div class="trap-text">Air India 809 stays Air India 809. Cannot be abbreviated to AI 09 or India 809.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">406 MHz ELT is satellite-monitored</div><div class="trap-text">ELT transmits on 121.5 / 243 / 406 MHz. Only <strong style="color:#fff;">406 MHz</strong> is satellite-monitored.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">CPDLC is NOT for urgent messages</div><div class="trap-text">CPDLC is for <strong style="color:#fff;">non-urgent</strong> ATC messages only. Voice remains primary for urgent/critical communications.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">VOR vs VHF COM frequency overlap</div><div class="trap-text">VOR = <strong style="color:#fff;">108–117.95 MHz</strong>. VHF COM = <strong style="color:#fff;">118–137 MHz</strong>. Both VHF band but different frequency ranges.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">ILS Glide Slope is UHF not VHF</div><div class="trap-text">Localizer = VHF (108–111.95 MHz). <strong style="color:#fff;">Glide Slope = UHF (329–335 MHz)</strong>. Different bands despite both being ILS components.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ ======= -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si si-c">🧠</div><div><div class="st">Practice Quiz</div><div class="ss">30 DGCA-style questions covering all Chapter 19 topics</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"What does QDM mean?",opts:["Magnetic bearing FROM station","TRUE bearing from station","Magnetic heading TO steer to reach station","True track to station"],ans:2,exp:"QDM = Magnetic heading to STEER to reach the station. Memory: QDM = Direct Me. QDR = bearing FROM station (like a radial)."},
+  {q:"What does QDR indicate?",opts:["Magnetic heading TO station","Magnetic bearing FROM station","Runway magnetic direction","True bearing from station"],ans:1,exp:"QDR = Magnetic bearing FROM the station (like a radial FROM the station). QDM is TO the station. Very common exam trap."},
+  {q:"QNH altimeter setting makes the altimeter read:",opts:["Zero at aerodrome","Height above aerodrome","Elevation above MSL when on the ground","Standard pressure 1013.25"],ans:2,exp:"QNH makes the altimeter read aerodrome elevation above MSL when on the ground. QFE reads zero. QNE = 1013.25 hPa."},
+  {q:"QFE altimeter setting makes the altimeter read:",opts:["Elevation above MSL","Height above aerodrome — ZERO at touchdown","1013.25 hPa","True altitude"],ans:1,exp:"QFE = Zero at the aerodrome (Field Elevation). The altimeter reads zero when on the ground. Used for height above aerodrome."},
+  {q:"QNE refers to:",opts:["Aerodrome elevation setting","Height above field","Standard pressure 1013.25 hPa","True bearing from VOR"],ans:2,exp:"QNE = Standard pressure setting of 1013.25 hPa (29.92 inHg). Used above transition altitude for Flight Levels."},
+  {q:"What is the correct order of message priority?",opts:["SECURITE > PAN PAN > MAYDAY","PAN PAN > MAYDAY > SECURITE","MAYDAY > PAN PAN > SECURITE","All have equal priority"],ans:2,exp:"Priority order: 1st MAYDAY (Distress — grave and imminent danger), 2nd PAN PAN (Urgency — no immediate danger), 3rd SECURITE (Safety information). Memory: D > U > S."},
+  {q:"SECURITE is used for:",opts:["Grave and imminent danger","Medical emergency","Safety information — navigation hazards, weather warnings","Urgency — low fuel or engine problem"],ans:2,exp:"SECURITE = Safety messages. Used for navigation hazards, weather warnings, floating obstacles. It is the lowest of the three emergency message priorities."},
+  {q:"How is the digit '9' pronounced in ICAO aviation communications?",opts:["NINE","NIEN","NINER","NI-NER"],ans:2,exp:"9 is pronounced NINER in ICAO standard. Other key ones: 0=ZE-RO, 1=WUN, 3=TREE, 4=FOW-ER, 5=FIFE, 8=AIT."},
+  {q:"What does AFFIRM mean in ICAO phraseology?",opts:["Message received","I will comply","YES","Permission granted"],ans:2,exp:"AFFIRM = YES. ROGER = message received. WILCO = received and will comply. APPROVED = permission granted."},
+  {q:"What does ROGER mean in ICAO phraseology?",opts:["YES","Message received and understood","I will comply","Permission granted"],ans:1,exp:"ROGER = message received and understood. It is NOT yes, NOT no, and NOT a readback. Frequently confused with AFFIRM (YES) in DGCA exams."},
+  {q:"What does WILCO mean?",opts:["Message received","I understand the message","Received and will comply — includes ROGER","Wait and standby"],ans:2,exp:"WILCO = 'Will Comply' — means received and will comply. It already INCLUDES the meaning of ROGER. Therefore 'Roger Wilco' is incorrect and redundant."},
+  {q:"STANDBY means:",opts:["Approved to proceed","Wait — not approval, not denial","Message received","Resume own navigation"],ans:1,exp:"STANDBY = wait. It is neither approval nor denial. A very common DGCA trap — students sometimes think STANDBY gives implicit permission."},
+  {q:"Which phrase has been DELETED from ICAO standard phraseology?",opts:["AFFIRM","ROGER","GO AHEAD","WILCO"],ans:2,exp:"'GO AHEAD' has been deleted from ICAO standard phraseology and is no longer used. This is a classic DGCA favourite question."},
+  {q:"MONITOR means:",opts:["Establish two-way communication","Listen on frequency — no call-up required","Repeat transmission","Wait for further instructions"],ans:1,exp:"MONITOR = listen on frequency. No initial call-up is required. CONTACT = establish two-way communication. 'Monitor 121.5' means listen only."},
+  {q:"Which call sign type has NO abbreviated form?",opts:["Registration VT-EJP → VJP","Company + Last 4 characters","Flight identification (e.g. Air India 809)","Military aircraft call signs"],ans:2,exp:"Flight identification call signs (Air India 809) have NO abbreviated form. They must always be stated in full. Cannot become AI 09 or India 809."},
+  {q:"The call sign suffix for Surface Movement Control is:",opts:["TOWER","APPROACH","GROUND","RADAR"],ans:2,exp:"Surface Movement Control = GROUND (e.g. Mumbai Ground). TOWER = Aerodrome Control. APPROACH = Approach Control. CONTROL = Area Control Centre."},
+  {q:"What is the readability scale value for 'Readable with difficulty'?",opts:["1","2","3","4"],ans:2,exp:"Readability Scale: 1=Unreadable, 2=Readable now and then, 3=Readable with difficulty, 4=Readable, 5=Perfectly readable."},
+  {q:"Which items MUST always be read back? (Select the correct group)",opts:["Only runway clearances","Route clearance, QNH, SSR codes, heading, level, speed instructions, runway clearances","Only level and heading instructions","Only QNH"],ans:1,exp:"Must always read back: Route clearance (R), QNH/QFE (Q), SSR codes (S), Heading (H), Level (L), Speed (S), plus all runway-related instructions and transition level. Memory: RQSHLS."},
+  {q:"CAVOK is used when:",opts:["Visibility ≥ 5 km and no CB","Visibility ≥ 10 km, no cloud below 5000 ft or MSA, no CB, no significant weather","Any clear weather conditions","Visibility ≥ 8 km and no icing"],ans:1,exp:"CAVOK = Ceiling And Visibility OK. Requires: Visibility ≥ 10 km, no cloud below 5000 ft or highest MSA (whichever higher), no CB clouds, and no significant weather."},
+  {q:"BKN (Broken) cloud cover means:",opts:["1–2 octas","3–4 octas","5–7 octas","8 octas"],ans:2,exp:"BKN = 5–7 octas. Memory: FEW=1-2, SCT=3-4, BKN=5-7, OVC=8."},
+  {q:"Which SSR code indicates a HIJACK?",opts:["7500","7600","7700","7000"],ans:0,exp:"SSR 7500 = Hijack. Memory: 75 = Gun. SSR 7600 = Radio Failure (76 = Silent Radio). SSR 7700 = Emergency (77 = Serious Trouble)."},
+  {q:"Which SSR code indicates RADIO FAILURE?",opts:["7500","7600","7700","7200"],ans:1,exp:"SSR 7600 = Radio Failure. Memory: 76 = Silent Radio. SSR 7500 = Hijack. SSR 7700 = Emergency."},
+  {q:"The international VHF distress frequency is:",opts:["118.0 MHz","121.5 MHz","123.45 MHz","243 MHz"],ans:1,exp:"121.5 MHz = International VHF distress frequency. 243 MHz = UHF distress. 2182 kHz = MF distress. 500 kHz = Maritime distress."},
+  {q:"Which ELT frequency is satellite-monitored?",opts:["121.5 MHz","243 MHz","406 MHz","500 kHz"],ans:2,exp:"406 MHz ELT signals are satellite-monitored (COSPAS-SARSAT system). 121.5 MHz and 243 MHz are homing/guard frequencies but not satellite-monitored."},
+  {q:"For an Airbus A380, which wake turbulence callsign suffix must be added?",opts:["HEAVY","LARGE","SUPER","WIDE"],ans:2,exp:"Airbus A380 uses 'SUPER' (e.g. Emirates 203 SUPER). All other heavy aircraft (≥136,000 kg) use 'HEAVY'. A380 is the only aircraft in the Super Heavy category."},
+  {q:"The frequency band used for standard ATC voice communications is:",opts:["MF","HF","VHF","UHF"],ans:2,exp:"VHF (30–300 MHz) is the standard band for ATC voice communications. VHF COM range = 118–137 MHz. 121.5 MHz (also VHF) is the emergency frequency."},
+  {q:"Which propagation method does HF use for long range communications?",opts:["Ground wave","Line of sight","Sky wave (reflected by ionosphere)","Satellite"],ans:2,exp:"HF uses Sky Wave propagation — signals are reflected/refracted by the ionosphere enabling very long range communication. LF/MF use ground wave. VHF+ uses line of sight."},
+  {q:"The VOR operates in which frequency range?",opts:["108–111.95 MHz","108–117.95 MHz","118–137 MHz","329–335 MHz"],ans:1,exp:"VOR = 108–117.95 MHz (VHF band). Note: ILS Localizer occupies 108.1–111.95 MHz (part of the VOR band). VHF COM = 118–137 MHz."},
+  {q:"The ILS Glide Slope operates in which frequency band?",opts:["VHF (108–111 MHz)","VHF (118–137 MHz)","UHF (329–335 MHz)","SHF (4 GHz)"],ans:2,exp:"ILS Glide Slope = UHF band, 329.15–335 MHz. The ILS Localizer is VHF (108–111.95 MHz). A common trap — both are ILS but different bands."},
+  {q:"ADS (Automatic Dependent Surveillance) aircraft must log in how many minutes before entering an FIR?",opts:["5 minutes","10 minutes","15 minutes","30 minutes"],ans:1,exp:"Aircraft equipped with ADS/CPDLC must log in 10 minutes before entering the FIR. ADS automatically sends position, intent and meteorological information from the FMS."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=90){msg='🏆 Excellent!';sub='Chapter 19 mastered. Ready for DGCA!';}
+  else if(pct>=75){msg='📡 Strong!';sub='Great work. Drill any missed frequency values.';}
+  else if(pct>=60){msg='📻 Good Progress!';sub='Focus on Q-codes, SSR codes, and equipment frequencies.';}
+  else{msg='🔄 Keep Revising!';sub='Use the Frequencies and Master Reference sections to drill all values.';}
+  document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

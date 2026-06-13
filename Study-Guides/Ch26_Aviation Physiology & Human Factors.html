@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 26: Aviation Physiology & Human Factors</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060D18;--bg2:#081220;--bg3:#0A1728;
+  --card:#0D1A2E;--card2:#101E38;
+  --teal:#14B8A6;--sky:#0EA5E9;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --purple:#A855F7;--indigo:#6366F1;--cyan:#06B6D4;
+  --pink:#EC4899;--lime:#84CC16;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --tl-bg:rgba(20,184,166,.11);--sk-bg:rgba(14,165,233,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --pu-bg:rgba(168,85,247,.11);--in-bg:rgba(99,102,241,.11);
+  --cy-bg:rgba(6,182,212,.11);--pk-bg:rgba(236,72,153,.11);
+  --lm-bg:rgba(132,204,22,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(20,184,166,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.4);color:#5EEAD4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#5EEAD4;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 10px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--teal);color:#5EEAD4;}
+.nb.active{background:var(--teal);border-color:var(--teal);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.b-cy{background:var(--cy-bg);color:#67E8F9;border:1px solid rgba(6,182,212,.3);}
+.b-pk{background:var(--pk-bg);color:#F9A8D4;border:1px solid rgba(236,72,153,.3);}
+.b-lm{background:var(--lm-bg);color:#BEF264;border:1px solid rgba(132,204,22,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);} .al-tl strong{color:#5EEAD4;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);} .al-pu strong{color:#D8B4FE;}
+.al-or{background:var(--or-bg);border-color:var(--orange);} .al-or strong{color:#FDB785;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#5EEAD4;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--teal);color:#fff;background:var(--tl-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--tl-bg);border:1px solid rgba(20,184,166,.22);border-radius:8px;font-size:12.5px;color:#5EEAD4;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--teal);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#2DD4BF;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--teal) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#5EEAD4;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nav-bar{gap:2px;}.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">🫁 DGCA CPL · Aviation Physiology</div>
+  <h1>Chapter 26 — <span>Aviation Physiology & Human Factors</span></h1>
+  <p>Gas Laws · Hypoxia · TUC · Decompression · Vision · Ear · Illusions · G-Forces · Incapacitation</p>
+  <div class="hero-chips">
+    <span class="chip">HASH Hypoxia</span><span class="chip">Dalton=Hypoxia · Henry=DCS · Boyle=Trapped Gas</span>
+    <span class="chip">TUC FL350=30s-1min</span><span class="chip">Armstrong Line=63,000ft</span>
+    <span class="chip">Rods=Night · Cones=Colour</span><span class="chip">Fovea=Sharpest</span>
+    <span class="chip">Dark adapt=30min</span><span class="chip">Bends·Creeps·Chokes·Staggers</span>
+    <span class="chip">Somatogravic=Nose-up feel</span><span class="chip">Black Hole=Low approach</span>
+  </div>
+</div>
+<div class="nav-bar">
+  <button class="nb active" onclick="show('atm')">🌍 Atmosphere</button>
+  <button class="nb" onclick="show('physio')">🫀 Physiology</button>
+  <button class="nb" onclick="show('hypoxia')">😮‍💨 Hypoxia</button>
+  <button class="nb" onclick="show('tuc')">⏱ TUC & DCS</button>
+  <button class="nb" onclick="show('incap')">🚨 Incapacitation</button>
+  <button class="nb" onclick="show('vision')">👁 Vision</button>
+  <button class="nb" onclick="show('ear')">👂 Ear & Balance</button>
+  <button class="nb" onclick="show('illusions')">🌀 Illusions</button>
+  <button class="nb" onclick="show('gforce')">🪂 G-Forces</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+<div class="content">
+
+<!-- ===== ATMOSPHERE & GAS LAWS ===== -->
+<div class="section active" id="section-atm">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🌍</div>
+  <div><div class="st">Atmosphere, Gas Laws & Physiological Zones</div>
+  <div class="ss">78-21-1 · Boyle · Henry · Dalton · ISA · Zones · Armstrong Line · TUC altitudes</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Atmospheric Composition & Zones — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="280" fill="#07101c"/>
+        <!-- Altitude axis -->
+        <line x1="80" y1="20" x2="80" y2="260" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <!-- Altitude labels -->
+        <text x="62" y="260" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">0</text>
+        <text x="62" y="204" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">10,000</text>
+        <text x="62" y="168" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">18,000</text>
+        <text x="62" y="128" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">36,000</text>
+        <text x="62" y="90" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">50,000</text>
+        <text x="62" y="48" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="end">63,000+</text>
+        <text x="20" y="150" fill="var(--text2)" font-family="monospace" font-size="9" transform="rotate(-90,20,150)">ALTITUDE (ft)</text>
+
+        <!-- PHYSIOLOGICAL ZONE (0-12000) -->
+        <rect x="80" y="192" width="200" height="68" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+        <text x="180" y="222" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">PHYSIOLOGICAL ZONE</text>
+        <text x="180" y="238" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">0 – 12,000 ft · Normal function</text>
+        <text x="180" y="253" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">No O₂ required</text>
+
+        <!-- PHYSIOLOGICAL DEFICIENT ZONE (12000-50000) -->
+        <rect x="80" y="88" width="200" height="104" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="180" y="118" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">DEFICIENT ZONE</text>
+        <text x="180" y="134" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">12,000 – 50,000 ft</text>
+        <text x="180" y="149" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Hypoxia risk</text>
+        <text x="180" y="163" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Critical @ 22,000 ft</text>
+        <text x="180" y="178" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">O₂ mixture required</text>
+
+        <!-- PARTIAL SPACE EQUIVALENT (50000-120000) -->
+        <rect x="80" y="44" width="200" height="44" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+        <text x="180" y="62" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">PARTIAL SPACE EQ.</text>
+        <text x="180" y="77" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">50,000–120,000 ft · Pressure suit</text>
+
+        <!-- ARMSTRONG LINE -->
+        <line x1="80" y1="44" x2="300" y2="44" stroke="rgba(239,68,68,.6)" stroke-width="2" stroke-dasharray="6,4"/>
+        <rect x="300" y="36" width="150" height="18" rx="5" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.4)" stroke-width="1"/>
+        <text x="375" y="49" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Armstrong Line 63,000ft</text>
+        <text x="375" y="64" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Body fluids boil above this</text>
+
+        <!-- Oxygen availability chart right side -->
+        <text x="470" y="22" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">O₂ Availability with Altitude</text>
+        <rect x="370" y="30" width="365" height="230" rx="6" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <!-- Bars -->
+        <rect x="390" y="50" width="320" height="22" rx="3" fill="rgba(34,197,94,.3)"/>
+        <text x="395" y="65" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold">Sea Level: 100% · 101 kPa</text>
+        <rect x="390" y="82" width="243" height="22" rx="3" fill="rgba(34,197,94,.22)"/>
+        <text x="395" y="97" fill="#86EFAC" font-family="monospace" font-size="11">8,000 ft: 76% · 77 kPa</text>
+        <rect x="390" y="114" width="208" height="22" rx="3" fill="rgba(245,158,11,.25)"/>
+        <text x="395" y="129" fill="#FCD34D" font-family="monospace" font-size="11">12,000 ft: 65% · 66 kPa</text>
+        <rect x="390" y="146" width="166" height="22" rx="3" fill="rgba(245,158,11,.2)"/>
+        <text x="395" y="161" fill="#FCD34D" font-family="monospace" font-size="11">18,000 ft: 52% — HALF ★</text>
+        <rect x="390" y="178" width="131" height="22" rx="3" fill="rgba(249,115,22,.2)"/>
+        <text x="395" y="193" fill="#FDB785" font-family="monospace" font-size="11">24,000 ft: 41% · 41 kPa</text>
+        <rect x="390" y="210" width="80" height="22" rx="3" fill="rgba(239,68,68,.25)"/>
+        <text x="395" y="225" fill="#FCA5A5" font-family="monospace" font-size="11">36,000 ft: 25% — QUARTER ★</text>
+        <text x="470" y="254" fill="rgba(245,158,11,.7)" font-family="monospace" font-size="10" text-anchor="middle">★ = DGCA favourite values</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- GAS LAWS CARDS -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>5 Gas Laws — What Each Explains (DGCA Direct MCQs)</div>
+    <div class="g3">
+      <div style="background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.35);border-radius:11px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#7DD3FC;margin-bottom:6px;">Boyle's</div>
+        <div style="font-size:12px;font-weight:700;color:#7DD3FC;margin-bottom:5px;">P↓ → Volume↑</div>
+        <div style="font-size:11.5px;color:var(--text2);">Climb = gas expands<br>Descent = gas compresses</div>
+        <div class="b b-sk" style="margin-top:8px;">Explains: Trapped Gas</div>
+      </div>
+      <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.35);border-radius:11px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#FCA5A5;margin-bottom:6px;">Henry's</div>
+        <div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-bottom:5px;">P↓ → Gas leaves solution</div>
+        <div style="font-size:11.5px;color:var(--text2);">Like soda bottle uncapped<br>N₂ bubbles form in body</div>
+        <div class="b b-rd" style="margin-top:8px;">Explains: Decompression Sickness</div>
+      </div>
+      <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.35);border-radius:11px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#FCD34D;margin-bottom:6px;">Dalton's</div>
+        <div style="font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:5px;">Total = Sum of partial pressures</div>
+        <div style="font-size:11.5px;color:var(--text2);">O₂% stays 21% at altitude<br>But partial pressure drops!</div>
+        <div class="b b-am" style="margin-top:8px;">Explains: Hypoxia</div>
+      </div>
+      <div style="background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.35);border-radius:11px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#86EFAC;margin-bottom:6px;">Graham's</div>
+        <div style="font-size:12px;font-weight:700;color:#86EFAC;margin-bottom:5px;">Diffusion: high → low concentration</div>
+        <div style="font-size:11.5px;color:var(--text2);">O₂: Alveoli → Blood → Tissues<br>CO₂: Tissues → Blood → Air</div>
+        <div class="b b-gn" style="margin-top:8px;">Explains: Gas Exchange</div>
+      </div>
+      <div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.35);border-radius:11px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#D8B4FE;margin-bottom:6px;">Charles'</div>
+        <div style="font-size:12px;font-weight:700;color:#D8B4FE;margin-bottom:5px;">P ∝ Temperature (constant volume)</div>
+        <div style="font-size:11.5px;color:var(--text2);">Temp↑ → Pressure↑<br>O₂ cylinders, rapid decompression</div>
+        <div class="b b-pu" style="margin-top:8px;">Explains: Temp-Pressure Relationship</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Gas Law Memory</div>
+      <div class="mf">Boyle=Trapped Gas · Henry=DCS · Dalton=Hypoxia · Graham=Diffusion · Charles=Temp-Pressure</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>ISA Values & Oxygen by Altitude</div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);">
+        <div class="sn" style="color:#7DD3FC;font-size:16px;">1013.25</div><div class="su">hPa (sea level)</div><div class="sl">= 760 mmHg = 101 kPa</div>
+      </div>
+      <div class="stat"><div class="sn" style="color:#FCD34D;">15°C</div><div class="su">Sea level temp</div><div class="sl">Lapse rate: 1.98°C/1000ft</div></div>
+      <div class="stat" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.07);">
+        <div class="sn" style="color:#FCD34D;">52%</div><div class="su">O₂ at 18,000ft</div><div class="sl">≈ Half of sea level</div>
+      </div>
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);">
+        <div class="sn" style="color:#FCA5A5;">25%</div><div class="su">O₂ at 36,000ft</div><div class="sl">≈ Quarter of sea level</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PHYSIOLOGY ===== -->
+<div class="section" id="section-physio">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🫀</div>
+  <div><div class="st">Nervous System, Respiration & Circulation</div>
+  <div class="ss">CNS · PNS · ANS · Alveoli · Air pathway · Heart · Blood · Hemoglobin</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Nervous System — Three Divisions</div>
+      <div class="svg-wrap" style="margin:0;">
+        <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="330" height="200" fill="#07101c"/>
+          <!-- CNS -->
+          <rect x="100" y="10" width="130" height="50" rx="8" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+          <text x="165" y="32" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">CNS</text>
+          <text x="165" y="48" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Brain + Spinal Cord</text>
+          <!-- PNS -->
+          <rect x="10" y="90" width="140" height="50" rx="8" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+          <text x="80" y="112" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">PNS</text>
+          <text x="80" y="128" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Peripheral nerves</text>
+          <!-- ANS -->
+          <rect x="180" y="90" width="140" height="50" rx="8" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+          <text x="250" y="112" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">ANS</text>
+          <text x="250" y="128" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Involuntary control</text>
+          <!-- lines -->
+          <line x1="150" y1="60" x2="100" y2="90" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+          <line x1="180" y1="60" x2="220" y2="90" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+          <!-- ANS part of PNS -->
+          <text x="165" y="168" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">ANS is part of PNS</text>
+          <text x="165" y="183" fill="#D8B4FE" font-family="monospace" font-size="10" text-anchor="middle">Controls: heart, breathing, BP, digestion</text>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--orange)"></span>Air Pathway & Key Numbers</div>
+      <div style="font-size:12px;font-weight:700;color:#FDB785;margin-bottom:8px;">Air pathway to gas exchange:</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2);line-height:2;">
+        Nose/Mouth → Epiglottis → Larynx → Trachea → Bronchi → Bronchioles →
+        <span style="color:#86EFAC;font-weight:700;"> ALVEOLI ← Gas exchange here</span>
+      </div>
+      <div class="g2" style="gap:8px;margin-top:12px;">
+        <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);padding:10px;">
+          <div class="sn" style="font-size:18px;color:#86EFAC;">14–18</div><div class="su">/min</div><div class="sl">Normal respiratory rate</div>
+        </div>
+        <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.07);padding:10px;">
+          <div class="sn" style="font-size:18px;color:#7DD3FC;">CO₂</div><div class="su">regulates</div><div class="sl">Breathing (NOT O₂ level!)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Heart & Circulation — Key Facts</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Heart in centre -->
+        <ellipse cx="380" cy="90" r="55" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="380" y="82" fill="#FCA5A5" font-family="sans-serif" font-size="28" text-anchor="middle">❤️</text>
+        <text x="380" y="108" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">60-80 bpm</text>
+        <text x="380" y="123" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">5 L/min output</text>
+        <!-- RIGHT side -->
+        <rect x="20" y="30" width="170" height="120" rx="10" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+        <text x="105" y="58" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">RIGHT HEART</text>
+        <text x="105" y="76" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Receives deoxygenated</text>
+        <text x="105" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">blood from body</text>
+        <text x="105" y="115" fill="#7DD3FC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">→ Pumps to LUNGS</text>
+        <!-- Arrow right to lungs -->
+        <line x1="190" y1="90" x2="320" y2="90" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <polygon points="320,84 332,90 320,96" fill="rgba(14,165,233,.4)"/>
+        <text x="255" y="80" fill="#7DD3FC" font-family="monospace" font-size="9" text-anchor="middle">deoxy blood</text>
+        <!-- LEFT side -->
+        <rect x="570" y="30" width="170" height="120" rx="10" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <text x="655" y="58" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">LEFT HEART</text>
+        <text x="655" y="76" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Receives oxygenated</text>
+        <text x="655" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">blood from lungs</text>
+        <text x="655" y="115" fill="#86EFAC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">→ Pumps to BODY</text>
+        <!-- Arrow from lungs to left -->
+        <line x1="428" y1="90" x2="560" y2="90" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <polygon points="560,84 572,90 560,96" fill="rgba(34,197,94,.4)"/>
+        <text x="494" y="80" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">oxy blood</text>
+        <!-- Blood components row -->
+        <text x="380" y="158" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">ARTERIES = Away from heart (high pressure) · VEINS = Toward heart (low pressure) · CAPILLARIES = Exchange site</text>
+      </svg>
+    </div>
+    <div class="g4" style="margin-top:0;">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);padding:10px;">
+        <div class="sn" style="color:#FCA5A5;font-size:16px;">RBC</div><div class="sl">O₂ transport via Hemoglobin</div>
+      </div>
+      <div class="stat" style="padding:10px;">
+        <div class="sn" style="color:#7DD3FC;font-size:16px;">WBC</div><div class="sl">Immunity + antibodies</div>
+      </div>
+      <div class="stat" style="padding:10px;">
+        <div class="sn" style="color:#FCD34D;font-size:16px;">Platelets</div><div class="sl">Blood clotting</div>
+      </div>
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);padding:10px;">
+        <div class="sn" style="color:#86EFAC;font-size:14px;">BP 120/80</div><div class="sl">Normal blood pressure</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HYPOXIA ===== -->
+<div class="section" id="section-hypoxia">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">😮‍💨</div>
+  <div><div class="st">Hypoxia, CO Poisoning & Hyperventilation</div>
+  <div class="ss">HASH types · First affected = Judgment · CO=cherry red · Hyperventilation vs Hypoxia</div></div></div>
+
+  <!-- HYPOXIA TYPES SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>HASH — 4 Types of Hypoxia (Visual)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#07101c"/>
+        <!-- Title -->
+        <text x="380" y="18" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">H — A — S — H</text>
+        <!-- H - Hypoxic -->
+        <rect x="15" y="30" width="170" height="148" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <text x="100" y="56" fill="#7DD3FC" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">H</text>
+        <text x="100" y="74" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">HYPOXIC</text>
+        <text x="100" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">High altitude</text>
+        <text x="100" y="107" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Low partial pressure O₂</text>
+        <text x="100" y="125" fill="#7DD3FC" font-family="monospace" font-size="11" text-anchor="middle">Most common ★</text>
+        <text x="100" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Cabin depressurization</text>
+        <text x="100" y="158" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Memory: High altitude</text>
+        <!-- A - Anemic -->
+        <rect x="197" y="30" width="170" height="148" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="282" y="56" fill="#FCA5A5" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">A</text>
+        <text x="282" y="74" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">ANEMIC</text>
+        <text x="282" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Blood can't carry O₂</text>
+        <text x="282" y="107" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Anemia · Blood loss</text>
+        <text x="282" y="125" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">CO poisoning ★</text>
+        <text x="282" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Sickle cell disease</text>
+        <text x="282" y="158" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Memory: Abnormal blood</text>
+        <!-- S - Stagnant -->
+        <rect x="379" y="30" width="170" height="148" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+        <text x="464" y="56" fill="#D8B4FE" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">S</text>
+        <text x="464" y="74" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">STAGNANT</text>
+        <text x="464" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Poor circulation</text>
+        <text x="464" y="107" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">O₂ doesn't reach tissues</text>
+        <text x="464" y="125" fill="#D8B4FE" font-family="monospace" font-size="11" text-anchor="middle">High G-forces ★</text>
+        <text x="464" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Low BP · Shock · Fainting</text>
+        <text x="464" y="158" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Memory: Slow circulation</text>
+        <!-- H - Histotoxic -->
+        <rect x="561" y="30" width="183" height="148" rx="10" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.4)" stroke-width="2"/>
+        <text x="652" y="56" fill="#FDB785" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">H</text>
+        <text x="652" y="74" fill="#FDB785" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">HISTOTOXIC</text>
+        <text x="652" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Cells can't use O₂</text>
+        <text x="652" y="107" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">O₂ present, but blocked</text>
+        <text x="652" y="125" fill="#FDB785" font-family="monospace" font-size="11" text-anchor="middle">Alcohol ★ · Cyanide</text>
+        <text x="652" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Certain drugs</text>
+        <text x="652" y="158" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Memory: Harmed cells</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">HASH Memory</div>
+      <div class="mf">H=High altitude · A=Abnormal blood(CO) · S=Slow circulation(G-force) · H=Harmed cells(Alcohol)</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>CO Poisoning — Key Facts</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="b b-rd">CO</span><div><strong>Colourless, Odourless, Tasteless</strong> — you can't detect it!</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="b b-rd">200×</span><div>CO binds hemoglobin <strong>200–250× more</strong> readily than O₂</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="b b-rd">Sign</span><div><strong>Cherry-red lips/cheeks</strong> — classic DGCA sign</div></div>
+        <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);"><span class="b b-gn">Action</span><div>Turn cabin heater OFF · Open vents · Use O₂ · Land ASAP</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Hypoxia vs Hyperventilation</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">Feature</th><th style="color:#FCA5A5;">Hypoxia</th><th style="color:#7DD3FC;">Hyperventilation</th></tr></thead>
+          <tbody>
+            <tr><td>Altitude</td><td><span class="b b-rd">Above 10,000ft</span></td><td><span class="b b-sk">Any altitude</span></td></tr>
+            <tr><td>Cause</td><td>Low O₂ partial pressure</td><td>Over-breathing, anxiety, fear</td></tr>
+            <tr><td>Night vision</td><td>Impaired above 5,000ft</td><td>Not specifically affected</td></tr>
+            <tr><td>First affected</td><td>Judgment &amp; decisions</td><td>Dizziness, tingling</td></tr>
+            <tr><td>Treatment</td><td>O₂ + descend</td><td>Slow breathing 10-12/min</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="al al-am" style="margin-top:6px;margin-bottom:0;"><strong>Night vision impairment starts:</strong> 5,000 ft — before other hypoxia symptoms. Smoker gets hypoxia at 7,000 ft (vs 10,000 ft for non-smoker).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TUC & DCS ===== -->
+<div class="section" id="section-tuc">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">⏱</div>
+  <div><div class="st">TUC, Pressurization & Decompression Sickness</div>
+  <div class="ss">Time of Useful Consciousness · Cabin 8000ft · Bends·Creeps·Chokes·Staggers · Diving 24hr</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>TUC — Time of Useful Consciousness (Must Memorize)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 270" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="270" fill="#07101c"/>
+        <text x="380" y="18" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TUC = Time between oxygen interruption → Loss of useful performance (= EPT)</text>
+        <text x="380" y="32" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Higher altitude = Less TUC · Rapid decompression halves TUC</text>
+        <!-- Header row -->
+        <rect x="20" y="44" width="230" height="24" rx="5" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+        <text x="135" y="60" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">ALTITUDE</text>
+        <rect x="260" y="44" width="220" height="24" rx="5" fill="rgba(245,158,11,.12)"/>
+        <text x="370" y="60" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NORMAL ASCENT TUC</text>
+        <rect x="492" y="44" width="248" height="24" rx="5" fill="rgba(249,115,22,.12)"/>
+        <text x="616" y="60" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RAPID DECOMPRESSION TUC</text>
+        <!-- Data rows -->
+        <g font-family="monospace" font-size="12">
+          <text x="135" y="84" fill="#7DD3FC" text-anchor="middle">FL 180</text>
+          <text x="370" y="84" fill="#86EFAC" text-anchor="middle">20–30 min</text>
+          <text x="616" y="84" fill="#FCD34D" text-anchor="middle">10–15 min</text>
+          <text x="135" y="104" fill="#7DD3FC" text-anchor="middle">FL 220</text>
+          <text x="370" y="104" fill="#86EFAC" text-anchor="middle">10 min</text>
+          <text x="616" y="104" fill="#FCD34D" text-anchor="middle">5 min</text>
+          <text x="135" y="124" fill="#7DD3FC" text-anchor="middle">FL 250</text>
+          <text x="370" y="124" fill="#FDB785" text-anchor="middle">3–5 min</text>
+          <text x="616" y="124" fill="#FDB785" text-anchor="middle">1.5–3.5 min</text>
+          <text x="135" y="144" fill="#7DD3FC" text-anchor="middle">FL 300</text>
+          <text x="370" y="144" fill="#FDB785" text-anchor="middle">1–2 min</text>
+          <text x="616" y="144" fill="#FDB785" text-anchor="middle">30–60 sec</text>
+          <!-- Highlighted rows -->
+          <rect x="20" y="152" width="720" height="22" rx="3" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.2)" stroke-width="1"/>
+          <text x="135" y="167" fill="#FCA5A5" font-weight="bold" text-anchor="middle">FL 350 ★</text>
+          <text x="370" y="167" fill="#FCA5A5" font-weight="bold" text-anchor="middle">30 sec – 1 min</text>
+          <text x="616" y="167" fill="#FCA5A5" font-weight="bold" text-anchor="middle">15–30 sec</text>
+          <rect x="20" y="178" width="720" height="22" rx="3" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.25)" stroke-width="1"/>
+          <text x="135" y="193" fill="#FCA5A5" font-weight="bold" text-anchor="middle">FL 400 ★</text>
+          <text x="370" y="193" fill="#FCA5A5" font-weight="bold" text-anchor="middle">15–20 sec</text>
+          <text x="616" y="193" fill="#FCA5A5" font-weight="bold" text-anchor="middle">7–10 sec</text>
+          <rect x="20" y="204" width="720" height="22" rx="3" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+          <text x="135" y="219" fill="#FCA5A5" font-weight="bold" text-anchor="middle">FL 430 ★</text>
+          <text x="370" y="219" fill="#FCA5A5" font-weight="bold" text-anchor="middle">9–12 sec</text>
+          <text x="616" y="219" fill="#FCA5A5" font-weight="bold" text-anchor="middle">5–6 sec</text>
+        </g>
+        <line x1="250" y1="45" x2="250" y2="230" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <line x1="482" y1="45" x2="482" y2="230" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <rect x="20" y="238" width="720" height="24" rx="6" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="380" y="254" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Golden Rule: O₂ MASK FIRST → Communicate → Emergency Descent · Cabin altitude max = 8,000 ft</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- DCS BCCS SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Decompression Sickness — BCCS Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="190" fill="#07101c"/>
+        <text x="380" y="18" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">DCS = Henry's Law → Pressure ↓ → N₂ bubbles form in body tissues → B.C.C.S. symptoms</text>
+        <!-- B - BENDS -->
+        <rect x="15" y="30" width="170" height="140" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <text x="100" y="58" fill="#7DD3FC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">B</text>
+        <text x="100" y="76" fill="#7DD3FC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">BENDS</text>
+        <text x="100" y="97" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Location: JOINTS</text>
+        <text x="100" y="114" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">🦴 Joint Pain</text>
+        <text x="100" y="133" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Severe pain in</text>
+        <text x="100" y="146" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">elbows, knees, hips</text>
+        <text x="100" y="162" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Bones → Bends</text>
+        <!-- C - CREEPS -->
+        <rect x="198" y="30" width="170" height="140" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <text x="283" y="58" fill="#86EFAC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">C</text>
+        <text x="283" y="76" fill="#86EFAC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">CREEPS</text>
+        <text x="283" y="97" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Location: SKIN</text>
+        <text x="283" y="114" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">🐜 Crawling skin</text>
+        <text x="283" y="133" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">"Ants under skin"</text>
+        <text x="283" y="146" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Skin itching/mottling</text>
+        <text x="283" y="162" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Skin → Creeps</text>
+        <!-- C - CHOKES -->
+        <rect x="381" y="30" width="170" height="140" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="466" y="58" fill="#FCD34D" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">C</text>
+        <text x="466" y="76" fill="#FCD34D" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">CHOKES</text>
+        <text x="466" y="97" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Location: LUNGS</text>
+        <text x="466" y="114" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">🫁 Chest pain</text>
+        <text x="466" y="133" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Chest pain</text>
+        <text x="466" y="146" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Shortness of breath</text>
+        <text x="466" y="162" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Chest → Chokes</text>
+        <!-- S - STAGGERS -->
+        <rect x="564" y="30" width="180" height="140" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="654" y="58" fill="#FCA5A5" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">S</text>
+        <text x="654" y="76" fill="#FCA5A5" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">STAGGERS</text>
+        <text x="654" y="97" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Location: BRAIN/CNS</text>
+        <text x="654" y="114" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">🧠 Neurological</text>
+        <text x="654" y="133" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Dizziness</text>
+        <text x="654" y="146" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Loss of coordination</text>
+        <text x="654" y="162" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">CNS → Staggers</text>
+      </svg>
+    </div>
+    <div class="g3" style="gap:8px;">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:10px;">
+        <div class="sn" style="font-size:15px;color:#FCA5A5;">Treatment</div><div class="sl">100% O₂ → Emergency descent → Land → Medical</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+        <div class="sn" style="font-size:15px;color:#D8B4FE;">After Diving</div><div class="sl">Wait <strong>24 hours</strong> before flying</div>
+      </div>
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:10px;">
+        <div class="sn" style="font-size:15px;color:#7DD3FC;">Cabin Max</div><div class="sl"><strong>8,000 ft</strong> maximum cabin altitude</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INCAPACITATION ===== -->
+<div class="section" id="section-incap">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🚨</div>
+  <div><div class="st">Incapacitation in Flight</div>
+  <div class="ss">Obvious vs Subtle · Grand Mal vs Petit Mal · Syncope · Subtle = More dangerous</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Obvious vs Subtle Incapacitation</div>
+    <div class="g2">
+      <div style="background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.35);border-radius:12px;padding:16px;">
+        <div style="font-size:16px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">OBVIOUS ✋</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Easy to recognize — everyone sees it</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;"><span class="cn">!</span>Loss of consciousness</div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cn">!</span>Collapse</div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cn">!</span>Convulsions</div>
+          <div class="chk-item" style="padding:7px 10px;"><span class="cn">!</span>Unable to move/communicate</div>
+        </div>
+        <div style="font-size:11px;color:#7DD3FC;margin-top:8px;">Causes: Cardiac arrest · MI · Stroke · Epilepsy</div>
+      </div>
+      <div style="background:rgba(239,68,68,.09);border:2px solid rgba(239,68,68,.4);border-radius:12px;padding:16px;">
+        <div style="font-size:16px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">SUBTLE ⚠️ — MORE DANGEROUS</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Gradual, may look normal — harder to detect!</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">!</span>Poor judgment</div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">!</span>Slow responses</div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">!</span>Confusion / absent-mindedness</div>
+          <div class="chk-item" style="padding:7px 10px;border-color:rgba(239,68,68,.3);"><span class="cn">!</span>Wrong decisions</div>
+        </div>
+        <div style="font-size:11px;color:#FCA5A5;margin-top:8px;">Causes: Hypoglycemia · Low BP · Fatigue · Alcohol</div>
+      </div>
+    </div>
+    <div class="al al-rd" style="margin-top:4px;margin-bottom:0;"><strong>DGCA Favourite:</strong> Subtle incapacitation is MORE DANGEROUS because it may go completely unnoticed by the crew.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Grand Mal vs Petit Mal Epilepsy & Syncope</div>
+    <div class="g3">
+      <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.35);border-radius:11px;padding:14px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:5px;">💥</div>
+        <div style="font-weight:700;color:#FCA5A5;font-size:14px;margin-bottom:5px;">GRAND MAL</div>
+        <div style="font-size:12px;color:var(--text2);">Loss of consciousness ✓<br>Convulsions ✓<br>Major seizure</div>
+        <div class="b b-rd" style="margin-top:8px;">Serious incapacitation</div>
+      </div>
+      <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.35);border-radius:11px;padding:14px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:5px;">⚡</div>
+        <div style="font-weight:700;color:#FCD34D;font-size:14px;margin-bottom:5px;">PETIT MAL</div>
+        <div style="font-size:12px;color:var(--text2);">NO loss of consciousness<br>Minor attack<br>Brief interruption</div>
+        <div class="b b-am" style="margin-top:8px;">Less obvious</div>
+      </div>
+      <div style="background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.35);border-radius:11px;padding:14px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:5px;">😵</div>
+        <div style="font-weight:700;color:#7DD3FC;font-size:14px;margin-bottom:5px;">SYNCOPE (Fainting)</div>
+        <div style="font-size:12px;color:var(--text2);">Temporary loss of consciousness<br>Reduced blood flow to brain<br>Vasovagal syncope</div>
+        <div class="b b-sk" style="margin-top:8px;">Common cause: Stand up quickly</div>
+      </div>
+    </div>
+    <div class="al al-am" style="margin-top:4px;margin-bottom:0;"><strong>Aviation Rule:</strong> Any history of epileptic fit = Absolute bar to holding a flying licence.</div>
+  </div>
+</div>
+
+<!-- ===== VISION ===== -->
+<div class="section" id="section-vision">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">👁</div>
+  <div><div class="st">The Eye & Vision</div>
+  <div class="ss">Rods=Night · Cones=Colour · Fovea=Sharpest · Dark adapt 30min · Visual defects · Lenses</div></div></div>
+
+  <!-- EYE ANATOMY SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Eye Anatomy & Rods vs Cones — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#07101c"/>
+        <!-- Eye diagram (left) -->
+        <!-- Outer circle = eyeball -->
+        <circle cx="195" cy="130" r="100" fill="#0d1e18" stroke="rgba(34,197,94,.3)" stroke-width="2"/>
+        <!-- Cornea -->
+        <path d="M95,105 Q70,130 95,155" fill="rgba(34,197,94,.3)" stroke="rgba(34,197,94,.6)" stroke-width="2"/>
+        <text x="50" y="128" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Cornea</text>
+        <text x="50" y="141" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">70-80%</text>
+        <text x="50" y="154" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">focusing</text>
+        <!-- Iris/Pupil -->
+        <circle cx="145" cy="130" r="30" fill="#1a0e0e" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <circle cx="145" cy="130" r="15" fill="#050505" stroke="rgba(245,158,11,.6)" stroke-width="1"/>
+        <text x="145" y="175" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Iris/Pupil</text>
+        <!-- Lens -->
+        <ellipse cx="175" cy="130" rx="15" ry="22" fill="rgba(14,165,233,.2)" stroke="rgba(14,165,233,.5)" stroke-width="1.5"/>
+        <text x="175" y="165" fill="#7DD3FC" font-family="monospace" font-size="10" text-anchor="middle">Lens</text>
+        <!-- Retina (inside arc) -->
+        <path d="M260,80 A95,95 0 0,1 260,180" fill="none" stroke="rgba(168,85,247,.5)" stroke-width="6"/>
+        <text x="290" y="130" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="start">Retina</text>
+        <!-- Fovea dot on retina -->
+        <circle cx="295" cy="130" r="8" fill="#A855F7" opacity=".9"/>
+        <text x="318" y="128" fill="#D8B4FE" font-family="monospace" font-size="10">Fovea</text>
+        <text x="318" y="140" fill="var(--text2)" font-family="monospace" font-size="9">Sharpest</text>
+        <!-- Optic nerve -->
+        <line x1="260" y1="148" x2="290" y2="148" stroke="rgba(239,68,68,.5)" stroke-width="3"/>
+        <text x="295" y="152" fill="#FCA5A5" font-family="monospace" font-size="10">Blind spot</text>
+        <!-- Optic nerve exit -->
+        <line x1="295" y1="150" x2="340" y2="155" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="295" y="170" fill="var(--text2)" font-family="monospace" font-size="9">Optic nerve exit = No rods/cones</text>
+        <!-- Light ray arrow -->
+        <line x1="20" y1="130" x2="90" y2="130" stroke="rgba(255,255,200,.6)" stroke-width="2"/>
+        <polygon points="90,124 102,130 90,136" fill="rgba(255,255,200,.6)"/>
+        <text x="50" y="100" fill="rgba(255,255,200,.5)" font-family="monospace" font-size="10">LIGHT →</text>
+
+        <!-- RIGHT: Rods vs Cones table -->
+        <rect x="390" y="20" width="355" height="225" rx="10" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <text x="567" y="44" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">RODS vs CONES</text>
+        <!-- Headers -->
+        <text x="470" y="66" fill="#A5B4FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RODS 🌙</text>
+        <text x="657" y="66" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">CONES ☀️</text>
+        <line x1="400" y1="70" x2="738" y2="70" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <!-- Rows -->
+        <g font-family="sans-serif" font-size="11">
+          <text x="400" y="88" fill="var(--text2)">Vision type</text>
+          <text x="470" y="88" fill="#A5B4FC" text-anchor="middle">Night / Dim</text>
+          <text x="657" y="88" fill="#FCD34D" text-anchor="middle">Day / Bright</text>
+          <text x="400" y="108" fill="var(--text2)">Colour</text>
+          <text x="470" y="108" fill="#A5B4FC" text-anchor="middle">Black &amp; White</text>
+          <text x="657" y="108" fill="#FCD34D" text-anchor="middle">Full Colour ★</text>
+          <text x="400" y="128" fill="var(--text2)">Location</text>
+          <text x="470" y="128" fill="#A5B4FC" text-anchor="middle">Peripheral retina</text>
+          <text x="657" y="128" fill="#FCD34D" text-anchor="middle">Fovea (centre) ★</text>
+          <text x="400" y="148" fill="var(--text2)">Count</text>
+          <text x="470" y="148" fill="#A5B4FC" text-anchor="middle">~100 million</text>
+          <text x="657" y="148" fill="#FCD34D" text-anchor="middle">~6 million</text>
+          <text x="400" y="168" fill="var(--text2)">Sensitivity</text>
+          <text x="470" y="168" fill="#A5B4FC" text-anchor="middle">Very high</text>
+          <text x="657" y="168" fill="#FCD34D" text-anchor="middle">Less sensitive</text>
+          <text x="400" y="188" fill="var(--text2)">Visual acuity</text>
+          <text x="470" y="188" fill="#A5B4FC" text-anchor="middle">Poor</text>
+          <text x="657" y="188" fill="#FCD34D" text-anchor="middle">Excellent ★</text>
+          <text x="400" y="208" fill="var(--text2)">DGCA key</text>
+          <text x="470" y="208" fill="#86EFAC" text-anchor="middle">Night vision</text>
+          <text x="657" y="208" fill="#86EFAC" text-anchor="middle">Colour + Day + Fovea</text>
+        </g>
+        <line x1="570" y1="72" x2="570" y2="228" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Rod / Cone Memory</div>
+      <div class="mf">RODS = Road at Night (peripheral, B&W, night vision) · CONES = Colour + Centre (fovea, day, detail, colour)</div>
+    </div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>Visual Defects — Lenses Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(34,197,94,.12);"><tr><th style="color:#86EFAC;">Defect</th><th style="color:#86EFAC;">What?</th><th style="color:#86EFAC;">Correction</th></tr></thead>
+          <tbody>
+            <tr><td><span class="b b-sk">Myopia</span></td><td>Short sighted — can't see far</td><td><strong>Concave</strong> lens</td></tr>
+            <tr><td><span class="b b-or">Hypermetropia</span></td><td>Long sighted — can't see near</td><td><strong>Convex</strong> lens</td></tr>
+            <tr><td><span class="b b-am">Presbyopia</span></td><td>Age-related (40-50y) — accommodation loss</td><td><strong>Convex</strong> (reading glasses)</td></tr>
+            <tr><td><span class="b b-pu">Astigmatism</span></td><td>Irregular cornea — distorted image</td><td>Cylindrical lens</td></tr>
+            <tr><td><span class="b b-rd">Glaucoma</span></td><td>High intraocular pressure — field loss</td><td>Medical treatment</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+        <div class="mt">Lens Memory</div>
+        <div class="mf">Myopia = My Near is OK (can't see FAR) → CONcave · HYPERmetropia = HYPER FAR (can't see NEAR) → COnVEx</div>
+      </div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Night Vision & Dark Adaptation</div>
+      <div class="g2" style="gap:8px;margin-bottom:10px;">
+        <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:10px;">
+          <div class="sn" style="color:#D8B4FE;font-size:20px;">30 min</div><div class="sl">Full dark adaptation (rods)</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#FCD34D;font-size:20px;">7 min</div><div class="sl">Cones adapt quickly</div>
+        </div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">↓</span><div>Night vision impairs above <strong>5,000 ft</strong> (rods need O₂)</div></div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);"><span class="cy">✓</span><div>Red cockpit light preserves dark adaptation</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);"><span class="cn">✗</span><div>Photochromatic lenses: <strong>NOT recommended for flight</strong></div></div>
+        <div class="chk-item"><span class="b b-sk">Empty field myopia</span><div>Eye focuses at <strong>1–2 metres</strong> when no target (haze/cloud)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EAR & BALANCE ===== -->
+<div class="section" id="section-ear">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">👂</div>
+  <div><div class="st">The Ear & Balance Mechanism</div>
+  <div class="ss">Eustachian tube · Ossicles · Semicircular canals · Otolith organs · Hearing range · Presbycusis</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Ear Structure & Balance Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 230" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="230" fill="#07101c"/>
+        <!-- THREE EAR PARTS -->
+        <rect x="15" y="30" width="185" height="160" rx="10" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="107" y="54" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">OUTER EAR</text>
+        <text x="107" y="73" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Pinna (ear flap)</text>
+        <text x="107" y="89" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">External canal</text>
+        <text x="107" y="108" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Collects sound waves</text>
+        <rect x="210" y="30" width="200" height="160" rx="10" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="310" y="54" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">MIDDLE EAR</text>
+        <text x="310" y="73" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Eardrum (Tympanum)</text>
+        <text x="310" y="89" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Ossicles: M-I-S ★</text>
+        <text x="310" y="105" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Malleus·Incus·Stapes</text>
+        <text x="310" y="120" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Stapes = smallest bone</text>
+        <text x="310" y="137" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Eustachian Tube ★</text>
+        <text x="310" y="153" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Middle ear → Throat</text>
+        <text x="310" y="168" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Pressure equalization</text>
+        <!-- Inner ear -->
+        <rect x="420" y="30" width="325" height="160" rx="10" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="582" y="54" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">INNER EAR</text>
+        <text x="500" y="76" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Cochlea</text>
+        <text x="500" y="92" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Converts sound → signals</text>
+        <line x1="430" y1="106" x2="735" y2="106" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="500" y="124" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">OTOLITH Organs ★</text>
+        <text x="500" y="140" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">LINEAR acceleration</text>
+        <text x="500" y="155" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Takeoff roll, braking</text>
+        <text x="670" y="124" fill="#5EEAD4" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SEMICIRCULAR ★</text>
+        <text x="670" y="140" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">ANGULAR accel.</text>
+        <text x="670" y="155" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Turns, rolls, pitch</text>
+        <!-- Eustachian note -->
+        <rect x="15" y="198" width="730" height="24" rx="6" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.25)" stroke-width="1"/>
+        <text x="380" y="214" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Ear problems mainly during DESCENT · Human hearing: 20–20,000 Hz · Noise damage above 90 dB · Age-related = Presbycusis</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Balance Memory</div>
+      <div class="mf">Otolith = Linear (line/straight) · Semicircular = Angular (turns) · Vision = MOST RELIABLE orientation · Instruments = Trust when disoriented</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== ILLUSIONS ===== -->
+<div class="section" id="section-illusions">
+  <div class="sh"><div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🌀</div>
+  <div><div class="st">Aviation Illusions</div>
+  <div class="ss">Somatogravic · Black Hole · Runway Width · Autokinesis · Flicker · Spatial Disorientation</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Top 6 Aviation Illusions — Visual Guide</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="360" fill="#07101c"/>
+        <!-- SOMATOGRAVIC -->
+        <rect x="10" y="10" width="360" height="160" rx="10" fill="rgba(239,68,68,.07)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="190" y="30" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SOMATOGRAVIC ILLUSION</text>
+        <!-- Runway -->
+        <rect x="20" y="120" width="340" height="18" rx="2" fill="#1e2a30"/>
+        <text x="190" y="134" fill="white" font-family="monospace" font-size="9" text-anchor="middle">RUNWAY</text>
+        <!-- Aircraft accelerating -->
+        <g transform="translate(160,90)"><ellipse cx="0" cy="0" rx="28" ry="7" fill="#7DD3FC" opacity=".8"/>
+        <line x1="4" y1="0" x2="-24" y2="-12" stroke="#7DD3FC" stroke-width="2"/>
+        <line x1="4" y1="0" x2="-24" y2="12" stroke="#7DD3FC" stroke-width="2"/></g>
+        <!-- Acceleration arrow -->
+        <line x1="80" y1="90" x2="140" y2="90" stroke="rgba(34,197,94,.6)" stroke-width="2"/>
+        <polygon points="140,85 152,90 140,95" fill="rgba(34,197,94,.6)"/>
+        <text x="110" y="80" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">Accelerating →</text>
+        <!-- Perceived nose-up -->
+        <path d="M190,90 L270,50" fill="none" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="280" y="50" fill="#FCA5A5" font-family="monospace" font-size="10">FEELS nose-up</text>
+        <text x="280" y="64" fill="#FCA5A5" font-family="monospace" font-size="10">Pilot pushes DOWN ⚠</text>
+        <text x="190" y="110" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Rapid acceleration → Otoliths feel nose-up → DANGER</text>
+        <text x="190" y="150" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">DGCA: Takeoff = Head-Up illusion · Trust attitude indicator!</text>
+
+        <!-- BLACK HOLE -->
+        <rect x="390" y="10" width="360" height="160" rx="10" fill="rgba(14,165,233,.07)" stroke="rgba(14,165,233,.35)" stroke-width="1.5"/>
+        <text x="570" y="30" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BLACK HOLE ILLUSION</text>
+        <!-- dark terrain simulation -->
+        <rect x="400" y="80" width="340" height="70" fill="#050810"/>
+        <rect x="400" y="145" width="340" height="25" fill="#1a2a3a"/>
+        <!-- runway lights only -->
+        <g fill="#FDE047" opacity=".8">
+          <rect x="525" y="140" width="8" height="25"/><rect x="555" y="140" width="8" height="25"/>
+          <rect x="585" y="140" width="8" height="25"/><rect x="615" y="140" width="8" height="25"/>
+          <rect x="645" y="140" width="8" height="25"/><rect x="675" y="140" width="8" height="25"/>
+        </g>
+        <!-- Normal glidepath -->
+        <line x1="410" y1="90" x2="525" y2="148" stroke="rgba(34,197,94,.5)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="450" y="85" fill="#86EFAC" font-family="monospace" font-size="9">Correct path</text>
+        <!-- Actual flight path (too low) -->
+        <line x1="410" y1="110" x2="525" y2="148" stroke="#EF4444" stroke-width="2.5"/>
+        <text x="418" y="128" fill="#FCA5A5" font-family="monospace" font-size="9">Actual (too LOW!)</text>
+        <text x="570" y="75" fill="#7DD3FC" font-family="monospace" font-size="10" text-anchor="middle">Night approach over dark terrain</text>
+        <text x="570" y="90" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">No ground lights → pilot feels "too high"</text>
+        <text x="570" y="168" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Result: LOW approach → Ground strike risk</text>
+
+        <!-- RUNWAY WIDTH ILLUSION -->
+        <rect x="10" y="185" width="360" height="160" rx="10" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="190" y="204" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">RUNWAY WIDTH ILLUSION</text>
+        <!-- Narrow runway -->
+        <rect x="30" y="220" width="60" height="110" rx="2" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <text x="60" y="218" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">NARROW</text>
+        <!-- Aircraft symbol high above narrow -->
+        <text x="60" y="248" fill="#FCA5A5" font-family="sans-serif" font-size="20" text-anchor="middle">✈</text>
+        <text x="60" y="268" fill="#FCA5A5" font-family="monospace" font-size="9" text-anchor="middle">Feels HIGH</text>
+        <text x="60" y="282" fill="#FCA5A5" font-family="monospace" font-size="9" text-anchor="middle">→ Flies LOW</text>
+        <!-- Wide runway -->
+        <rect x="210" y="220" width="140" height="110" rx="2" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <text x="280" y="218" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">WIDE</text>
+        <text x="280" y="310" fill="#86EFAC" font-family="sans-serif" font-size="20" text-anchor="middle">✈</text>
+        <text x="280" y="282" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">Feels LOW</text>
+        <text x="280" y="296" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">→ Flies HIGH</text>
+        <text x="190" y="340" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Narrow=Low · Wide=High</text>
+
+        <!-- AUTOKINESIS + FLICKER -->
+        <rect x="390" y="185" width="360" height="160" rx="10" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="570" y="204" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">AUTOKINESIS & FLICKER</text>
+        <text x="440" y="230" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">AUTOKINESIS</text>
+        <text x="440" y="248" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Stationary light at night</text>
+        <text x="440" y="263" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">viewed &gt;10 sec</text>
+        <text x="440" y="278" fill="#FDB785" font-family="monospace" font-size="10" text-anchor="middle">→ Light APPEARS to move</text>
+        <text x="440" y="293" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Fix: Look away periodically</text>
+        <line x1="565" y1="215" x2="565" y2="335" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+        <text x="660" y="230" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">FLICKER VERTIGO</text>
+        <text x="660" y="248" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Light flickering:</text>
+        <text x="660" y="263" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">4–20 Hz ★</text>
+        <text x="660" y="280" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Causes: Nausea</text>
+        <text x="660" y="295" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Disorientation</text>
+        <text x="660" y="310" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Unconsciousness!</text>
+        <text x="660" y="328" fill="#FCD34D" font-family="monospace" font-size="9" text-anchor="middle">Sun + prop rotation</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== G-FORCES ===== -->
+<div class="section" id="section-gforce">
+  <div class="sh"><div class="si" style="background:var(--in-bg);border:1px solid rgba(99,102,241,.3);">🪂</div>
+  <div><div class="st">G-Forces, Motion Sickness & Other Hazards</div>
+  <div class="ss">Positive G=blackout · Negative G=redout · BMI 20-25 · Hypoglycemia · Drugs · Diving 24hr</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--indigo)"></span>G-Force Effects — Visual Progression</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Positive G progression -->
+        <text x="250" y="18" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">POSITIVE G — Blood rushes to FEET</text>
+        <rect x="20" y="28" width="110" height="100" rx="8" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="75" y="56" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">2–3G</text>
+        <text x="75" y="74" fill="#FCD34D" font-family="monospace" font-size="11" text-anchor="middle">Tunnel</text>
+        <text x="75" y="89" fill="#FCD34D" font-family="monospace" font-size="11" text-anchor="middle">Vision</text>
+        <line x1="130" y1="78" x2="145" y2="78" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+        <polygon points="145,73 155,78 145,83" fill="rgba(255,255,255,.3)"/>
+        <rect x="155" y="28" width="110" height="100" rx="8" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.35)" stroke-width="1.5"/>
+        <text x="210" y="56" fill="#FDB785" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">4–5G</text>
+        <text x="210" y="74" fill="#FDB785" font-family="monospace" font-size="11" text-anchor="middle">Grey</text>
+        <text x="210" y="89" fill="#FDB785" font-family="monospace" font-size="11" text-anchor="middle">Out</text>
+        <line x1="265" y1="78" x2="280" y2="78" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+        <polygon points="280,73 290,78 280,83" fill="rgba(255,255,255,.3)"/>
+        <rect x="290" y="28" width="110" height="100" rx="8" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <text x="345" y="56" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">5–6G+</text>
+        <text x="345" y="74" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BLACK</text>
+        <text x="345" y="91" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">OUT</text>
+        <text x="345" y="108" fill="#FCA5A5" font-family="monospace" font-size="9" text-anchor="middle">Unconsciousness</text>
+        <text x="200" y="148" fill="rgba(245,158,11,.7)" font-family="monospace" font-size="11" text-anchor="middle">First symptom = TUNNEL VISION → Grey out → BLACKOUT</text>
+
+        <!-- Negative G -->
+        <text x="600" y="18" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NEGATIVE G — Blood rushes to HEAD</text>
+        <rect x="450" y="28" width="300" height="100" rx="8" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="600" y="60" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">RED-OUT ★</text>
+        <text x="600" y="80" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Blood into head · Facial congestion</text>
+        <text x="600" y="98" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Headache · Impaired vision</text>
+        <text x="600" y="114" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Example: Bunting manoeuvre</text>
+        <text x="600" y="148" fill="#FCD34D" font-family="monospace" font-size="11" text-anchor="middle">DGCA: Positive G = Blackout · Negative G = Redout</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--indigo)"></span>Miscellaneous Hazards</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(99,102,241,.12);"><tr><th style="color:#A5B4FC;">Topic</th><th style="color:#A5B4FC;">Key Fact</th></tr></thead>
+          <tbody>
+            <tr><td>BMI (men)</td><td><span class="num">20–25</span></td></tr>
+            <tr><td>BMI (women)</td><td><span class="num">19–24</span></td></tr>
+            <tr><td>Normal body temp</td><td><span class="num">37°C (98.6°F)</span></td></tr>
+            <tr><td>Comfortable cockpit temp</td><td><span class="num">~20°C</span></td></tr>
+            <tr><td>Vision interference vibration</td><td><span class="num">30–40 Hz</span></td></tr>
+            <tr><td>Flicker vertigo frequency</td><td><span class="num">4–20 Hz</span></td></tr>
+            <tr><td>After blood donation</td><td>Wait <span class="num">48 hours</span></td></tr>
+            <tr><td>After local anaesthetic</td><td>Wait <span class="num">12 hours</span></td></tr>
+            <tr><td>After general anaesthetic</td><td>Wait <span class="num">48 hours</span></td></tr>
+            <tr><td>After dental work</td><td>Wait <span class="num">48–72 hours</span></td></tr>
+            <tr><td>Caffeine daily limit</td><td><span class="num">250–300 mg</span> ≈ 2-3 cups</td></tr>
+            <tr><td>Alcohol type</td><td>Depressant</td></tr>
+            <tr><td>Sinus blockage when</td><td>Mainly DESCENT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>G Tolerance Reducing Factors</div>
+      <div style="font-size:12px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">A-S-F-O-H — Factors that reduce G tolerance:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+        <span class="b b-rd">Alcohol</span><span class="b b-am">Smoking</span>
+        <span class="b b-or">Fatigue</span><span class="b b-pu">Obesity</span>
+        <span class="b b-sk">Heat</span><span class="b b-in">Illness</span>
+      </div>
+      <div class="al al-am" style="margin-bottom:10px;"><strong>Motion Sickness:</strong> Mismatch between vestibular input and visual input = sensory conflict → nausea, vomiting, pallor</div>
+      <div class="mem" style="margin:0;"><div class="mi">🧠</div><div>
+        <div class="mt">Key Memory</div>
+        <div class="mf">Most reliable orientation = VISION<br>If disoriented → TRUST INSTRUMENTS<br>Seat-of-pants feeling = LEAST reliable</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference & Exam Traps</div>
+  <div class="ss">Every critical fact from Chapter 26</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Critical Facts Table (A–Z)</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(20,184,166,.12);"><tr><th style="color:#5EEAD4;">Question</th><th style="color:#5EEAD4;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Atmosphere: N₂ / O₂ / Others</td><td><span class="num">78 / 21 / 1 %</span></td></tr>
+            <tr><td>Boyle's law explains</td><td>Trapped gas (climb=expand)</td></tr>
+            <tr><td>Henry's law explains</td><td>Decompression sickness</td></tr>
+            <tr><td>Dalton's law explains</td><td>Hypoxia (O₂% stays 21%, partial P drops)</td></tr>
+            <tr><td>ISA sea level pressure</td><td>1013.25 hPa / 760 mmHg / 101 kPa</td></tr>
+            <tr><td>ISA lapse rate</td><td>1.98°C / 1000 ft</td></tr>
+            <tr><td>O₂ at 18,000 ft</td><td>52% (half)</td></tr>
+            <tr><td>O₂ at 36,000 ft</td><td>25% (quarter)</td></tr>
+            <tr><td>Armstrong Line</td><td>63,000 ft (body fluids boil)</td></tr>
+            <tr><td>Physiological Deficient Zone</td><td>12,000–50,000 ft</td></tr>
+            <tr><td>Critical altitude without O₂</td><td>22,000 ft</td></tr>
+            <tr><td>Gas exchange site</td><td>Alveoli</td></tr>
+            <tr><td>Respiratory rate (adult)</td><td>14–18 /min</td></tr>
+            <tr><td>Breathing regulated by</td><td>CO₂ level (NOT O₂)</td></tr>
+            <tr><td>Cardiac output</td><td>~5 L/min</td></tr>
+            <tr><td>Normal pulse</td><td>60–80 bpm</td></tr>
+            <tr><td>Normal BP</td><td>120/80 mmHg</td></tr>
+            <tr><td>Most common aviation hypoxia</td><td>Hypoxic hypoxia</td></tr>
+            <tr><td>CO poisoning sign</td><td>Cherry-red lips</td></tr>
+            <tr><td>CO affinity for Hb</td><td>200–250× oxygen</td></tr>
+            <tr><td>Night vision affected above</td><td>5,000 ft</td></tr>
+            <tr><td>TUC FL350 (rapid decompression)</td><td>15–30 sec</td></tr>
+            <tr><td>TUC FL400 (rapid decompression)</td><td>7–10 sec</td></tr>
+            <tr><td>Cabin max altitude</td><td>8,000 ft</td></tr>
+            <tr><td>DCS explained by</td><td>Henry's Law</td></tr>
+            <tr><td>DCS joint pain</td><td>Bends</td></tr>
+            <tr><td>Dive to fly wait</td><td>24 hours</td></tr>
+            <tr><td>Subtle incapacitation danger</td><td>Goes unnoticed</td></tr>
+            <tr><td>Grand Mal epilepsy</td><td>LOC + convulsions</td></tr>
+            <tr><td>Petit Mal epilepsy</td><td>No LOC</td></tr>
+            <tr><td>Syncope definition</td><td>Temp LOC from reduced cerebral blood flow</td></tr>
+            <tr><td>Sharpest vision area</td><td>Fovea</td></tr>
+            <tr><td>Night vision receptor</td><td>Rods</td></tr>
+            <tr><td>Colour vision receptor</td><td>Cones</td></tr>
+            <tr><td>Full dark adaptation</td><td>30 minutes (rods)</td></tr>
+            <tr><td>Empty field myopia focus</td><td>1–2 metres</td></tr>
+            <tr><td>Myopia correction</td><td>Concave lens</td></tr>
+            <tr><td>Hypermetropia correction</td><td>Convex lens</td></tr>
+            <tr><td>Linear acceleration detected by</td><td>Otolith organs</td></tr>
+            <tr><td>Angular acceleration detected by</td><td>Semicircular canals</td></tr>
+            <tr><td>Somatogravic illusion</td><td>Acceleration = nose-up feeling</td></tr>
+            <tr><td>Black hole illusion result</td><td>Low approach</td></tr>
+            <tr><td>Flicker vertigo frequency</td><td>4–20 Hz</td></tr>
+            <tr><td>Positive G first symptom</td><td>Tunnel vision</td></tr>
+            <tr><td>Negative G causes</td><td>Red-out</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ DGCA Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">O₂ percentage stays 21% at altitude</div><div class="trap-d">At altitude, O₂ is still 21% of the air. But the PARTIAL PRESSURE drops. This is Dalton's Law — lower total pressure means less O₂ per breath. The percentage never changes.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Breathing is controlled by CO₂, NOT O₂</div><div class="trap-d">The primary drive to breathe is CO₂ level in the blood, not oxygen level. That's why hyperventilation (blowing off CO₂) is dangerous — it removes the breathing stimulus.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Somatogravic: Acceleration = nose-up feel (not nose-down)</div><div class="trap-d">Rapid acceleration stimulates otolith organs creating a sensation of pitching up. Pilot may PUSH NOSE DOWN dangerously. Trust instruments!</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Black Hole = LOW approach (not high)</div><div class="trap-d">Black hole illusion makes pilot feel TOO HIGH, so they descend MORE than needed. Result = dangerously LOW approach. Classic exam confusion.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Grand Mal = LOC · Petit Mal = NO LOC</div><div class="trap-d">Grand Mal = major seizure WITH loss of consciousness. Petit Mal = minor seizure WITHOUT loss of consciousness. Both disqualify from flying.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Otolith = Linear · Semicircular = Angular</div><div class="trap-d">Otolith organs detect LINEAR acceleration (straight line). Semicircular canals detect ANGULAR (rotational) acceleration. Frequently confused in MCQs.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 26</div>
+  <div class="ss">30 DGCA-style questions on all Aviation Physiology topics</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- content -->
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"Dalton's Law explains which aviation condition?",opts:["Decompression sickness","Trapped gas expansion","Hypoxia at altitude","Gas diffusion in alveoli"],ans:2,exp:"Dalton's Law: Total pressure = sum of partial pressures. At altitude, O₂% stays 21% but TOTAL pressure drops → O₂ partial pressure drops → Less O₂ available = Hypoxia."},
+{q:"Henry's Law explains which aviation condition?",opts:["Hypoxia","Gas exchange in alveoli","Decompression sickness","Trapped gas in sinuses"],ans:2,exp:"Henry's Law: Gas dissolved in liquid ∝ partial pressure. When pressure drops (altitude), dissolved N₂ comes out of solution as bubbles = Decompression Sickness."},
+{q:"Boyle's Law explains which aviation hazard?",opts:["Hypoxia","Decompression sickness","Trapped gas expansion in body cavities","Gas diffusion"],ans:2,exp:"Boyle's Law: Pressure inversely proportional to volume. As altitude ↑, pressure ↓, gas volume ↑. Affects: middle ear, sinuses, GI gas, air splints, trapped air."},
+{q:"At 18,000 ft, what percentage of sea-level oxygen is available?",opts:["76%","65%","52%","41%"],ans:2,exp:"At 18,000 ft = 52% ≈ half of sea-level oxygen. At 36,000 ft = 25% ≈ quarter. DGCA favourite: 18,000 ft = half, 36,000 ft = quarter."},
+{q:"At what altitude do body fluids begin to boil?",opts:["43,000 ft","50,000 ft","63,000 ft","100,000 ft"],ans:2,exp:"Armstrong Line = 63,000 ft. Above this altitude, body fluids (blood, water in tissues) will boil due to extremely low pressure. Requires sealed pressurized suit."},
+{q:"The most common type of aviation hypoxia is:",opts:["Anemic hypoxia","Stagnant hypoxia","Histotoxic hypoxia","Hypoxic hypoxia"],ans:3,exp:"Hypoxic hypoxia = most common aviation type. Caused by low partial pressure of O₂ at altitude (reduced atmospheric pressure). Boyle and Dalton's laws explain it."},
+{q:"Carbon monoxide poisoning causes which type of hypoxia?",opts:["Hypoxic hypoxia","Anemic hypoxia","Stagnant hypoxia","Histotoxic hypoxia"],ans:1,exp:"CO poisoning → Anemic hypoxia. CO binds hemoglobin 200-250× more readily than O₂, reducing blood's O₂ carrying capacity. Classic sign: cherry-red lips."},
+{q:"High G-forces cause which type of hypoxia?",opts:["Hypoxic hypoxia","Anemic hypoxia","Stagnant hypoxia","Histotoxic hypoxia"],ans:2,exp:"Stagnant hypoxia (also called Ischemic hypoxia) = caused by poor circulation. High G-forces prevent blood from reaching the brain and tissues."},
+{q:"Alcohol primarily causes which type of hypoxia?",opts:["Hypoxic hypoxia","Anemic hypoxia","Stagnant hypoxia","Histotoxic hypoxia"],ans:3,exp:"Histotoxic hypoxia = cells unable to utilize O₂ even though it's present. Caused by alcohol, cyanide, and certain drugs. Memory: Histotoxic = Harmed cells."},
+{q:"Carbon monoxide binds hemoglobin how many times more readily than oxygen?",opts:["10–20×","50–100×","200–250×","500×"],ans:2,exp:"CO affinity for hemoglobin = 200–250 times greater than O₂. This is why CO is so dangerous even in small amounts — it displaces O₂ from hemoglobin."},
+{q:"The classic clinical sign of CO poisoning is:",opts:["Blue lips (cyanosis)","Cherry-red lips and cheeks","Pale, cold skin","Yellow eyes"],ans:1,exp:"Cherry-red lips/cheeks = classic sign of CO poisoning. This is due to carboxyhemoglobin (CO-Hb) giving blood a bright red colour, unlike the blue of normal hypoxia."},
+{q:"Night vision begins to impair above:",opts:["2,000 ft","5,000 ft","8,000 ft","10,000 ft"],ans:1,exp:"Night vision (rods) starts to deteriorate above 5,000 ft because rods are highly oxygen-dependent. This occurs BEFORE other hypoxia symptoms appear."},
+{q:"TUC at FL350 with rapid decompression is approximately:",opts:["1–2 minutes","30–60 seconds","15–30 seconds","5–10 seconds"],ans:2,exp:"FL350 rapid decompression TUC = 15–30 seconds. FL350 normal ascent = 30sec–1min. FL400 rapid decompression = 7–10 sec. These are critical DGCA numbers."},
+{q:"The maximum normal cabin altitude in a pressurized aircraft is:",opts:["4,000 ft","6,000 ft","8,000 ft","10,000 ft"],ans:2,exp:"Maximum cabin altitude = 8,000 ft. Aircraft at 30,000 ft maintains cabin pressure equivalent to approximately 6,000–8,000 ft."},
+{q:"The correct order of actions in explosive decompression is:",opts:["Descend → Communicate → Put on oxygen mask","Oxygen mask FIRST → Communicate → Emergency descent","Communicate → Oxygen mask → Descend","None of these — no specific order"],ans:1,exp:"O₂ MASK FIRST (you have seconds at altitude) → Then communicate → Then emergency descent. This order saves lives. TUC at FL400 = only 7-10 seconds."},
+{q:"'Bends' in DCS refers to:",opts:["Lung/chest symptoms","Skin crawling sensation","Severe joint pain","Neurological symptoms"],ans:2,exp:"Bends = severe pain in joints (knees, elbows, hips) due to N₂ bubbles forming in and around joints. Memory: Bones → Bends."},
+{q:"'Staggers' in DCS refers to:",opts:["Skin symptoms","Lung symptoms","CNS/neurological symptoms","Joint symptoms"],ans:2,exp:"Staggers = CNS involvement — dizziness, loss of coordination, neurological dysfunction due to N₂ bubbles in brain/spinal cord. Most serious DCS symptom."},
+{q:"Minimum time to wait after scuba diving before flying:",opts:["6 hours","12 hours","24 hours","48 hours"],ans:2,exp:"Wait 24 hours after scuba diving before flying. Reduced pressure during flight could cause dissolved N₂ from diving to form bubbles = decompression sickness."},
+{q:"Subtle incapacitation is more dangerous than obvious incapacitation because:",opts:["It is more painful","It lasts longer","It may go unnoticed by the crew","It always involves loss of consciousness"],ans:2,exp:"Subtle incapacitation is more dangerous because the pilot appears to function normally while performance deteriorates. Crew may fail to recognize it and take over."},
+{q:"A seizure WITH loss of consciousness is called:",opts:["Petit Mal","Syncope","Psychosis","Grand Mal"],ans:3,exp:"Grand Mal = major generalized seizure WITH loss of consciousness and convulsions. Petit Mal = minor seizure WITHOUT loss of consciousness. Both disqualify from flying."},
+{q:"The area of sharpest vision in the eye is the:",opts:["Cornea","Optic nerve","Fovea","Peripheral retina"],ans:2,exp:"Fovea = central part of retina, densely packed with cones = best visual acuity, best colour vision, best day vision. Objects requiring detail are focused on fovea."},
+{q:"Night vision is primarily provided by:",opts:["Cones at the fovea","Rods in the peripheral retina","The cornea","The optic nerve"],ans:1,exp:"Rods = night vision receptors, located in peripheral retina, work in dim light, provide black-and-white vision. Memory: Rods = Road at Night."},
+{q:"Complete dark adaptation requires approximately:",opts:["5 minutes","10 minutes","20 minutes","30 minutes"],ans:3,exp:"Full dark adaptation = 30 minutes (rods). Cones adapt faster (~7 minutes). Red cockpit lighting preserves dark adaptation because rods are insensitive to red light."},
+{q:"Myopia (short-sightedness) is corrected by:",opts:["Convex lens","Cylindrical lens","Concave lens","Bifocal lens"],ans:2,exp:"Myopia = can't see far = eyeball too long = image forms IN FRONT of retina. Correction = CONCAVE (diverging) lens. Memory: Myopia = My Near is OK (can't see FAR)."},
+{q:"Linear acceleration in flight is detected by:",opts:["Semicircular canals","The cochlea","Otolith organs","The fovea"],ans:2,exp:"Otolith organs (saccule + utricle) detect LINEAR acceleration (straight line motion: takeoff roll, braking, climb). Semicircular canals detect ANGULAR (rotational) acceleration."},
+{q:"The Somatogravic illusion during takeoff creates the sensation of:",opts:["Aircraft banking to the left","Nose pitching excessively DOWN","Nose pitching excessively UP","Aircraft descending"],ans:2,exp:"Somatogravic illusion: rapid acceleration stimulates otolith organs creating false sensation of NOSE UP. Pilot may push nose down dangerously. Trust the attitude indicator!"},
+{q:"The Black Hole illusion most commonly occurs during:",opts:["Daytime IFR approaches","Night approaches over dark featureless terrain","High-altitude cruise flight","Takeoff over water"],ans:1,exp:"Black Hole illusion = night approach over dark terrain (water, desert) with few ground lights. Pilot feels 'too high' and descends more than needed → dangerously LOW approach."},
+{q:"Increasing positive G-force affects a pilot in this sequence:",opts:["Blackout → Grey-out → Tunnel vision","Tunnel vision → Grey-out → Blackout","Redout → Tunnel vision → Blackout","Grey-out → Redout → Blackout"],ans:1,exp:"Correct sequence with increasing positive G: 1. Tunnel vision (first, ~2-3G) → 2. Grey-out (~4-5G) → 3. Blackout (5-6G+, unconsciousness). Negative G causes redout."},
+{q:"Negative G-forces cause:",opts:["Blackout","Grey-out","Tunnel vision","Red-out"],ans:3,exp:"Negative G = blood rushes TO the head = engorgement of head vessels = RED-OUT (reddish visual field, facial congestion, headache). Opposite of positive G blackout."},
+{q:"Flicker vertigo can cause disorientation and possibly unconsciousness at frequencies of:",opts:["1–3 Hz","4–20 Hz","30–40 Hz","50–60 Hz"],ans:1,exp:"Flicker vertigo = 4–20 Hz. Light flickering at this frequency (e.g., sun through rotating propeller) can cause nausea, disorientation, and even unconsciousness. 30-40 Hz = visual blur only."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='🏆 Excellent!';sub='Chapter 26 mastered — DGCA ready!';}else if(pct>=75){msg='✅ Strong!';sub='Review HASH types and TUC values.';}else if(pct>=60){msg='📚 Good!';sub='Focus on gas laws, DCS symptoms, and illusions.';}else{msg='🔄 Keep Revising!';sub='Drill the master table — many direct MCQ values.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

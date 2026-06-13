@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 5: Air Traffic Services (ATS)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;
+  --card:#0D1A2E;--card2:#101E38;
+  --sky:#0EA5E9;--teal:#14B8A6;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --purple:#A855F7;--indigo:#6366F1;--cyan:#06B6D4;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --sk-bg:rgba(14,165,233,.11);--tl-bg:rgba(20,184,166,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --pu-bg:rgba(168,85,247,.11);--in-bg:rgba(99,102,241,.11);
+  --cy-bg:rgba(6,182,212,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(14,165,233,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(20,184,166,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,.15);border:1px solid rgba(14,165,233,.4);color:#7DD3FC;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#7DD3FC;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 10px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--sky);color:#7DD3FC;}
+.nb.active{background:var(--sky);border-color:var(--sky);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.b-cy{background:var(--cy-bg);color:#67E8F9;border:1px solid rgba(6,182,212,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);}.al-sk strong{color:#7DD3FC;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);}.al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);}.al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);}.al-am strong{color:#FCD34D;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);}.al-tl strong{color:#5EEAD4;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#7DD3FC;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--sky),var(--teal));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--sky);color:#fff;background:var(--sk-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--sk-bg);border:1px solid rgba(14,165,233,.22);border-radius:8px;font-size:12.5px;color:#7DD3FC;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--sky);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#38BDF8;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--sky) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#7DD3FC;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">✈️ DGCA CPL · Air Traffic Services</div>
+  <h1>Chapter 5 — <span>Air Traffic Services (ATS)</span></h1>
+  <p>Objectives · Divisions · Airspace Classes A–G · Identifiers · Special Areas · Emergency Codes</p>
+  <div class="hero-chips">
+    <span class="chip">ATS = ATC + FIS + Alerting</span>
+    <span class="chip">Class A = IFR only</span>
+    <span class="chip">Class B = Everyone separated</span>
+    <span class="chip">Class E = No Control Zone</span>
+    <span class="chip">CTA min = 700ft · CTR min = 5NM</span>
+    <span class="chip">VOR=3 · ILS=4(I) · Sig Point=5</span>
+    <span class="chip">TSA=No transit · TRA=ATC allows</span>
+    <span class="chip">7500=Hijack · 7600=Radio · 7700=Emergency</span>
+  </div>
+</div>
+<div class="nav-bar">
+  <button class="nb active" onclick="show('objectives')">🎯 Objectives</button>
+  <button class="nb" onclick="show('divisions')">🏛 Divisions</button>
+  <button class="nb" onclick="show('classes')">🗂 Classes A–G</button>
+  <button class="nb" onclick="show('airspace')">🗺 Airspace</button>
+  <button class="nb" onclick="show('identifiers')">🔤 Identifiers</button>
+  <button class="nb" onclick="show('special')">⚠️ Special Areas</button>
+  <button class="nb" onclick="show('emergency')">🚨 Emergency</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+<div class="content">
+
+<!-- OBJECTIVES -->
+<div class="section active" id="section-objectives">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🎯</div>
+  <div><div class="st">Objectives of Air Traffic Services</div><div class="ss">5 objectives · 3P+I+SAR memory</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>ATS Objectives — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="210" fill="#07101c"/>
+        <circle cx="380" cy="105" r="52" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.4)" stroke-width="2.5"/>
+        <text x="380" y="100" fill="#7DD3FC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">ATS</text>
+        <text x="380" y="118" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Objectives</text>
+        <rect x="10" y="10" width="195" height="46" rx="9" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.38)" stroke-width="1.5"/>
+        <text x="107" y="29" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Prevent AC to AC collision</text>
+        <text x="107" y="47" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Air-to-air prevention</text>
+        <line x1="205" y1="33" x2="330" y2="88" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <rect x="10" y="80" width="195" height="46" rx="9" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.35)" stroke-width="1.5"/>
+        <text x="107" y="99" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Prevent AC to Obstacle</text>
+        <text x="107" y="116" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Manoeuvring area</text>
+        <line x1="205" y1="103" x2="330" y2="105" stroke="rgba(249,115,22,.3)" stroke-width="1.5"/>
+        <rect x="10" y="153" width="195" height="46" rx="9" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="107" y="172" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Orderly Flow of Traffic</text>
+        <text x="107" y="189" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Expedite and maintain order</text>
+        <line x1="205" y1="176" x2="330" y2="122" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <rect x="558" y="10" width="192" height="46" rx="9" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="654" y="29" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Advice and Information</text>
+        <text x="654" y="47" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">For safe efficient flight</text>
+        <line x1="558" y1="33" x2="432" y2="88" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <rect x="558" y="153" width="192" height="46" rx="9" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="654" y="172" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Notify SAR Organisations</text>
+        <text x="654" y="189" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Aircraft needing SAR</text>
+        <line x1="558" y1="176" x2="432" y2="122" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Memory: 3P + I + SAR</div>
+      <div class="mf">Prevent (air-air) · Prevent (air-ground) · Promote (orderly flow) · Information · SAR notification</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- DIVISIONS -->
+<div class="section" id="section-divisions">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">🏛</div>
+  <div><div class="st">Divisions of ATS</div><div class="ss">ATC · FIS · Alerting · ACC · APP · TWR</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>ATS Full Hierarchy Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#07101c"/>
+        <rect x="280" y="10" width="200" height="44" rx="10" fill="rgba(14,165,233,.14)" stroke="rgba(14,165,233,.5)" stroke-width="2"/>
+        <text x="380" y="29" fill="#7DD3FC" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">ATS</text>
+        <text x="380" y="46" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Air Traffic Services</text>
+        <line x1="240" y1="54" x2="140" y2="96" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <line x1="380" y1="54" x2="380" y2="96" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <line x1="520" y1="54" x2="620" y2="96" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <rect x="60" y="96" width="160" height="44" rx="10" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.45)" stroke-width="2"/>
+        <text x="140" y="115" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">ATC</text>
+        <text x="140" y="131" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Air Traffic Control</text>
+        <rect x="300" y="96" width="160" height="44" rx="10" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.45)" stroke-width="2"/>
+        <text x="380" y="115" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">FIS</text>
+        <text x="380" y="131" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Flight Information Service</text>
+        <rect x="540" y="96" width="160" height="44" rx="10" fill="rgba(168,85,247,.12)" stroke="rgba(168,85,247,.45)" stroke-width="2"/>
+        <text x="620" y="115" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">ALRS</text>
+        <text x="620" y="131" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Alerting Service</text>
+        <line x1="80" y1="140" x2="80" y2="174" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <line x1="140" y1="140" x2="140" y2="174" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <line x1="200" y1="140" x2="200" y2="174" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <line x1="80" y1="157" x2="200" y2="157" stroke="rgba(239,68,68,.2)" stroke-width="1"/>
+        <rect x="20" y="174" width="120" height="60" rx="9" fill="rgba(249,115,22,.10)" stroke="rgba(249,115,22,.4)" stroke-width="1.5"/>
+        <text x="80" y="198" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">ACC</text>
+        <text x="80" y="214" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Area Control</text>
+        <text x="80" y="227" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">En-route / Airways</text>
+        <rect x="160" y="174" width="120" height="60" rx="9" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+        <text x="220" y="198" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">APP</text>
+        <text x="220" y="214" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Approach Control</text>
+        <text x="220" y="227" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Arriving/Departing</text>
+        <rect x="300" y="174" width="120" height="60" rx="9" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <line x1="140" y1="140" x2="360" y2="174" stroke="rgba(239,68,68,.2)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="360" y="198" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TWR</text>
+        <text x="360" y="214" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Aerodrome Control</text>
+        <text x="360" y="227" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Runway / Taxiway</text>
+        <rect x="460" y="174" width="280" height="60" rx="9" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.25)" stroke-width="1"/>
+        <text x="600" y="198" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">FIS: Info for safe/efficient flight</text>
+        <text x="600" y="214" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ALRS: Notify SAR organisations</text>
+        <text x="600" y="230" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">FIR provides both FIS + Alerting</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Division Memory</div>
+      <div class="mf">ATS = ATC + FIS + ALRS · ATC = ACC (en-route) + APP (terminal) + TWR (aerodrome)</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CLASSES A-G -->
+<div class="section" id="section-classes">
+  <div class="sh"><div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🗂</div>
+  <div><div class="st">Airspace Classes A–G</div><div class="ss">Flights · Separation · Service level · Key rules per class</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Classes A–G — Most Restrictive to Least</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 155" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="155" fill="#07101c"/>
+        <text x="380" y="16" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Most Restrictive ————————————————————————————————> Least Restrictive</text>
+        <rect x="30" y="26" width="90" height="116" rx="9" fill="rgba(239,68,68,.13)" stroke="rgba(239,68,68,.5)" stroke-width="2"/>
+        <text x="75" y="52" fill="#FCA5A5" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">A</text>
+        <text x="75" y="70" fill="#FCA5A5" font-family="monospace" font-size="11" text-anchor="middle">IFR only</text>
+        <text x="75" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">IFR&#8596;IFR</text>
+        <text x="75" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">ATC all</text>
+        <text x="75" y="135" fill="#FCA5A5" font-family="monospace" font-size="8" text-anchor="middle">No VFR</text>
+        <rect x="132" y="26" width="90" height="116" rx="9" fill="rgba(249,115,22,.11)" stroke="rgba(249,115,22,.45)" stroke-width="2"/>
+        <text x="177" y="52" fill="#FDB785" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">B</text>
+        <text x="177" y="70" fill="#FDB785" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="177" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">ALL&#8596;ALL</text>
+        <text x="177" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">ATC all</text>
+        <text x="177" y="135" fill="#FCD34D" font-family="monospace" font-size="8" text-anchor="middle">Highest svc</text>
+        <rect x="234" y="26" width="90" height="116" rx="9" fill="rgba(245,158,11,.11)" stroke="rgba(245,158,11,.45)" stroke-width="2"/>
+        <text x="279" y="52" fill="#FCD34D" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">C</text>
+        <text x="279" y="70" fill="#FCD34D" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="279" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">IFR&#8596;ALL</text>
+        <text x="279" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">VFR&#8594;info</text>
+        <text x="279" y="135" fill="#FCD34D" font-family="monospace" font-size="8" text-anchor="middle">IFR sep all</text>
+        <rect x="336" y="26" width="90" height="116" rx="9" fill="rgba(34,197,94,.10)" stroke="rgba(34,197,94,.42)" stroke-width="2"/>
+        <text x="381" y="52" fill="#86EFAC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">D</text>
+        <text x="381" y="70" fill="#86EFAC" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="381" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">IFR&#8596;IFR</text>
+        <text x="381" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">VFR&#8594;info</text>
+        <rect x="438" y="26" width="90" height="116" rx="9" fill="rgba(20,184,166,.10)" stroke="rgba(20,184,166,.42)" stroke-width="2"/>
+        <text x="483" y="52" fill="#5EEAD4" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">E</text>
+        <text x="483" y="70" fill="#5EEAD4" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="483" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">IFR&#8596;IFR</text>
+        <text x="483" y="100" fill="#FCA5A5" font-family="sans-serif" font-size="9" text-anchor="middle">No CTR</text>
+        <text x="483" y="135" fill="#FCA5A5" font-family="monospace" font-size="8" text-anchor="middle">&#9733; No CTR</text>
+        <rect x="540" y="26" width="90" height="116" rx="9" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.38)" stroke-width="1.5"/>
+        <text x="585" y="52" fill="#7DD3FC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">F</text>
+        <text x="585" y="70" fill="#7DD3FC" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="585" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Advisory</text>
+        <text x="585" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">+FIS</text>
+        <rect x="642" y="26" width="88" height="116" rx="9" fill="rgba(99,102,241,.10)" stroke="rgba(99,102,241,.35)" stroke-width="1.5"/>
+        <text x="686" y="52" fill="#A5B4FC" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">G</text>
+        <text x="686" y="70" fill="#A5B4FC" font-family="monospace" font-size="11" text-anchor="middle">IFR+VFR</text>
+        <text x="686" y="86" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">FIS only</text>
+        <text x="686" y="100" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">No ATC sep</text>
+        <text x="686" y="135" fill="#A5B4FC" font-family="monospace" font-size="8" text-anchor="middle">&#9733; FIS only</text>
+      </svg>
+    </div>
+  </div>
+  <div class="tw" style="margin-bottom:14px;">
+    <table>
+      <thead style="background:rgba(168,85,247,.12);">
+        <tr><th style="color:#D8B4FE;">Class</th><th style="color:#D8B4FE;">Flights</th><th style="color:#D8B4FE;">Separation</th><th style="color:#D8B4FE;">VFR gets</th><th style="color:#D8B4FE;">Clearance</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(239,68,68,.05);"><td><span class="b b-rd">A</span></td><td>IFR ONLY</td><td>IFR&#8596;IFR</td><td>N/A</td><td>Required</td></tr>
+        <tr style="background:rgba(249,115,22,.04);"><td><span class="b b-or">B</span></td><td>IFR+VFR</td><td>ALL&#8596;ALL ★★</td><td>Separation</td><td>Required</td></tr>
+        <tr style="background:rgba(245,158,11,.04);"><td><span class="b b-am">C</span></td><td>IFR+VFR</td><td>IFR&#8596;IFR · IFR&#8596;VFR</td><td>Traffic info on other VFR ★</td><td>Required</td></tr>
+        <tr style="background:rgba(34,197,94,.04);"><td><span class="b b-gn">D</span></td><td>IFR+VFR</td><td>IFR&#8596;IFR only</td><td>Traffic information</td><td>Required</td></tr>
+        <tr style="background:rgba(20,184,166,.04);"><td><span class="b b-tl">E</span></td><td>IFR+VFR</td><td>IFR&#8596;IFR only</td><td>Traffic info (as practicable)</td><td>IFR only</td></tr>
+        <tr style="background:rgba(14,165,233,.04);"><td><span class="b b-sk">F</span></td><td>IFR+VFR</td><td>Advisory service</td><td>FIS+advisory</td><td>Not req.</td></tr>
+        <tr><td><span class="b b-in">G</span></td><td>IFR+VFR</td><td>NONE</td><td>FIS only ★</td><td>Not req.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Key Rules Per Class</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);"><span class="b b-rd">A</span><div>VFR NOT permitted ★</div></div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.07);"><span class="b b-or">B</span><div>VFR separated from VFR — highest service ★</div></div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07);"><span class="b b-am">C</span><div>IFR separated from everyone; VFR gets traffic info on other VFR ★</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);"><span class="b b-tl">E</span><div>SHALL NOT be used for Control Zones ★★</div></div>
+        <div class="chk-item" style="border-color:rgba(99,102,241,.35);background:rgba(99,102,241,.07);"><span class="b b-in">G</span><div>Flight Information Service ONLY ★</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Speed Limit</div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);margin-bottom:12px;">
+        <div class="sn" style="color:#FCA5A5;">250 kt IAS</div>
+        <div class="su">Maximum below 10,000 ft — Classes C–G ★</div>
+      </div>
+      <div class="al al-sk" style="margin-bottom:0;"><strong>Continuous 2-way radio</strong> mandatory in Class A, B, C, and D.</div>
+    </div>
+  </div>
+  <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+    <div class="mt">Class Memory</div>
+    <div class="mf">A=IFR only · B=All sep · C=IFR from all · D=IFR&#8596;IFR · E=IFR&#8596;IFR+No CTR · F=Advisory · G=FIS only</div>
+  </div></div>
+</div>
+
+<!-- AIRSPACE TYPES -->
+<div class="section" id="section-airspace">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">🗺</div>
+  <div><div class="st">Airspace Types</div><div class="ss">FIR · CTA (700ft min) · CTR (5NM min) · Before entry · Holding = arriving</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Airspace Layers Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="240" fill="#07101c"/>
+        <rect x="0" y="210" width="760" height="30" fill="#0a120a" opacity=".7"/>
+        <line x1="0" y1="210" x2="760" y2="210" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+        <rect x="300" y="188" width="160" height="22" rx="3" fill="#1e2a30"/>
+        <text x="380" y="203" fill="white" font-family="monospace" font-size="10" text-anchor="middle">AERODROME</text>
+        <!-- FIR -->
+        <rect x="20" y="18" width="720" height="192" rx="8" fill="rgba(99,102,241,.04)" stroke="rgba(99,102,241,.25)" stroke-width="1.5" stroke-dasharray="8,6"/>
+        <text x="58" y="38" fill="#A5B4FC" font-family="monospace" font-size="12" font-weight="bold">FIR — Flight Information Region</text>
+        <text x="58" y="54" fill="var(--text2)" font-family="sans-serif" font-size="10">Provides: FIS + Alerting Service ★</text>
+        <!-- CTA -->
+        <rect x="110" y="46" width="540" height="164" rx="8" fill="rgba(14,165,233,.05)" stroke="rgba(14,165,233,.28)" stroke-width="1.5"/>
+        <text x="148" y="67" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold">CTA — Control Area</text>
+        <line x1="110" y1="160" x2="650" y2="160" stroke="rgba(14,165,233,.3)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="660" y="157" fill="#7DD3FC" font-family="monospace" font-size="10" font-weight="bold">700 ft ★</text>
+        <text x="660" y="170" fill="var(--text2)" font-family="monospace" font-size="9">min lower limit</text>
+        <!-- CTR -->
+        <rect x="200" y="98" width="360" height="112" rx="8" fill="rgba(245,158,11,.06)" stroke="rgba(245,158,11,.35)" stroke-width="2"/>
+        <text x="238" y="118" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold">CTR — Control Zone</text>
+        <text x="238" y="134" fill="var(--text2)" font-family="sans-serif" font-size="10">Extends at least 5 NM ★</text>
+        <line x1="200" y1="150" x2="380" y2="150" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <line x1="200" y1="144" x2="200" y2="156" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <line x1="380" y1="144" x2="380" y2="156" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <text x="290" y="144" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">5 NM min</text>
+      </svg>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Before Entering CTR / ATZ</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);"><span style="font-size:16px;">📋</span><div><strong>Obtain ATC clearance ★</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Report <strong>position · level · track</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Report <strong>estimated crossing time</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div><strong>Maintain listening watch</strong></div></div>
+        <div class="chk-item"><span class="cy">→</span><div><strong>Comply with ATC instructions</strong></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Key Numbers</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.09);"><span style="font-size:16px;">⚠️</span><div><strong>Aircraft holding near aerodrome = ARRIVING aircraft ★</strong></div></div>
+        <div class="chk-item" style="border-color:rgba(20,184,166,.35);background:rgba(20,184,166,.07);"><span style="font-size:14px;">🔢</span><div>CTA lower limit minimum: <strong>700 ft AGL ★</strong></div></div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07);"><span style="font-size:14px;">🔢</span><div>CTR lateral minimum: <strong>5 NM ★</strong></div></div>
+        <div class="chk-item" style="border-color:rgba(14,165,233,.35);background:rgba(14,165,233,.07);"><span style="font-size:14px;">ℹ️</span><div>FIR provides: <strong>FIS + Alerting Service ★</strong></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IDENTIFIERS -->
+<div class="section" id="section-identifiers">
+  <div class="sh"><div class="si" style="background:var(--cy-bg);border:1px solid rgba(6,182,212,.3);">🔤</div>
+  <div><div class="st">Aeronautical Identifiers</div><div class="ss">NDB=2-3 · VOR=3 · ILS=4(I) · Aerodrome=4 · Sig Point=5 · Indian codes</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--cyan)"></span>Identifier Length Reference</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 175" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="175" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">All five identifier types — lengths and examples</text>
+        <rect x="10" y="28" width="130" height="132" rx="10" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.38)" stroke-width="1.5"/>
+        <text x="75" y="52" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">NDB</text>
+        <text x="75" y="82" fill="#D8B4FE" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle">2–3</text>
+        <text x="75" y="103" fill="#D8B4FE" font-family="monospace" font-size="12" text-anchor="middle">letters</text>
+        <text x="75" y="122" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">SP · JG · DBR</text>
+        <rect x="152" y="28" width="130" height="132" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.38)" stroke-width="1.5"/>
+        <text x="217" y="52" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">VOR</text>
+        <text x="217" y="82" fill="#7DD3FC" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle">3</text>
+        <text x="217" y="103" fill="#7DD3FC" font-family="monospace" font-size="12" text-anchor="middle">letters ★</text>
+        <text x="217" y="122" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">AAT · DEL</text>
+        <rect x="294" y="28" width="130" height="132" rx="10" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.38)" stroke-width="1.5"/>
+        <text x="359" y="52" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">ILS</text>
+        <text x="359" y="82" fill="#86EFAC" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle">4</text>
+        <text x="359" y="103" fill="#86EFAC" font-family="monospace" font-size="12" text-anchor="middle">letters ★</text>
+        <text x="359" y="122" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">starts with I ★</text>
+        <text x="359" y="140" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">IGHT · ILUC</text>
+        <rect x="436" y="28" width="145" height="132" rx="10" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.38)" stroke-width="1.5"/>
+        <text x="508" y="52" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">AERODROME</text>
+        <text x="508" y="82" fill="#FCD34D" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle">4</text>
+        <text x="508" y="103" fill="#FCD34D" font-family="monospace" font-size="12" text-anchor="middle">letters ★</text>
+        <text x="508" y="122" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">VIDP · VABB</text>
+        <rect x="593" y="28" width="157" height="132" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.38)" stroke-width="1.5"/>
+        <text x="671" y="52" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SIG POINT</text>
+        <text x="671" y="82" fill="#FCA5A5" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle">5</text>
+        <text x="671" y="103" fill="#FCA5A5" font-family="monospace" font-size="12" text-anchor="middle">letters ★</text>
+        <text x="671" y="122" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">GOLEM · IDOLA</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Identifier Memory</div>
+      <div class="mf">NDB=2-3 · VOR=3 · ILS=4(starts I) · Aerodrome=4 · Sig Point=5 · Domestic route=W</div>
+    </div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Key Indian Aerodrome Codes</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">Code</th><th style="color:#7DD3FC;">Location</th><th style="color:#7DD3FC;">FIR</th></tr></thead>
+          <tbody>
+            <tr><td><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FDE047;">VIDP</span></td><td>Delhi</td><td>Delhi FIR (I)</td></tr>
+            <tr><td><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FDE047;">VABB</span></td><td>Mumbai</td><td>Mumbai FIR (A)</td></tr>
+            <tr><td><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FDE047;">VOMM</span></td><td>Chennai</td><td>Chennai FIR (O)</td></tr>
+            <tr><td><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FDE047;">VECC</span></td><td>Kolkata</td><td>Kolkata FIR (E)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>ATS Unit Naming</div>
+      <div class="g2" style="gap:8px;">
+        <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.35);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-weight:700;color:#FDB785;margin-bottom:5px;">ACC / FIC</div>
+          <div style="font-size:12px;color:var(--text2);">Named after city or geographic feature</div>
+          <div style="font-size:12px;color:#FDB785;margin-top:5px;">e.g. Mumbai ACC</div>
+        </div>
+        <div style="background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.35);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-weight:700;color:#7DD3FC;margin-bottom:5px;">Tower / Approach</div>
+          <div style="font-size:12px;color:var(--text2);">Named after the aerodrome</div>
+          <div style="font-size:12px;color:#7DD3FC;margin-top:5px;">Delhi Tower · Mumbai Approach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SPECIAL AREAS -->
+<div class="section" id="section-special">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">⚠️</div>
+  <div><div class="st">Special Use Airspace</div><div class="ss">P · R · D · TSA · TRA · Number allocations by FIR</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>P / R / D Areas</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="170" fill="#07101c"/>
+        <rect x="15" y="15" width="225" height="140" rx="12" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.5)" stroke-width="2.5"/>
+        <text x="127" y="46" fill="#FCA5A5" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">P — PROHIBITED</text>
+        <text x="127" y="68" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">NO flight permitted</text>
+        <text x="127" y="86" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">under any circumstance</text>
+        <text x="127" y="112" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">VA(P)-2</text>
+        <text x="127" y="130" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Mumbai FIR Prohibited #2</text>
+        <rect x="268" y="15" width="225" height="140" rx="12" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.45)" stroke-width="2"/>
+        <text x="380" y="46" fill="#FCD34D" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">R — RESTRICTED</text>
+        <text x="380" y="68" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Flight restricted</text>
+        <text x="380" y="86" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">with/without permission</text>
+        <text x="380" y="112" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">VO(R)-81</text>
+        <text x="380" y="130" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Chennai FIR Restricted #81</text>
+        <rect x="521" y="15" width="224" height="140" rx="12" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.45)" stroke-width="2"/>
+        <text x="633" y="46" fill="#FDB785" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle">D — DANGER</text>
+        <text x="633" y="68" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Hazardous activity</text>
+        <text x="633" y="86" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Flight at own risk</text>
+        <text x="633" y="112" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">VE(D)-72</text>
+        <text x="633" y="130" fill="var(--text2)" font-family="monospace" font-size="10" text-anchor="middle">Kolkata FIR Danger #72</text>
+      </svg>
+    </div>
+    <div class="al al-am"><strong>Code structure:</strong> Nationality (V=India) + FIR letter (A=Mumbai, E=Kolkata, I=Delhi, O=Chennai) + P/R/D + number</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>TSA vs TRA — Military Exercise Areas</div>
+    <div class="g2">
+      <div style="background:rgba(239,68,68,.08);border:2px solid rgba(239,68,68,.45);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#FCA5A5;margin-bottom:6px;">TSA</div>
+        <div style="font-weight:700;color:#FCA5A5;margin-bottom:8px;">Temporary Segregated Area</div>
+        <div style="font-size:26px;margin-bottom:8px;">🚫</div>
+        <div style="font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:5px;">Other traffic NOT permitted ★</div>
+        <div style="font-size:12px;color:var(--text2);">Example: TSA801(A)</div>
+      </div>
+      <div style="background:rgba(34,197,94,.08);border:2px solid rgba(34,197,94,.45);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#86EFAC;margin-bottom:6px;">TRA</div>
+        <div style="font-weight:700;color:#86EFAC;margin-bottom:8px;">Temporary Reserved Area</div>
+        <div style="font-size:26px;margin-bottom:8px;">✅</div>
+        <div style="font-size:13px;font-weight:700;color:#86EFAC;margin-bottom:5px;">Transit allowed with ATC clearance ★</div>
+        <div style="font-size:12px;color:var(--text2);">Example: TRA601(A)</div>
+      </div>
+    </div>
+    <div class="tw" style="margin-top:12px;margin-bottom:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.10);"><tr><th style="color:#FCD34D;">FIR</th><th style="color:#FCD34D;">TSA/TRA Numbers</th></tr></thead>
+        <tbody>
+          <tr><td>Mumbai FIR</td><td><span class="num">501 – 600</span></td></tr>
+          <tr><td>Kolkata FIR</td><td><span class="num">601 – 700</span></td></tr>
+          <tr><td>Delhi FIR</td><td><span class="num">701 – 800</span></td></tr>
+          <tr><td>Chennai FIR</td><td><span class="num">801 – 900</span></td></tr>
+          <tr><td>Future</td><td><span class="num">901 – 999</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<div class="section" id="section-emergency">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">🚨</div>
+  <div><div class="st">Emergency SSR Codes</div><div class="ss">7700=Emergency · 7600=Radio · 7500=Hijack — guaranteed DGCA MCQ</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Three Emergency Squawk Codes</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 145" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="145" fill="#07101c"/>
+        <rect x="20" y="15" width="220" height="112" rx="12" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.55)" stroke-width="2.5"/>
+        <text x="130" y="62" fill="#FCA5A5" font-family="monospace" font-size="42" font-weight="bold" text-anchor="middle">7500</text>
+        <text x="130" y="85" fill="#FCA5A5" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">HIJACK 🔫</text>
+        <text x="130" y="115" fill="rgba(239,68,68,.7)" font-family="monospace" font-size="11" text-anchor="middle">75 = Taken over</text>
+        <rect x="270" y="15" width="220" height="112" rx="12" fill="rgba(245,158,11,.11)" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <text x="380" y="62" fill="#FCD34D" font-family="monospace" font-size="42" font-weight="bold" text-anchor="middle">7600</text>
+        <text x="380" y="85" fill="#FCD34D" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">RADIO FAILURE 📻</text>
+        <text x="380" y="115" fill="rgba(245,158,11,.7)" font-family="monospace" font-size="11" text-anchor="middle">76 = Can't talk</text>
+        <rect x="520" y="15" width="220" height="112" rx="12" fill="rgba(168,85,247,.11)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+        <text x="630" y="62" fill="#D8B4FE" font-family="monospace" font-size="42" font-weight="bold" text-anchor="middle">7700</text>
+        <text x="630" y="85" fill="#D8B4FE" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">EMERGENCY ⚠️</text>
+        <text x="630" y="115" fill="rgba(168,85,247,.7)" font-family="monospace" font-size="11" text-anchor="middle">77 = Need help</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Code Memory</div>
+      <div class="mf">7500 = 75 Taken Over (Hijack) · 7600 = 76 Can't Talk (Radio) · 7700 = 77 Need Help (Emergency)</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- MASTER REF -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference</div><div class="ss">Every critical fact from Chapter 5</div></div></div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Critical Facts Table</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">Question</th><th style="color:#7DD3FC;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>ATS consists of</td><td>ATC + FIS + Alerting ★</td></tr>
+            <tr><td>ATC divided into</td><td>ACC + APP + TWR</td></tr>
+            <tr><td>FIR provides</td><td>FIS + Alerting Service ★</td></tr>
+            <tr><td>IFR-only airspace class</td><td><span class="num">Class A ★</span></td></tr>
+            <tr><td>ALL aircraft separated from ALL</td><td><span class="num">Class B ★★</span></td></tr>
+            <tr><td>Class E shall NOT be used for</td><td>CTR (Control Zone) ★★</td></tr>
+            <tr><td>Class G provides</td><td>FIS only ★</td></tr>
+            <tr><td>Speed limit below 10,000 ft</td><td><span class="num">250 kt IAS</span></td></tr>
+            <tr><td>CTA minimum lower limit</td><td><span class="num">700 ft AGL ★</span></td></tr>
+            <tr><td>CTR minimum lateral extent</td><td><span class="num">5 NM ★</span></td></tr>
+            <tr><td>Holding aircraft near aerodrome =</td><td>Arriving aircraft ★</td></tr>
+            <tr><td>NDB identifier</td><td>2–3 capital letters</td></tr>
+            <tr><td>VOR identifier</td><td>3 capital letters ★</td></tr>
+            <tr><td>ILS identifier</td><td>4 letters starting with I ★</td></tr>
+            <tr><td>Aerodrome ICAO code</td><td>4 capital letters</td></tr>
+            <tr><td>Significant point</td><td>5 capital letters ★</td></tr>
+            <tr><td>Domestic route prefix</td><td>W (e.g. W49)</td></tr>
+            <tr><td>VIDP</td><td>Delhi</td></tr>
+            <tr><td>VABB</td><td>Mumbai</td></tr>
+            <tr><td>VOMM</td><td>Chennai</td></tr>
+            <tr><td>Prohibited area</td><td>P</td></tr>
+            <tr><td>Restricted area</td><td>R</td></tr>
+            <tr><td>Danger area</td><td>D ★</td></tr>
+            <tr><td>TSA</td><td>Other traffic NOT permitted ★</td></tr>
+            <tr><td>TRA</td><td>Allowed with ATC clearance ★</td></tr>
+            <tr><td>TSA/TRA Mumbai FIR numbers</td><td><span class="num">501–600</span></td></tr>
+            <tr><td>TSA/TRA Delhi FIR numbers</td><td><span class="num">701–800</span></td></tr>
+            <tr><td>TSA/TRA Chennai FIR numbers</td><td><span class="num">801–900</span></td></tr>
+            <tr><td>Squawk 7500</td><td>Hijack ★</td></tr>
+            <tr><td>Squawk 7600</td><td>Radio failure ★</td></tr>
+            <tr><td>Squawk 7700</td><td>Emergency ★</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Class E CANNOT be used for a Control Zone</div><div class="trap-d">Class E is IFR-only separation — specifically prohibited from CTR designation. Control Zones must use Class A, B, C or D.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Class C: VFR NOT separated from other VFR</div><div class="trap-d">Class C separates IFR↔IFR and IFR↔VFR only. VFR↔VFR gets traffic information — not separation. VFR↔VFR separation only in Class B.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">7500=Hijack · 7600=Radio · 7700=Emergency</div><div class="trap-d">Memory: 75=Taken Over · 76=Can't Talk · 77=Need Help. Examiner swaps 7500 and 7700 in options — know these cold.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Holding aircraft = ARRIVING (not en-route)</div><div class="trap-d">Any aircraft holding near an aerodrome is classified as an ARRIVING aircraft for ATC priority — frequently asked in DGCA orals.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">TSA = Nobody enters · TRA = ATC may allow</div><div class="trap-d">TSA (Segregated) = completely excluded. TRA (Reserved) = transit with ATC clearance. Segregated is stricter. Students often swap these.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">VOR=3 letters · Significant Point=5 letters</div><div class="trap-d">VOR = exactly 3 (AAT, DEL). Significant point/waypoint = exactly 5 (GOLEM, IDOLA). ILS = 4 starting with I. Don't mix VOR(3) with Sig Point(5).</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 5</div><div class="ss">25 DGCA-style questions</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">&#8617; Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next &#8594;</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"ATS (Air Traffic Services) consists of:",opts:["ATC only","ACC, APP and Tower","ATC, Flight Information Service, and Alerting Service","Radar and FIS only"],ans:2,exp:"ATS = ATC + FIS (Flight Information Service) + ALRS (Alerting Service). ATC itself is divided into ACC (area), APP (approach) and TWR (aerodrome)."},
+{q:"FIR (Flight Information Region) provides:",opts:["ATC only","Radar separation","FIS and Alerting Service","Full ATC separation for all flights"],ans:2,exp:"FIR provides FIS (Flight Information Service) + Alerting Service. NOT full ATC separation. FIR is the basic unit of airspace structure covering large areas."},
+{q:"Which airspace class permits ONLY IFR flights?",opts:["Class B","Class C","Class D","Class A"],ans:3,exp:"Class A = IFR flights ONLY. VFR is NOT permitted. All other classes B through G allow both IFR and VFR flights."},
+{q:"In which class are ALL aircraft separated from ALL other aircraft including VFR from VFR?",opts:["Class A","Class B","Class C","Class D"],ans:1,exp:"Class B = highest service level. ALL aircraft separated from ALL including VFR from VFR. This is the unique feature of Class B."},
+{q:"In Class C airspace what separation is provided?",opts:["IFR from IFR only","All from all","IFR from IFR and IFR from VFR","VFR from VFR only"],ans:2,exp:"Class C: IFR-IFR AND IFR-VFR. VFR-VFR is NOT separated — VFR gets traffic information on other VFR. IFR is separated from everything."},
+{q:"Class E airspace shall NOT be used for:",opts:["Airways","Terminal control areas","Control Zones (CTR)","En-route navigation"],ans:2,exp:"Class E SHALL NOT be used for Control Zones. CTRs require Class A, B, C or D. Class E provides IFR-IFR only, insufficient for CTR."},
+{q:"Class G airspace provides which service?",opts:["Full ATC separation","Radar advisory service","Flight Information Service only","IFR separation only"],ans:2,exp:"Class G = Flight Information Service ONLY. No ATC separation whatsoever. Aircraft operate without separation."},
+{q:"Maximum speed below 10,000 ft in Classes C to G is:",opts:["200 kt","220 kt","250 kt","280 kt"],ans:2,exp:"250 kt IAS is the speed limit below 10,000 ft in Classes C through G."},
+{q:"The minimum permissible lower limit of a Control Area (CTA) is:",opts:["300 ft AGL","500 ft AGL","700 ft AGL","1000 ft AGL"],ans:2,exp:"CTA minimum lower limit = 700 ft above the ground or water. Direct DGCA MCQ."},
+{q:"A Control Zone (CTR) must extend laterally at least:",opts:["3 NM","5 NM","10 NM","15 NM"],ans:1,exp:"CTR minimum lateral extent = 5 NM from the aerodrome reference point."},
+{q:"Aircraft holding near an aerodrome are classified as:",opts:["En-route traffic","Departing aircraft","Arriving aircraft","Transit traffic"],ans:2,exp:"Aircraft holding near an aerodrome = ARRIVING aircraft for ATC priority. Frequently asked in DGCA oral exams."},
+{q:"A VOR navigational aid is identified by:",opts:["2 capital letters","3 capital letters","4 capital letters","5 capital letters"],ans:1,exp:"VOR = always 3 capital letters (AAT, DEL). NDB=2-3, Aerodrome=4, Significant point=5."},
+{q:"An ILS identifier has:",opts:["3 letters starting with I","4 letters starting with I","5 letters starting with I","3 letters starting with L"],ans:1,exp:"ILS = 4 letters starting with the letter I (IGHT, ILUC). The I prefix distinguishes ILS from VOR and NDB."},
+{q:"A significant point (waypoint) identifier has:",opts:["3 capital letters","4 capital letters","5 capital letters","2 capital letters"],ans:2,exp:"Significant point = 5 capital letters (GOLEM, IDOLA). VOR=3, ILS=4(I), Aerodrome=4, Significant point=5."},
+{q:"VIDP is the ICAO code for:",opts:["Mumbai","Chennai","Delhi","Kolkata"],ans:2,exp:"VIDP = Delhi (Indira Gandhi International). V=South Asia, I=Delhi FIR, DP=Delhi. VABB=Mumbai, VOMM=Chennai, VECC=Kolkata."},
+{q:"A Danger Area is identified by the letter:",opts:["P","R","D","X"],ans:2,exp:"D=Danger, P=Prohibited, R=Restricted. Format: nationality + FIR letter + P/R/D + number. e.g. VE(D)-72 = Kolkata FIR Danger Area 72."},
+{q:"In a Temporary Segregated Area (TSA), other traffic is:",opts:["Permitted freely","Permitted with ATC clearance","NOT permitted","Permitted at pilot discretion"],ans:2,exp:"TSA = Segregated = completely excluded. TRA = Reserved = transit allowed with ATC clearance. Segregated is stricter than Reserved."},
+{q:"In a TRA, other aircraft may transit:",opts:["Never","Freely without restriction","Only with ATC clearance","Only in VMC"],ans:2,exp:"TRA = Temporary Reserved Area. Other traffic may transit WITH ATC clearance. Unlike TSA which allows nobody."},
+{q:"The hijack squawk code is:",opts:["7700","7600","7500","7000"],ans:2,exp:"7500 = Hijack. Memory: 75 = Taken Over. 7600=Radio failure, 7700=Emergency. Know these three instantly."},
+{q:"The radio failure squawk code is:",opts:["7500","7600","7700","2000"],ans:1,exp:"7600 = Radio/Communication failure. Memory: 76 = Can't Talk. 7500=Hijack, 7700=Emergency."},
+{q:"Approach Control (APP) provides service to:",opts:["En-route traffic only","Arriving and departing aircraft in terminal area","Aircraft below FL100 only","Aircraft in Control Zone only"],ans:1,exp:"APP handles arriving AND departing aircraft in the terminal area. ACC handles en-route, TWR handles aerodrome."},
+{q:"TSA/TRA numbers 801-900 in India belong to which FIR?",opts:["Mumbai","Kolkata","Delhi","Chennai"],ans:3,exp:"Chennai FIR = 801-900. Mumbai=501-600, Kolkata=601-700, Delhi=701-800, Chennai=801-900."},
+{q:"Domestic ATS routes in India typically begin with:",opts:["A","B","V","W"],ans:3,exp:"Domestic ATS routes start with W (e.g. W49). International routes use A, B etc. (A791, B209)."},
+{q:"Before entering a CTR a pilot must first:",opts:["Only maintain listening watch","Obtain ATC clearance and report position level track and ETA","Only squawk assigned code","Report on 121.5 MHz only"],ans:1,exp:"Before CTR entry: obtain clearance AND report position + level + track + estimated crossing time, maintain listening watch, comply with instructions."},
+{q:"Which ATS service notifies SAR organisations for aircraft in distress?",opts:["Area Control","Approach Control","Alerting Service","Flight Information Service"],ans:2,exp:"Alerting Service (ALRS) = responsible for notifying SAR organisations when aircraft need assistance. One of the three ATS divisions."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML='<span class="qltr">'+l+'</span>'+q.opts[i];b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=88){msg='Trophy Excellent!';sub='Chapter 5 mastered — DGCA ready!';}else if(pct>=72){msg='Strong!';sub='Review Class E CTR rule and squawk codes.';}else if(pct>=60){msg='Good!';sub='Drill the airspace class table.';}else{msg='Keep Revising!';sub='Focus on Classes A/B/C differences and identifiers.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

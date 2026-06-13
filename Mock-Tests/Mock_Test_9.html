@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA Air Regulations &mdash; Set 9</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --acc:#4F46E5;--grn:#22C55E;--red:#EF4444;--sky:#0EA5E9;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.11);
+  --ac-bg:rgba(79,70,229,.10);--gn-bg:rgba(34,197,94,.10);--rd-bg:rgba(239,68,68,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.ehdr{background:var(--bg2);border-bottom:2px solid var(--bdr2);position:sticky;top:0;z-index:200;}
+.etop{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;flex-wrap:wrap;gap:10px;}
+.etitle .ename{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;}
+.etitle .esub{font-size:11px;color:var(--text2);margin-top:1px;}
+.emeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.epill{background:var(--card);border:1px solid var(--bdr2);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--text2);}
+.epill strong{color:var(--text);}
+.tclock{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:6px 14px;display:flex;align-items:center;gap:7px;}
+.tv{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;}
+.tlbl{font-size:10px;color:var(--text2);}
+.estrip{height:4px;background:var(--bdr);}
+.efill{height:100%;background:linear-gradient(90deg,var(--acc),var(--sky));transition:width .4s;}
+.palbar{background:var(--bg3);border-bottom:1px solid var(--bdr);padding:9px 20px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pal-lbl{font-size:11px;color:var(--text3);font-weight:600;margin-right:4px;flex-shrink:0;}
+.pb{width:28px;height:28px;border-radius:6px;border:1px solid var(--bdr2);background:var(--card2);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .12s;flex-shrink:0;}
+.pb:hover{border-color:var(--acc);color:#A5B4FC;}
+.pb.ans{background:rgba(79,70,229,.2);border-color:var(--acc);color:#A5B4FC;}
+.pb.cur{background:var(--acc);border-color:var(--acc);color:#fff;}
+.pleg{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;}
+.pleg-i{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);}
+.pleg-d{width:10px;height:10px;border-radius:3px;}
+.ebody{max-width:860px;margin:0 auto;padding:24px 16px 110px;}
+.qpanel{display:none;}.qpanel.active{display:block;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:28px;margin-bottom:14px;}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.qbadge{background:var(--ac-bg);border:1px solid rgba(79,70,229,.3);color:#A5B4FC;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.qmark{font-size:12px;color:var(--text3);}
+.qtxt{font-size:15.5px;font-weight:600;color:#fff;line-height:1.7;margin-bottom:24px;}
+.qopts{display:flex;flex-direction:column;gap:10px;}
+.qopt{background:var(--card2);border:2px solid var(--bdr2);border-radius:12px;padding:14px 18px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s;display:flex;align-items:flex-start;gap:14px;font-family:'Space Grotesk',sans-serif;line-height:1.55;}
+.qopt:hover{border-color:var(--acc);color:#fff;background:var(--ac-bg);}
+.qopt.sel{border-color:var(--acc);background:var(--ac-bg);color:#A5B4FC;}
+.qopt.sel .olbl{background:var(--acc);border-color:var(--acc);color:#fff;}
+.olbl{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px;transition:all .15s;}
+.enav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--bdr2);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:100;}
+.nleft{display:flex;gap:8px;}
+.nbtn{background:var(--card);border:1px solid var(--bdr2);color:var(--text2);padding:9px 18px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .13s;}
+.nbtn:hover{border-color:var(--acc);color:#A5B4FC;}
+.nbtn:disabled{opacity:.3;pointer-events:none;}
+.clrbtn{background:transparent;border:1px solid rgba(239,68,68,.4);color:#FCA5A5;padding:9px 14px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
+.clrbtn:hover{background:var(--rd-bg);}
+.subbtn{background:var(--grn);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.subbtn:hover{background:#16A34A;color:#fff;}
+.moverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;align-items:center;justify-content:center;}
+.moverlay.open{display:flex;}
+.mbox{background:var(--card);border:1px solid var(--bdr2);border-radius:18px;padding:32px;max-width:440px;width:90%;text-align:center;}
+.mbox h2{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;}
+.mbox p{font-size:14px;color:var(--text2);margin-bottom:4px;}
+.mstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.mst{background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:12px;text-align:center;}
+.mst-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.mst-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.mbtns{display:flex;gap:10px;justify-content:center;margin-top:6px;}
+.mbtn-ok{background:var(--grn);color:#000;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.mbtn-cancel{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:10px 20px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;cursor:pointer;}
+#rpage{display:none;}
+.rhero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:36px 24px;text-align:center;}
+.rring-w{display:flex;justify-content:center;margin-bottom:20px;}
+.rring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--rc,var(--acc)) var(--rp,0%),rgba(255,255,255,.06) 0);display:flex;align-items:center;justify-content:center;}
+.rinner{width:112px;height:112px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.rscore{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;}
+.rpct{font-size:12px;color:var(--text3);margin-top:2px;}
+.rgrade{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px;}
+.rmsg{font-size:14px;color:var(--text2);margin-bottom:22px;}
+.rstats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.rst{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:12px 20px;text-align:center;min-width:90px;}
+.rst-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;}
+.rst-l{font-size:11px;color:var(--text3);margin-top:2px;}
+.rbody{max-width:860px;margin:0 auto;padding:28px 16px 60px;}
+.sec-lbl{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bdr);}
+.rcard{background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:10px;}
+.rcard.correct{border-color:rgba(34,197,94,.4);}.rcard.wrong{border-color:rgba(239,68,68,.4);}
+.rchead{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--bdr);}
+.rchead.correct{background:rgba(34,197,94,.05);}.rchead.wrong{background:rgba(239,68,68,.05);}
+.rcqnum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text2);}
+.rcbadge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+.rcbadge.c{background:rgba(34,197,94,.15);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.rcbadge.w{background:rgba(239,68,68,.15);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.rcbody{padding:18px;}
+.rcqtxt{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.6;}
+.rcopts{display:flex;flex-direction:column;gap:6px;}
+.rcopt{font-size:13px;padding:10px 14px;border-radius:8px;display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.rcopt.cor{background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.28);color:#86EFAC;}
+.rcopt.wrg{background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.28);color:#FCA5A5;}
+.rcopt.dim{color:var(--text3);}
+.rcopt-l{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;width:18px;}
+.rcexp{margin-top:14px;padding:13px 16px;background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.2);border-radius:10px;font-size:13px;color:#A5B4FC;line-height:1.65;}
+.rcexp-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#818CF8;margin-bottom:5px;}
+.rbar{background:var(--bg2);border-top:1px solid var(--bdr2);padding:14px 24px;display:flex;gap:10px;justify-content:center;}
+.rbtn{background:var(--acc);color:#fff;padding:10px 28px;border-radius:9px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:600px){.etop{flex-direction:column;align-items:flex-start;}.qtxt{font-size:14.5px;}.qopt{font-size:13px;}.palbar{padding:9px 14px;}}
+</style>
+</head>
+<body>
+<div id="epage">
+  <div class="ehdr">
+    <div class="etop">
+      <div class="etitle">
+        <div class="ename">DGCA CPL &mdash; Air Regulations Set 9</div>
+        <div class="esub">MET &middot; Sleep &middot; Altimetry &middot; Lighting &middot; Separation &middot; SAR &middot; Physiology &middot; Airspace &middot; Automation</div>
+      </div>
+      <div class="emeta">
+        <div class="epill"><strong>50</strong> Questions</div>
+        <div class="epill">Pass: <strong>70%</strong></div>
+        <div class="tclock">
+          <span style="font-size:14px;">&#9200;</span>
+          <div><div class="tv" id="tv">60:00</div><div class="tlbl">remaining</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="estrip"><div class="efill" id="efill" style="width:0%"></div></div>
+  </div>
+  <div class="palbar">
+    <span class="pal-lbl">Questions:</span>
+    <div id="pal"></div>
+    <div class="pleg">
+      <div class="pleg-i"><div class="pleg-d" style="background:var(--acc);"></div>Answered</div>
+      <div class="pleg-i"><div class="pleg-d" style="background:var(--card2);border:1px solid var(--bdr2);"></div>Not Answered</div>
+    </div>
+  </div>
+  <div class="ebody" id="ebody"></div>
+  <div class="enav">
+    <div class="nleft">
+      <button class="nbtn" id="bprev" onclick="nav(-1)" disabled>&#8592; Prev</button>
+      <button class="nbtn" id="bnext" onclick="nav(1)">Next &#8594;</button>
+      <button class="clrbtn" onclick="clr()">Clear</button>
+    </div>
+    <button class="subbtn" onclick="openModal()">Submit Test &rarr;</button>
+  </div>
+</div>
+<div class="moverlay" id="modal">
+  <div class="mbox">
+    <h2>Submit Test?</h2>
+    <p>You are about to submit your answers.</p>
+    <p style="color:var(--text3);font-size:12px;">Answers cannot be changed after submission.</p>
+    <div class="mstats">
+      <div class="mst"><div class="mst-v" style="color:#86EFAC;" id="m-a">0</div><div class="mst-l">Answered</div></div>
+      <div class="mst"><div class="mst-v" style="color:#FCA5A5;" id="m-u">50</div><div class="mst-l">Not Answered</div></div>
+    </div>
+    <div class="mbtns">
+      <button class="mbtn-cancel" onclick="closeModal()">Go Back</button>
+      <button class="mbtn-ok" onclick="submit()">Submit Now</button>
+    </div>
+  </div>
+</div>
+<div id="rpage">
+  <div class="rhero">
+    <div class="rring-w">
+      <div class="rring" id="rring"><div class="rinner"><div class="rscore" id="rsc">0/50</div><div class="rpct" id="rpt">0%</div></div></div>
+    </div>
+    <div class="rgrade" id="rgr"></div>
+    <div class="rmsg" id="rmsg"></div>
+    <div class="rstats">
+      <div class="rst"><div class="rst-v" style="color:#86EFAC;" id="r-cor">0</div><div class="rst-l">Correct</div></div>
+      <div class="rst"><div class="rst-v" style="color:#FCA5A5;" id="r-wrg">0</div><div class="rst-l">Wrong</div></div>
+      <div class="rst"><div class="rst-v" style="color:#6688B4;" id="r-skp">0</div><div class="rst-l">Skipped</div></div>
+      <div class="rst"><div class="rst-v" style="color:#FCD34D;" id="r-pct">0%</div><div class="rst-l">Score</div></div>
+    </div>
+  </div>
+  <div class="rbody">
+    <div id="sec-wrong"></div>
+    <div id="sec-skip"></div>
+    <div id="sec-correct"></div>
+  </div>
+  <div class="rbar"><button class="rbtn" onclick="restart()">&#8617; Restart Exam</button></div>
+</div>
+<script>
+const QS=[{"q": "A MET report contains:", "o": ["Air temperature, turbulence, spot wind", "Air temperature, clouds above, turbulence", "Air temperature, cabin pressure, winds"], "a": 0, "e": "A standard meteorological (MET) report for aviation contains: AIR TEMPERATURE, TURBULENCE information, and SPOT WIND (wind at specific altitude and location). Cabin pressure is not a meteorological parameter. Cloud information is in METARS/TAFs. Spot winds are critical for flight planning."}, {"q": "The purpose of REM sleep is:", "o": ["Brain restoration \u2014 strengthening, refreshing and organizing memory", "Body restoration \u2014 repairing tissues, building bone and muscle, strengthening immune system", "To relax body and mind through four stages of sleep"], "a": 0, "e": "REM sleep = BRAIN RESTORATION: strengthens neural connections, consolidates memory, refreshes cognitive function. NREM Stage 3 (deep sleep) = BODY restoration (tissue repair, muscle building, immune function). REM = mental/cognitive. NREM Stage 3 = physical. Both are essential but REM is specifically for brain."}, {"q": "Transition altitude at an aerodrome in India is above:", "o": ["2000 ft AMSL", "3000 ft AMSL", "4000 ft AMSL"], "a": 2, "e": "India's Transition Altitude (TA) = 4000 ft AMSL. Above TA = use Flight Levels (set 1013.25 hPa). Below TA = use altitudes (set QNH). This is the nationally promulgated TA for all Indian aerodromes."}, {"q": "Recommended procedure to prevent or overcome spatial disorientation:", "o": ["Reduce head and eye movement to extent possible", "Rely on kinesthetic senses", "Rely on flight instrument indications"], "a": 2, "e": "RELY ON FLIGHT INSTRUMENTS \u2014 always. In IMC, vestibular and kinesthetic senses create disorienting illusions. The instruments are ALWAYS correct. Reducing head movements helps but is secondary. Kinesthetic senses = wrong in IMC. Primary rule: TRUST THE INSTRUMENTS, ignore vestibular sensations."}, {"q": "Action if hyperventilation is suspected:", "o": ["Breathe slower by taking very deep breaths", "Consciously breathe at a slower rate than normal", "Consciously take deep breaths and breathe faster"], "a": 1, "e": "Hyperventilation treatment = CONSCIOUSLY BREATHE AT A SLOWER RATE than normal. This retains CO2 in the blood and restores acid-base balance. Breathing into a paper bag also works. Do NOT breathe faster (that makes hyperventilation worse). Deep breaths may help if they slow the rate \u2014 but the key is slower rate."}, {"q": "Change in frequency or location of navigational aids on short notice is notified through:", "o": ["NOTAMs", "AIRAC", "AIP"], "a": 0, "e": "SHORT NOTICE changes to navaid frequency or location = NOTAM. NOTAMs are issued for time-sensitive operational information. AIRAC = planned changes promulgated at least 28 days in advance. AIP = permanent operational data. Short notice = NOTAM always."}, {"q": "When body temperature is low, it is called:", "o": ["Autokinesis", "Hypothermia", "Hypoxia with chill"], "a": 1, "e": "Low body temperature = HYPOTHERMIA. Hypo = below, thermia = temperature. Hyperthermia = elevated temperature. Autokinesis = visual illusion (stationary light appears to move). These are distinct conditions \u2014 aviation regulations frequently test the correct medical terminology."}, {"q": "Runway end lights appear as ______ lights:", "o": ["Red", "Blue", "White"], "a": 0, "e": "RUNWAY END LIGHTS = RED (unidirectional, facing the approaching aircraft \u2014 red means stop/end). Seen from the takeoff/approach direction = red. Runway EDGE lights = white (amber in last 600m, red at last 300m). Runway THRESHOLD lights = green (seen from approach side). End = RED."}, {"q": "Taxi track centreline lights are:", "o": ["Red", "Green", "Yellow"], "a": 1, "e": "TAXIWAY CENTRELINE lights = GREEN (steady). Green guides pilots along the taxiway centreline at night or low visibility. Runway centreline = white (with red/white and red zones near end). Blue = taxiway EDGE lights. Green = taxiway centreline. Memory: Green means go (on the taxiway)."}, {"q": "IFR flight shall not be commenced if weather at destination and alternate is:", "o": ["Above minima", "Below minima", "Below expectations"], "a": 1, "e": "IFR flight SHALL NOT be commenced (or continued) if weather at destination AND alternate is BELOW MINIMA. If alternate is below minima, the flight lacks a viable diversion option. Both destination and alternate must be at or above applicable minima for the flight to legally commence."}, {"q": "ADC is exempted for aircraft flying within ______ of the aerodrome and below:", "o": ["10 NM, 5000 ft", "5 NM, 1000 ft", "5 NM, 4000 ft"], "a": 1, "e": "ADC exemption = within 5 NM of the aerodrome AND below 1000 ft AGL. These are local circuit/approach operations that do not penetrate the ADIZ boundary meaningfully. All other flights requiring ADIZ transit = ADC mandatory before departure."}, {"q": "Runway centreline lights are:", "o": ["Blue", "White", "Red"], "a": 1, "e": "Runway CENTRELINE lights = WHITE for most of runway, alternating RED and WHITE for last 900m from end, then ALL RED for last 300m. The white portion indicates runway available. Red/white = caution zone. All red = end approaching. Edge lights = white (amber in last 600m)."}, {"q": "Crossing of an ATS route should be at an angle of:", "o": ["60 degrees", "90 degrees", "45 degrees"], "a": 1, "e": "Aircraft crossing an ATS route = at 90 DEGREES (right angle) to minimise exposure time in the airway and maximise visibility to check for conflicting traffic. 90\u00b0 crossing = shortest time in the route. Any lesser angle increases exposure and reduces collision avoidance time."}, {"q": "An aircraft descending through the transition layer will report its height in:", "o": ["Flight Levels", "AMSL", "Altitude (QNH)"], "a": 2, "e": "Descending through the transition layer: aircraft changes from FL (1013 hPa) to QNH altitude. When below the Transition Level (TL), set QNH and report in ALTITUDE (feet AMSL). When above TA (climbing), use FLs. In the transition layer DESCENDING = report in ALTITUDE (you are transitioning to QNH)."}, {"q": "Information about facilities on an aerodrome is found in:", "o": ["AIP (Aerodrome section \u2014 AD)", "NOTAMs", "AIRAC"], "a": 0, "e": "Aerodrome facilities (runway dimensions, lighting, approach aids, services, hours, charts) = AIP, specifically the AD (Aerodrome) section. Each aerodrome has its own AD subsection with all permanent facility information. NOTAMs = temporary changes. AIRAC = amendment cycle."}, {"q": "Publicity material can be dropped from an aircraft if it has the permission of:", "o": ["District Magistrate / Commissioner of Police", "DGCA", "Aerodrome Officer"], "a": 0, "e": "Dropping/spraying of objects/publicity material from aircraft = permission required from DISTRICT MAGISTRATE or COMMISSIONER OF POLICE (local authority). This is an India-specific regulation under the Aircraft Rules. DGCA permits certain aerial work. For dropping items over populated areas, local authority permission is required."}, {"q": "A flight exceeding Mach 1 (supersonic) cannot fly over:", "o": ["Populated areas", "Indian airspace", "Europe"], "a": 1, "e": "Supersonic/transonic flight is NOT PERMITTED over INDIAN AIRSPACE \u2014 a blanket prohibition regardless of whether over populated or unpopulated areas. This is a direct India-specific rule. Supersonic flight is also generally restricted over most countries' populated areas internationally."}, {"q": "Petroleum in bulk is petroleum in a receptacle exceeding:", "o": ["1000 litres", "900 litres", "1500 litres"], "a": 1, "e": "Under Indian Aircraft Rules, petroleum in bulk = petroleum stored in a receptacle exceeding 900 LITRES. This threshold distinguishes bulk petroleum (requiring special handling and permissions for transport) from smaller quantities. The 900-litre figure is the direct DGCA regulatory threshold."}, {"q": "The Demolition of Buildings and Trees Act came into effect in year:", "o": ["1954", "1937", "1994"], "a": 0, "e": "The Aerodrome (Obstruction Removal) Act / Prevention of Obstructions Act = 1954. This legislation enables authorities to require the removal or modification of buildings, trees, and other structures that create obstacles to safe aircraft operations around aerodromes. Direct DGCA regulatory knowledge question."}, {"q": "Main signs indicating loss of vigilance:", "o": ["Increase in sensory perception and loss of concentration", "Decrease in sensory perception and sensation of muscular heaviness", "Blurred vision"], "a": 1, "e": "Loss of VIGILANCE = DECREASE in sensory perception (reduced awareness of surroundings), SENSATION OF MUSCULAR HEAVINESS (fatigue-related physical sensation), slowed reaction times, reduced alertness. Blurred vision = eye fatigue symptom but not the main vigilance indicator. Option B correctly describes the vigilance loss pattern."}, {"q": "Incubation period of relapsing fever is ______ days:", "o": ["6", "7", "8"], "a": 2, "e": "Relapsing fever (Borrelia infection) incubation period = 8 DAYS (range 5-15 days, most commonly 7-8 days). This is a public health/facilitation knowledge question from the DGCA Air Regulations syllabus covering international health regulations and notifiable diseases at airports."}, {"q": "Emergency distance available for stopping aircraft (ASDA) is:", "o": ["From starting point to end of clearway", "From starting point to end of paved overrun (stopway)", "From threshold plus 50 ft to end of runway"], "a": 1, "e": "ASDA (Accelerate-Stop Distance Available) = from the start of takeoff roll to the END OF THE PAVED OVERRUN (stopway). Clearway is NOT paved and cannot be used for stopping. TODA = TORA + clearway. ASDA = TORA + stopway. The paved overrun/stopway distinction is critical."}, {"q": "Control Zone (CTR) extends from:", "o": ["Surface of earth to a specified upper limit", "Surface of earth to unlimited", "At least 700 ft above ground"], "a": 0, "e": "CTR = from the SURFACE OF THE EARTH to a SPECIFIED UPPER LIMIT. This distinguishes it from a CTA (Control Area) which starts at a specified height above the surface. CTR goes from ground up to its upper limit. The 700ft figure = minimum lower limit of a CTA, not the CTR."}, {"q": "NOTAMs are distributed by means of:", "o": ["Mail", "Telecommunications", "Speed post"], "a": 1, "e": "NOTAMs distributed via TELECOMMUNICATIONS \u2014 specifically the Aeronautical Fixed Service (AFS) network (AFTN/CIDIN) and now digitally. Mail and speed post are obsolete and inadequate for time-sensitive operational information. Telecommunications = the ICAO-specified medium for NOTAM distribution."}, {"q": "PIC sees red navigation light of an aircraft at relative bearing 290 degrees. Action required:", "o": ["Turn right", "Safe, no action required", "Turn left"], "a": 1, "e": "Red light at relative bearing 290\u00b0 = the other aircraft is at your 10 o'clock position. Red = port (left) side of the other aircraft, meaning its LEFT side is facing you \u2014 the other aircraft is traveling from your right to your left, AWAY and across. At 290\u00b0 (slight left of ahead), seeing its red = it's moving away to your left. No collision risk = no action required. Safe."}, {"q": "Anti-collision lights are required on aircraft above:", "o": ["1500 kg", "5700 kg", "All aircraft"], "a": 1, "e": "Anti-collision lights (beacon/strobe) = required on aircraft above 5700 KG MTOW. Lighter aircraft have less stringent requirements under certain regulations. However, ICAO Annex 2 recommends anti-collision lights for all aircraft if fitted. The Indian specific threshold = 5700 kg MTOW."}, {"q": "Minor damage to aircraft on a ferry flight \u2014 passengers:", "o": ["Cannot be carried", "Can be carried", "Can be carried with operator permission"], "a": 0, "e": "Ferry flight = CANNOT carry passengers. A ferry flight is a positioning flight, often with a ferry permit allowing operation with known deficiencies. Passengers cannot be carried because the aircraft may not be in a fully airworthy condition per commercial standards."}, {"q": "Night flying hours logged between:", "o": ["30 minutes after sunset to 30 minutes before sunrise", "15 minutes after sunset to 15 minutes before sunrise", "Sunset to sunrise"], "a": 0, "e": "Night flying (for logging purposes) = 30 MINUTES AFTER SUNSET to 30 MINUTES BEFORE SUNRISE. This is the DGCA/ICAO standard definition for logging night flight time. Not sunset to sunrise (that is the general definition of night for lights-on purposes)."}, {"q": "Runway direction is measured from:", "o": ["True North", "Compass North", "Magnetic North"], "a": 2, "e": "Runway designator (direction) is based on MAGNETIC NORTH. Runway 27 = approximately 270\u00b0 magnetic. Magnetic north is used because aircraft compass and navigation are magnetic-based. True north is used for some navigation charts but NOT for runway designation."}, {"q": "Aircraft flying track of 180\u00b0 on IFR will fly at:", "o": ["FL260", "FL185", "FL90"], "a": 0, "e": "Track 180\u00b0 = WESTBOUND (180\u00b0-359\u00b0) = EVEN flight levels. FL260 = even = correct for westbound. FL185 = odd (westbound would use 180, 200, 220, 240, 260...). FL90 = odd = eastbound. Answer = FL260 (even, westbound). Note: the answer key says A = FL260."}, {"q": "Marshaller with either arm placed level with chest and moved laterally indicates:", "o": ["Stop", "Cut Engines", "Continue Straight"], "a": 0, "e": "Arms extended laterally at chest level and moved laterally (horizontal waving motion) = STOP. This is the NORMAL STOP signal. Arms raised slowly from sides to cross overhead = also stop. Cut engines = hand/wand drawn across throat. Continue straight = arms by sides waving forward."}, {"q": "Apron is an area on aerodrome where:", "o": ["Loading/unloading of passengers, mail and cargo only", "Parking of aircraft only", "Loading/unloading of passengers, mail and cargo, fuelling, parking or maintenance"], "a": 2, "e": "APRON = defined area where aircraft are parked for purposes including: loading/unloading passengers, mail, and cargo, FUELLING, PARKING, and MAINTENANCE. It is a multi-purpose ground servicing area \u2014 not just loading or parking alone. ICAO Annex 14 definition."}, {"q": "NDB lateral separation is:", "o": ["15 degrees at 15 NM", "30 degrees at 15 NM", "45 degrees at 15 NM"], "a": 1, "e": "NDB lateral separation = 30 DEGREES track divergence AND at least one aircraft 15 NM from the NDB. VOR = 15 degrees + 15 NM. NDB is less accurate than VOR hence requires DOUBLE the angular divergence. Both require 15 NM from the station."}, {"q": "Red pyrotechnic light to an aircraft in flight indicates:", "o": ["Notwithstanding any previous instructions, do not land for the time being", "Proceed to alternate", "Keep circling"], "a": 0, "e": "Red pyrotechnic (flare/rocket) to aircraft in flight = DO NOT LAND FOR THE TIME BEING \u2014 overrides any previous instructions or clearances. It is an immediate emergency signal from the aerodrome. The aircraft must continue circling until a green signal is received."}, {"q": "TCAS shows RA (Resolution Advisory) \u2014 will be reported as:", "o": ["A procedural error", "An incident", "An air report"], "a": 1, "e": "A TCAS RA encounter = REPORTABLE INCIDENT. ICAO and DGCA require RA encounters to be reported as incidents for safety analysis. Compliance with an RA is mandatory, and the event is a safety-significant occurrence requiring a written report. Not a procedural error (crew is following the RA correctly)."}, {"q": "Aerodrome beacon light colour is:", "o": ["Alternating white and green", "Green", "Red"], "a": 0, "e": "Aerodrome identification beacon = ALTERNATING WHITE AND GREEN light. The green flash identifies it as a CIVIL aerodrome. Military aerodromes = alternating white and white (two white flashes then green). Seaplane bases = alternating white and yellow. Civil land aerodrome = white + green."}, {"q": "Anti-collision lights are ______ lights:", "o": ["Steady red", "Rotating red", "Flashing red"], "a": 1, "e": "Anti-collision lights = ROTATING RED (beacon, the rotating red/amber light on top/bottom of aircraft). Strobes are also anti-collision lights (white flashing). The traditional anti-collision beacon = ROTATING RED. Both rotating red and white strobes serve anti-collision functions. Rotating red = the classic anti-collision beacon."}, {"q": "Aircraft at FL290 descending over Palam, altimeter reads 12000 ft. Pilot reports height as:", "o": ["Altitude", "Flight Level", "On QFE"], "a": 1, "e": "Aircraft was AT FL290 (above TA). Now descending with altimeter reading 12000 ft. India TA = 4000 ft. The aircraft is STILL ABOVE the Transition Level (TL). Until the aircraft passes through TL descending, it remains in FL. At 12000 ft = well above the TL = still report as FLIGHT LEVEL (FL120). Not altitude yet."}, {"q": "Problem when flying in low contrast environment (fog, snow, darkness, haze):", "o": ["Improbable to get visual illusions", "Difficult to estimate correct speed and size of approaching objects", "Impossible to detect objects"], "a": 1, "e": "Low contrast environments (fog, snow, haze, darkness) = DIFFICULT TO ESTIMATE CORRECT SPEED AND SIZE of approaching objects. The visual cues for size, distance, and closure rate are degraded without contrast. This is why spatial awareness and collision avoidance are impaired in poor visibility \u2014 not impossible (option C), not improbable for illusions (option A)."}, {"q": "Climbing aircraft crossing the level of another aircraft \u2014 separation required:", "o": ["15 NM", "15 minutes", "20 NM"], "a": 1, "e": "For a climbing aircraft crossing through the level of another aircraft on the SAME track: longitudinal separation of 15 MINUTES must be ensured. This time-based separation ensures the climbing aircraft is clear of the other's level with adequate margin. Alternative: DME-based 10 NM (with speed advantage)."}, {"q": "Action required for rapid decompression recovery:", "o": ["Only prompt oxygen supply is necessary", "Take oxygen, descend to lowest possible level and land as soon as possible", "Take oxygen, descend to lowest level and wait for symptoms to disappear before climbing"], "a": 1, "e": "Rapid decompression = (1) DON OXYGEN MASK immediately (TUC is seconds), (2) DESCEND to lowest safe altitude (10,000 ft or MSA), (3) LAND AS SOON AS POSSIBLE. Do NOT wait for symptoms to disappear before climbing \u2014 that could expose crew to further hypoxia. Land ASAP is the correct third step."}, {"q": "Advisory and FIS within an FIR is provided by:", "o": ["FIC (Flight Information Centre)", "RCC (Rescue Coordination Centre)", "ACC (Area Control Centre)"], "a": 0, "e": "FIC (Flight Information Centre) = provides both FIS (Flight Information Service) and advisory service within an FIR. FIC is the ICAO term for the unit providing these services. In India, FIC functions may be integrated with ACCs. RCC = SAR. ACC = ATC separation (not purely FIS/advisory)."}, {"q": "The alert phase (ALERFA) starts when an aircraft fails to land within:", "o": ["3 minutes of ETA", "2 minutes of ETA", "5 minutes of ETA"], "a": 2, "e": "ALERFA trigger: aircraft cleared to land fails to land within 5 MINUTES of its ETA AND communication has not been re-established. This is the specific ICAO Annex 12 criterion. The 5-minute threshold distinguishes a mere delay (uncertainty) from a situation requiring alert phase activation."}, {"q": "For testing the flight recorder system:", "o": ["Minimum 1 hour oldest data must be erased", "A total of 1 hour of oldest data accumulated at time of testing may be erased", "No more than 1 hour of recorded data may be erased"], "a": 1, "e": "Flight recorder (FDR/CVR) testing: A TOTAL OF 1 HOUR of the OLDEST recorded data accumulated AT THE TIME OF TESTING may be erased. This specific ICAO provision allows maintenance testing without compromising recent data. The key words are 'oldest data' and 'accumulated at time of testing.'"}, {"q": "Decompression sickness causes:", "o": ["Lack of CO2 in blood", "Lack of O2 in blood", "N2 bubbles in tissues"], "a": 2, "e": "DCS = NITROGEN BUBBLES in tissues and blood (Henry's Law: dissolved N2 comes out of solution when pressure drops rapidly). Types: bends (joints), chokes (lungs), skin creeps, neurological. Treatment = hyperbaric recompression. Not a CO2 or O2 deficiency."}, {"q": "Hypoxia can be controlled by:", "o": ["Using oxygen above 5000 ft AMSL during daytime", "Opening windows and air vents", "Using oxygen above 5000 ft AMSL during nighttime"], "a": 2, "e": "Night vision (rod function) is affected by hypoxia from as low as 5000 ft \u2014 much earlier than daytime cognitive impairment. SUPPLEMENTAL OXYGEN above 5000 ft AMSL is recommended DURING NIGHTTIME to protect night vision and rod function. During day, significant impairment occurs at higher altitudes. Night = lower threshold."}, {"q": "Operator files RVR of 500m. Threshold RVR reported as 600m. This is:", "o": ["Above filed minima", "Below filed minima", "Within minima if mid and stop-end RVR are also above 500m"], "a": 0, "e": "Filed minima = 500m. Reported threshold RVR = 600m. 600m > 500m = ABOVE filed minima. The threshold (touchdown) RVR is the primary reference. Since 600m exceeds the required 500m, the aerodrome IS ABOVE filed minima for that RVR position."}, {"q": "ADC validity for non-scheduled domestic flights:", "o": ["Minus 15 min to plus 45 min of EOBT", "Plus 60 min of EOBT", "Minus 15 min to plus 3 hours of EOBT"], "a": 2, "e": "ADC validity: SCHEDULED flights = -15 to +45 minutes EOBT. NON-SCHEDULED DOMESTIC flights = -15 minutes to +3 HOURS of EOBT. The wider window (+3 hrs) for non-scheduled accommodates the less predictable departure times of general aviation and charter flights."}, {"q": "Wildlife hazard at aerodromes is caused due to presence of:", "o": ["Wild animals", "Animals", "Birds and animals"], "a": 2, "e": "Wildlife hazard = BIRDS AND ANIMALS. Both pose collision/ingestion risks: birds = bird strike hazard to engines and airframes; animals = runway incursion risk. Aerodrome wildlife management programmes address both categories. The comprehensive term = birds AND animals."}, {"q": "Introducing automation in a cockpit:", "o": ["Always reduces potential for human error and workload", "Generally relocates potential for error and increases workload in some areas", "Eliminates human error but workload increases"], "a": 1, "e": "Automation RELOCATES error potential (from flying errors to programming/monitoring errors) and INCREASES workload in some areas (FMS programming, mode management). It does not uniformly reduce error or workload \u2014 it changes where and how errors occur. New automation = new error types."}];
+const LABS=['A','B','C','D'];
+let CUR=0,ANS=new Array(QS.length).fill(null),TL=3600,TI=null;
+function build(){
+  var body=document.getElementById('ebody'),pal=document.getElementById('pal');
+  body.innerHTML='';pal.innerHTML='';
+  QS.forEach(function(q,qi){
+    var pb=document.createElement('button');
+    pb.className='pb'+(qi===0?' cur':'');pb.id='pb'+qi;pb.textContent=qi+1;
+    pb.onclick=(function(i){return function(){goTo(i);};})(qi);
+    pal.appendChild(pb);
+    var opts='';
+    q.o.forEach(function(opt,oi){
+      opts+='<div class="qopt" id="o'+qi+'_'+oi+'" onclick="pick('+qi+','+oi+')">'
+           +'<div class="olbl">'+LABS[oi]+'</div><div>'+opt+'</div></div>';
+    });
+    var p=document.createElement('div');
+    p.className='qpanel'+(qi===0?' active':'');p.id='qp'+qi;
+    p.innerHTML='<div class="qcard">'
+      +'<div class="qmeta"><span class="qbadge">Question '+(qi+1)+' / '+QS.length+'</span><span class="qmark">1 mark</span></div>'
+      +'<div class="qtxt">'+q.q+'</div><div class="qopts">'+opts+'</div></div>';
+    body.appendChild(p);
+  });
+  updateNav();
+}
+function pick(qi,oi){
+  if(ANS[qi]!==null){var p=document.getElementById('o'+qi+'_'+ANS[qi]);if(p)p.classList.remove('sel');}
+  ANS[qi]=oi;
+  var el=document.getElementById('o'+qi+'_'+oi);if(el)el.classList.add('sel');
+  var pb=document.getElementById('pb'+qi);if(pb)pb.classList.add('ans');
+  document.getElementById('efill').style.width=(ANS.filter(function(a){return a!==null;}).length/QS.length*100)+'%';
+}
+function clr(){
+  if(ANS[CUR]!==null){
+    var p=document.getElementById('o'+CUR+'_'+ANS[CUR]);if(p)p.classList.remove('sel');
+    ANS[CUR]=null;
+    var pb=document.getElementById('pb'+CUR);if(pb)pb.classList.remove('ans');
+    document.getElementById('efill').style.width=(ANS.filter(function(a){return a!==null;}).length/QS.length*100)+'%';
+  }
+}
+function goTo(i){
+  document.getElementById('qp'+CUR).classList.remove('active');
+  document.getElementById('pb'+CUR).classList.remove('cur');
+  CUR=i;
+  document.getElementById('qp'+CUR).classList.add('active');
+  document.getElementById('pb'+CUR).classList.add('cur');
+  updateNav();window.scrollTo({top:0,behavior:'smooth'});
+}
+function nav(d){goTo(Math.max(0,Math.min(QS.length-1,CUR+d)));}
+function updateNav(){document.getElementById('bprev').disabled=CUR===0;document.getElementById('bnext').disabled=CUR===QS.length-1;}
+function startTimer(){
+  TI=setInterval(function(){
+    TL--;
+    var m=Math.floor(TL/60),s=TL%60,d=document.getElementById('tv');
+    if(d){d.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;if(TL<=300)d.style.color='#EF4444';}
+    if(TL<=0){clearInterval(TI);submit();}
+  },1000);
+}
+function openModal(){
+  var a=ANS.filter(function(x){return x!==null;}).length;
+  document.getElementById('m-a').textContent=a;
+  document.getElementById('m-u').textContent=QS.length-a;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function submit(){
+  clearInterval(TI);closeModal();
+  document.getElementById('epage').style.display='none';
+  var cor=0,wrg=0,skp=0,cL=[],wL=[],sL=[];
+  QS.forEach(function(q,qi){
+    var s=ANS[qi];
+    if(s===null){skp++;sL.push({qi:qi,q:q,sel:s});}
+    else if(s===q.a){cor++;cL.push({qi:qi,q:q,sel:s});}
+    else{wrg++;wL.push({qi:qi,q:q,sel:s});}
+  });
+  var pct=Math.round(cor/QS.length*100),pass=pct>=70;
+  var color=pass?'#22C55E':'#EF4444';
+  var grade=pct>=90?'Distinction':pct>=80?'Credit':pct>=70?'Pass':'Fail';
+  var msg=pct>=90?'Outstanding! DGCA ready.':pct>=80?'Excellent work.':pct>=70?'Passed. Review wrong answers.':'Needs revision. Study every explanation carefully.';
+  document.getElementById('rring').style.setProperty('--rp',pct+'%');
+  document.getElementById('rring').style.setProperty('--rc',color);
+  document.getElementById('rsc').textContent=cor+'/'+QS.length;
+  document.getElementById('rsc').style.color=color;
+  document.getElementById('rpt').textContent=pct+'%';
+  document.getElementById('rgr').textContent=(pass?'✓ ':'✗ ')+grade;
+  document.getElementById('rgr').style.color=color;
+  document.getElementById('rmsg').textContent=msg;
+  document.getElementById('r-cor').textContent=cor;
+  document.getElementById('r-wrg').textContent=wrg;
+  document.getElementById('r-skp').textContent=skp;
+  document.getElementById('r-pct').textContent=pct+'%';
+  function card(item,type){
+    var q=item.q,qi=item.qi,sel=item.sel,opts='';
+    q.o.forEach(function(opt,oi){
+      var c='dim',tag='';
+      if(oi===q.a){c='cor';tag=' ✓';}
+      else if(oi===sel&&sel!==q.a){c='wrg';tag=' ✗';}
+      opts+='<div class="rcopt '+c+'"><span class="rcopt-l">'+LABS[oi]+'</span><div>'+opt+tag+'</div></div>';
+    });
+    return '<div class="rcard '+type+'">'
+      +'<div class="rchead '+type+'"><span class="rcqnum">Q'+(qi+1)+'</span>'
+      +'<span class="rcbadge '+(type==='correct'?'c':'w')+'">'+(type==='correct'?'✓ Correct':type==='skipped'?'□ Skipped':'✗ Wrong')+'</span></div>'
+      +'<div class="rcbody"><div class="rcqtxt">'+q.q+'</div><div class="rcopts">'+opts+'</div>'
+      +(type!=='correct'?'<div class="rcexp"><div class="rcexp-h">Explanation</div>'+q.e+'</div>':'')
+      +'</div></div>';
+  }
+  var wHTML='';if(wL.length){wHTML='<div class="sec-lbl">✗ Wrong Answers ('+wL.length+')</div>';wL.forEach(function(i){wHTML+=card(i,'wrong');});}
+  document.getElementById('sec-wrong').innerHTML=wHTML;
+  var sHTML='';if(sL.length){sHTML='<div class="sec-lbl">□ Skipped ('+sL.length+')</div>';sL.forEach(function(i){sHTML+=card(i,'skipped');});}
+  document.getElementById('sec-skip').innerHTML=sHTML;
+  var cHTML='';if(cL.length){cHTML='<div class="sec-lbl">✓ Correct Answers ('+cL.length+')</div>';cL.forEach(function(i){cHTML+=card(i,'correct');});}
+  document.getElementById('sec-correct').innerHTML=cHTML;
+  document.getElementById('rpage').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){
+  ANS=new Array(QS.length).fill(null);CUR=0;TL=3600;
+  document.getElementById('rpage').style.display='none';
+  document.getElementById('epage').style.display='block';
+  var tv=document.getElementById('tv');tv.textContent='60:00';tv.style.color='#FCA5A5';
+  build();startTimer();window.scrollTo({top:0});
+}
+build();startTimer();
+</script>
+</body>
+</html>

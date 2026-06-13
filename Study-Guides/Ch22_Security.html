@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 22: Security (Annex 17)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1526;
+  --card:#0D1B30;--card2:#102035;
+  --red:#EF4444;--amber:#F59E0B;--green:#22C55E;
+  --blue:#3B82F6;--purple:#A855F7;--teal:#14B8A6;
+  --orange:#F97316;--sky:#0EA5E9;--pink:#EC4899;
+  --text:#D8E6F8;--text2:#7895BB;--text3:#3A5470;
+  --bdr:rgba(255,255,255,0.055);--bdr2:rgba(255,255,255,0.10);
+  --red-bg:rgba(239,68,68,.11);--amber-bg:rgba(245,158,11,.11);
+  --green-bg:rgba(34,197,94,.11);--blue-bg:rgba(59,130,246,.11);
+  --purple-bg:rgba(168,85,247,.11);--teal-bg:rgba(20,184,166,.11);
+  --orange-bg:rgba(249,115,22,.11);--sky-bg:rgba(14,165,233,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 34px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(239,68,68,.13) 0%,transparent 50%),radial-gradient(ellipse at 80% 0%,rgba(168,85,247,.10) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.38);color:#FCA5A5;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#FCA5A5;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:13px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--red);color:#FCA5A5;}
+.nb.active{background:var(--red);border-color:var(--red);color:#fff;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 64px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#FCA5A5;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(239,68,68,.13);color:#FCA5A5;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(239,68,68,.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-r{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-a{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-g{background:var(--green-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.25);}
+.b-b{background:var(--blue-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.25);}
+.b-p{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-t{background:var(--teal-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.25);}
+.b-o{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.b-s{background:var(--sky-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-r{background:var(--red-bg);border-color:var(--red);}
+.al-a{background:var(--amber-bg);border-color:var(--amber);}
+.al-g{background:var(--green-bg);border-color:var(--green);}
+.al-b{background:var(--blue-bg);border-color:var(--blue);}
+.al-p{background:var(--purple-bg);border-color:var(--purple);}
+.al-t{background:var(--teal-bg);border-color:var(--teal);}
+.al strong{color:#FCD34D;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#86EFAC;}.al-b strong{color:#93C5FD;}.al-p strong{color:#D8B4FE;}.al-t strong{color:#5EEAD4;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCA5A5;}
+/* EVOLUTION TIMELINE */
+.evo{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.evo-box{border-radius:12px;padding:16px;border:1px solid;}
+.evo-before{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.3);}
+.evo-after{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.3);}
+.evo-hdr{font-size:13px;font-weight:700;margin-bottom:10px;}
+.evo-before .evo-hdr{color:#FCA5A5;}
+.evo-after .evo-hdr{color:#93C5FD;}
+/* ORG HIERARCHY */
+.org-tree{display:flex;flex-direction:column;gap:0;align-items:center;}
+.org-box{border-radius:10px;padding:12px 24px;text-align:center;font-weight:600;min-width:200px;margin-bottom:0;}
+.org-line{width:2px;height:20px;margin:0 auto;}
+.org-top{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#FCA5A5;font-size:14px;}
+.org-mid{background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);color:#FCD34D;font-size:13px;}
+.org-bot{background:rgba(59,130,246,.09);border:1px solid rgba(59,130,246,.3);color:#93C5FD;font-size:12px;}
+/* NOTIFICATION CHAIN */
+.notif-chain{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.notif-box{background:var(--card2);border:1px solid var(--bdr2);border-radius:11px;padding:14px;text-align:center;}
+.notif-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;margin-bottom:4px;}
+.notif-label{font-size:12.5px;font-weight:600;margin-bottom:3px;}
+.notif-desc{font-size:11.5px;color:var(--text3);}
+/* AIRPORT SECURITY GRID */
+.airport-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;}
+.airport-box{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px;text-align:center;}
+.airport-code{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCD34D;}
+.airport-city{font-size:12px;color:var(--text2);margin-top:3px;}
+/* REPORTERS LIST */
+.reporter-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--card2);border:1px solid var(--bdr);border-radius:9px;margin-bottom:7px;}
+.reporter-num{width:28px;height:28px;border-radius:50%;background:var(--red-bg);border:1px solid rgba(239,68,68,.4);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#FCA5A5;flex-shrink:0;}
+.reporter-name{font-size:13.5px;font-weight:600;color:var(--text);}
+/* TRAP */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* MCQ QUICK FIRE */
+.mcq-item{background:var(--card2);border:1px solid var(--bdr2);border-radius:10px;padding:14px;margin-bottom:8px;}
+.mcq-q{font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;}
+.mcq-a{font-size:13px;color:#86EFAC;font-weight:600;display:flex;align-items:center;gap:8px;}
+.mcq-a::before{content:'✓';color:#86EFAC;font-weight:700;}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--red);color:#fff;background:var(--red-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--amber-bg);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12.5px;color:#FCD34D;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--red);color:#fff;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#F87171;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--red) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FCA5A5;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:580px){.evo{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">🔒 DGCA CPL Exam Prep</div>
+  <h1>Chapter 22 — <span>Security (Annex 17)</span></h1>
+  <p>Safeguarding Civil Aviation Against Acts of Unlawful Interference · BCAS · NCASP · Reporting</p>
+  <div class="hero-chips">
+    <span class="chip">Annex 17 Purpose</span><span class="chip">BCAS India</span>
+    <span class="chip">Hijacking Provisions</span><span class="chip">Re-screening Rule</span>
+    <span class="chip">4 Notifications</span><span class="chip">Commissioner of Security</span>
+    <span class="chip">Aircraft Security Rules 2011</span><span class="chip">Inquiry Officer Rank</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('annex17')">🛡 Annex 17</button>
+  <button class="nb" onclick="show('hijack')">✈️ Hijacking</button>
+  <button class="nb" onclick="show('bcas')">🇮🇳 BCAS India</button>
+  <button class="nb" onclick="show('reporting')">📋 Reporting</button>
+  <button class="nb" onclick="show('quickfire')">⚡ Quick Fire</button>
+  <button class="nb" onclick="show('numbers')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ======= ANNEX 17 ======= -->
+<div class="section active" id="section-annex17">
+  <div class="sh">
+    <div class="si" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.3);">🛡</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Annex 17 — Aviation Security</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Full name · Purpose · Objectives · Protected persons · Evolution</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>What is Annex 17?</div>
+    <div class="g2">
+      <div>
+        <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:16px;margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:#FCA5A5;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Full Name</div>
+          <div style="font-size:14px;font-weight:700;color:#fff;line-height:1.4;">Security — Safeguarding International Civil Aviation Against Acts of <strong style="color:#FCA5A5;">Unlawful Interference</strong></div>
+        </div>
+        <div class="al al-r" style="margin-bottom:0;">
+          <strong>Introduced after:</strong> Increase in aviation crimes and hijackings. Originally focused on hijacking (before 1985), then expanded significantly.
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">Annex 17 protects against:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Hijacking</div>
+          <div class="chk-item"><span class="cy">✓</span>Sabotage</div>
+          <div class="chk-item"><span class="cy">✓</span>Bomb threats</div>
+          <div class="chk-item"><span class="cy">✓</span>Terrorist attacks</div>
+          <div class="chk-item"><span class="cy">✓</span>Unlawful seizure of aircraft</div>
+          <div class="chk-item"><span class="cy">✓</span>Other unlawful interference</div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Memory</div>
+          <div class="mf">Annex 17 = Aviation Security (17 = Shield)</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Evolution of Annex 17</div>
+    <div class="evo">
+      <div class="evo-box evo-before">
+        <div class="evo-hdr">📅 Before 1985</div>
+        <div class="chklist">
+          <div class="chk-item" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);"><span style="color:#FCA5A5;">⚠</span><div>Main threat was <strong>HIJACKING</strong> only</div></div>
+        </div>
+      </div>
+      <div class="evo-box evo-after">
+        <div class="evo-hdr">📅 Later Amendments Added</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="b b-b">Threat information</span>
+          <span class="b b-b">Access control</span>
+          <span class="b b-b">Passenger screening</span>
+          <span class="b b-b">Baggage screening</span>
+          <span class="b b-b">Cockpit protection</span>
+          <span class="b b-b">In-flight security</span>
+          <span class="b b-b">Cargo security</span>
+          <span class="b b-b">Mail security</span>
+          <span class="b b-b">Human factors</span>
+          <span class="b b-b">Response management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Annex 17 Objectives</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#86EFAC;margin-bottom:8px;">Every Contracting State shall establish:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-g">Org</span>Organisation structure</div>
+          <div class="chk-item"><span class="b b-g">Reg</span>Regulations</div>
+          <div class="chk-item"><span class="b b-g">Pro</span>Procedures</div>
+          <div class="chk-item"><span class="b b-g">Pra</span>Practices</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">To protect:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Passengers</div>
+          <div class="chk-item"><span class="cy">✓</span>Crew</div>
+          <div class="chk-item"><span class="cy">✓</span>Ground personnel</div>
+          <div class="chk-item"><span class="cy">✓</span>General public</div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-top:10px;margin-bottom:6px;">And ensure ability to:</div>
+        <div class="chk-item"><span class="cy">✓</span><div>Respond rapidly to <strong>increased security threats</strong></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Passenger Screening & Re-screening</div>
+    <div class="g2">
+      <div>
+        <div class="al al-a" style="margin-bottom:10px;">
+          <strong>Re-screening required when:</strong> Screened passengers mix with unscreened passengers before boarding.
+        </div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+            <span class="cy">→</span>
+            <div>Both the <strong>passenger</strong> AND their <strong>cabin baggage</strong> must be re-screened</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Potentially Disruptive Passengers:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-p">Rule</span><div>Board them <strong>before other passengers</strong> to minimize risk</div></div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#FDB785;margin-top:12px;margin-bottom:8px;">Weapons on Aircraft — Allowed for:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Police officers / Security personnel</div>
+          <div class="chk-item"><span class="cy">✓</span>Bodyguards / Foreign agents</div>
+          <div class="chk-item"><span class="b b-o">Condition</span><div>Prior notification by State of Embarkation + PIC informed</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Re-screening Rule</div>
+      <div class="mf">Screened + Unscreened mix → Re-screen passenger AND cabin baggage</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= HIJACKING ======= -->
+<div class="section" id="section-hijack">
+  <div class="sh">
+    <div class="si" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.3);">✈️</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Hijacking & Unlawful Seizure</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">State obligations · Assistance to aircraft · Notification chain</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>When an Aircraft is Subjected to Unlawful Seizure</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">The landing State SHALL:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span class="cy">✓</span>Retain aircraft if necessary
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span class="cy">✓</span>Protect passengers
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span class="cy">✓</span>Protect crew
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span class="cy">✓</span>Protect aircraft
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span class="cy">✓</span>Until journey can continue
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">Assistance MUST be provided:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+            <span class="b b-t">1</span><div><strong>Navigation aids</strong></div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+            <span class="b b-t">2</span><div><strong>Air traffic services</strong></div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+            <span class="b b-t">3</span><div><strong>Permission to land</strong></div>
+          </div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Hijacked aircraft assistance</div>
+          <div class="mf">NAL = Navigation + ATS + Landing permission</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Notification Chain After Unlawful Interference</div>
+    <div class="al al-a" style="margin-bottom:14px;">
+      When an aircraft subjected to unlawful interference lands, the <strong>State shall inform ALL of the following:</strong>
+    </div>
+    <div class="notif-chain">
+      <div class="notif-box" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);">
+        <div class="notif-num" style="color:#FCA5A5;">1</div>
+        <div class="notif-label" style="color:#FCA5A5;">State of Registry</div>
+        <div class="notif-desc">Country where aircraft is registered</div>
+      </div>
+      <div class="notif-box" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07);">
+        <div class="notif-num" style="color:#FCD34D;">2</div>
+        <div class="notif-label" style="color:#FCD34D;">State of Operator</div>
+        <div class="notif-desc">Country of the airline/operator</div>
+      </div>
+      <div class="notif-box" style="border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.07);">
+        <div class="notif-num" style="color:#D8B4FE;">3</div>
+        <div class="notif-label" style="color:#D8B4FE;">Affected States</div>
+        <div class="notif-desc">States whose citizens died, were injured, or held hostage</div>
+      </div>
+      <div class="notif-box" style="border-color:rgba(20,184,166,.35);background:rgba(20,184,166,.07);">
+        <div class="notif-num" style="color:#5EEAD4;">4</div>
+        <div class="notif-label" style="color:#5EEAD4;">ICAO</div>
+        <div class="notif-desc">International Civil Aviation Organization</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">4-Party Notification Memory</div>
+      <div class="mf">Registry + Operator + Affected States + ICAO</div>
+      <div class="mc" style="font-size:11.5px;color:var(--text3);margin-top:3px;">Memory: "ROAI" — Registry · Operator · Affected · ICAO</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= BCAS ======= -->
+<div class="section" id="section-bcas">
+  <div class="sh">
+    <div class="si" style="background:var(--orange-bg);border:1px solid rgba(249,115,22,.3);">🇮🇳</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">BCAS & Indian Security Framework</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Bureau of Civil Aviation Security · NCASP · Commissioner · Airport security</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>BCAS — Bureau of Civil Aviation Security</div>
+    <div class="g2">
+      <div>
+        <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.35);border-radius:12px;padding:16px;margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:#FDB785;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Full Form</div>
+          <div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:2px;">BCAS</div>
+          <div style="font-size:14px;color:#FDB785;">Bureau of Civil Aviation Security</div>
+        </div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-o">Role</span><div>India's aviation security regulator</div></div>
+          <div class="chk-item"><span class="b b-o">Appointed by</span><div>Central Government</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FDB785;margin-bottom:8px;">Responsibilities of BCAS:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Regulatory functions</div>
+          <div class="chk-item"><span class="cy">✓</span>Oversight functions</div>
+          <div class="chk-item"><span class="cy">✓</span>Aviation security programme</div>
+          <div class="chk-item"><span class="cy">✓</span>Security compliance</div>
+          <div class="chk-item"><span class="cy">✓</span>Threat response</div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Key Facts</div>
+          <div class="mf">BCAS Head = Director General, BCAS (DG BCAS)</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORG HIERARCHY -->
+  <div class="card">
+    <div class="ch"><span class="pip"></span>India Aviation Security — Authority Hierarchy</div>
+    <div class="org-tree">
+      <div class="org-box org-top" style="width:100%;max-width:340px;">
+        🏛 Director General, BCAS<br>
+        <span style="font-size:11px;font-weight:400;color:rgba(252,165,165,.7);">Head of BCAS — appointed by Central Government</span>
+      </div>
+      <div class="org-line" style="background:rgba(239,68,68,.3);"></div>
+      <div class="org-box org-mid" style="width:100%;max-width:340px;">
+        📋 Commissioner of Security (Civil Aviation)<br>
+        <span style="font-size:11px;font-weight:400;color:rgba(253,211,77,.7);">Responsible for Annex 17 implementation in India</span>
+      </div>
+      <div class="org-line" style="background:rgba(245,158,11,.3);"></div>
+      <div class="org-box org-bot" style="width:100%;max-width:340px;">
+        🔍 Inquiry Officer<br>
+        <span style="font-size:11px;font-weight:400;color:rgba(147,197,253,.7);">Minimum rank: Assistant Commissioner of Security</span>
+      </div>
+    </div>
+    <div class="al al-a" style="margin-top:14px;margin-bottom:0;font-size:12.5px;">
+      <strong>Aircraft (Security) Rules, 2011</strong> — Year to memorize. This governs Indian aviation security.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Commissioner of Security — Duties (NCASP)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-p" style="margin-bottom:10px;"><strong>NCASP</strong> = National Civil Aviation Security Programme</div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Commissioner must:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Establish NCASP</div>
+          <div class="chk-item"><span class="cy">✓</span>Develop NCASP</div>
+          <div class="chk-item"><span class="cy">✓</span>Implement NCASP</div>
+          <div class="chk-item"><span class="cy">✓</span>Maintain NCASP</div>
+          <div class="chk-item"><span class="cy">✓</span>Review NCASP</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Airport Security Responsibility:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-a">AAI Airports</span><div>Airport Director responsible</div></div>
+          <div class="chk-item"><span class="b b-b">Private/JV Airports</span><div>Airport operators maintain own security systems</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:12.5px;font-weight:700;color:#FDB785;margin-bottom:8px;">Private Airport Examples:</div>
+        <div class="airport-grid">
+          <div class="airport-box"><div class="airport-code">DIAL</div><div class="airport-city">Delhi</div></div>
+          <div class="airport-box"><div class="airport-code">MIAL</div><div class="airport-city">Mumbai</div></div>
+          <div class="airport-box"><div class="airport-code">CIAL</div><div class="airport-city">Cochin</div></div>
+          <div class="airport-box"><div class="airport-code">HIAL</div><div class="airport-city">Hyderabad</div></div>
+          <div class="airport-box"><div class="airport-code">BIAL</div><div class="airport-city">Bangalore</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= REPORTING ======= -->
+<div class="section" id="section-reporting">
+  <div class="sh">
+    <div class="si" style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);">📋</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Security Incident Reporting</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Who reports · Report to whom · Investigation · Inquiry officer rank</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Who Must Report Security Incidents — Immediately</div>
+    <div class="al al-b" style="margin-bottom:14px;"><strong>All of these entities must report security incidents immediately to the Commissioner of Security:</strong></div>
+    <div class="reporter-item"><div class="reporter-num">1</div><div class="reporter-name">Aircraft Operator</div></div>
+    <div class="reporter-item"><div class="reporter-num">2</div><div class="reporter-name">Aviation Security Group</div></div>
+    <div class="reporter-item"><div class="reporter-num">3</div><div class="reporter-name">Aerodrome Operator</div></div>
+    <div class="reporter-item"><div class="reporter-num">4</div><div class="reporter-name">Regulated Agent</div></div>
+    <div class="reporter-item"><div class="reporter-num">5</div><div class="reporter-name">Catering Establishment Owner / Operator</div></div>
+    <div class="al al-r" style="margin-top:4px;margin-bottom:0;"><strong>Report To:</strong> Commissioner of Security — <strong>immediately</strong></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Investigation of Security Incidents</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">Commissioner may:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><div>Order an <strong>Investigation</strong></div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>Appoint an <strong>Inquiry Officer</strong></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="stat" style="border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1);">
+          <div class="sn" style="color:#D8B4FE;font-size:16px;">Assistant Commissioner<br>of Security</div>
+          <div class="sl">Minimum rank required for Inquiry Officer</div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Inquiry Officer Minimum Rank</div>
+          <div class="mf">Inquiry Officer ≥ Assistant Commissioner of Security</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUICK FIRE ======= -->
+<div class="section" id="section-quickfire">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⚡</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Quick Fire — Top 10 DGCA MCQs</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Direct questions DGCA loves to ask from Chapter 22</div></div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-q">Q1. Annex dealing with Aviation Security is:</div>
+    <div class="mcq-a">Annex 17</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q2. BCAS stands for:</div>
+    <div class="mcq-a">Bureau of Civil Aviation Security</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q3. Main aviation security threat before 1985:</div>
+    <div class="mcq-a">Hijacking</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q4. Aviation security in India is governed by:</div>
+    <div class="mcq-a">Aircraft (Security) Rules, 2011</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q5. Passenger mixes with unscreened passenger before boarding — action required:</div>
+    <div class="mcq-a">Passenger AND cabin baggage must be re-screened</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q6. Aircraft affected by unlawful seizure must be provided:</div>
+    <div class="mcq-a">Navigation aids + ATS services + Landing permission</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q7. Security incidents are reported to:</div>
+    <div class="mcq-a">Commissioner of Security — immediately</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q8. BCAS is headed by:</div>
+    <div class="mcq-a">Director General, BCAS</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q9. Inquiry Officer rank shall not be below:</div>
+    <div class="mcq-a">Assistant Commissioner of Security</div>
+  </div>
+  <div class="mcq-item">
+    <div class="mcq-q">Q10. Annex 17 primarily deals with:</div>
+    <div class="mcq-a">Safeguarding civil aviation against acts of unlawful interference</div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="ch"><span class="pip"></span>Ultra-Short Revision — One Line Each</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Topic</th><th>One-Line Answer</th></tr></thead>
+        <tbody>
+          <tr><td>Annex 17</td><td><strong>Aviation Security</strong></td></tr>
+          <tr><td>BCAS</td><td><strong>Bureau of Civil Aviation Security</strong></td></tr>
+          <tr><td>Head of BCAS</td><td><strong>DG BCAS</strong></td></tr>
+          <tr><td>Rules governing security</td><td><span class="num">Aircraft (Security) Rules 2011</span></td></tr>
+          <tr><td>Mixed screened+unscreened passengers</td><td><strong>Re-screen passenger + cabin baggage</strong></td></tr>
+          <tr><td>Hijacked aircraft — State provides</td><td><strong>ATS + Navigation Aid + Landing Permission</strong></td></tr>
+          <tr><td>Report incident to</td><td><strong>Commissioner of Security</strong></td></tr>
+          <tr><td>Inquiry officer minimum rank</td><td><strong>Assistant Commissioner of Security</strong></td></tr>
+          <tr><td>Notification after unlawful interference</td><td><strong>Registry + Operator + Affected States + ICAO</strong></td></tr>
+          <tr><td>NCASP</td><td><strong>National Civil Aviation Security Programme</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MASTER REF ======= -->
+<div class="section" id="section-numbers">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Master Reference & Exam Traps</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">All key facts, dates and DGCA trap questions from Chapter 22</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Critical Facts & Dates</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Answer</th></tr></thead>
+          <tbody>
+            <tr><td>ICAO Annex for Security</td><td><span class="num">Annex 17</span></td></tr>
+            <tr><td>Main threat before 1985</td><td><span class="num">Hijacking</span></td></tr>
+            <tr><td>India security rules year</td><td><span class="num">2011</span></td></tr>
+            <tr><td>India security authority</td><td><span class="num">BCAS</span></td></tr>
+            <tr><td>BCAS = </td><td>Bureau of Civil Aviation Security</td></tr>
+            <tr><td>Head of BCAS</td><td>Director General, BCAS</td></tr>
+            <tr><td>Annex 17 implementation (India)</td><td>Commissioner of Security (Civil Aviation)</td></tr>
+            <tr><td>NCASP = </td><td>National Civil Aviation Security Programme</td></tr>
+            <tr><td>Minimum inquiry officer rank</td><td>Assistant Commissioner of Security</td></tr>
+            <tr><td>Incident reported to</td><td>Commissioner of Security</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Annex 17 — What States Must Do</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Situation</th><th>State Obligation</th></tr></thead>
+          <tbody>
+            <tr><td>Hijacked aircraft lands</td><td>Protect passengers, crew, aircraft · Retain if needed</td></tr>
+            <tr><td>Hijacked aircraft in flight</td><td>Provide: Nav aids + ATS + Landing permission</td></tr>
+            <tr><td>Notification required to</td><td>State of Registry · State of Operator · Affected States · ICAO</td></tr>
+            <tr><td>Screened mix with unscreened</td><td>Re-screen passenger AND cabin baggage</td></tr>
+            <tr><td>Disruptive passenger boarding</td><td>Board before other passengers</td></tr>
+            <tr><td>Armed security on board</td><td>Prior notification by embarkation state + PIC informed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--blue)"></span>Security Reporters — All 5</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>#</th><th>Who Reports</th><th>Reports To</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Aircraft Operator</td><td rowspan="5" style="vertical-align:middle;"><strong style="color:#FCA5A5;">Commissioner of Security</strong><br><span style="font-size:11px;color:var(--text3);">Immediately</span></td></tr>
+            <tr><td>2</td><td>Aviation Security Group</td></tr>
+            <tr><td>3</td><td>Aerodrome Operator</td></tr>
+            <tr><td>4</td><td>Regulated Agent</td></tr>
+            <tr><td>5</td><td>Catering Establishment Owner/Operator</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>Indian Airport Security Operators</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Airport Type</th><th>Security Responsibility</th></tr></thead>
+          <tbody>
+            <tr><td>AAI Airports</td><td>Airport Director responsible</td></tr>
+            <tr><td>DIAL — Delhi</td><td rowspan="5">Private/JV airport operators maintain own security systems</td></tr>
+            <tr><td>MIAL — Mumbai</td></tr>
+            <tr><td>CIAL — Cochin</td></tr>
+            <tr><td>HIAL — Hyderabad</td></tr>
+            <tr><td>BIAL — Bangalore</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 22</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Annex 17 vs Annex 13 vs Annex 9</div><div class="trap-text">Annex 17 = <strong style="color:#fff;">Security</strong> (unlawful interference). Annex 13 = Accident Investigation. Annex 9 = Facilitation. Very commonly mixed up in MCQs.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Re-screening — BOTH passenger AND cabin baggage</div><div class="trap-text">When screened passengers mix with unscreened passengers, <strong style="color:#fff;">BOTH the passenger AND their cabin baggage</strong> must be re-screened. Selecting just "passenger" or just "baggage" is wrong.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Inquiry Officer minimum rank</div><div class="trap-text">Inquiry Officer must be at least <strong style="color:#fff;">Assistant Commissioner of Security</strong>. Not just "any security officer".</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Aircraft (Security) Rules year</div><div class="trap-text">The year is <strong style="color:#fff;">2011</strong>. Not 2001, not 2015. This is a specific number DGCA tests.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">4 parties notified after unlawful interference</div><div class="trap-text">State of Registry + State of Operator + States of affected citizens (died/injured/hostage) + <strong style="color:#fff;">ICAO</strong>. Students forget ICAO or forget the "affected states" element.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Commissioner of Security vs DG BCAS</div><div class="trap-text"><strong style="color:#fff;">DG BCAS</strong> = head of BCAS (the organisation). <strong style="color:#fff;">Commissioner of Security (Civil Aviation)</strong> = responsible for Annex 17 implementation and receives security incident reports. They are different roles.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ ======= -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.3);">🧠</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Practice Quiz</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">20 DGCA-style questions covering all Chapter 22 topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 20</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:5%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/20</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"Which ICAO Annex deals with Aviation Security?",opts:["Annex 9","Annex 13","Annex 17","Annex 6"],ans:2,exp:"Annex 17 = Security — Safeguarding International Civil Aviation Against Acts of Unlawful Interference. Annex 9 = Facilitation. Annex 13 = Accident Investigation."},
+  {q:"The full name of Annex 17 is:",opts:["Aviation Safety Standards","Security — Safeguarding International Civil Aviation Against Acts of Unlawful Interference","International Air Security","Protection of Aircraft from Hostile Acts"],ans:1,exp:"Full name of Annex 17 = Security: Safeguarding International Civil Aviation Against Acts of Unlawful Interference. Introduced after the increase in aviation crimes and hijackings."},
+  {q:"Before 1985, the main aviation security threat was:",opts:["Bomb threats","Cyber attacks","Sabotage","Hijacking"],ans:3,exp:"Before 1985, the main threat was HIJACKING. Later amendments added provisions for passenger screening, baggage screening, cockpit protection, cargo security, and many other areas."},
+  {q:"BCAS stands for:",opts:["Bureau of Civil Aviation Standards","Bureau of Civil Aviation Security","Board of Civil Aviation Security","Bureau of Civil Airspace Security"],ans:1,exp:"BCAS = Bureau of Civil Aviation Security. It is India's aviation security regulator, headed by the Director General (DG BCAS), appointed by the Central Government."},
+  {q:"BCAS is headed by:",opts:["Commissioner of Security","Director General, BCAS","Secretary, Ministry of Civil Aviation","Chairman, DGCA"],ans:1,exp:"BCAS is headed by the Director General, BCAS (DG BCAS), who is appointed by the Central Government."},
+  {q:"Aviation security in India is governed by which rules?",opts:["Aircraft (Safety) Rules, 2001","Civil Aviation Security Rules, 2010","Aircraft (Security) Rules, 2011","Aviation Security Act, 2015"],ans:2,exp:"Aircraft (Security) Rules, 2011 — remember the year 2011. This is a frequently asked DGCA question."},
+  {q:"Who is responsible for implementing Annex 17 in India?",opts:["Director General, DGCA","Director General, BCAS","Commissioner of Security (Civil Aviation)","Secretary, Ministry of Civil Aviation"],ans:2,exp:"The Commissioner of Security (Civil Aviation) is the authority responsible for Annex 17 implementation in India, including establishing and maintaining the NCASP."},
+  {q:"NCASP stands for:",opts:["National Civil Airspace Security Plan","National Civil Aviation Security Programme","National Committee on Aviation Safety and Protection","National Civil Airport Security Protocol"],ans:1,exp:"NCASP = National Civil Aviation Security Programme. The Commissioner of Security must establish, develop, implement, maintain, and review the NCASP."},
+  {q:"If screened passengers mix with unscreened passengers before boarding, the required action is:",opts:["Only the cabin baggage needs re-screening","Only the passenger needs re-screening","Both the passenger AND cabin baggage must be re-screened","No action required if delay is minimal"],ans:2,exp:"Both the passenger AND their cabin baggage must be re-screened. This is a favourite DGCA question — selecting only one (passenger or baggage) is incorrect."},
+  {q:"A State must provide what assistance to an aircraft subjected to unlawful seizure?",opts:["Fuel and crew replacement","Navigation aids, ATS services, and permission to land","Military escort only","Immediate clearance to nearest safe country"],ans:1,exp:"A State must provide: Navigation aids + Air traffic services + Permission to land. Memory: NAL = Navigation + ATS + Landing."},
+  {q:"When an aircraft subjected to unlawful interference lands, which parties must the State inform?",opts:["DGCA, Police, and Airport authority","State of Registry, State of Operator, Affected States, and ICAO","ICAO and the airline only","State of Registry and ICAO only"],ans:1,exp:"Four notifications: State of Registry + State of Operator + States whose citizens died/were injured/held hostage + ICAO. Memory: ROAI."},
+  {q:"After a hijacking, if citizens of a State were killed, injured, or held hostage, that State must be:",opts:["Notified by ICAO","Notified by the landing State","Notified by the airline","No notification required"],ans:1,exp:"The landing State must notify all States whose citizens died, were injured, or were held hostage — in addition to State of Registry, State of Operator, and ICAO."},
+  {q:"Potentially disruptive passengers should be:",opts:["Denied boarding entirely","Seated at the rear of the aircraft","Boarded before other passengers","Accompanied by security escort at all times"],ans:2,exp:"Potentially disruptive passengers should be boarded BEFORE other passengers to minimize risk and allow proper seating arrangements and monitoring."},
+  {q:"Armed police or security officers may carry weapons on aircraft if:",opts:["They identify themselves to the crew","Prior notification is given by State of Embarkation and PIC is informed","The captain requests additional security","ICAO approves the specific flight"],ans:1,exp:"Armed personnel may carry weapons on aircraft subject to: prior notification by State of Embarkation to the receiving State, AND the Pilot-in-Command must be informed."},
+  {q:"Security incidents must be reported to the Commissioner of Security by:",opts:["PIC only","Aircraft operator only","Aircraft operator, Aviation Security Group, Aerodrome Operator, Regulated Agent, and Catering Establishment","BCAS directly"],ans:2,exp:"5 entities must report: Aircraft Operator + Aviation Security Group + Aerodrome Operator + Regulated Agent + Catering Establishment Owner/Operator. All must report immediately to the Commissioner of Security."},
+  {q:"The minimum rank of an Inquiry Officer appointed to investigate a security incident is:",opts:["Security Inspector","Security Officer","Assistant Commissioner of Security","Commissioner of Security"],ans:2,exp:"The Inquiry Officer rank must be at least Assistant Commissioner of Security. This is a specific DGCA question — not just 'any security officer'."},
+  {q:"For AAI airports, who is responsible for airport security?",opts:["BCAS directly","Director General, BCAS","Airport Director","Commissioner of Security"],ans:2,exp:"For AAI (Airports Authority of India) airports, the Airport Director is responsible for airport security. For private/JV airports (DIAL, MIAL etc.), the airport operators maintain their own security systems."},
+  {q:"Which of the following is NOT one of the 4 parties that must be notified after unlawful interference?",opts:["State of Registry","ICAO","State of Design of aircraft","States whose citizens were injured"],ans:2,exp:"The 4 notifications are: State of Registry + State of Operator + Affected States (citizens died/injured/hostage) + ICAO. State of Design is NOT in this notification list."},
+  {q:"Annex 17 aims to protect which persons?",opts:["Only passengers and crew","Passengers, crew, ground personnel, and general public","Only persons on the aircraft","Passengers and airport staff only"],ans:1,exp:"Annex 17 aims to protect: Passengers + Crew + Ground personnel + General public. All four categories are included in the protection objective."},
+  {q:"What must Contracting States establish under Annex 17?",opts:["A dedicated security airline","Organisation, regulations, procedures, and practices to safeguard civil aviation","A national police force for airports only","An ICAO-approved security committee"],ans:1,exp:"Every Contracting State must establish: Organisation + Regulations + Procedures + Practices — all aimed at safeguarding civil aviation against acts of unlawful interference."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=90){msg='🏆 Excellent!';sub='Chapter 22 fully mastered!';}
+  else if(pct>=75){msg='🔒 Strong!';sub='Great. Review the notification chain and re-screening rule.';}
+  else if(pct>=60){msg='📚 Good!';sub='Focus on BCAS hierarchy and the 4 notification parties.';}
+  else{msg='🔄 Keep Revising!';sub='Use the Quick Fire and Master Ref sections for a fast review.';}
+  document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

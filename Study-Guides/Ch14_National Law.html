@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 14 – National Law | Aviation Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #0a0f1e;
+    --cockpit: #0d1525;
+    --panel: #111d35;
+    --hud: #00d4ff;
+    --amber: #ffb347;
+    --red: #ff4757;
+    --green: #2ed573;
+    --white: #e8f4fd;
+    --muted: #5a7a99;
+    --card: #0f1c30;
+    --border: rgba(0,212,255,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--sky);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HUD-style grid background */
+  body::before {
+    content: '';
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    padding: 60px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(0,212,255,0.06) 0%, transparent 100%);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--hud);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid var(--hud);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  h1 span { color: var(--hud); }
+
+  .hero-sub {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* NAV TABS */
+  .nav-wrap {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,30,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    overflow-x: auto;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 10px 0;
+    white-space: nowrap;
+    width: max-content;
+    margin: 0 auto;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--hud); border-color: var(--border); }
+  .tab-btn.active {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--hud);
+    color: var(--hud);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 32px 16px 60px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--hud);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(0,212,255,0.35); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+  /* MEMORY NUMBERS - BIG HIGHLIGHTS */
+  .num-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .num-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .num-card::before {
+    content: '';
+    position: absolute; inset:0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .num-card:hover::before { opacity: 1; }
+  .num-card:hover { border-color: var(--hud); transform: translateY(-2px); }
+
+  .num-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--hud);
+    line-height: 1;
+  }
+
+  .num-unit {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    margin: 4px 0;
+    letter-spacing: 1px;
+  }
+
+  .num-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+
+  .num-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cockpit);
+    border: 1px solid var(--hud);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--white);
+    white-space: nowrap;
+    z-index: 200;
+    pointer-events: none;
+  }
+  .num-card:hover .num-tooltip { display: block; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    margin: 2px;
+  }
+  .tag-green { background: rgba(46,213,115,0.15); color: var(--green); border: 1px solid rgba(46,213,115,0.3); }
+  .tag-red { background: rgba(255,71,87,0.15); color: var(--red); border: 1px solid rgba(255,71,87,0.3); }
+  .tag-amber { background: rgba(255,179,71,0.15); color: var(--amber); border: 1px solid rgba(255,179,71,0.3); }
+  .tag-hud { background: rgba(0,212,255,0.1); color: var(--hud); border: 1px solid rgba(0,212,255,0.3); }
+
+  ul.checklist { list-style: none; }
+  ul.checklist li {
+    padding: 6px 0;
+    font-size: 14px;
+    color: #b8d4e8;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  ul.checklist li::before { content: '▸'; color: var(--hud); flex-shrink: 0; margin-top: 1px; }
+  ul.checklist li:last-child { border-bottom: none; }
+
+  /* FLOWCHART */
+  .flowchart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 0;
+  }
+
+  .flow-node {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 13px;
+    text-align: center;
+    min-width: 220px;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .flow-node.start { border-color: var(--green); color: var(--green); }
+  .flow-node.end { border-color: var(--red); color: var(--red); }
+  .flow-node.decision {
+    background: rgba(255,179,71,0.08);
+    border-color: var(--amber);
+    color: var(--amber);
+    clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 50%);
+    padding: 10px 40px;
+  }
+  .flow-node.action { border-color: var(--hud); color: var(--hud); }
+
+  .flow-arrow {
+    width: 2px; height: 24px;
+    background: var(--muted);
+    position: relative;
+  }
+  .flow-arrow::after {
+    content: '▼';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .flow-row {
+    display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* ACCORDION */
+  .acc-item { margin-bottom: 8px; }
+  .acc-head {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: border-color 0.2s;
+  }
+  .acc-head:hover { border-color: var(--hud); }
+  .acc-head.open { border-color: var(--hud); color: var(--hud); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+  .acc-arrow { transition: transform 0.3s; font-size: 12px; color: var(--muted); }
+  .acc-head.open .acc-arrow { transform: rotate(180deg); }
+
+  .acc-body {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--hud);
+    border-top: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #b8d4e8;
+    line-height: 1.6;
+  }
+  .acc-body.open { display: block; }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .data-table th {
+    background: rgba(0,212,255,0.08);
+    color: var(--hud);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 9px 14px;
+    color: #b8d4e8;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .data-table tr:hover td { background: rgba(0,212,255,0.04); }
+  .data-table .rule-num {
+    font-family: 'Space Mono', monospace;
+    color: var(--amber);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* PENALTY BOX */
+  .penalty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+
+  .penalty-card {
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid;
+  }
+  .p-danger { background: rgba(255,71,87,0.06); border-color: rgba(255,71,87,0.3); }
+  .p-warn { background: rgba(255,179,71,0.06); border-color: rgba(255,179,71,0.3); }
+  .p-info { background: rgba(0,212,255,0.06); border-color: rgba(0,212,255,0.2); }
+
+  .penalty-card .p-head {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .p-danger .p-head { color: var(--red); }
+  .p-warn .p-head { color: var(--amber); }
+  .p-info .p-head { color: var(--hud); }
+
+  /* MIND MAP */
+  .mindmap-wrap { overflow-x: auto; padding: 10px 0; }
+
+  .mindmap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 700px;
+    padding: 20px;
+  }
+
+  .mm-center {
+    background: rgba(0,212,255,0.15);
+    border: 2px solid var(--hud);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--hud);
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+
+  .mm-branches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+  }
+
+  .mm-branch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mm-line {
+    width: 40px;
+    height: 2px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .mm-node {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+    color: #b8d4e8;
+    white-space: nowrap;
+  }
+
+  .mm-node.amber { border-color: rgba(255,179,71,0.4); color: var(--amber); }
+  .mm-node.green { border-color: rgba(46,213,115,0.4); color: var(--green); }
+  .mm-node.red { border-color: rgba(255,71,87,0.4); color: var(--red); }
+
+  /* QUIZ */
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .quiz-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .quiz-q span { color: var(--hud); }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .quiz-opt {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #b8d4e8;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--hud); color: var(--hud); }
+  .quiz-opt.correct { background: rgba(46,213,115,0.12); border-color: var(--green); color: var(--green); }
+  .quiz-opt.wrong { background: rgba(255,71,87,0.12); border-color: var(--red); color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+
+  .quiz-feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.right { background: rgba(46,213,115,0.1); border: 1px solid rgba(46,213,115,0.3); color: var(--green); }
+  .quiz-feedback.wrong { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #ff8b96; }
+
+  .quiz-score {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .quiz-score span { color: var(--hud); font-weight: 700; font-size: 18px; }
+
+  /* FUELLING VISUAL */
+  .fuel-visual {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .fuel-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    padding: 20px 0;
+  }
+
+  .fuel-zone {
+    text-align: center;
+    position: relative;
+  }
+
+  .fuel-circle {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .zone-43 { width: 220px; height: 220px; border: 2px dashed rgba(255,71,87,0.4); background: rgba(255,71,87,0.04); }
+  .zone-30 { width: 160px; height: 160px; border: 2px dashed rgba(255,179,71,0.4); background: rgba(255,179,71,0.06); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .zone-15 { width: 100px; height: 100px; border: 2px solid rgba(0,212,255,0.5); background: rgba(0,212,255,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); border-radius: 50%; }
+
+  .zone-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; text-align: center; }
+  .zone-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
+
+  .zone-legend { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* MNEMONIC BOX */
+  .mnemonic {
+    background: linear-gradient(135deg, rgba(255,179,71,0.08), rgba(0,212,255,0.05));
+    border: 1px solid rgba(255,179,71,0.3);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+
+  .mnemonic-head {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .mnemonic-body {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  .mnemonic-body strong { color: var(--hud); }
+
+  /* PROGRESS BAR */
+  .progress-track {
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    height: 4px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--hud), var(--amber));
+    border-radius: 4px;
+    transition: width 0.5s;
+  }
+
+  /* SECTION SUBHEADING */
+  h3.sh {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--amber);
+    margin: 24px 0 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3.sh::before { content: '//'; font-family: 'Space Mono', monospace; color: var(--muted); font-size: 12px; }
+
+  /* APPLICABILITY DIAGRAM */
+  .apply-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .apply-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .apply-icon { font-size: 28px; margin-bottom: 8px; }
+  .apply-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--hud); margin-bottom: 4px; }
+  .apply-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    text-align: center;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 8px;
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .quiz-options { grid-template-columns: 1fr; }
+    .scroll-hint { display: block; }
+    .zone-43 { width: 180px; height: 180px; }
+    .zone-30 { width: 130px; height: 130px; }
+    .zone-15 { width: 82px; height: 82px; }
+  }
+
+  .highlight-box {
+    background: rgba(0,212,255,0.06);
+    border-left: 3px solid var(--hud);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #b8d4e8;
+    line-height: 1.6;
+  }
+
+  .rule-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,179,71,0.12);
+    border: 1px solid rgba(255,179,71,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    margin: 2px;
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">DGCA EXAM PREP · CHAPTER 14</div>
+  <h1>National Law <span>Study Guide</span></h1>
+  <div class="hero-sub">Aircraft Act 1934 · Aircraft Rules 1937 · Indian Aircraft Rules 1920 · Public Health Rules 1954</div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('overview')">🗺 Overview</button>
+    <button class="tab-btn" onclick="showTab('numbers')">🔢 Key Numbers</button>
+    <button class="tab-btn" onclick="showTab('act1934')">📋 Act 1934</button>
+    <button class="tab-btn" onclick="showTab('rules1937')">📜 Rules 1937</button>
+    <button class="tab-btn" onclick="showTab('other')">📦 Other Rules</button>
+    <button class="tab-btn" onclick="showTab('ruleref')">📑 Rule Reference</button>
+    <button class="tab-btn" onclick="showTab('quiz')">🎯 Quick Quiz</button>
+  </div>
+</div>
+
+<!-- ======================== OVERVIEW ======================== -->
+<div id="overview" class="section active">
+  <div class="section-title">Chapter Overview</div>
+
+  <h3 class="sh">Applicability — Aircraft Act 1934</h3>
+  <div class="apply-grid">
+    <div class="apply-card">
+      <div class="apply-icon">🇮🇳</div>
+      <div class="apply-title">Indian Citizens</div>
+      <div class="apply-desc">Wherever they may be — even outside India</div>
+    </div>
+    <div class="apply-card">
+      <div class="apply-icon">✈️</div>
+      <div class="apply-title">Indian-Registered Aircraft</div>
+      <div class="apply-desc">Wherever they may be in the world</div>
+    </div>
+    <div class="apply-card">
+      <div class="apply-icon">🌐</div>
+      <div class="apply-title">Foreign Aircraft in India</div>
+      <div class="apply-desc">While in or over Indian territory</div>
+    </div>
+    <div class="apply-card">
+      <div class="apply-icon">🏢</div>
+      <div class="apply-title">Non-Citizens with India Base</div>
+      <div class="apply-desc">Having principal business or permanent residence in India</div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-head">💡 Memory Trick — "CIRI"</div>
+    <div class="mnemonic-body">
+      <strong>C</strong>itizens of India (anywhere) ·
+      <strong>I</strong>ndian-registered aircraft (anywhere) ·
+      <strong>R</strong>egistered elsewhere but in India ·
+      <strong>I</strong>ndia-based non-citizens<br>
+      Think: <strong>"CIRI covers everything"</strong>
+    </div>
+  </div>
+
+  <h3 class="sh">The Legislative Hierarchy</h3>
+  <div class="flowchart">
+    <div class="flow-node action">Aircraft Act, 1934 (Parent Act)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">Aircraft Rules, 1937 (Detailed Rules)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-row">
+      <div class="flow-node" style="min-width:140px;font-size:12px;text-align:center;">Indian Aircraft Rules, 1920<br><small style="color:var(--muted)">Customs</small></div>
+      <div class="flow-node" style="min-width:140px;font-size:12px;text-align:center;">Public Health Rules, 1954<br><small style="color:var(--muted)">Health/Quarantine</small></div>
+      <div class="flow-node" style="min-width:140px;font-size:12px;text-align:center;">UAS Rules, 2021<br><small style="color:var(--muted)">Drones</small></div>
+      <div class="flow-node" style="min-width:140px;font-size:12px;text-align:center;">Security Rules, 2011<br><small style="color:var(--muted)">Safety</small></div>
+    </div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">DGCA CARs / AICs / NOTAMs (Directions)</div>
+  </div>
+
+  <h3 class="sh">Registration Categories</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🅐 Category A — Indian Registration</div>
+      <ul class="checklist">
+        <li>Indian Citizens</li>
+        <li>Indian Companies</li>
+        <li>Government of India</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">🅑 Category B — Foreign-Linked in India</div>
+      <ul class="checklist">
+        <li>Foreign residents in India</li>
+        <li>Foreign businesses operating in India</li>
+        <li>Cannot perform aerial work / public transport unless permitted (Rule 14)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sh">Power to Exempt + Official Gazette</h3>
+  <div class="highlight-box">
+    Under <strong>Section 3</strong>, the Central Government may <strong>exempt any aircraft/person/class</strong> from provisions of the Act, or modify applicability. Any such exemption MUST be published in the <strong>Official Gazette</strong> — the government's official publication for laws, rules, notifications, exemptions and appointments.
+  </div>
+
+  <h3 class="sh">Where to Land / Depart (Customs)</h3>
+  <div class="flowchart">
+    <div class="flow-node start">Aircraft entering India</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node decision" style="font-size:12px">Must first land at...</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">✅ Customs Aerodrome (Indian Aircraft Rules 1920)</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">Customs Officers may board, inspect, examine goods</div>
+  </div>
+  <div class="highlight-box">Same rule applies for <strong>departure</strong> — aircraft must depart from a <strong>Customs Aerodrome</strong>.</div>
+</div>
+
+<!-- ======================== NUMBERS ======================== -->
+<div id="numbers" class="section">
+  <div class="section-title">🔢 Critical Numbers to Memorise</div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-head">⚡ Quick Reference — All Exam Numbers</div>
+    <div class="mnemonic-body">
+      Hover / tap each card for the rule reference
+    </div>
+  </div>
+
+  <div class="num-grid">
+    <div class="num-card">
+      <div class="num-big">10</div>
+      <div class="num-unit">KM</div>
+      <div class="num-label">Slaughter prohibition radius from Aerodrome Reference Point</div>
+      <div class="num-tooltip">Aircraft Act 1934 — Section 10</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">2</div>
+      <div class="num-unit">HRS BEFORE</div>
+      <div class="num-label">Health report must be submitted before arrival</div>
+      <div class="num-tooltip">Public Health Rules 1954</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">16</div>
+      <div class="num-unit">YEARS</div>
+      <div class="num-label">Minimum age for sole control of aircraft</div>
+      <div class="num-tooltip">Rule 28, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">12</div>
+      <div class="num-unit">HOURS</div>
+      <div class="num-label">Bottle-to-throttle — no alcohol before flight</div>
+      <div class="num-tooltip">Rule 24, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">15</div>
+      <div class="num-unit">METRES</div>
+      <div class="num-label">Min distance from building during fuelling</div>
+      <div class="num-tooltip">Rule 25A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">30</div>
+      <div class="num-unit">METRES</div>
+      <div class="num-label">No smoking / open flame zone during fuelling</div>
+      <div class="num-tooltip">Rule 25A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">43</div>
+      <div class="num-unit">METRES</div>
+      <div class="num-label">Turbojet exhaust — fuelling must stop</div>
+      <div class="num-tooltip">Rule 25A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">5</div>
+      <div class="num-unit">YEARS</div>
+      <div class="num-label">Minimum logbook retention period</div>
+      <div class="num-tooltip">Rule 67A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">600</div>
+      <div class="num-unit">NM</div>
+      <div class="num-label">Flight Navigator required above this range (without nav aids)</div>
+      <div class="num-tooltip">Rule 38A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">65</div>
+      <div class="num-unit">YEARS</div>
+      <div class="num-label">Maximum age for commercial air transport pilot</div>
+      <div class="num-tooltip">Rule 28A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">60–65</div>
+      <div class="num-unit">YEARS</div>
+      <div class="num-label">Allowed in multi-crew only if other pilot is under 60</div>
+      <div class="num-tooltip">Rule 28A, Aircraft Rules 1937</div>
+    </div>
+    <div class="num-card">
+      <div class="num-big">250</div>
+      <div class="num-unit">GRAMS</div>
+      <div class="num-label">Drone above this weight needs Unique ID Number</div>
+      <div class="num-tooltip">Rule 15A, Aircraft Rules 1937</div>
+    </div>
+  </div>
+
+  <h3 class="sh">Fuelling Safety Zones (Visual)</h3>
+  <div class="fuel-visual">
+    <div style="text-align:center;">
+      <div style="position:relative; display:inline-block;">
+        <div class="fuel-circle zone-43" style="border-radius:50%;">
+          <div class="fuel-circle zone-30" style="border-radius:50%;">
+            <div class="fuel-circle zone-15">
+              <div class="zone-num" style="color:var(--hud);">15m</div>
+              <div style="font-size:9px;color:var(--muted);">Bldg</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute; top:8px; right:-5px; font-family:'Space Mono',monospace; font-size:10px; color:var(--red);">43m</div>
+        <div style="position:absolute; top:50%; left:-30px; transform:translateY(-50%); font-family:'Space Mono',monospace; font-size:10px; color:var(--amber);">30m</div>
+      </div>
+    </div>
+    <div class="zone-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--hud);"></div>15m — Min distance from building</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--amber);"></div>30m — No smoking / open flame</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--red);"></div>43m — Turbojet stop fuelling zone</div>
+    </div>
+  </div>
+
+  <h3 class="sh">Penalty Numbers</h3>
+  <div class="penalty-grid">
+    <div class="penalty-card p-danger">
+      <div class="p-head">Slaughter / Filth near Aerodrome</div>
+      <ul class="checklist">
+        <li>Up to <strong>3 years</strong> imprisonment</li>
+        <li>Or ₹<strong>1 crore</strong> fine</li>
+        <li>Or both</li>
+      </ul>
+    </div>
+    <div class="penalty-card p-warn">
+      <div class="p-head">Dangerous Goods / Sec 11A / Sec 11B</div>
+      <ul class="checklist">
+        <li>Up to <strong>2 years</strong> imprisonment</li>
+        <li>Or ₹<strong>1 crore</strong> fine</li>
+        <li>Or both</li>
+      </ul>
+    </div>
+    <div class="penalty-card p-info">
+      <div class="p-head">Licence Consequences</div>
+      <ul class="checklist">
+        <li>Suspension or Cancellation</li>
+        <li>Under <strong>Section 10B</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sh">Incubation Periods (Public Health)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">6-Day Diseases</div>
+      <ul class="checklist">
+        <li>Yellow Fever — <span class="tag tag-amber">6 days</span></li>
+        <li>Plague — <span class="tag tag-amber">6 days</span></li>
+        <li>Cholera — <span class="tag tag-amber">5 days</span></li>
+      </ul>
+      <div class="mnemonic" style="margin-top:10px;">
+        <div class="mnemonic-head">💡 Trick</div>
+        <div class="mnemonic-body"><strong>YPC</strong> — "Yellow Plague Cholera" = 6, 6, 5</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">14-Day Diseases</div>
+      <ul class="checklist">
+        <li>Smallpox — <span class="tag tag-red">14 days</span></li>
+        <li>Typhus — <span class="tag tag-red">14 days</span></li>
+        <li>Relapsing Fever — <span class="tag tag-amber">8 days</span></li>
+      </ul>
+      <div class="mnemonic" style="margin-top:10px;">
+        <div class="mnemonic-head">💡 Trick</div>
+        <div class="mnemonic-body"><strong>STR</strong> — "Smallpox Typhus Relapsing" = 14, 14, 8</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">Crew Requirements by Seat Count</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Seat Count</th><th>Cabin Crew Required</th><th>Rule</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>10–50 passenger seats</td><td><span class="tag tag-green">1 Cabin Crew</span></td><td class="rule-num">Rule 38B</td></tr>
+      <tr><td>More than 50 seats</td><td><span class="tag tag-green">2 Cabin Crew + additional per seating</span></td><td class="rule-num">Rule 38B</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">Licence Renewal Rules</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Licence Expired</th><th>Requirement</th><th>Rule</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2–3 years ago</td><td><span class="tag tag-amber">Skill test + Air Regulations exam</span></td><td class="rule-num">Rule 42</td></tr>
+      <tr><td>More than 3 years ago</td><td><span class="tag tag-red">Complete examinations again from scratch</span></td><td class="rule-num">Rule 42</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======================== ACT 1934 ======================== -->
+<div id="act1934" class="section">
+  <div class="section-title">Aircraft Act, 1934 — Sections</div>
+
+  <div class="mindmap-wrap">
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px;">Aircraft Act 1934 — Key Sections Mind Map</div>
+    <div class="mindmap">
+      <div class="mm-center">Aircraft<br>Act 1934</div>
+      <div class="mm-branches">
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node amber">Sec 3 — Power to Exempt (via Gazette)</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node">Sec 5 — Rule-making powers</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node">Sec 8 — Power to Detain Aircraft</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node">Sec 9 — Wreck & Salvage</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node red">Sec 10 — Penalties (3yr/₹1Cr)</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node red">Sec 10B — Suspend/Cancel Licence</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node red">Sec 11A — Fail Sec5A direction</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node red">Sec 11B — Fail Sec9A direction</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node green">Sec 17 — No civil suit for trespass/nuisance</div></div>
+        <div class="mm-branch"><div class="mm-line"></div><div class="mm-node green">Sec 18 — Good Faith Protection</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">Power to Detain Aircraft (Sec 8)</h3>
+  <div class="card">
+    <div class="card-title">Authorized authority may detain if ANY of these apply:</div>
+    <ul class="checklist">
+      <li>(a) Flight may endanger persons/property</li>
+      <li>(b) Necessary to ensure compliance with Act</li>
+      <li>(c) Necessary to prevent violation</li>
+    </ul>
+  </div>
+
+  <h3 class="sh">Slaughter / Filth Near Aerodrome</h3>
+  <div class="card">
+    <div class="card-title">🚫 Prohibited Within 10 km of Aerodrome Reference Point</div>
+    <ul class="checklist">
+      <li>Slaughtering or flaying animals</li>
+      <li>Depositing rubbish, filth, or obnoxious matter</li>
+    </ul>
+    <div class="penalty-grid" style="margin-top:12px;">
+      <div class="penalty-card p-danger">
+        <div class="p-head">Penalty</div>
+        <div style="font-size:13px;color:#ff8b96;">Up to <strong>3 years</strong> imprisonment<br>OR ₹<strong>1 crore</strong> fine — OR BOTH</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">Wreck & Salvage (Sec 9)</h3>
+  <div class="highlight-box">
+    Aircraft wreck/salvage provisions are similar to the <strong>Merchant Shipping Act</strong>. The owner is entitled to a <strong>reasonable salvage reward</strong>.
+  </div>
+
+  <h3 class="sh">Good Faith & Bar of Suits (Sec 17 & 18)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Sec 17 — Bar of Suits</div>
+      <div style="font-size:13px;color:#b8d4e8;">No civil suit for <strong>trespass or nuisance</strong> due to aircraft flying at <strong>reasonable height</strong>.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sec 18 — Good Faith Protection</div>
+      <div style="font-size:13px;color:#b8d4e8;">No legal action against persons <strong>acting in good faith</strong> under the Act.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== RULES 1937 ======================== -->
+<div id="rules1937" class="section">
+  <div class="section-title">Aircraft Rules, 1937 — Topic Groups</div>
+
+  <div style="margin-bottom:20px;">
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:10px;">CLICK TO EXPAND EACH TOPIC GROUP</div>
+
+    <!-- Group 1 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🛫 Registration & Nationality (Rules 2, 5, 30, 33)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 2</span> Aircraft possesses nationality of the State in whose register it is entered</li>
+          <li><span class="rule-pill">Rule 5</span> Aircraft shall not fly unless: (a) Registered (b) Displays nationality & registration marks</li>
+          <li><span class="rule-pill">Rule 5A</span> No Indian aircraft shall leave India without permission · No aircraft shall fly to territory declared prohibited</li>
+          <li><span class="rule-pill">Rule 30</span> Category A (Indian) = Indian citizens, companies, Govt · Category B (Foreign-linked) = foreign residents/businesses in India</li>
+          <li><span class="rule-pill">Rule 33</span> Change of ownership must be notified to DGCA</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 2 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>👨‍✈️ Licensing & Personnel (Rules 6, 6A–6C, 38, 38A, 39A, 39B)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 6</span> Aircraft shall carry prescribed LICENSED personnel</li>
+          <li><span class="rule-pill">Rule 6A</span> Pilot shall not fly aircraft type NOT included in licence rating</li>
+          <li><span class="rule-pill">Rule 6B</span> Pilot MAY fly unendorsed type for licence extension/training</li>
+          <li><span class="rule-pill">Rule 6C</span> DGCA may authorise test flights on aircraft not in rating</li>
+          <li><span class="rule-pill">Rule 38</span> Licensing Authority = Central Government</li>
+          <li><span class="rule-pill">Rule 38A</span> Private aircraft → PPL or higher · Public Transport → CPL/ATPL · Navigator needed if flight >600 NM without nav aids · Flight Radio Telephone Operator needed when radio carried</li>
+          <li><span class="rule-pill">Rule 39A</span> Disqualification reasons: alcohol/drug addiction, criminal conduct, fraudulent/tampered licence</li>
+          <li><span class="rule-pill">Rule 39B</span> Medical standards are mandatory</li>
+          <li><span class="rule-pill">Rule 40</span> Licence holder shall sign their licence</li>
+          <li><span class="rule-pill">Rule 41</span> Proof of competency required · <span class="rule-pill">Rule 41A</span> DGCA may conduct tests & examinations</li>
+          <li><span class="rule-pill">Rule 42</span> Expired 2–3 yrs → Skill test + Air Regs · Expired >3 yrs → Complete exams again</li>
+          <li><span class="rule-pill">Rule 44</span> Foreign aircraft personnel licensed under state of registry</li>
+          <li><span class="rule-pill">Rule 45</span> Foreign licences may be validated</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 3 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>📄 Documents & Checklists (Rules 7, 7A, 7B)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 7</span> Aircraft shall carry valid documents</li>
+          <li><span class="rule-pill">Rule 7A</span> No aircraft entering India shall carry persons WITHOUT valid passports</li>
+          <li><span class="rule-pill">Rule 7B</span> Must carry: <strong>Cockpit Checklist</strong> + <strong>Emergency Checklist</strong> — must be readily accessible to pilot</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 4 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🔫 Arms, Security & Prohibited Areas (Rules 8, 8A, 12)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 8</span> Cannot carry Arms, Ammunition, Explosives, Military stores — without WRITTEN PERMISSION</li>
+          <li><span class="rule-pill">Rule 8A</span> Passengers and baggage may be searched before boarding</li>
+          <li><span class="rule-pill">Rule 12</span> Aircraft shall NOT fly over prohibited areas · If inadvertently enters: give distress signal → land at nearest aerodrome → do not descend/fly further</li>
+        </ul>
+        <div class="highlight-box" style="margin-top:10px;">
+          <strong>Examples of Prohibited Areas:</strong> Rashtrapati Bhavan · Kalpakkam Nuclear Area · Mathura Refineries
+        </div>
+      </div>
+    </div>
+
+    <!-- Group 5 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>✈️ Airworthiness & Conditions for Flight (Rules 15, 15A, 50, 52)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 15</span> Aircraft shall have: Valid C of A · Proper maintenance · Compliance with C of A conditions · Required documents onboard</li>
+          <li><span class="rule-pill">Rule 15A</span> Drone >250g requires: Unique Identification Number (UIN)</li>
+          <li><span class="rule-pill">Rule 50</span> Certificate of Airworthiness issued/renewed by DGCA</li>
+          <li><span class="rule-pill">Rule 52</span> Safety modifications / repairs require approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 6 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🍺 Conduct, Alcohol & Safety Rules (Rules 21–24B)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 21</span> No dangerous flying — no operation causing danger to persons/property</li>
+          <li><span class="rule-pill">Rule 22</span> No assault, intimidation or threat to crew</li>
+          <li><span class="rule-pill">Rule 23</span> No acts endangering safety or discipline onboard</li>
+          <li><span class="rule-pill">Rule 24</span> <strong>12-Hour Bottle-to-Throttle</strong> — No alcohol within 12 hrs before flight · No flying while impaired</li>
+          <li><span class="rule-pill">Rule 24A</span> Mentally disordered persons require medical certification + conditions</li>
+          <li><span class="rule-pill">Rule 24B</span> Prisoners may be carried ONLY with written permission</li>
+          <li><span class="rule-pill">Rule 24C</span> Animals/birds/reptiles require permission</li>
+        </ul>
+        <div class="mnemonic" style="margin-top:10px;">
+          <div class="mnemonic-head">💡 Remember</div>
+          <div class="mnemonic-body"><strong>12-Hour Bottle-to-Throttle</strong> — Rule 24 — most examined rule on alcohol</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group 7 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>⛽ Fuelling, Smoking & Housing (Rules 25, 25A, 25B)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 25</span> Aircraft shall display smoking notices</li>
+          <li><span class="rule-pill">Rule 25A</span> Fuelling: Min <strong>15m</strong> from building · No smoking/open flame within <strong>30m</strong> · Turbojet: stop fuelling if jet exhaust within <strong>43m</strong></li>
+          <li><span class="rule-pill">Rule 25B</span> Hangars housing aircraft with petroleum must be fire safe and well ventilated</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 8 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🧑‍✈️ Age Limits (Rules 28, 28A)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <table class="data-table" style="margin-top:8px;">
+          <thead><tr><th>Rule</th><th>Age Limit</th><th>Context</th></tr></thead>
+          <tbody>
+            <tr><td class="rule-num">Rule 28</td><td><span class="tag tag-green">Min 16 years</span></td><td>Sole control of aircraft</td></tr>
+            <tr><td class="rule-num">Rule 28A</td><td><span class="tag tag-red">Max 65 years</span></td><td>Commercial Air Transport — not allowed above 65</td></tr>
+            <tr><td class="rule-num">Rule 28A</td><td><span class="tag tag-amber">60–65 years</span></td><td>Allowed in multi-crew only IF other pilot is below 60</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Group 9 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🌐 Modern Rules — SMS, PEDs, Sonic Boom (Rules 29A–29D)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 29</span> No interference with crew</li>
+          <li><span class="rule-pill">Rule 29A</span> Civil aircraft shall NOT create <strong>sonic boom</strong> over India</li>
+          <li><span class="rule-pill">Rule 29B</span> Portable Electronic Devices — internet via Wi-Fi allowed when approved</li>
+          <li><span class="rule-pill">Rule 29C</span> DGCA adopts ICAO Convention and Annexes</li>
+          <li><span class="rule-pill">Rule 29D</span> Organizations must establish <strong>Safety Management System (SMS)</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 10 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>📁 Operations, Manuals & DGCA Directions (Rules 133A, 134, 140, 140B, 140C)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 133A</span> DGCA may issue: CARs · AICs · AIPs · NOTAM-related directions</li>
+          <li><span class="rule-pill">Rule 134</span> Scheduled Air Transport requires Government permission</li>
+          <li><span class="rule-pill">Rule 140</span> Operators must comply with engineering and safety requirements</li>
+          <li><span class="rule-pill">Rule 140B</span> <strong>Operations Manual</strong> must include: Responsibilities · Crew requirements · Normal procedures · Emergency procedures · Minimum safe altitudes</li>
+          <li><span class="rule-pill">Rule 140C</span> <strong>Route Guide</strong> must contain: Navigation aids · Alternate aerodromes · Weather minima · Fuel requirements</li>
+          <li><span class="rule-pill">Rule 161</span> Penalties for contraventions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 11 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>📝 Logbooks (Rule 67A, 67B)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 67A</span> Maintain personal logbook · Entries in <strong>ink</strong> · Preserve minimum <strong>5 years</strong></li>
+          <li><span class="rule-pill">Rule 67B</span> False entries in logbooks — prohibited</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Group 12 -->
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <span>🚫 Dropping, Parachute, Sonic Boom, Prohibited Flights</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <ul class="checklist">
+          <li><span class="rule-pill">Rule 26</span> No dropping articles from aircraft — <strong>Exceptions:</strong> Emergency fuel jettison · Emergency cargo drop · Flower petals (with permission)</li>
+          <li><span class="rule-pill">Rule 27</span> No carriage of persons in unauthorized parts of aircraft</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">Prohibited Area — What To Do (Flowchart)</h3>
+  <div class="flowchart">
+    <div class="flow-node start">Aircraft inadvertently enters Prohibited Area</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">Step 1: Give distress signal</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node action">Step 2: Land at nearest aerodrome</div>
+    <div class="flow-arrow"></div>
+    <div class="flow-node end">Do NOT descend further · Do NOT fly further into area</div>
+  </div>
+</div>
+
+<!-- ======================== OTHER RULES ======================== -->
+<div id="other" class="section">
+  <div class="section-title">Other Rules & Regulations</div>
+
+  <h3 class="sh">Indian Aircraft Rules, 1920 — Customs</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📥 Arrival — Rule 54</div>
+      <ul class="checklist">
+        <li>Aircraft entering India MUST first land at a <strong>Customs Aerodrome</strong></li>
+        <li>Declared by the Central Government</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">📤 Departure — Rule 54</div>
+      <ul class="checklist">
+        <li>Aircraft leaving India MUST depart from a <strong>Customs Aerodrome</strong></li>
+        <li>Customs Officers may board, inspect, examine goods (Rule 62)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sh">Public Health Rules, 1954</h3>
+  <div class="card">
+    <div class="card-title">🦠 Infected Aircraft</div>
+    <div class="highlight-box">Aircraft carrying an infected person or animal must submit a <strong>Health Report 2 hours before arrival</strong></div>
+    <div style="margin-top:12px;">
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--hud);margin-bottom:8px;">INCUBATION PERIODS</div>
+      <table class="data-table">
+        <thead><tr><th>Disease</th><th>Incubation Period</th><th>Memory Group</th></tr></thead>
+        <tbody>
+          <tr><td>Yellow Fever</td><td><span class="tag tag-amber">6 days</span></td><td rowspan="2" style="vertical-align:middle;color:var(--amber);font-size:12px;font-family:'Space Mono',monospace;">YP = 6 days</td></tr>
+          <tr><td>Plague</td><td><span class="tag tag-amber">6 days</span></td></tr>
+          <tr><td>Cholera</td><td><span class="tag tag-amber">5 days</span></td><td style="color:var(--muted);font-size:12px;">Slightly shorter</td></tr>
+          <tr><td>Smallpox</td><td><span class="tag tag-red">14 days</span></td><td rowspan="2" style="vertical-align:middle;color:var(--red);font-size:12px;font-family:'Space Mono',monospace;">ST = 14 days</td></tr>
+          <tr><td>Typhus</td><td><span class="tag tag-red">14 days</span></td></tr>
+          <tr><td>Relapsing Fever</td><td><span class="tag tag-amber">8 days</span></td><td style="color:var(--muted);font-size:12px;">In between</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏥 APHO (Airport Port Health Officer)</div>
+    <div style="font-size:13px;color:#b8d4e8;margin-bottom:8px;">IHR 2005 implemented through APHO. Functions include:</div>
+    <ul class="checklist">
+      <li>Quarantine</li>
+      <li>Disinfection</li>
+      <li>Vaccination</li>
+      <li>Food inspection</li>
+      <li>Health emergencies</li>
+    </ul>
+  </div>
+
+  <h3 class="sh">Other Important Rules (Overview)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🏗️ Demolition of Obstructions Rules 1994</div>
+      <div style="font-size:13px;color:#b8d4e8;">Removal of obstacles near aerodromes</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚠️ Dangerous Goods Rules 2003</div>
+      <div style="font-size:13px;color:#b8d4e8;">Transport of dangerous goods by air</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🛡️ Aircraft Security Rules 2011</div>
+      <div style="font-size:13px;color:#b8d4e8;">Airport and aircraft security</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔍 Accident Investigation Rules 2017</div>
+      <div style="font-size:13px;color:#b8d4e8;">Accident and incident investigation</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🚁 UAS Rules 2021</div>
+      <ul class="checklist" style="font-size:13px;">
+        <li>Registered drones</li>
+        <li>Operators</li>
+        <li>Importers</li>
+        <li>Manufacturers</li>
+        <li>Persons operating drones in India</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== RULE REFERENCE ======================== -->
+<div id="ruleref" class="section">
+  <div class="section-title">Complete Rule Reference Tables</div>
+
+  <h3 class="sh">Aircraft Rules 1937 — All Rules</h3>
+  <table class="data-table">
+    <thead><tr><th>Rule</th><th>Topic</th><th>Priority</th></tr></thead>
+    <tbody id="rules1937-table"></tbody>
+  </table>
+
+  <h3 class="sh">Aircraft Act 1934 — All Sections</h3>
+  <table class="data-table">
+    <thead><tr><th>Section</th><th>Topic</th></tr></thead>
+    <tbody id="act1934-table"></tbody>
+  </table>
+
+  <h3 class="sh">DGCA's Favourite Rules — Must Memorise</h3>
+  <div class="num-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px,1fr));">
+    <div class="num-card"><div class="num-big" style="font-size:22px;">5A</div><div class="num-unit">RULE</div><div class="num-label">Prohibited Flights</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">6</div><div class="num-unit">RULE</div><div class="num-label">Licensing Personnel</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">7</div><div class="num-unit">RULE</div><div class="num-label">Documents</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">8</div><div class="num-unit">RULE</div><div class="num-label">Dangerous Goods</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">12</div><div class="num-unit">RULE</div><div class="num-label">Prohibited Areas</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">15</div><div class="num-unit">RULE</div><div class="num-label">Conditions for Flight</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">16</div><div class="num-unit">RULE</div><div class="num-label">Rules of the Air</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">21</div><div class="num-unit">RULE</div><div class="num-label">Dangerous Flying</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">24</div><div class="num-unit">RULE</div><div class="num-label">Alcohol (12 hrs)</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">25A</div><div class="num-unit">RULE</div><div class="num-label">Fuelling (15/30/43m)</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">28</div><div class="num-unit">RULE</div><div class="num-label">Min Age (16 yrs)</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">28A</div><div class="num-unit">RULE</div><div class="num-label">Max Age (65 yrs)</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">29B</div><div class="num-unit">RULE</div><div class="num-label">PEDs / Wi-Fi</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">30</div><div class="num-unit">RULE</div><div class="num-label">Registration</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">38A</div><div class="num-unit">RULE</div><div class="num-label">Operating Crew</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">39B</div><div class="num-unit">RULE</div><div class="num-label">Medical Standards</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">50</div><div class="num-unit">RULE</div><div class="num-label">C of A</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">67A</div><div class="num-unit">RULE</div><div class="num-label">Logbook (5 yrs)</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">133A</div><div class="num-unit">RULE</div><div class="num-label">DGCA Directions</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">140B</div><div class="num-unit">RULE</div><div class="num-label">Ops Manual</div></div>
+    <div class="num-card"><div class="num-big" style="font-size:22px;">161</div><div class="num-unit">RULE</div><div class="num-label">Penalties</div></div>
+  </div>
+</div>
+
+<!-- ======================== QUIZ ======================== -->
+<div id="quiz" class="section">
+  <div class="section-title">🎯 Quick Quiz — Test Yourself</div>
+
+  <div class="quiz-score">Score: <span id="score">0</span> / <span id="total">0</span> answered</div>
+  <div class="progress-track" style="margin-top:10px;"><div class="progress-fill" id="quiz-progress" style="width:0%"></div></div>
+
+  <div id="quiz-container"></div>
+
+  <button onclick="resetQuiz()" style="background:rgba(0,212,255,0.1);border:1px solid var(--hud);color:var(--hud);padding:10px 24px;border-radius:6px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;margin-top:16px;">↺ RESET QUIZ</button>
+</div>
+
+<script>
+// =========== TABS ===========
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// =========== ACCORDION ===========
+function toggleAcc(head) {
+  const body = head.nextElementSibling;
+  const isOpen = head.classList.contains('open');
+  document.querySelectorAll('.acc-head').forEach(h => { h.classList.remove('open'); h.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { head.classList.add('open'); body.classList.add('open'); }
+}
+
+// =========== RULE TABLES ===========
+const rules1937 = [
+  [1,'Short title and applicability',''],
+  [2,'Nationality of aircraft',''],
+  [3,'Definitions and interpretation',''],
+  [4,'Use and operation of aircraft',''],
+  [5,'Registration and nationality marks','⭐'],
+  ['5A','Prohibited flights','⭐⭐'],
+  [6,'Licensing of personnel','⭐⭐'],
+  ['6A','Type of aircraft to be included in rating',''],
+  ['6B','Flights for extension of licence',''],
+  ['6C','Test flights on aircraft not in rating',''],
+  [7,'Documents to be carried on aircraft','⭐⭐'],
+  ['7A','Persons without passport',''],
+  ['7B','Cockpit and emergency checklists',''],
+  [8,'Arms, ammunition and explosives','⭐⭐'],
+  ['8A','Security check before boarding',''],
+  [9,'Radio telegraph apparatus',''],
+  [10,'Mails',''],
+  [11,'Aerodromes',''],
+  [12,'Prohibited areas','⭐⭐'],
+  [13,'Photography at aerodromes/from aircraft',''],
+  [14,'Aerial work and public transport restrictions',''],
+  [15,'Conditions to be complied with by aircraft in flight','⭐⭐'],
+  ['15A','Remotely Piloted Aircraft System (Drone >250g → UIN)',''],
+  [16,'Rules of the Air','⭐⭐'],
+  [17,'Production of licences/documents',''],
+  [18,'Prevention of flights in contravention',''],
+  [19,'Suspension/cancellation of certificates',''],
+  ['19A','Restrictions on licence/certificate',''],
+  [20,'Rules not applicable to gliders/kites/RPAS',''],
+  [21,'Dangerous flying','⭐⭐'],
+  [22,'Assault/interference with crew member',''],
+  [23,'Acts endangering safety or discipline',''],
+  [24,'Alcohol and psychoactive substances (12-hr rule)','⭐⭐'],
+  ['24A','Mentally disordered persons/epilepsy',''],
+  ['24B','Carriage of prisoners',''],
+  ['24C','Carriage of animals, birds and reptiles',''],
+  [25,'Smoking in aircraft',''],
+  ['25A','Fuelling of aircraft (15/30/43m)','⭐⭐'],
+  ['25B','Housing of aircraft',''],
+  [26,'Dropping articles/parachute descent',''],
+  [27,'Carriage of persons in unauthorized parts',''],
+  [28,'Minimum age for sole control (16 yrs)','⭐⭐'],
+  ['28A','Maximum age for professional pilots (65 yrs)','⭐⭐'],
+  [29,'Acts likely to imperil aircraft safety',''],
+  ['29A','Sonic boom prohibition',''],
+  ['29B','Portable electronic devices','⭐'],
+  ['29C','Adoption of Convention and Annexes',''],
+  ['29D','Safety Management System (SMS)',''],
+  [30,'Certificate of Registration','⭐'],
+  [33,'Change in ownership',''],
+  ['37A','Use of State Marks',''],
+  [38,'Licensing Authority (Central Government)','⭐'],
+  ['38A','Carriage of operating crew','⭐⭐'],
+  ['38B','Carriage of cabin crew',''],
+  ['39A','Disqualification for licence',''],
+  ['39B','Medical standards','⭐⭐'],
+  [40,'Signature of licence holder',''],
+  [41,'Proof of competency',''],
+  ['41A','Checks, tests and examinations',''],
+  [42,'Licence issue and renewal','⭐'],
+  [44,'Aircraft not registered in India',''],
+  [45,'Validation of foreign licences',''],
+  [50,'Certificate of Airworthiness','⭐⭐'],
+  [52,'Modifications and repairs',''],
+  [55,'Suspension/cancellation of C of A',''],
+  [65,'Aeronautical beacons and ground lights',''],
+  ['67A','Log books and logging of flight time (5 yrs)','⭐⭐'],
+  ['67B','False entries in log books',''],
+  [79,'Qualifications of licensee (Aerodrome)',''],
+  [80,'Procedure for grant of licence',''],
+  ['133A','Directions by Director-General','⭐⭐'],
+  [134,'Scheduled Air Transport Services',''],
+  [140,'Minimum requirements for operators',''],
+  ['140A','DGCA approval of new routes',''],
+  ['140B','Operations Manual','⭐⭐'],
+  ['140C','Route Guide','⭐'],
+  [161,'Penalties','⭐'],
+];
+
+const act1934 = [
+  [3,'Power to exempt aircraft/persons (via Official Gazette)'],
+  [5,'Rule-making powers'],
+  [8,'Power to detain aircraft'],
+  [9,'Wreck and Salvage (like Merchant Shipping Act)'],
+  [10,'Penalties — Slaughter/filth: 3yr / ₹1Cr'],
+  ['10A','Monetary penalties'],
+  ['10B','Suspension/cancellation of licence'],
+  ['11A','Failure to comply with Sec 5A direction: 2yr / ₹1Cr'],
+  ['11B','Failure to comply with Sec 9A direction: 2yr / ₹1Cr'],
+  [17,'Bar of certain suits (trespass/nuisance)'],
+  [18,'Good faith protection'],
+];
+
+const tbody1 = document.getElementById('rules1937-table');
+rules1937.forEach(([num, topic, star]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rule-num">${num}</td><td>${topic}</td><td>${star || ''}</td>`;
+  tbody1.appendChild(tr);
+});
+
+const tbody2 = document.getElementById('act1934-table');
+act1934.forEach(([num, topic]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="rule-num">Sec ${num}</td><td>${topic}</td>`;
+  tbody2.appendChild(tr);
+});
+
+// =========== QUIZ ===========
+const quizData = [
+  { q: "What is the minimum age for sole control of an aircraft?", opts: ["14 years","16 years","18 years","21 years"], ans: 1, exp: "Rule 28 — Minimum age for sole control is 16 years." },
+  { q: "Under Rule 24, how many hours before flight must crew abstain from alcohol?", opts: ["6 hours","8 hours","10 hours","12 hours"], ans: 3, exp: "Rule 24 — The famous 12-Hour Bottle-to-Throttle rule." },
+  { q: "What is the minimum distance from a building during fuelling? (Rule 25A)", opts: ["5 metres","10 metres","15 metres","20 metres"], ans: 2, exp: "Rule 25A — Minimum 15 metres from any building during fuelling." },
+  { q: "No smoking/open flame zone during fuelling is:", opts: ["15 metres","25 metres","30 metres","43 metres"], ans: 2, exp: "Rule 25A — No smoking or open flame within 30 metres during fuelling." },
+  { q: "For turbojet aircraft, fuelling must stop if jet exhaust is within:", opts: ["15 metres","30 metres","35 metres","43 metres"], ans: 3, exp: "Rule 25A — Turbojet fuelling stops if jet exhaust is within 43 metres." },
+  { q: "Slaughter of animals is prohibited within what radius of an aerodrome?", opts: ["5 km","8 km","10 km","15 km"], ans: 2, exp: "Aircraft Act 1934 — Prohibition within 10 km of Aerodrome Reference Point." },
+  { q: "A health report must be submitted how many hours before arrival for an infected aircraft?", opts: ["1 hour","2 hours","4 hours","6 hours"], ans: 1, exp: "Public Health Rules 1954 — Health report must be submitted 2 hours before arrival." },
+  { q: "Logbooks must be preserved for a minimum of:", opts: ["2 years","3 years","5 years","7 years"], ans: 2, exp: "Rule 67A — Logbooks must be preserved for minimum 5 years." },
+  { q: "Flight Navigator is required for flights exceeding what range (without navigation aids)?", opts: ["400 NM","500 NM","600 NM","800 NM"], ans: 2, exp: "Rule 38A — Flight Navigator required for flights over 600 NM without adequate navigation facilities." },
+  { q: "Maximum age for a pilot in commercial air transport is:", opts: ["55 years","60 years","63 years","65 years"], ans: 3, exp: "Rule 28A — Pilots above 65 are NOT allowed in commercial air transport." },
+  { q: "What does Rule 29D require organizations to establish?", opts: ["Quality Management System","Safety Management System","Flight Operations Manual","Risk Assessment Framework"], ans: 1, exp: "Rule 29D — Organizations must establish a Safety Management System (SMS)." },
+  { q: "If a pilot's licence has been expired for 4 years, under Rule 42 they must:", opts: ["Only do a skill test","Do a skill test + Air Regulations exam","Complete all examinations again from scratch","Apply for a fresh PPL"], ans: 2, exp: "Rule 42 — Expired >3 years: must complete examinations again from scratch." },
+  { q: "Under Section 3 of the Aircraft Act, any exemption must be published in:", opts: ["DGCA Website","National Newspaper","Official Gazette","Parliament records"], ans: 2, exp: "Section 3 — Exemptions must be published in the Official Gazette." },
+  { q: "A drone weighing more than 250g requires (Rule 15A):", opts: ["Pilot licence","Unique Identification Number","DGCA approval letter","Insurance certificate"], ans: 1, exp: "Rule 15A — Drones over 250g require a Unique Identification Number (UIN)." },
+  { q: "Incubation period for Yellow Fever is:", opts: ["5 days","6 days","8 days","14 days"], ans: 1, exp: "Public Health Rules 1954 — Yellow Fever incubation period is 6 days." },
+  { q: "Under Rule 12, if an aircraft inadvertently enters a prohibited area, the pilot must:", opts: ["Immediately climb and exit","Give distress signal and land at nearest aerodrome","Contact ATC and proceed on course","Declare emergency and return to origin"], ans: 1, exp: "Rule 12 — Give distress signal, land at nearest aerodrome, do not descend or fly further." },
+  { q: "Category B aircraft under Rule 30 is owned by:", opts: ["Indian citizens only","Indian companies only","Foreign residents/businesses in India","Government of India"], ans: 2, exp: "Rule 30 — Category B aircraft are owned by foreign residents or businesses in India." },
+  { q: "For commercial air transport, what licence does a pilot require (Rule 38A)?", opts: ["PPL","CPL/ATPL","SPL","Any valid licence"], ans: 1, exp: "Rule 38A — Public Transport requires CPL or ATPL." },
+];
+
+let score = 0, answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  quizData.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.innerHTML = `
+      <div class="quiz-q"><span>Q${i+1}.</span> ${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,j) => `<button class="quiz-opt" onclick="checkAns(this,${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+  document.getElementById('total').textContent = quizData.length;
+}
+
+function checkAns(btn, qIdx, optIdx) {
+  const card = btn.closest('.quiz-card');
+  const btns = card.querySelectorAll('.quiz-opt');
+  btns.forEach(b => { b.disabled = true; });
+
+  const q = quizData[qIdx];
+  const fb = document.getElementById(`fb-${qIdx}`);
+
+  if (optIdx === q.ans) {
+    btn.classList.add('correct');
+    fb.className = 'quiz-feedback show right';
+    fb.textContent = '✓ Correct! ' + q.exp;
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✗ Incorrect. ' + q.exp;
+  }
+  answered++;
+  document.getElementById('score').textContent = score;
+  document.getElementById('total').textContent = quizData.length;
+  document.getElementById('quiz-progress').style.width = (answered/quizData.length*100) + '%';
+}
+
+function resetQuiz() {
+  score = 0; answered = 0;
+  document.getElementById('score').textContent = 0;
+  document.getElementById('quiz-progress').style.width = '0%';
+  buildQuiz();
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

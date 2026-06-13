@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 3: Aircraft Nationality & Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;
+  --card:#0D1A2E;--card2:#101E38;
+  --teal:#14B8A6;--sky:#0EA5E9;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --purple:#A855F7;--indigo:#6366F1;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --tl-bg:rgba(20,184,166,.11);--sk-bg:rgba(14,165,233,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --pu-bg:rgba(168,85,247,.11);--in-bg:rgba(99,102,241,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(20,184,166,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.4);color:#5EEAD4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#5EEAD4;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 10px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--teal);color:#5EEAD4;}
+.nb.active{background:var(--teal);border-color:var(--teal);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(249,115,22,.06));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-tl{background:var(--tl-bg);border-color:var(--teal);} .al-tl strong{color:#5EEAD4;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#5EEAD4;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--teal);color:#fff;background:var(--tl-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--tl-bg);border:1px solid rgba(20,184,166,.22);border-radius:8px;font-size:12.5px;color:#5EEAD4;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--teal);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#2DD4BF;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--teal) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#5EEAD4;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈️ DGCA CPL · Air Regulations</div>
+  <h1>Chapter 3 — <span>Aircraft Nationality &amp; Registration</span></h1>
+  <p>Annex 7 · Aircraft Rules 1937 · CAR Section 2 · Nationality Marks · C of R · Leasing · GIFT City</p>
+  <div class="hero-chips">
+    <span class="chip">India civil = VT · Military = VU</span>
+    <span class="chip">Drone = U + 6 alphanumeric</span>
+    <span class="chip">Marks min height = 30 cm</span>
+    <span class="chip">C of R issued by Central Government</span>
+    <span class="chip">Register maintained by DGCA</span>
+    <span class="chip">Lessor = Owner · Lessee = Operator</span>
+    <span class="chip">GIFT City = Gandhinagar, Gujarat</span>
+    <span class="chip">Dual registration NOT permitted</span>
+    <span class="chip">Plate = Metal or Fireproof · Near main entrance</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('marks')">🌏 Nationality</button>
+  <button class="nb" onclick="show('registration')">📝 Registration</button>
+  <button class="nb" onclick="show('plate')">🪪 ID Plate</button>
+  <button class="nb" onclick="show('cor')">📜 C of R</button>
+  <button class="nb" onclick="show('cancel')">❌ Cancellation</button>
+  <button class="nb" onclick="show('leasing')">🤝 Leasing</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- NATIONALITY MARKS -->
+<div class="section active" id="section-marks">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🌏</div>
+  <div><div class="st">Nationality Marks</div>
+  <div class="ss">Assigned by ITU · India=VT · Military=VU · Structure of Indian registration</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Indian Aircraft Registration — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#07101c"/>
+        <!-- Main VT-ABC breakdown -->
+        <rect x="160" y="20" width="440" height="80" rx="14" fill="rgba(20,184,166,.06)" stroke="rgba(20,184,166,.3)" stroke-width="1.5"/>
+        <text x="255" y="72" fill="#5EEAD4" font-family="monospace" font-size="52" font-weight="bold" text-anchor="middle">VT</text>
+        <text x="380" y="72" fill="rgba(255,255,255,.2)" font-family="monospace" font-size="40" text-anchor="middle">-</text>
+        <text x="508" y="72" fill="#FCD34D" font-family="monospace" font-size="52" font-weight="bold" text-anchor="middle">ABC</text>
+        <!-- Labels below -->
+        <rect x="160" y="112" width="200" height="48" rx="9" fill="rgba(20,184,166,.10)" stroke="rgba(20,184,166,.35)" stroke-width="1.5"/>
+        <text x="260" y="133" fill="#5EEAD4" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NATIONALITY MARK</text>
+        <text x="260" y="150" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Assigned by ITU ★ = India</text>
+        <rect x="400" y="112" width="200" height="48" rx="9" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="500" y="133" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">REGISTRATION MARK</text>
+        <text x="500" y="150" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">3 capital letters · Unique per AC</text>
+        <!-- Line arrows -->
+        <line x1="255" y1="100" x2="255" y2="112" stroke="rgba(20,184,166,.5)" stroke-width="2"/>
+        <line x1="500" y1="100" x2="500" y2="112" stroke="rgba(245,158,11,.5)" stroke-width="2"/>
+        <!-- Drone row -->
+        <rect x="160" y="168" width="440" height="26" rx="8" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1"/>
+        <text x="380" y="185" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">DRONE / UNMANNED: U + 6 alphanumeric characters (e.g. UB67DC) ★</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="stat" style="border-color:rgba(20,184,166,.5);background:rgba(20,184,166,.10);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:700;color:#5EEAD4;line-height:1;">VT</div>
+      <div class="su">India Civil ★</div>
+      <div class="sl">Assigned by ITU</div>
+    </div>
+    <div class="stat" style="border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.09);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:700;color:#D8B4FE;line-height:1;">VU</div>
+      <div class="su">India Military ★</div>
+      <div class="sl">Indian Armed Forces</div>
+    </div>
+    <div class="stat" style="border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.08);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;color:#FCD34D;line-height:1.2;">U+6</div>
+      <div class="su">Drone Registration ★</div>
+      <div class="sl">U + 6 alphanumeric</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Nationality Mark Assignment</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(20,184,166,.35);background:rgba(20,184,166,.07);">
+          <span style="font-size:18px;">🌐</span>
+          <div>Nationality marks are assigned by the <strong>ITU (International Telecommunication Union) ★</strong></div>
+        </div>
+        <div class="chk-item">
+          <span class="cy">→</span>
+          <div>Each country has a unique mark (India = VT)</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <span class="cn">✗</span>
+          <div>An aircraft <strong>cannot be registered in two countries simultaneously ★</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="al al-rd"><strong>Prohibited combinations:</strong> SOS · PAN · XXX — may be confused with distress signals</div>
+        <div class="al al-tl"><strong>Marks must be:</strong> Visible · Permanent · Legible · Kept clean · Must not be altered or hidden</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Mark Memory</div>
+      <div class="mf">VT = India Civil · VU = India Military · ITU assigns nationality marks · Dual registration = NOT permitted</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- REGISTRATION -->
+<div class="section" id="section-registration">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">📝</div>
+  <div><div class="st">Registration Marks</div>
+  <div class="ss">Format · Minimum size 30cm · Wings + fuselage/tail · Prohibited combos</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Mark Placement &amp; Size — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="210" fill="#07101c"/>
+        <!-- Aircraft silhouette top view -->
+        <!-- Fuselage -->
+        <ellipse cx="380" cy="105" rx="180" ry="30" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <!-- Wings -->
+        <path d="M300,105 L180,60 L140,65 L280,108" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <path d="M300,105 L180,150 L140,145 L280,102" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <path d="M460,105 L580,60 L620,65 L480,108" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <path d="M460,105 L580,150 L620,145 L480,102" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.25)" stroke-width="1.5"/>
+        <!-- Tail -->
+        <path d="M555,95 L620,75 L620,85 L570,98" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.25)" stroke-width="1"/>
+        <path d="M555,115 L620,135 L620,125 L570,112" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.25)" stroke-width="1"/>
+        <!-- Registration on fuselage -->
+        <text x="380" y="110" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">VT-ABC</text>
+        <!-- Registration on wing -->
+        <text x="205" y="110" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" transform="rotate(-20,205,110)">VT-ABC</text>
+        <!-- 30cm annotation -->
+        <rect x="30" y="60" width="130" height="50" rx="9" fill="rgba(239,68,68,.10)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="95" y="82" fill="#FCA5A5" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">MIN 30 cm</text>
+        <text x="95" y="99" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Letter height ★</text>
+        <line x1="160" y1="85" x2="190" y2="95" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <!-- Wings label -->
+        <rect x="30" y="130" width="130" height="36" rx="9" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+        <text x="95" y="150" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">WINGS</text>
+        <text x="95" y="163" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Upper and lower surface</text>
+        <!-- Fuselage/tail label -->
+        <rect x="600" y="100" width="148" height="36" rx="9" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.3)" stroke-width="1"/>
+        <text x="674" y="120" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">FUSELAGE / TAIL</text>
+        <text x="674" y="133" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Both sides required</text>
+        <line x1="600" y1="118" x2="564" y2="106" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Minimum Mark Height</div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);">
+        <div class="sn" style="color:#FCA5A5;">30 cm</div>
+        <div class="su">Minimum letter height ★</div>
+        <div class="sl">Heavier-than-air aircraft · Wings + Fuselage/Tail</div>
+      </div>
+      <div class="al al-am" style="margin-top:10px;margin-bottom:0;"><strong>Prohibited mark combinations:</strong> SOS · PAN · XXX (resemble distress signals)</div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>Registration Format Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(34,197,94,.11);"><tr><th style="color:#86EFAC;">Aircraft Type</th><th style="color:#86EFAC;">Format</th><th style="color:#86EFAC;">Example</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(20,184,166,.04);"><td>Indian civil aircraft</td><td><span class="b b-tl">VT + 3 letters</span></td><td>VT-ABC, VT-JET</td></tr>
+            <tr style="background:rgba(168,85,247,.04);"><td>Indian military</td><td><span class="b b-pu">VU + number</span></td><td>VU-123</td></tr>
+            <tr style="background:rgba(245,158,11,.04);"><td>Drone / UAS</td><td><span class="b b-am">U + 6 alphanum</span></td><td>UB67DC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ID PLATE -->
+<div class="section" id="section-plate">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">🪪</div>
+  <div><div class="st">Identification Plate</div>
+  <div class="ss">Material: Metal or Fireproof · Location: Near main entrance · Unmanned balloons: payload</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Identification Plate — Rules Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="180" fill="#07101c"/>
+        <!-- Plate graphic centre -->
+        <rect x="280" y="25" width="200" height="80" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.5)" stroke-width="2.5"/>
+        <text x="380" y="57" fill="#FCD34D" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle">IDENTIFICATION</text>
+        <text x="380" y="75" fill="#FCD34D" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle">PLATE</text>
+        <text x="380" y="96" fill="var(--text2)" font-family="monospace" font-size="13" text-anchor="middle">VT - ABC</text>
+        <!-- Material box left -->
+        <rect x="40" y="35" width="210" height="60" rx="10" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.38)" stroke-width="1.5"/>
+        <text x="145" y="58" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">MATERIAL ★</text>
+        <text x="145" y="76" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Metal  OR  Fireproof</text>
+        <line x1="250" y1="65" x2="280" y2="65" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <!-- Location box right -->
+        <rect x="510" y="35" width="210" height="60" rx="10" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.38)" stroke-width="1.5"/>
+        <text x="615" y="58" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">LOCATION ★</text>
+        <text x="615" y="76" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">Near MAIN ENTRANCE</text>
+        <line x1="480" y1="65" x2="510" y2="65" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+        <!-- Content labels -->
+        <text x="380" y="130" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">PLATE CONTAINS: Nationality mark + Registration mark</text>
+        <!-- Unmanned balloon note -->
+        <rect x="160" y="148" width="440" height="24" rx="7" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1"/>
+        <text x="380" y="164" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Unmanned balloons: plate attached to EXTERIOR of payload ★</text>
+      </svg>
+    </div>
+    <div class="g3">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);padding:12px;">
+        <div class="sn" style="font-size:18px;color:#FCA5A5;">Material</div>
+        <div class="sl">Metal or Fireproof ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.08);padding:12px;">
+        <div class="sn" style="font-size:16px;color:#7DD3FC;">Location</div>
+        <div class="sl">Prominently near main entrance ★</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08);padding:12px;">
+        <div class="sn" style="font-size:14px;color:#D8B4FE;">Unmanned Balloon</div>
+        <div class="sl">Exterior of payload ★</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C of R -->
+<div class="section" id="section-cor">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">📜</div>
+  <div><div class="st">Certificate of Registration (C of R)</div>
+  <div class="ss">Issued by Central Government · Contents · Leased aircraft · Aircraft Register by DGCA</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>C of R Issuing Chain &amp; Contents</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="160" fill="#07101c"/>
+        <!-- Issuing chain -->
+        <rect x="20" y="20" width="170" height="50" rx="10" fill="rgba(14,165,233,.10)" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <text x="105" y="42" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">CENTRAL</text>
+        <text x="105" y="59" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">GOVERNMENT ★</text>
+        <line x1="190" y1="45" x2="230" y2="45" stroke="rgba(14,165,233,.5)" stroke-width="2"/>
+        <polygon points="230,40 242,45 230,50" fill="rgba(14,165,233,.5)"/>
+        <rect x="242" y="20" width="130" height="50" rx="10" fill="rgba(20,184,166,.09)" stroke="rgba(20,184,166,.4)" stroke-width="1.5"/>
+        <text x="307" y="42" fill="#5EEAD4" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">through</text>
+        <text x="307" y="59" fill="#5EEAD4" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">DGCA</text>
+        <line x1="372" y1="45" x2="412" y2="45" stroke="rgba(20,184,166,.5)" stroke-width="2"/>
+        <polygon points="412,40 424,45 412,50" fill="rgba(20,184,166,.5)"/>
+        <!-- Certificate box -->
+        <rect x="424" y="10" width="310" height="140" rx="12" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="579" y="35" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">C of R CONTAINS:</text>
+        <g font-family="sans-serif" font-size="11" fill="var(--text2)">
+          <text x="434" y="57">Aircraft type · Manufacturer</text>
+          <text x="434" y="73">Constructor number · Year of manufacture</text>
+          <text x="434" y="89">Nationality + Registration mark</text>
+          <text x="434" y="105">Owner details · Date of registration</text>
+          <text x="434" y="121">Validity</text>
+          <text x="434" y="140" fill="#D8B4FE">+Lease details (if leased)</text>
+        </g>
+        <!-- Aircraft register -->
+        <rect x="20" y="90" width="380" height="50" rx="10" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+        <text x="210" y="111" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">AIRCRAFT REGISTER</text>
+        <text x="210" y="128" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Maintained by Director General (DGCA) ★</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="al al-am"><strong>Leased aircraft C of R</strong> must also include: Lease validity · Lessor details · Lessee details</div>
+  <div class="al al-gn" style="margin-bottom:0;"><strong>Aircraft register</strong> contains: Aircraft details · Registration details · Owner details — maintained by DGCA ★</div>
+</div>
+
+<!-- CANCELLATION -->
+<div class="section" id="section-cancel">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">❌</div>
+  <div><div class="st">Cancellation of Registration</div>
+  <div class="ss">8 grounds for cancellation · CofA expired 5+ years · Registered elsewhere = cancelled</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>All 8 Grounds for Cancellation</div>
+    <div class="chklist">
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">1</span>
+        <div>Aircraft no longer complies with registration rules</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">2</span>
+        <div>Registration was obtained <strong>fraudulently</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.09);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">3</span>
+        <div><strong>Aircraft registered in another country ★</strong> — automatic Indian registration cancellation</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">4</span>
+        <div>Aircraft <strong>destroyed</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">5</span>
+        <div>Aircraft <strong>permanently withdrawn from use</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">6</span>
+        <div>Cancellation required in <strong>public interest</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">7</span>
+        <div>Lease <strong>expires or terminates</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.09);">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#FCA5A5;flex-shrink:0;">8</span>
+        <div>Certificate of Airworthiness (CofA) expired for <strong>5 years or more ★</strong></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:14px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Cancellation Key Facts</div>
+      <div class="mf">Dual registration NOT allowed · Registered elsewhere = Indian registration CANCELLED · CofA expired 5yr = cancel</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- LEASING -->
+<div class="section" id="section-leasing">
+  <div class="sh"><div class="si" style="background:var(--pu-bg);border:1px solid rgba(168,85,247,.3);">🤝</div>
+  <div><div class="st">Leasing</div>
+  <div class="ss">Lessor=Owner · Lessee=Operator · IFSC · IFSCA · GIFT City=Gandhinagar</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Lessor vs Lessee — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="190" fill="#07101c"/>
+        <!-- Lessor box -->
+        <rect x="20" y="20" width="310" height="150" rx="14" fill="rgba(14,165,233,.09)" stroke="rgba(14,165,233,.42)" stroke-width="2"/>
+        <text x="175" y="52" fill="#7DD3FC" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">LESSOR</text>
+        <text x="175" y="70" fill="#7DD3FC" font-family="sans-serif" font-size="14" text-anchor="middle">= Aircraft OWNER ★</text>
+        <text x="175" y="100" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Provides aircraft under lease</text>
+        <text x="175" y="118" fill="var(--text2)" font-family="sans-serif" font-size="12" text-anchor="middle">Receives compensation</text>
+        <text x="175" y="140" fill="rgba(14,165,233,.7)" font-family="monospace" font-size="11" text-anchor="middle">Memory: Les-SOR = Sorce (gives)</text>
+        <!-- Arrow with aircraft -->
+        <text x="380" y="100" fill="#FCD34D" font-family="sans-serif" font-size="28" text-anchor="middle">✈</text>
+        <line x1="330" y1="95" x2="360" y2="95" stroke="rgba(245,158,11,.6)" stroke-width="2.5"/>
+        <polygon points="360,89 374,95 360,101" fill="rgba(245,158,11,.6)"/>
+        <line x1="400" y1="95" x2="430" y2="95" stroke="rgba(245,158,11,.6)" stroke-width="2.5"/>
+        <polygon points="430,89 444,95 430,101" fill="rgba(245,158,11,.6)"/>
+        <text x="380" y="128" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Aircraft + $$</text>
+        <!-- Lessee box -->
+        <rect x="430" y="20" width="310" height="150" rx="14" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.42)" stroke-width="2"/>
+        <text x="585" y="52" fill="#86EFAC" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">LESSEE</text>
+        <text x="585" y="70" fill="#86EFAC" font-family="sans-serif" font-size="14" text-anchor="middle">= Aircraft OPERATOR ★</text>
+        <text x="585" y="92" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Responsible for:</text>
+        <text x="585" y="109" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Operations · Crew · Dispatch</text>
+        <text x="585" y="125" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Ground handling · Operational control</text>
+        <text x="585" y="150" fill="rgba(34,197,94,.7)" font-family="monospace" font-size="11" text-anchor="middle">Memory: Les-SEE = Uses it (sees it daily)</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:14px;"><div class="mi">🧠</div><div>
+      <div class="mt">Leasing Memory</div>
+      <div class="mf">LESSOR = Gives the aircraft (Owner) · LESSEE = Uses the aircraft (Operator)</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>GIFT City — Leasing Hub</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);">
+          <span style="font-size:18px;">🏙️</span>
+          <div><strong>GIFT City</strong> = Gujarat International Finance Tec-City ★</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);">
+          <span style="font-size:14px;">📍</span>
+          <div>Located in <strong>Gandhinagar, Gujarat ★</strong></div>
+        </div>
+        <div class="chk-item">
+          <span style="font-size:14px;">🏦</span>
+          <div>Aircraft leasing companies registered at <strong>IFSC</strong> (International Financial Services Centre)</div>
+        </div>
+        <div class="chk-item">
+          <span style="font-size:14px;">⚖️</span>
+          <div>Regulated by <strong>IFSCA</strong> (International Financial Services Centres Authority) ★</div>
+        </div>
+      </div>
+      <div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Term</th><th style="color:#FCD34D;">Full Form</th></tr></thead>
+            <tbody>
+              <tr><td><span class="b b-am">GIFT</span></td><td>Gujarat International Finance Tec-City</td></tr>
+              <tr><td><span class="b b-am">IFSC</span></td><td>International Financial Services Centre</td></tr>
+              <tr><td><span class="b b-am">IFSCA</span></td><td>International Financial Services Centres Authority</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MASTER REF -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference</div>
+  <div class="ss">Every critical fact from Chapter 3</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>All Critical Facts</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(20,184,166,.12);"><tr><th style="color:#5EEAD4;">Question</th><th style="color:#5EEAD4;">Answer</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(20,184,166,.04);"><td>India civil nationality mark</td><td><span class="num">VT ★</span></td></tr>
+            <tr><td>India military nationality mark</td><td><span class="num">VU ★</span></td></tr>
+            <tr><td>Who assigns nationality marks</td><td>ITU ★</td></tr>
+            <tr><td>Indian civil aircraft format</td><td><span class="num">VT + 3 letters</span></td></tr>
+            <tr><td>Drone registration format</td><td><span class="num">U + 6 alphanumeric ★</span></td></tr>
+            <tr><td>Prohibited mark combinations</td><td>SOS · PAN · XXX</td></tr>
+            <tr><td>Minimum mark height</td><td><span class="num">30 cm ★</span></td></tr>
+            <tr><td>Marks appear on</td><td>Wings + Fuselage/Tail</td></tr>
+            <tr><td>ID plate material</td><td>Metal or Fireproof ★</td></tr>
+            <tr><td>ID plate location</td><td>Near main entrance ★</td></tr>
+            <tr><td>Unmanned balloon plate location</td><td>Exterior of payload</td></tr>
+            <tr><td>C of R issued by</td><td>Central Government (via DGCA) ★</td></tr>
+            <tr><td>Aircraft register maintained by</td><td>Director General (DGCA) ★</td></tr>
+            <tr><td>Dual registration permitted?</td><td>NO ★</td></tr>
+            <tr><td>Aircraft registered elsewhere =</td><td>Indian registration cancelled</td></tr>
+            <tr><td>CofA expired for 5+ years =</td><td>Registration cancelled ★</td></tr>
+            <tr><td>Lessor =</td><td>Aircraft OWNER ★</td></tr>
+            <tr><td>Lessee =</td><td>Aircraft OPERATOR ★</td></tr>
+            <tr><td>GIFT City full form</td><td>Gujarat International Finance Tec-City ★</td></tr>
+            <tr><td>GIFT City location</td><td>Gandhinagar, Gujarat ★</td></tr>
+            <tr><td>Aircraft leasing regulator</td><td>IFSCA ★</td></tr>
+            <tr><td>Leasing companies registered at</td><td>IFSC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">VT = Civil India · VU = Military India (not VU for civil)</div><div class="trap-d">Indian civilian aircraft = VT (e.g. VT-ABC). Indian military = VU. Students sometimes write VU for civil. VT is the internationally assigned ITU code for India's civil aviation.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">C of R issued by CENTRAL GOVERNMENT (not DGCA directly)</div><div class="trap-d">C of R is issued by the Central Government through DGCA. The issuing authority is Central Government — DGCA is the executing agency. The aircraft register is maintained by DGCA (Director General).</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Lessor = Owner (gives aircraft) · Lessee = Operator (uses aircraft)</div><div class="trap-d">Lessor is the OWNER who gives the aircraft. Lessee is the OPERATOR who uses it. Frequently reversed in exam options. Memory: LesSOR = SORce (gives). LesSEE = SEEs it daily (uses).</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">ID Plate = Metal OR Fireproof (not just metal)</div><div class="trap-d">The identification plate must be made of metal OR other fireproof material. Not exclusively metal — fireproof material is also acceptable. Near main entrance.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">CofA expired 5 YEARS → registration cancelled (not 1 or 3 years)</div><div class="trap-d">If the Certificate of Airworthiness has been expired for 5 years or more, DGCA may cancel the registration. The threshold is specifically 5 years.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">GIFT City = Gandhinagar (not Ahmedabad or Mumbai)</div><div class="trap-d">GIFT City (Gujarat International Finance Tec-City) is in GANDHINAGAR, not Ahmedabad. Both are in Gujarat — but the answer is specifically Gandhinagar.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 3</div>
+  <div class="ss">25 DGCA-style questions on Aircraft Nationality and Registration</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">&#8617; Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next &#8594;</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"India's nationality mark for civil aircraft is:",opts:["VA","VT","VU","VI"],ans:1,exp:"VT = India's civil nationality mark. VU = Indian military aircraft. Nationality marks are assigned by the ITU (International Telecommunication Union)."},
+{q:"Indian military aircraft carry the nationality mark:",opts:["VT","VM","VU","IM"],ans:2,exp:"VU = Indian military aircraft nationality mark. VT = Indian civil. These are two separate marks for the same country assigned under different ITU allocations."},
+{q:"Nationality marks are assigned by:",opts:["ICAO","DGCA","ITU","Central Government"],ans:2,exp:"ITU (International Telecommunication Union) assigns nationality marks to countries. ICAO provides guidance but ITU is the assigning body. India's ITU-assigned mark = VT."},
+{q:"The Indian civil aircraft registration format is:",opts:["VT + 2 letters","VT + 3 letters","VT + 4 letters","VI + 3 letters"],ans:1,exp:"Indian civil aircraft = VT + 3 capital letters (e.g. VT-ABC, VT-JET). The registration mark uniquely identifies each aircraft."},
+{q:"A drone (unmanned aircraft) in India is registered as:",opts:["VT + 3 letters","VU + number","U + 6 alphanumeric characters","D + 4 letters"],ans:2,exp:"Drone/UAS registration format = U + 6 alphanumeric characters (e.g. UB67DC). This is completely different from manned aircraft format."},
+{q:"Which combinations are NOT permitted as registration marks?",opts:["VT-JET","VT-AIR","SOS","VT-SKY"],ans:2,exp:"SOS, PAN, and XXX are prohibited because they resemble international distress signals. Any combination likely to be confused with distress signals is not permitted."},
+{q:"Minimum height of registration marks on a heavier-than-air aircraft is:",opts:["10 cm","20 cm","30 cm","50 cm"],ans:2,exp:"Minimum registration mark height = 30 cm. Marks appear on wings and fuselage/tail. Marks must be visible, permanent, legible and kept clean."},
+{q:"Registration marks on a heavier-than-air aircraft appear on:",opts:["Nose only","Fuselage only","Wings and fuselage/tail","Tail only"],ans:2,exp:"Registration marks appear on WINGS (upper and lower surface) AND fuselage/tail (both sides). All surfaces visible from multiple angles."},
+{q:"The identification plate on an aircraft must be made of:",opts:["Plastic","Wood","Metal or fireproof material","Aluminium only"],ans:2,exp:"ID plate = Metal or any other Fireproof material. Not just metal — fireproof material is equally acceptable. Must be prominently placed near the main entrance."},
+{q:"The identification plate must be located:",opts:["In the cockpit","On the nose","Prominently near the main entrance","On the tail"],ans:2,exp:"ID plate must be prominently placed near the MAIN ENTRANCE of the aircraft. For unmanned balloons it is attached to the exterior of the payload."},
+{q:"For an unmanned balloon, the identification plate is attached to:",opts:["The gas bag","The control module","The exterior of the payload","The tethering rope"],ans:2,exp:"Unmanned balloon ID plate = attached to EXTERIOR of payload. This differs from manned aircraft where it is near the main entrance."},
+{q:"The Certificate of Registration (C of R) is issued by:",opts:["DGCA directly","Central Government through DGCA","ICAO","State Government"],ans:1,exp:"C of R is issued by the CENTRAL GOVERNMENT through DGCA. The issuing authority is Central Government — not DGCA independently. DGCA executes on behalf of Central Government."},
+{q:"The Aircraft Register is maintained by:",opts:["Central Government","State Government","ICAO","Director General of Civil Aviation (DGCA)"],ans:3,exp:"Aircraft Register = maintained by Director General (DGCA). It contains aircraft details, registration details, and owner details."},
+{q:"Can an aircraft be registered in two countries simultaneously?",opts:["Yes, with ICAO permission","Yes, if both countries agree","No — dual registration is not permitted","Yes, for leased aircraft"],ans:2,exp:"Dual registration is NOT permitted. An aircraft can only be registered in one country at a time. If registered in another country, the previous registration is cancelled."},
+{q:"If an aircraft is registered in another country, its Indian registration is:",opts:["Suspended for 6 months","Cancelled","Transferred automatically","Retained alongside the foreign registration"],ans:1,exp:"If an aircraft is registered in another country, the Indian registration is CANCELLED. Dual registration is not permitted under international aviation law."},
+{q:"Registration may be cancelled if the Certificate of Airworthiness has expired for:",opts:["1 year","2 years","3 years","5 years or more"],ans:3,exp:"CofA expired for 5 YEARS OR MORE = registration may be cancelled. The specific threshold is 5 years — not 1, 2, or 3 years."},
+{q:"Which of the following is a valid ground for cancellation of registration?",opts:["Aircraft changes operator","Aircraft is painted a new colour","Aircraft registration obtained fraudulently","Aircraft undergoes major repair"],ans:2,exp:"Fraudulent registration = valid ground for cancellation. Other valid grounds: non-compliance, registered elsewhere, destroyed, permanently withdrawn, public interest, lease expires, CofA expired 5+ years."},
+{q:"In aircraft leasing, the LESSOR is:",opts:["The operator who uses the aircraft","The pilot flying the aircraft","The owner who provides the aircraft","The maintenance organization"],ans:2,exp:"LESSOR = owner of the aircraft who provides it under lease and receives compensation. Memory: LesSOR = SORce of aircraft (gives it)."},
+{q:"In aircraft leasing, the LESSEE is responsible for:",opts:["Manufacturing the aircraft","Owning the aircraft","Operations, crew, dispatch and ground handling","Only fuelling the aircraft"],ans:2,exp:"LESSEE = operator using the aircraft. Responsible for operations, crew, ground handling, dispatch, and operational control. Memory: LesSEE = SEEs it daily (operates it)."},
+{q:"GIFT City stands for:",opts:["General Investment Finance Technology City","Gujarat International Finance Tec-City","Government International Finance Trade City","Gujarat Investment Finance Trading City"],ans:1,exp:"GIFT = Gujarat International Finance Tec-City. Located in Gandhinagar, Gujarat. Aircraft leasing companies can be registered at IFSC in GIFT City, regulated by IFSCA."},
+{q:"GIFT City is located in:",opts:["Ahmedabad","Surat","Gandhinagar","Mumbai"],ans:2,exp:"GIFT City is located in GANDHINAGAR, Gujarat. Not Ahmedabad (a common wrong answer since Ahmedabad is also in Gujarat). Aircraft leasing companies register at IFSC there."},
+{q:"Aircraft leasing companies at GIFT City are regulated by:",opts:["DGCA","ICAO","IFSCA","RBI"],ans:2,exp:"IFSCA (International Financial Services Centres Authority) regulates aircraft leasing companies at GIFT City's IFSC. DGCA regulates aviation safety separately."},
+{q:"A Certificate of Registration for a leased aircraft must include:",opts:["Only the lessee's name","Only the lessor's name","Lease validity, lessor and lessee details","Only the aircraft technical details"],ans:2,exp:"Leased aircraft C of R must also include: lease validity, lessor details, AND lessee details — in addition to standard C of R contents."},
+{q:"Registration marks must NOT be:",opts:["Painted in white","Visible from a distance","Altered or hidden","Placed on both wings"],ans:2,exp:"Registration marks must NOT be altered or hidden. They must remain visible, permanent, legible, and kept clean at all times. Cannot be covered or changed without authorization."},
+{q:"The identification plate contains:",opts:["Only the aircraft type","Nationality mark and registration mark","Pilot's licence number","Manufacturer's logo"],ans:1,exp:"ID plate contains: Nationality mark + Registration mark. Example: VT-ABC. Made of metal or fireproof material, fixed prominently near main entrance."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML='<span class="qltr">'+l+'</span>'+q.opts[i];b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=88){msg='Excellent!';sub='Chapter 3 mastered — DGCA ready!';}else if(pct>=72){msg='Strong!';sub='Review C of R issuing authority and leasing terms.';}else if(pct>=60){msg='Good!';sub='Drill the quick revision table.';}else{msg='Keep Revising!';sub='Focus on VT/VU, lessor/lessee, and cancellation grounds.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

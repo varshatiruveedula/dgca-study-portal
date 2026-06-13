@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 15: Personnel Licensing</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0A1628;
+  --navy2: #0E1F3A;
+  --sky: #1565C0;
+  --sky2: #1976D2;
+  --accent: #FF6B35;
+  --accent2: #FFA726;
+  --teal: #00897B;
+  --green: #2E7D32;
+  --red: #C62828;
+  --purple: #6A1B9A;
+  --gold: #F9A825;
+  --text: #E8EAF0;
+  --text2: #B0B8CC;
+  --text3: #7A88A0;
+  --card: #0F1E34;
+  --card2: #132340;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --success-bg: rgba(46,125,50,0.15);
+  --danger-bg: rgba(198,40,40,0.15);
+  --gold-bg: rgba(249,168,37,0.12);
+  --sky-bg: rgba(21,101,192,0.15);
+  --teal-bg: rgba(0,137,123,0.13);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.hero {
+  background: linear-gradient(135deg, #0A1628 0%, #0d2144 50%, #0A1628 100%);
+  border-bottom: 1px solid var(--border2);
+  padding: 40px 24px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% -20%, rgba(21,101,192,0.25) 0%, transparent 70%);
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(21,101,192,0.2);
+  border: 1px solid rgba(21,101,192,0.4);
+  color: #90CAF9;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  margin-bottom: 8px;
+}
+.hero h1 span { color: var(--accent2); }
+.hero p {
+  color: var(--text2);
+  font-size: 15px;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+/* NAV */
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 20px 24px;
+  background: var(--navy2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-pill {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-pill:hover, .nav-pill.active {
+  background: var(--sky);
+  border-color: var(--sky);
+  color: #fff;
+}
+
+/* SECTIONS */
+.content { max-width: 1000px; margin: 0 auto; padding: 32px 20px 60px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* SECTION HEADER */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.section-icon {
+  width: 44px; height: 44px;
+  background: var(--sky-bg);
+  border: 1px solid rgba(21,101,192,0.3);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.section-title { font-size: 22px; font-weight: 700; color: #fff; }
+.section-sub { font-size: 13px; color: var(--text3); margin-top: 2px; }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+
+/* STAT CARDS */
+.stat-box {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.stat-box:hover { transform: translateY(-2px); }
+.stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent2);
+  line-height: 1.1;
+}
+.stat-unit { font-size: 14px; color: var(--text3); }
+.stat-label { font-size: 12px; color: var(--text2); margin-top: 6px; font-weight: 500; }
+
+/* TABLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+th {
+  background: rgba(21,101,192,0.2);
+  color: #90CAF9;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(21,101,192,0.3);
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.table-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+/* BADGES / PILLS */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.badge-green { background: var(--success-bg); color: #81C784; border: 1px solid rgba(46,125,50,0.3); }
+.badge-red   { background: var(--danger-bg);  color: #EF9A9A; border: 1px solid rgba(198,40,40,0.3); }
+.badge-gold  { background: var(--gold-bg);    color: var(--gold); border: 1px solid rgba(249,168,37,0.3); }
+.badge-blue  { background: var(--sky-bg);     color: #90CAF9;     border: 1px solid rgba(21,101,192,0.3); }
+.badge-teal  { background: var(--teal-bg);    color: #80CBC4;     border: 1px solid rgba(0,137,123,0.3); }
+
+/* MEMORY TIPS */
+.memory-box {
+  background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(255,167,38,0.08));
+  border: 1px solid rgba(255,107,53,0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+}
+.memory-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.memory-title { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.memory-content { font-size: 14px; color: var(--text); }
+.memory-formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent2);
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* FLOWCHART */
+.flowchart {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.flow-box {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: center;
+  min-width: 110px;
+}
+.flow-box .fb-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent2);
+  line-height: 1;
+}
+.flow-box .fb-label { font-size: 11px; color: var(--text3); margin-top: 3px; font-weight: 500; }
+.flow-box .fb-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.flow-arrow {
+  font-size: 20px;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+.flow-box.sky { border-color: rgba(21,101,192,0.5); background: rgba(21,101,192,0.1); }
+.flow-box.green { border-color: rgba(46,125,50,0.5); background: rgba(46,125,50,0.1); }
+.flow-box.gold  { border-color: rgba(249,168,37,0.5); background: rgba(249,168,37,0.1); }
+.flow-box.accent { border-color: rgba(255,107,53,0.5); background: rgba(255,107,53,0.1); }
+
+/* MIND MAP */
+.mindmap-center {
+  background: var(--sky);
+  border-radius: 16px;
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  width: fit-content;
+  margin: 0 auto 28px;
+}
+.mindmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.mindmap-node {
+  background: var(--card2);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+}
+.mindmap-node-header {
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mindmap-node-body { padding: 10px 14px 12px; }
+.mindmap-node-body li {
+  list-style: none;
+  font-size: 13px;
+  color: var(--text2);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mindmap-node-body li:last-child { border-bottom: none; }
+.mn-blue .mindmap-node-header { background: rgba(21,101,192,0.2); color: #90CAF9; }
+.mn-green .mindmap-node-header { background: rgba(46,125,50,0.2); color: #A5D6A7; }
+.mn-gold .mindmap-node-header  { background: rgba(249,168,37,0.2); color: var(--gold); }
+.mn-red .mindmap-node-header   { background: rgba(198,40,40,0.2); color: #EF9A9A; }
+.mn-teal .mindmap-node-header  { background: rgba(0,137,123,0.2); color: #80CBC4; }
+.mn-purple .mindmap-node-header{ background: rgba(106,27,154,0.2); color: #CE93D8; }
+
+/* COMPARISON HIGHLIGHT */
+.highlight-row td:first-child { color: #fff; font-weight: 600; }
+.vs-badge {
+  background: rgba(255,107,53,0.15);
+  border: 1px solid rgba(255,107,53,0.3);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* QUIZ */
+.quiz-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sky), var(--accent2));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.quiz-q-num { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.quiz-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+.quiz-q {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-opt {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 13px 18px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text2);
+  transition: all 0.15s;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quiz-opt:hover { border-color: var(--sky); color: #fff; background: rgba(21,101,192,0.1); }
+.quiz-opt.correct { border-color: var(--teal); background: var(--teal-bg); color: #80CBC4; pointer-events: none; }
+.quiz-opt.wrong   { border-color: var(--red); background: var(--danger-bg); color: #EF9A9A; pointer-events: none; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.5; }
+.opt-letter {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.quiz-explain {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(0,137,123,0.1);
+  border: 1px solid rgba(0,137,123,0.25);
+  border-radius: 10px;
+  font-size: 13px;
+  color: #80CBC4;
+  display: none;
+}
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+.btn {
+  background: var(--sky);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--sky2); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.quiz-score {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+.score-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent2) var(--pct, 0%), var(--border2) 0);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  position: relative;
+}
+.score-inner {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: var(--card);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent2);
+}
+.score-msg { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.score-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+
+/* IMPORTANT BOX */
+.important-box {
+  background: rgba(249,168,37,0.1);
+  border: 1px solid rgba(249,168,37,0.3);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+.important-box strong { color: var(--gold); }
+
+/* CHECK/CROSS ICONS */
+.chk { color: #81C784; font-weight: 700; }
+.crs { color: #EF9A9A; font-weight: 700; }
+
+/* ACCORDION */
+.accordion { margin-bottom: 12px; }
+.accordion-btn {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: left;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+.accordion-btn:hover { background: rgba(255,255,255,0.04); }
+.accordion-btn.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: rgba(21,101,192,0.4); }
+.accordion-body {
+  background: var(--card);
+  border: 1px solid rgba(21,101,192,0.3);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 16px;
+  display: none;
+}
+.accordion-body.open { display: block; }
+.chevron { transition: transform 0.2s; }
+.accordion-btn.open .chevron { transform: rotate(180deg); }
+
+/* ELP LEVELS */
+.elp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.elp-row:last-child { border-bottom: none; }
+.elp-level {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.elp-6 { background: rgba(46,125,50,0.2); color: #81C784; border: 2px solid rgba(46,125,50,0.4); }
+.elp-5 { background: rgba(0,137,123,0.2); color: #80CBC4; border: 2px solid rgba(0,137,123,0.4); }
+.elp-4 { background: rgba(21,101,192,0.2); color: #90CAF9; border: 2px solid rgba(21,101,192,0.4); }
+.elp-3 { background: rgba(255,107,53,0.1); color: #FFAB91; border: 2px solid rgba(255,107,53,0.2); }
+.elp-2 { background: rgba(198,40,40,0.1); color: #EF9A9A; border: 1px solid rgba(198,40,40,0.2); }
+.elp-1 { background: rgba(198,40,40,0.1); color: #EF9A9A; border: 1px solid rgba(198,40,40,0.2); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .flow-row { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">DGCA CPL Exam Prep</div>
+  <h1>Chapter 15 — <span>Personnel Licensing</span></h1>
+  <p>Complete interactive study guide · SPL · PPL · CPL · ATPL · Instrument Rating</p>
+</div>
+
+<div class="nav-pills" id="nav">
+  <button class="nav-pill active" onclick="showSection('overview')">📋 Overview</button>
+  <button class="nav-pill" onclick="showSection('spl')">🎓 SPL</button>
+  <button class="nav-pill" onclick="showSection('ppl')">🛩️ PPL</button>
+  <button class="nav-pill" onclick="showSection('cpl')">✈️ CPL</button>
+  <button class="nav-pill" onclick="showSection('atpl')">🏆 ATPL</button>
+  <button class="nav-pill" onclick="showSection('ir')">📡 Instrument Rating</button>
+  <button class="nav-pill" onclick="showSection('compare')">⚖️ Comparisons</button>
+  <button class="nav-pill" onclick="showSection('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="section active" id="section-overview">
+  <div class="section-header">
+    <div class="section-icon">📋</div>
+    <div>
+      <div class="section-title">Overview & Key Concepts</div>
+      <div class="section-sub">Licensing authority · Ages · Education · ELP · Medical · Cross-Country</div>
+    </div>
+  </div>
+
+  <!-- LICENSING AUTHORITY -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Licensing Authority in India</div>
+    <div class="grid-2">
+      <div>
+        <div class="important-box">
+          <strong>DGCA / Central Government</strong> is the licensing authority in India. It may <b>grant, renew, vary, or refuse</b> any licence or rating.
+        </div>
+        <div style="font-size:13px;color:var(--text2);margin-top:8px;">
+          Common trap: ICAO sets standards; AAI manages airports. Only <span style="color:#90CAF9;font-weight:600;">DGCA / Central Government</span> issues pilot licences.
+        </div>
+      </div>
+      <div class="flowchart" style="margin:0;padding:16px;">
+        <div class="flow-row">
+          <div class="flow-box sky">
+            <div class="fb-label">Grant</div>
+          </div>
+          <div class="flow-box sky">
+            <div class="fb-label">Renew</div>
+          </div>
+          <div class="flow-box sky">
+            <div class="fb-label">Vary</div>
+          </div>
+          <div class="flow-box sky">
+            <div class="fb-label">Refuse</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px;">Powers of DGCA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINIMUM AGES FLOWCHART -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Minimum Age Requirements</div>
+    <div class="flowchart" style="padding:20px 16px;">
+      <div class="flow-row">
+        <div class="flow-box green">
+          <div class="fb-num">16</div>
+          <div class="fb-label">years</div>
+          <div class="fb-sub" style="color:#A5D6A7;font-weight:700;">SPL</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box sky">
+          <div class="fb-num">17</div>
+          <div class="fb-label">years</div>
+          <div class="fb-sub" style="color:#90CAF9;font-weight:700;">PPL</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box gold">
+          <div class="fb-num">18</div>
+          <div class="fb-label">years</div>
+          <div class="fb-sub" style="color:var(--gold);font-weight:700;">CPL</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent">
+          <div class="fb-num">21</div>
+          <div class="fb-label">years</div>
+          <div class="fb-sub" style="color:var(--accent);font-weight:700;">ATPL</div>
+        </div>
+      </div>
+    </div>
+    <div class="memory-box" style="margin-top:12px;">
+      <div class="memory-icon">🧠</div>
+      <div>
+        <div class="memory-title">Memory Trick</div>
+        <div class="memory-content">Count up: 16 → 17 → 18 → 21 &nbsp; (jumps by 1, 1, then 3 for ATPL)</div>
+        <div class="memory-formula">SPL → PPL → CPL → ATPL = 16, 17, 18, 21</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATIONAL QUALIFICATIONS -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Educational Qualifications</div>
+    <div class="grid-2">
+      <div class="table-wrap" style="margin:0;">
+        <table>
+          <thead><tr><th colspan="2">Class 10 Sufficient</th></tr></thead>
+          <tbody>
+            <tr><td>SPL (all categories)</td><td><span class="badge badge-green">Class 10</span></td></tr>
+            <tr><td>PPL (Aeroplane, Helicopter, Glider, Balloon, Microlight)</td><td><span class="badge badge-green">Class 10</span></td></tr>
+            <tr><td>FRTOL</td><td><span class="badge badge-green">Class 10</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap" style="margin:0;">
+        <table>
+          <thead><tr><th colspan="2">10+2 Physics & Maths Required</th></tr></thead>
+          <tbody>
+            <tr><td>CPL (Aeroplane / Helicopter)</td><td><span class="badge badge-gold">10+2 P&M</span></td></tr>
+            <tr><td>ATPL (Aeroplane / Helicopter)</td><td><span class="badge badge-gold">10+2 P&M</span></td></tr>
+            <tr><td>Flight Navigator Licence</td><td><span class="badge badge-gold">10+2 P&M</span></td></tr>
+            <tr><td>Flight Engineer Licence</td><td><span class="badge badge-gold">10+2 P&M</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="memory-box" style="margin-top:14px;margin-bottom:0;">
+      <div class="memory-icon">🧠</div>
+      <div>
+        <div class="memory-title">Memory Trick</div>
+        <div class="memory-content">"Student + Private + FRTO" = only Class 10 needed. Everything commercial = 10+2 with Physics & Maths.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CROSS COUNTRY -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Cross-Country Flight Definition</div>
+    <div class="grid-2">
+      <div class="stat-box sky">
+        <div class="stat-num">100</div>
+        <div class="stat-unit">NM</div>
+        <div class="stat-label">General Cross-Country (CPL/ATPL)</div>
+      </div>
+      <div class="stat-box" style="border-color:rgba(0,137,123,0.4);background:rgba(0,137,123,0.08);">
+        <div class="stat-num" style="color:#80CBC4;">50</div>
+        <div class="stat-unit">NM</div>
+        <div class="stat-label">PPL & Microlight Cross-Country</div>
+      </div>
+    </div>
+    <div class="memory-box" style="margin-top:14px;margin-bottom:0;">
+      <div class="memory-icon">🧠</div>
+      <div>
+        <div class="memory-title">Memory Trick</div>
+        <div class="memory-formula">PPL = Half = 50 NM &nbsp;|&nbsp; General = 100 NM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELP -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>English Language Proficiency (ELP)</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">Acceptable levels: <span class="badge badge-green">4</span> <span class="badge badge-teal">5</span> <span class="badge badge-blue">6</span> only. Levels 1–3 are NOT acceptable.</div>
+        <div class="elp-row">
+          <div class="elp-level elp-6">6</div>
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:14px;">Expert</div>
+            <div style="font-size:12px;color:var(--text3);">No re-evaluation required</div>
+          </div>
+          <span class="badge badge-green">Never</span>
+        </div>
+        <div class="elp-row">
+          <div class="elp-level elp-5">5</div>
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:14px;">Extended</div>
+            <div style="font-size:12px;color:var(--text3);">Re-check every 6 years</div>
+          </div>
+          <span class="badge badge-teal">6 yrs</span>
+        </div>
+        <div class="elp-row">
+          <div class="elp-level elp-4">4</div>
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:14px;">Operational ✅ Minimum</div>
+            <div style="font-size:12px;color:var(--text3);">Re-check every 3 years</div>
+          </div>
+          <span class="badge badge-blue">3 yrs</span>
+        </div>
+        <div class="elp-row" style="opacity:0.5;">
+          <div class="elp-level elp-3">3</div>
+          <div style="flex:1;"><div style="font-weight:600;font-size:14px;">Pre-operational ❌</div></div>
+          <span class="badge badge-red">Rejected</span>
+        </div>
+        <div class="elp-row" style="opacity:0.4;">
+          <div class="elp-level elp-2">2</div>
+          <div style="flex:1;"><div style="font-weight:600;font-size:14px;">Elementary ❌</div></div>
+          <span class="badge badge-red">Rejected</span>
+        </div>
+        <div class="elp-row" style="opacity:0.3;">
+          <div class="elp-level elp-1">1</div>
+          <div style="flex:1;"><div style="font-weight:600;font-size:14px;">Pre-elementary ❌</div></div>
+          <span class="badge badge-red">Rejected</span>
+        </div>
+      </div>
+      <div>
+        <div class="memory-box" style="margin-bottom:14px;">
+          <div class="memory-icon">🧠</div>
+          <div>
+            <div class="memory-title">Memory Trick</div>
+            <div class="memory-formula">6 = Never | 5 = 6 years | 4 = 3 years</div>
+          </div>
+        </div>
+        <div class="important-box" style="margin:0;">
+          <strong>Required for:</strong> PPL, CPL, ATPL, Flight Navigator, Flight Engineer, ATC, Aeronautical Station Operator
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDICAL -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Medical Classes & Validity</div>
+    <div class="table-wrap" style="margin-bottom:14px;">
+      <table>
+        <thead><tr><th>Medical Class</th><th>Required For</th><th>Validity (≤ Age)</th><th>Validity (&gt; Age)</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-gold">Class 1</span></td>
+            <td>CPL, ATPL, PPL with IR</td>
+            <td>1 year (up to 60)</td>
+            <td>6 months (above 60)<br><span style="font-size:11px;color:var(--text3);">Single-pilot above 40 → 6 months</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">Class 2</span></td>
+            <td>PPL, SPL, Microlight, FRTOL Restricted</td>
+            <td>2 years (up to 50)</td>
+            <td>1 year (above 50)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-teal">Class 3</span></td>
+            <td>Student ATCO, ATCO</td>
+            <td>4 yrs (≤40), 2 yrs (40–50)</td>
+            <td>1 year (above 50)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-3">
+      <div class="stat-box">
+        <div class="stat-num" style="font-size:20px;">15 days</div>
+        <div class="stat-label">Sickness requiring fresh medical assessment</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="font-size:20px;">10 yrs</div>
+        <div class="stat-label">Licence validity (from Oct 2023)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="font-size:20px;">65 yrs</div>
+        <div class="stat-label">Max age for commercial airline operations</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAX AGE FLOWCHART -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Maximum Age Rules for Professional Pilots</div>
+    <div class="flowchart" style="padding:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.3);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:22px;font-weight:700;color:#EF9A9A;">≥ 65 years</div>
+          <div style="font-size:12px;color:#EF9A9A;margin-top:6px;">❌ Cannot act as PIC or Co-pilot in commercial air transport</div>
+        </div>
+        <div style="background:var(--success-bg);border:1px solid rgba(46,125,50,0.3);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:22px;font-weight:700;color:#A5D6A7;">60–64 years</div>
+          <div style="font-size:12px;color:#A5D6A7;margin-top:6px;">✅ Can fly if: Multi-crew operation AND other pilot is below 60</div>
+        </div>
+      </div>
+      <div class="important-box" style="margin-top:14px;margin-bottom:0;">
+        <strong>Exception:</strong> Rule on multi-crew NOT applicable to aircraft certified for single-pilot, AUW ≤ 5700 kg, commercial air transport within India.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SPL ==================== -->
+<div class="section" id="section-spl">
+  <div class="section-header">
+    <div class="section-icon">🎓</div>
+    <div>
+      <div class="section-title">Student Pilot Licence (SPL)</div>
+      <div class="section-sub">Oral exam · VFR only · No passengers · 10 hrs solo for cross-country</div>
+    </div>
+  </div>
+
+  <div class="mindmap-center">SPL – Key Topics</div>
+  <div class="mindmap-grid" style="margin-bottom:20px;">
+    <div class="mindmap-node mn-blue">
+      <div class="mindmap-node-header">🎤 Knowledge Exam</div>
+      <div class="mindmap-node-body">
+        <li>Air Regulations <span class="badge badge-gold" style="font-size:10px;">Oral</span></li>
+        <li>Air Navigation <span class="badge badge-gold" style="font-size:10px;">Oral</span></li>
+        <li>Aviation Meteorology <span class="badge badge-gold" style="font-size:10px;">Oral</span></li>
+        <li>Aircraft & Engines <span class="badge badge-gold" style="font-size:10px;">Oral</span></li>
+      </div>
+    </div>
+    <div class="mindmap-node mn-red">
+      <div class="mindmap-node-header">🚫 SPL Restrictions</div>
+      <div class="mindmap-node-body">
+        <li>VFR only <span class="crs">✗ IFR</span></li>
+        <li>No passengers allowed <span class="crs">✗</span></li>
+        <li>No hire / reward <span class="crs">✗</span></li>
+        <li>Under supervision only <span class="badge badge-red" style="font-size:10px;">Always</span></li>
+      </div>
+    </div>
+    <div class="mindmap-node mn-green">
+      <div class="mindmap-node-header">✅ Privileges</div>
+      <div class="mindmap-node-body">
+        <li>Fly within India <span class="badge badge-green" style="font-size:10px;">India only</span></li>
+        <li>Act as PIC <span class="chk">✓</span></li>
+        <li>Aircraft in rating <span class="chk">✓</span></li>
+      </div>
+    </div>
+    <div class="mindmap-node mn-gold">
+      <div class="mindmap-node-header">📅 Validity</div>
+      <div class="mindmap-node-body">
+        <li>Renewal period <span class="badge badge-gold" style="font-size:10px;">12 months</span></li>
+        <li>Total validity <span class="badge badge-gold" style="font-size:10px;">24 months</span></li>
+        <li>Cross-country eligibility <span class="badge badge-teal" style="font-size:10px;">10 hrs solo</span></li>
+      </div>
+    </div>
+  </div>
+
+  <div class="important-box">
+    <strong>⭐ DGCA Favourite:</strong> SPL examination is <strong>ORAL</strong> (not written/computer-based). SPL cross-country requires minimum <strong>10 hours solo</strong> + passed Air Navigation + Aviation Meteorology.
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title"><span class="dot"></span>SPL Cross-Country Conditions (All 3 must be met)</div>
+    <div class="flowchart" style="padding:16px;">
+      <div class="flow-row">
+        <div class="flow-box green" style="flex:1;max-width:200px;">
+          <div class="fb-num" style="font-size:18px;">10 hrs</div>
+          <div class="fb-label">Solo Flying</div>
+        </div>
+        <div style="font-size:14px;color:var(--accent);font-weight:700;">AND</div>
+        <div class="flow-box sky" style="flex:1;max-width:200px;">
+          <div class="fb-num" style="font-size:14px;">Pass</div>
+          <div class="fb-label">Air Navigation</div>
+        </div>
+        <div style="font-size:14px;color:var(--accent);font-weight:700;">AND</div>
+        <div class="flow-box gold" style="flex:1;max-width:200px;">
+          <div class="fb-num" style="font-size:14px;">Pass</div>
+          <div class="fb-label">Aviation Meteorology</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Quick Revision Table</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Item</th><th>Requirement</th></tr></thead>
+        <tbody>
+          <tr><td>Exam Type</td><td><span class="badge badge-gold">Oral</span></td></tr>
+          <tr><td>Number of Subjects</td><td>4</td></tr>
+          <tr><td>Flying Rules</td><td><span class="badge badge-blue">VFR only</span></td></tr>
+          <tr><td>Passengers</td><td><span class="crs">❌ Not allowed</span></td></tr>
+          <tr><td>Hire / Reward</td><td><span class="crs">❌ Not allowed</span></td></tr>
+          <tr><td>Cross-country eligibility</td><td>After 10 hrs solo + Nav + Met</td></tr>
+          <tr><td>Single renewal period</td><td><span class="badge badge-gold">12 months</span></td></tr>
+          <tr><td>Total validity</td><td><span class="badge badge-gold">24 months</span></td></tr>
+          <tr><td>Security clearance</td><td>From State Police, furnished to DGCA</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PPL ==================== -->
+<div class="section" id="section-ppl">
+  <div class="section-header">
+    <div class="section-icon">🛩️</div>
+    <div>
+      <div class="section-title">Private Pilot Licence (PPL)</div>
+      <div class="section-sub">40 hrs total · 20 hrs solo · Written exam · Night & IR ratings</div>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-box"><div class="stat-num">40</div><div class="stat-unit">hrs</div><div class="stat-label">Total flight time</div></div>
+    <div class="stat-box"><div class="stat-num">20</div><div class="stat-unit">hrs</div><div class="stat-label">Solo flying</div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-unit">hrs</div><div class="stat-label">XC solo (min 100 NM)</div></div>
+    <div class="stat-box"><div class="stat-num">10</div><div class="stat-unit">hrs</div><div class="stat-label">Recent solo (last 12 months)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>PPL Cross-Country Requirements</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:14px;color:var(--text2);margin-bottom:10px;">Minimum 5 hours cross-country solo must include:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">
+            <span class="chk" style="font-size:18px;">✓</span>
+            <div>
+              <div style="font-weight:600;font-size:14px;">One flight ≥ 100 NM</div>
+              <div style="font-size:12px;color:var(--text3);">Single cross-country flight</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">
+            <span class="chk" style="font-size:18px;">✓</span>
+            <div>
+              <div style="font-weight:600;font-size:14px;">Full-stop landings</div>
+              <div style="font-size:12px;color:var(--text3);">At 2 different aerodromes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="important-box" style="margin-bottom:12px;">
+          <strong>PPL vs SPL cross-country distance:</strong><br>
+          PPL = 50 NM | General = 100 NM
+        </div>
+        <div class="important-box">
+          <strong>Skill test validity:</strong> Must be passed within 6 months before application.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NIGHT RATING -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>🌙 Night Rating Requirements</div>
+    <div class="grid-4" style="margin-bottom:16px;">
+      <div class="stat-box"><div class="stat-num">50</div><div class="stat-unit">hrs PIC</div><div class="stat-label">Total PIC time</div></div>
+      <div class="stat-box"><div class="stat-num">5</div><div class="stat-unit">hrs</div><div class="stat-label">Night flying</div></div>
+      <div class="stat-box"><div class="stat-num">5+5</div><div class="stat-unit"></div><div class="stat-label">Night T/Os + Landings</div></div>
+      <div class="stat-box"><div class="stat-num">100</div><div class="stat-unit">NM</div><div class="stat-label">Dual night XC</div></div>
+    </div>
+    <div class="table-wrap" style="margin-bottom:14px;">
+      <table>
+        <thead><tr><th>Requirement</th><th>Amount</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Total PIC time</td><td>50 hours</td><td>Before applying for Night Rating</td></tr>
+          <tr><td>Night flying</td><td>5 hours</td><td>Within preceding 6 months</td></tr>
+          <tr><td>Night takeoffs</td><td>5</td><td>As PIC</td></tr>
+          <tr><td>Night landings</td><td>5</td><td>As PIC</td></tr>
+          <tr><td>Dual night cross-country</td><td>100 NM minimum</td><td>—</td></tr>
+          <tr><td>Dual instrument instruction</td><td>5 hours</td><td>Max 2.5 hrs simulator credit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="memory-box" style="margin-bottom:0;">
+      <div class="memory-icon">🧠</div>
+      <div>
+        <div class="memory-title">Night Rating Memory Formula</div>
+        <div class="memory-formula">50 – 5 – 5 – 5 – 100</div>
+        <div class="memory-content" style="font-size:12px;margin-top:4px;color:var(--text3);">50 PIC · 5 hrs night · 5 takeoffs · 5 landings · 100 NM night XC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PPL OPEN RATING -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>PPL Open Rating</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:14px;color:var(--text2);margin-bottom:10px;">Applies to single piston engine aeroplanes up to <strong style="color:#fff;">1050 kg AUW</strong></div>
+        <div class="grid-2" style="gap:10px;">
+          <div class="stat-box"><div class="stat-num">200</div><div class="stat-unit">hrs PIC</div></div>
+          <div class="stat-box"><div class="stat-num">4</div><div class="stat-unit">types</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="memory-box" style="margin:0;">
+          <div class="memory-icon">🧠</div>
+          <div>
+            <div class="memory-title">Memory Trick</div>
+            <div class="memory-formula">PPL Open = 200 + 4</div>
+            <div class="memory-content" style="font-size:12px;margin-top:4px;color:var(--text3);">200 hrs PIC + 4 aircraft types</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>PPL Renewal Requirements</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Requirement</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Medical</td><td>Required</td></tr>
+          <tr><td>Flight experience (PIC)</td><td>Minimum <strong>5 hours PIC</strong> in preceding 12 months</td></tr>
+          <tr><td>Alternative</td><td>Pass flying test within preceding 6 months</td></tr>
+          <tr><td>Night passenger carrying</td><td>5 T/Os + 5 landings at night within last 6 months</td></tr>
+          <tr><td>IFR flight</td><td>Requires valid Instrument Rating</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CPL ==================== -->
+<div class="section" id="section-cpl">
+  <div class="section-header">
+    <div class="section-icon">✈️</div>
+    <div>
+      <div class="section-title">Commercial Pilot Licence (CPL)</div>
+      <div class="section-sub">200 hrs · 100 hrs PIC · Signals exam · FRTOL required</div>
+    </div>
+  </div>
+
+  <!-- CPL STATS -->
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-box"><div class="stat-num">200</div><div class="stat-unit">hrs</div><div class="stat-label">Total flight time</div></div>
+    <div class="stat-box"><div class="stat-num">100</div><div class="stat-unit">hrs PIC</div><div class="stat-label">Pilot-in-Command</div></div>
+    <div class="stat-box"><div class="stat-num">20</div><div class="stat-unit">hrs</div><div class="stat-label">PIC Cross-country</div></div>
+    <div class="stat-box"><div class="stat-num">300</div><div class="stat-unit">NM</div><div class="stat-label">Long XC flight</div></div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-icon">🧠</div>
+    <div>
+      <div class="memory-title">CPL Experience Memory Formula</div>
+      <div class="memory-formula">200 – 100 – 20 – 10 – 5</div>
+      <div class="memory-content" style="font-size:12px;margin-top:6px;color:var(--text3);">
+        200 Total · 100 PIC · 20 XC PIC · 10 Instrument · 5 Night flying
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px;">
+    <div class="card-title"><span class="dot"></span>CPL Experience Requirements (Standard)</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Requirement</th><th>Hours / Distance</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Total flight time</td><td><strong>200 hours</strong></td><td>—</td></tr>
+          <tr><td>PIC time</td><td><strong>100 hours</strong></td><td>Including 15 hrs within last 6 months</td></tr>
+          <tr><td>PIC cross-country</td><td><strong>20 hours</strong></td><td>Includes one flight of 300 NM + 2 full-stop landings</td></tr>
+          <tr><td>Instrument time</td><td><strong>10 hours</strong></td><td>Max 5 hrs simulator credit</td></tr>
+          <tr><td>Night flying</td><td><strong>5 hours</strong></td><td>10 T/Os + 10 landings as PIC (last 6 months)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SKILL TESTS -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>CPL Skill Test Requirements</div>
+    <div class="grid-2" style="margin-bottom:12px;">
+      <div class="stat-box sky"><div class="stat-num">250</div><div class="stat-unit">NM</div><div class="stat-label">Day XC Test (min + 1 full-stop landing)</div></div>
+      <div class="stat-box" style="border-color:rgba(106,27,154,0.4);background:rgba(106,27,154,0.08);">
+        <div class="stat-num" style="color:#CE93D8;">120</div><div class="stat-unit">NM</div>
+        <div class="stat-label">Night XC Test (return to base, no landing elsewhere)</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--text2);">Also required: General Flying Test (Day) + General Flying Test (Night)</div>
+  </div>
+
+  <!-- CPL + IR Section -->
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAcc(this)">
+      CPL with Instrument Rating (CPL + IR) — Extra Requirements
+      <span class="chevron">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="important-box" style="margin-bottom:14px;">
+        <strong>Key difference:</strong> Instrument time jumps from 10 hrs → <strong>50 hrs</strong>. Simulator credit jumps from 5 → <strong>20 hrs</strong>. XC PIC jumps from 20 → <strong>50 hrs</strong>.
+      </div>
+      <div class="grid-4" style="margin-bottom:14px;">
+        <div class="stat-box"><div class="stat-num">50</div><div class="stat-unit">hrs</div><div class="stat-label">Instrument time (was 10)</div></div>
+        <div class="stat-box"><div class="stat-num">20</div><div class="stat-unit">hrs</div><div class="stat-label">Simulator credit (was 5)</div></div>
+        <div class="stat-box"><div class="stat-num">50</div><div class="stat-unit">hrs</div><div class="stat-label">XC PIC (was 20)</div></div>
+        <div class="stat-box"><div class="stat-num">30</div><div class="stat-unit">hrs</div><div class="stat-label">SPIC (Student PIC)</div></div>
+      </div>
+      <div class="table-wrap" style="margin-bottom:14px;">
+        <table>
+          <thead><tr><th>Item</th><th>Normal CPL</th><th>CPL with IR</th></tr></thead>
+          <tbody>
+            <tr><td>Instrument time</td><td>10 hrs</td><td><strong style="color:#90CAF9;">50 hrs</strong></td></tr>
+            <tr><td>Simulator credit</td><td>5 hrs</td><td><strong style="color:#90CAF9;">20 hrs</strong></td></tr>
+            <tr><td>XC PIC</td><td>20 hrs</td><td><strong style="color:#90CAF9;">50 hrs</strong></td></tr>
+            <tr><td>Open Rating AUW limit</td><td>1050 kg</td><td><strong style="color:#90CAF9;">1500 kg</strong></td></tr>
+            <tr><td>Separate IR issued?</td><td>No (must apply separately)</td><td><strong style="color:#A5D6A7;">No — included in this licence</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="important-box" style="margin-bottom:0;">
+        <strong>No separate Instrument Rating is issued</strong> for CPL with IR holders — IR privileges are already built into the licence once the Instrument Rating flight test is passed.
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFICIENCY CHECK -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Proficiency Check</div>
+    <div class="grid-3">
+      <div class="stat-box sky"><div class="stat-num">5700</div><div class="stat-unit">kg AUW</div><div class="stat-label">Required for co-pilots above this weight</div></div>
+      <div class="stat-box"><div class="stat-num">6</div><div class="stat-unit">months</div><div class="stat-label">Validity</div></div>
+      <div class="stat-box"><div class="stat-num">2</div><div class="stat-unit">months</div><div class="stat-label">Renewal window (before expiry = old date)</div></div>
+    </div>
+  </div>
+
+  <!-- CPL PRIVILEGES -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>CPL Privileges & Restrictions</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:13px;color:#A5D6A7;font-weight:600;margin-bottom:8px;">✅ CAN DO</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text2);">
+          <div>Exercise all PPL privileges</div>
+          <div>Act as PIC of aeroplanes ≤ 5700 kg AUW</div>
+          <div>Act as Co-pilot where required</div>
+          <div>Fly IFR (with valid Instrument Rating)</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#EF9A9A;font-weight:600;margin-bottom:8px;">⚠️ RESTRICTIONS</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text2);">
+          <div>At age 65 → privileges reduce to PPL only</div>
+          <div>Night passengers: 10 T/Os + 10 landings in last 6 months</div>
+          <div>Must hold current FRTOL</div>
+          <div>Renewal: 10 hrs PIC in 6 months OR general flying test</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ATPL ==================== -->
+<div class="section" id="section-atpl">
+  <div class="section-header">
+    <div class="section-icon">🏆</div>
+    <div>
+      <div class="section-title">Airline Transport Pilot Licence (ATPL)</div>
+      <div class="section-sub">Highest licence · 1500 hrs total · Multi-engine · 10 route checks</div>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-box accent"><div class="stat-num">1500</div><div class="stat-unit">hrs</div><div class="stat-label">Total flight time</div></div>
+    <div class="stat-box"><div class="stat-num">250</div><div class="stat-unit">hrs</div><div class="stat-label">PIC / Supervised PIC</div></div>
+    <div class="stat-box"><div class="stat-num">500</div><div class="stat-unit">hrs</div><div class="stat-label">Total cross-country</div></div>
+    <div class="stat-box"><div class="stat-num">100</div><div class="stat-unit">hrs</div><div class="stat-label">Instrument time</div></div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-icon">🧠</div>
+    <div>
+      <div class="memory-title">ATPL Master Formula</div>
+      <div class="memory-formula">1500 – 500 – 250 – 100 – 75 – 20</div>
+      <div class="memory-content" style="font-size:12px;margin-top:6px;color:var(--text3);">
+        Total · XC · PIC/Supervised · Instrument · Night · Recent
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px;">
+    <div class="card-title"><span class="dot"></span>ATPL Experience Requirements</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Requirement</th><th>Hours</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Total flight time</td><td><strong>1500 hrs</strong></td><td>—</td></tr>
+          <tr><td>PIC / Supervised PIC</td><td><strong>250 hrs</strong></td><td>Includes 100 hrs XC + 50 hrs night</td></tr>
+          <tr><td>Total cross-country</td><td><strong>500 hrs</strong></td><td>Total, not just as PIC</td></tr>
+          <tr><td>Total night flying</td><td><strong>75 hrs</strong></td><td>—</td></tr>
+          <tr><td>Instrument time</td><td><strong>100 hrs</strong></td><td>Min 50 hrs in actual flight</td></tr>
+          <tr><td>Recent flight time</td><td><strong>20 hrs</strong></td><td>Within preceding 6 months</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROUTE CHECKS FOR PIC -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Conditions Before Acting as PIC on Transport Aeroplane (&gt;5700 kg)</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px;">Standard Requirement:</div>
+        <div class="flowchart" style="padding:14px;margin:0;">
+          <div class="flow-row" style="flex-direction:column;gap:10px;">
+            <div class="flow-box sky" style="width:100%;max-width:none;text-align:left;padding:12px 16px;">
+              <div class="fb-num" style="font-size:16px;">100 hrs</div>
+              <div class="fb-label">Co-pilot on that aircraft type</div>
+            </div>
+            <div class="flow-box green" style="width:100%;max-width:none;text-align:left;padding:12px 16px;">
+              <div class="fb-num" style="font-size:16px;">10 route checks</div>
+              <div class="fb-label">Consecutive satisfactory (min 5 by night)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px;">Reduced Requirement (if already 100 hrs PIC on transport):</div>
+        <div class="flowchart" style="padding:14px;margin:0;">
+          <div class="flow-row" style="flex-direction:column;gap:10px;">
+            <div class="flow-box gold" style="width:100%;max-width:none;text-align:left;padding:12px 16px;">
+              <div class="fb-num" style="font-size:16px;">6 route checks</div>
+              <div class="fb-label">Including 3 by night</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>ATPL Knowledge Requirements</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Must pass all 6 subjects:</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;">
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ Air Regulations</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ Air Navigation</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ <strong style="color:#90CAF9;">Avionics</strong> (Radio Aids & Instruments — unique to ATPL)</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ Aviation Meteorology</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ Aircraft & Engines</div>
+          <div style="padding:8px 12px;background:var(--card2);border-radius:8px;border:1px solid var(--border2);">✅ Signals (Practical)</div>
+        </div>
+      </div>
+      <div>
+        <div class="important-box" style="margin-bottom:12px;">
+          <strong>CPL Holder Exemption:</strong> Need not pass Air Regulations again.
+        </div>
+        <div class="important-box" style="margin-bottom:12px;">
+          <strong>SCPL Holder:</strong> Need not pass any examinations.
+        </div>
+        <div class="important-box" style="margin-bottom:0;">
+          <strong>Other Requirements:</strong> Must hold CPL/SCPL + current IR on multi-engine + current FRTOL.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>ATPL Privileges</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Privilege</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>All PPL privileges</td><td><span class="chk">✓</span> Yes</td></tr>
+          <tr><td>All CPL privileges</td><td><span class="chk">✓</span> Yes</td></tr>
+          <tr><td><strong>Act as PIC</strong></td><td>Transport aeroplanes <strong>above 5700 kg AUW</strong> (biggest ATPL privilege)</td></tr>
+          <tr><td>At age 65</td><td>Privileges reduce to PPL only — commercial transport stops</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IR ==================== -->
+<div class="section" id="section-ir">
+  <div class="section-header">
+    <div class="section-icon">📡</div>
+    <div>
+      <div class="section-title">Instrument Rating (Aeroplanes)</div>
+      <div class="section-sub">40 hrs instrument · 100 hrs PIC · 12 months validity · 5700 kg weight break</div>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="stat-box"><div class="stat-num">100</div><div class="stat-unit">hrs PIC</div><div class="stat-label">Including 50 hrs XC</div></div>
+    <div class="stat-box"><div class="stat-num">40</div><div class="stat-unit">hrs</div><div class="stat-label">Instrument time (max 20 hrs ground)</div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-unit">hrs</div><div class="stat-label">Recent instrument (last 6 months)</div></div>
+    <div class="stat-box"><div class="stat-num">12</div><div class="stat-unit">months</div><div class="stat-label">IR validity</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>IR Knowledge & Experience</div>
+    <div class="table-wrap" style="margin-bottom:14px;">
+      <table>
+        <thead><tr><th>Requirement</th><th>Standard</th><th>With Helicopter IR</th></tr></thead>
+        <tbody>
+          <tr><td>PIC time</td><td><strong>100 hrs</strong></td><td>100 hrs</td></tr>
+          <tr><td>Cross-country time</td><td><strong>50 hrs</strong></td><td>20 hrs (reduced)</td></tr>
+          <tr><td>Instrument time</td><td><strong>40 hrs</strong></td><td>20 hrs (reduced)</td></tr>
+          <tr><td>Simulator credit</td><td>Max 20 hrs (ground instrument)</td><td>Max 10 hrs</td></tr>
+          <tr><td>Recent instrument</td><td>5 hrs (last 6 months)</td><td>Same</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="important-box">
+      <strong>Common DGCA Trap:</strong> IR requires <strong>40 hours</strong> instrument time (not 20). Recent instrument = <strong>5 hours</strong> (not 10). Validity = <strong>12 months</strong> (not 6 months).
+    </div>
+  </div>
+
+  <!-- WEIGHT RULES -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>IR Privileges by Weight Category</div>
+    <div class="grid-3">
+      <div style="background:var(--success-bg);border:1px solid rgba(46,125,50,0.3);border-radius:12px;padding:16px;">
+        <div style="font-weight:700;color:#A5D6A7;margin-bottom:8px;">Single-engine ≤ 5700 kg</div>
+        <div style="font-size:13px;color:var(--text2);">IR applies to <strong style="color:#fff;">all</strong> single-engine aeroplanes in that weight category</div>
+      </div>
+      <div style="background:var(--sky-bg);border:1px solid rgba(21,101,192,0.3);border-radius:12px;padding:16px;">
+        <div style="font-weight:700;color:#90CAF9;margin-bottom:8px;">Multi-engine ≤ 5700 kg</div>
+        <div style="font-size:13px;color:var(--text2);">IR applies to <strong style="color:#fff;">all</strong> multi-engine aeroplanes in that category. <br>Bonus: also valid on single-engine types in rating.</div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.3);border-radius:12px;padding:16px;">
+        <div style="font-weight:700;color:#EF9A9A;margin-bottom:8px;">Above 5700 kg</div>
+        <div style="font-size:13px;color:var(--text2);">IR applies <strong style="color:#fff;">only</strong> to the specific aircraft type on which the IR test was passed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>IR Renewal Rules</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Validity</td><td><strong>12 months</strong> from date of IR Flight Test</td></tr>
+          <tr><td>Renewal window</td><td>If renewed within <strong>2 months before expiry</strong>, validity starts from previous expiry date</td></tr>
+          <tr><td>Renewal requirements</td><td>Instrument Rating Flight Test + Current FRTOL</td></tr>
+          <tr><td>Extension of rating</td><td>Must pass IR Flight Test on that aircraft type within last 6 months</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== COMPARE ==================== -->
+<div class="section" id="section-compare">
+  <div class="section-header">
+    <div class="section-icon">⚖️</div>
+    <div>
+      <div class="section-title">Comparison Tables</div>
+      <div class="section-sub">SPL vs PPL vs CPL vs ATPL · Normal CPL vs CPL+IR · Key traps</div>
+    </div>
+  </div>
+
+  <!-- MAIN COMPARISON -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>SPL → PPL → CPL → ATPL Master Comparison</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>SPL</th>
+            <th>PPL</th>
+            <th>CPL</th>
+            <th>ATPL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>Min Age</td><td>16 yrs</td><td>17 yrs</td><td>18 yrs</td><td>21 yrs</td></tr>
+          <tr><td>Education</td><td>Class 10</td><td>Class 10</td><td>10+2 P&M</td><td>10+2 P&M</td></tr>
+          <tr><td>Exam type</td><td><span class="vs-badge">Oral</span></td><td>Written</td><td>Written + Signals</td><td>Written + Signals</td></tr>
+          <tr class="highlight-row"><td>Total flight time</td><td>—</td><td><strong>40 hrs</strong></td><td><strong>200 hrs</strong></td><td><strong>1500 hrs</strong></td></tr>
+          <tr><td>PIC time</td><td>—</td><td>20 hrs solo</td><td>100 hrs</td><td>250 hrs</td></tr>
+          <tr><td>XC time</td><td>10 hrs solo (for XC)</td><td>5 hrs solo (100 NM)</td><td>20 hrs (300 NM)</td><td>500 hrs total</td></tr>
+          <tr><td>Instrument time</td><td>—</td><td>Optional (IR)</td><td>10 hrs</td><td>100 hrs</td></tr>
+          <tr class="highlight-row"><td>Night time</td><td>—</td><td>5 hrs (Night Rating)</td><td>5 hrs</td><td>75 hrs</td></tr>
+          <tr><td>Night T/Os + Landings</td><td>—</td><td>5 + 5</td><td>10 + 10</td><td>—</td></tr>
+          <tr><td>Medical required</td><td>Class 2</td><td>Class 2</td><td>Class 1</td><td>Class 1</td></tr>
+          <tr><td>Can fly for hire?</td><td><span class="crs">❌ No</span></td><td><span class="crs">❌ No</span></td><td><span class="chk">✓ Yes</span></td><td><span class="chk">✓ Yes</span></td></tr>
+          <tr class="highlight-row"><td>Can be Airline Captain?</td><td><span class="crs">❌</span></td><td><span class="crs">❌</span></td><td>Limited (≤5700 kg)</td><td><span class="chk">✓ Yes (>5700 kg)</span></td></tr>
+          <tr><td>Renewal PIC</td><td>N/A</td><td>5 hrs (12 months)</td><td>10 hrs (6 months)</td><td>10 hrs (6 months)</td></tr>
+          <tr><td>FRTOL required?</td><td><span class="crs">❌</span></td><td><span class="crs">❌</span></td><td><span class="chk">✓ Yes</span></td><td><span class="chk">✓ Yes</span></td></tr>
+          <tr><td>Commercial age limit</td><td>—</td><td>—</td><td>65 yrs</td><td>65 yrs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CPL vs CPL+IR -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Normal CPL vs CPL with IR — Key Differences</div>
+    <div class="table-wrap" style="margin:0;">
+      <table>
+        <thead>
+          <tr><th>Requirement</th><th>Normal CPL</th><th>CPL with IR</th><th>Change</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Instrument time</td><td>10 hrs</td><td><strong style="color:#90CAF9;">50 hrs</strong></td><td>↑ 5×</td></tr>
+          <tr><td>Simulator credit</td><td>5 hrs</td><td><strong style="color:#90CAF9;">20 hrs</strong></td><td>↑ 4×</td></tr>
+          <tr><td>XC PIC</td><td>20 hrs</td><td><strong style="color:#90CAF9;">50 hrs</strong></td><td>↑ 2.5×</td></tr>
+          <tr><td>SPIC time</td><td>—</td><td><strong style="color:#90CAF9;">30 hrs</strong></td><td>Added</td></tr>
+          <tr><td>Instrument flight test</td><td><span class="crs">Not required</span></td><td><span class="chk">Required</span></td><td>Added</td></tr>
+          <tr><td>Separate IR issued?</td><td>Must apply separately</td><td><strong style="color:#A5D6A7;">No — built-in</strong></td><td>Included</td></tr>
+          <tr><td>Open Rating AUW</td><td>1050 kg</td><td><strong style="color:#90CAF9;">1500 kg</strong></td><td>↑</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HIGH YIELD NUMBERS MASTER TABLE -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>⭐ High-Yield Numbers — Master Reference</div>
+    <div class="grid-2">
+      <div class="table-wrap" style="margin:0;">
+        <table>
+          <thead><tr><th>Topic</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>General cross-country</td><td><strong>100 NM</strong></td></tr>
+            <tr><td>PPL cross-country</td><td><strong>50 NM</strong></td></tr>
+            <tr><td>SPL minimum age</td><td>16</td></tr>
+            <tr><td>PPL minimum age</td><td>17</td></tr>
+            <tr><td>CPL minimum age</td><td>18</td></tr>
+            <tr><td>ATPL minimum age</td><td>21</td></tr>
+            <tr><td>Licence validity</td><td>10 years</td></tr>
+            <tr><td>Sickness → fresh medical</td><td><strong>15 days</strong></td></tr>
+            <tr><td>ELP level 4 recheck</td><td>3 years</td></tr>
+            <tr><td>ELP level 5 recheck</td><td>6 years</td></tr>
+            <tr><td>ELP level 6 recheck</td><td>Not required</td></tr>
+            <tr><td>Max commercial age</td><td>65 years</td></tr>
+            <tr><td>Proficiency check validity</td><td>6 months</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap" style="margin:0;">
+        <table>
+          <thead><tr><th>Topic</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>PPL total time</td><td><strong>40 hrs</strong></td></tr>
+            <tr><td>CPL total time</td><td><strong>200 hrs</strong></td></tr>
+            <tr><td>ATPL total time</td><td><strong>1500 hrs</strong></td></tr>
+            <tr><td>CPL PIC time</td><td>100 hrs</td></tr>
+            <tr><td>CPL XC flight (single)</td><td>300 NM</td></tr>
+            <tr><td>CPL Day XC test</td><td>250 NM</td></tr>
+            <tr><td>CPL Night XC test</td><td>120 NM</td></tr>
+            <tr><td>IR instrument time</td><td><strong>40 hrs</strong></td></tr>
+            <tr><td>IR validity</td><td>12 months</td></tr>
+            <tr><td>ATPL route checks</td><td>10 (reduced: 6)</td></tr>
+            <tr><td>SPL total validity</td><td>24 months</td></tr>
+            <tr><td>SPL renewal period</td><td>12 months</td></tr>
+            <tr><td>Weight break (commercial)</td><td>5700 kg AUW</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DGCA TRAPS -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>⚠️ Common DGCA Exam Traps</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">SPL Exam Type</div>
+          <div style="font-size:13px;color:var(--text2);">SPL exam is <strong style="color:#fff;">ORAL</strong>, not written or computer-based.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">Instrument Time CPL vs CPL+IR</div>
+          <div style="font-size:13px;color:var(--text2);">Normal CPL = <strong style="color:#fff;">10 hrs</strong> | CPL with IR = <strong style="color:#90CAF9;">50 hrs</strong>. Don't mix them up.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">IR Instrument Time</div>
+          <div style="font-size:13px;color:var(--text2);">IR requires <strong style="color:#fff;">40 hrs</strong> instrument time (not 20). Recent = <strong style="color:#fff;">5 hrs</strong>. Validity = <strong style="color:#90CAF9;">12 months</strong> (not 6).</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">Night T/Os & Landings</div>
+          <div style="font-size:13px;color:var(--text2);">PPL night rating = <strong style="color:#fff;">5+5</strong> | CPL = <strong style="color:#90CAF9;">10+10</strong>.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">Age 60–65 Rule</div>
+          <div style="font-size:13px;color:var(--text2);">Age 60–65 = CAN fly commercial but only in multi-crew with other pilot below 60. Age 65+ = PPL privileges only.</div>
+        </div>
+      </div>
+      <div style="background:var(--danger-bg);border:1px solid rgba(198,40,40,0.25);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;flex-shrink:0;">🪤</span>
+        <div>
+          <div style="font-weight:700;color:#EF9A9A;font-size:13px;margin-bottom:4px;">Renewal Window Rule</div>
+          <div style="font-size:13px;color:var(--text2);">If IR or Proficiency Check is renewed within <strong style="color:#fff;">2 months before expiry</strong>, validity runs from previous expiry date (not test date).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== QUIZ ==================== -->
+<div class="section" id="section-quiz">
+  <div class="section-header">
+    <div class="section-icon">🧠</div>
+    <div>
+      <div class="section-title">Practice Quiz</div>
+      <div class="section-sub">25 DGCA-style questions covering all topics</div>
+    </div>
+  </div>
+
+  <div id="quiz-main">
+    <div class="quiz-progress">
+      <span class="quiz-q-num" id="q-num">Q 1 / 25</span>
+      <div class="progress-bar"><div class="progress-fill" id="q-fill" style="width:4%"></div></div>
+      <span id="q-score-live" style="font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-q" id="q-text"></div>
+      <div class="quiz-options" id="q-opts"></div>
+      <div class="quiz-explain" id="q-explain"></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn btn-outline" onclick="restartQuiz()">↩ Restart</button>
+      <button class="btn" id="next-btn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+
+  <div class="quiz-score" id="quiz-score">
+    <div class="score-circle" id="score-circle">
+      <div class="score-inner" id="score-inner">0/25</div>
+    </div>
+    <div class="score-msg" id="score-msg"></div>
+    <div class="score-sub" id="score-sub"></div>
+    <button class="btn" onclick="restartQuiz()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+const questions = [
+  {q:"Who is the licensing authority for pilot licences in India?",opts:["ICAO","Airports Authority of India","DGCA / Central Government","Ministry of Defence"],ans:2,exp:"DGCA / Central Government is the sole licensing authority in India. ICAO sets standards but does not issue licences."},
+  {q:"What is the minimum age for a Student Pilot Licence (SPL)?",opts:["14 years","16 years","17 years","18 years"],ans:1,exp:"SPL minimum age is 16 years. PPL = 17, CPL = 18, ATPL = 21."},
+  {q:"The SPL knowledge examination is:",opts:["Written","Computer-based","Oral","Practical simulator"],ans:2,exp:"SPL exam is ORAL. PPL and CPL exams are written. This is a classic DGCA trap."},
+  {q:"What educational qualification is required for CPL?",opts:["Class 8 pass","Class 10 pass","10+2 with Physics and Mathematics","Any graduate degree"],ans:2,exp:"CPL (and ATPL) require 10+2 with Physics and Mathematics. PPL and SPL only need Class 10."},
+  {q:"Cross-country flight for PPL means flight beyond what distance from departure aerodrome?",opts:["25 NM","50 NM","75 NM","100 NM"],ans:1,exp:"For PPL, cross-country is defined as flight beyond 50 NM. For general (CPL/ATPL) it is 100 NM."},
+  {q:"Which ELP levels are acceptable for pilot licences?",opts:["1, 2, 3","3, 4, 5","4, 5, 6","5 and 6 only"],ans:2,exp:"Only ELP Levels 4 (Operational), 5 (Extended), and 6 (Expert) are acceptable. Levels 1–3 are not."},
+  {q:"How often must an ELP Level 4 holder be re-evaluated?",opts:["Every year","Every 3 years","Every 6 years","No re-evaluation needed"],ans:1,exp:"ELP Level 4 = every 3 years. Level 5 = every 6 years. Level 6 = never required."},
+  {q:"After how many days of sickness must a pilot undergo a fresh medical assessment?",opts:["7 days","10 days","15 days","21 days"],ans:2,exp:"A pilot cannot exercise licence privileges if incapacitated due to sickness/injury for 15 days or more."},
+  {q:"What is the current validity of all pilot licences in India (from Oct 2023)?",opts:["5 years","8 years","10 years","Lifetime"],ans:2,exp:"From 10 October 2023, all pilot licences are valid for 10 years."},
+  {q:"What is the maximum age to act as PIC or Co-pilot in commercial air transport?",opts:["60 years","63 years","65 years","70 years"],ans:2,exp:"At age 65 or more, a pilot cannot act as PIC or Co-pilot in commercial air transport operations."},
+  {q:"An SPL holder can undertake cross-country flight after:",opts:["5 hours solo","8 hours solo","10 hours solo and passing Nav + Met","20 hours solo"],ans:2,exp:"SPL cross-country requires minimum 10 hours solo flying AND passing Air Navigation AND Aviation Meteorology."},
+  {q:"What is the minimum total flight time for PPL?",opts:["20 hours","30 hours","40 hours","50 hours"],ans:2,exp:"PPL requires minimum 40 hours total flight time, including 20 hours solo."},
+  {q:"For PPL Night Rating, what is the minimum PIC time required?",opts:["30 hours","40 hours","50 hours","60 hours"],ans:2,exp:"Night Rating requires minimum 50 hours PIC time, plus 5 hrs night flying, 5 T/Os, 5 landings, 100 NM night XC."},
+  {q:"What is the minimum total flight time for CPL?",opts:["100 hours","150 hours","200 hours","250 hours"],ans:2,exp:"CPL requires 200 hours total flight time, including 100 hours PIC."},
+  {q:"The minimum cross-country PIC flight required for CPL skill test (Day) is:",opts:["100 NM","150 NM","200 NM","250 NM"],ans:3,exp:"CPL Day XC skill test requires minimum 250 NM with at least one full-stop landing at another aerodrome."},
+  {q:"CPL Night XC skill test minimum distance is:",opts:["80 NM","100 NM","120 NM","150 NM"],ans:2,exp:"CPL Night XC skill test is minimum 120 NM, returning to the departure point without landing elsewhere."},
+  {q:"What is the instrument time required for CPL with Instrument Rating?",opts:["10 hours","20 hours","40 hours","50 hours"],ans:3,exp:"CPL with IR requires 50 hours instrument time (compared to only 10 hrs for normal CPL). Simulator credit up to 20 hrs."},
+  {q:"What is the minimum total flight time for ATPL?",opts:["750 hours","1000 hours","1250 hours","1500 hours"],ans:3,exp:"ATPL requires 1500 hours total flight time. The most important ATPL number!"},
+  {q:"The total cross-country time required for ATPL is:",opts:["100 hours","250 hours","500 hours","750 hours"],ans:2,exp:"ATPL requires 500 hours total cross-country flight time. Within the 250 hrs PIC, 100 hrs must be XC."},
+  {q:"Before acting as PIC on a transport aeroplane above 5700 kg, how many route checks are needed (standard)?",opts:["5","8","10","15"],ans:2,exp:"Standard requirement is 10 consecutive satisfactory route checks, of which minimum 5 must be by night."},
+  {q:"Instrument Rating validity is:",opts:["6 months","9 months","12 months","24 months"],ans:2,exp:"IR validity is 12 months from the date of the Instrument Rating Flight Test. A common trap — don't say 6 months."},
+  {q:"For IR on aircraft above 5700 kg, the rating applies to:",opts:["All aircraft above 5700 kg","Only the specific type on which the IR test was passed","All multi-engine aircraft","All transport aircraft"],ans:1,exp:"For aircraft above 5700 kg, IR privileges apply ONLY to the specific aircraft type on which the IR test was passed."},
+  {q:"Class 1 medical validity for a pilot above 60 years is:",opts:["12 months","9 months","6 months","3 months"],ans:2,exp:"Class 1 medical is valid for 1 year up to age 60, but only 6 months for pilots above 60 years."},
+  {q:"What is the minimum PIC time required for CPL renewal?",opts:["5 hours in 12 months","10 hours in 6 months","15 hours in 6 months","20 hours in 12 months"],ans:1,exp:"CPL renewal requires 10 hours PIC within preceding 6 months (or pass general flying test day & night)."},
+  {q:"A pilot aged 61 wishes to continue commercial operations. This is permitted if:",opts:["The pilot holds a valid ATPL","It is a multi-crew operation and the other pilot is below 60","The pilot holds Class 1 medical","The aircraft is above 5700 kg"],ans:1,exp:"Age 60–64 can fly commercial ONLY if it is a multi-crew operation AND the other crew member is below 60 years."}
+];
+
+let current=0, score=0, answered=[];
+
+function renderQ() {
+  const q = questions[current];
+  document.getElementById('q-num').textContent = 'Q '+(current+1)+' / '+questions.length;
+  document.getElementById('q-fill').style.width = ((current+1)/questions.length*100)+'%';
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-explain').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+  const opts = document.getElementById('q-opts');
+  opts.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAns(i);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAns(i) {
+  const q = questions[current];
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach(b => b.classList.add('disabled'));
+  btns[q.ans].classList.add('correct');
+  if(i !== q.ans) btns[i].classList.add('wrong');
+  else score++;
+  document.getElementById('q-score-live').textContent = 'Score: '+score;
+  const ex = document.getElementById('q-explain');
+  ex.textContent = '💡 ' + q.exp;
+  ex.style.display = 'block';
+  document.getElementById('next-btn').style.display = 'block';
+  answered.push(i===q.ans);
+}
+
+function nextQ() {
+  current++;
+  if(current >= questions.length) showResult();
+  else renderQ();
+}
+
+function showResult() {
+  document.getElementById('quiz-main').style.display = 'none';
+  const rs = document.getElementById('quiz-score');
+  rs.style.display = 'block';
+  const pct = Math.round(score/questions.length*100);
+  document.getElementById('score-circle').style.setProperty('--pct', pct+'%');
+  document.getElementById('score-inner').textContent = score+'/'+questions.length;
+  let msg = '', sub = '';
+  if(pct >= 90) { msg = '🏆 Outstanding!'; sub = 'You\'re ready for the DGCA exam. Excellent preparation!'; }
+  else if(pct >= 75) { msg = '✈️ Strong Performance!'; sub = 'Good understanding. Review the topics you missed.'; }
+  else if(pct >= 60) { msg = '📚 Getting There!'; sub = 'Revise the comparison tables and high-yield numbers.'; }
+  else { msg = '🔄 Keep Studying!'; sub = 'Focus on numbers and key definitions. Use the memory tricks!'; }
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-sub').textContent = sub;
+}
+
+function restartQuiz() {
+  current=0; score=0; answered=[];
+  document.getElementById('quiz-main').style.display = 'block';
+  document.getElementById('quiz-score').style.display = 'none';
+  document.getElementById('q-score-live').textContent = 'Score: 0';
+  renderQ();
+}
+
+renderQ();
+</script>
+</body>
+</html>

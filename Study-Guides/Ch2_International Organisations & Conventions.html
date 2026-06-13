@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 2: International Organisations & Conventions</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;
+  --card:#0D1A2E;--card2:#101E38;
+  --gold:#EAB308;--sky:#0EA5E9;--green:#22C55E;
+  --amber:#F59E0B;--red:#EF4444;--orange:#F97316;
+  --purple:#A855F7;--teal:#14B8A6;--indigo:#6366F1;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --gd-bg:rgba(234,179,8,.11);--sk-bg:rgba(14,165,233,.11);
+  --gn-bg:rgba(34,197,94,.11);--am-bg:rgba(245,158,11,.11);
+  --rd-bg:rgba(239,68,68,.11);--or-bg:rgba(249,115,22,.11);
+  --pu-bg:rgba(168,85,247,.11);--tl-bg:rgba(20,184,166,.11);
+  --in-bg:rgba(99,102,241,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(234,179,8,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.11),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);color:#FDE047;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#FDE047;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:11px 14px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:5px 11px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.nb:hover{border-color:var(--gold);color:#FDE047;}
+.nb.active{background:var(--gold);border-color:var(--gold);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;line-height:1.1;}
+.su{font-size:11px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.013);}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-gd{background:var(--gd-bg);color:#FDE047;border:1px solid rgba(234,179,8,.3);}
+.b-sk{background:var(--sk-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-gn{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-am{background:var(--am-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-rd{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-or{background:var(--or-bg);color:#FDB785;border:1px solid rgba(249,115,22,.3);}
+.b-pu{background:var(--pu-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.3);}
+.b-tl{background:var(--tl-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-in{background:var(--in-bg);color:#A5B4FC;border:1px solid rgba(99,102,241,.3);}
+.mem{background:linear-gradient(135deg,rgba(234,179,8,.09),rgba(249,115,22,.06));border:1px solid rgba(234,179,8,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-gd{background:var(--gd-bg);border-color:var(--gold);} .al-gd strong{color:#FDE047;}
+.al-rd{background:var(--rd-bg);border-color:var(--red);} .al-rd strong{color:#FCA5A5;}
+.al-gn{background:var(--gn-bg);border-color:var(--green);} .al-gn strong{color:#86EFAC;}
+.al-sk{background:var(--sk-bg);border-color:var(--sky);} .al-sk strong{color:#7DD3FC;}
+.al-am{background:var(--am-bg);border-color:var(--amber);} .al-am strong{color:#FCD34D;}
+.al-pu{background:var(--pu-bg);border-color:var(--purple);} .al-pu strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FDE047;}
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+.trap{background:var(--rd-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* Article pill list */
+.art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+.art-box{background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:10px 13px;display:flex;align-items:center;gap:10px;}
+.art-num{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#FDE047;flex-shrink:0;min-width:32px;}
+.art-topic{font-size:13px;color:var(--text);}
+.art-sub{font-size:11px;color:var(--text2);}
+/* freedom cards */
+.freedom-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.freedom-card{flex:1;min-width:130px;border-radius:10px;padding:13px;text-align:center;border:1px solid;}
+.fn{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin-bottom:4px;}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--gold);color:#fff;background:var(--gd-bg);}
+.qopt.correct{border-color:var(--green);background:var(--gn-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--rd-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--gd-bg);border:1px solid rgba(234,179,8,.22);border-radius:8px;font-size:12.5px;color:#FDE047;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--gold);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{background:#FACC15;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--gold) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FDE047;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.nav-bar{gap:2px;}.nb{font-size:9.5px;padding:4px 7px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">⚖️ DGCA CPL · Air Regulations</div>
+  <h1>Chapter 2 — <span>International Organisations & Conventions</span></h1>
+  <p>Chicago Convention · ICAO · Articles · Annexes · Freedoms · Tokyo/Hague/Montreal · Indian Organisations</p>
+  <div class="hero-chips">
+    <span class="chip">96 Articles · 7 Dec 1944</span><span class="chip">Art.1=Sovereignty · Art.6=Scheduled</span>
+    <span class="chip">Art.29=Documents · Art.38=Differences</span>
+    <span class="chip">ICAO HQ=Montreal · Council=36 · ANC=19</span>
+    <span class="chip">19 Annexes · Only 2,5,7,8 = Standards only</span>
+    <span class="chip">Hague=Hijack · Montreal 1971=Safety</span>
+    <span class="chip">DGCA=Regulator · AAI=1 Apr 1995</span>
+  </div>
+</div>
+<div class="nav-bar">
+  <button class="nb active" onclick="show('chicago')">📜 Chicago Conv.</button>
+  <button class="nb" onclick="show('articles')">📋 All Articles</button>
+  <button class="nb" onclick="show('icao')">🏛 ICAO</button>
+  <button class="nb" onclick="show('annexes')">📚 Annexes</button>
+  <button class="nb" onclick="show('freedoms')">✈️ Freedoms</button>
+  <button class="nb" onclick="show('conventions')">⚖️ Conventions</button>
+  <button class="nb" onclick="show('india')">🇮🇳 India</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+<div class="content">
+
+<!-- ===== CHICAGO CONVENTION ===== -->
+<div class="section active" id="section-chicago">
+  <div class="sh"><div class="si" style="background:var(--gd-bg);border:1px solid rgba(234,179,8,.3);">📜</div>
+  <div><div class="st">Chicago Convention, 1944</div>
+  <div class="ss">Foundation of international aviation law · 96 Articles · Created ICAO</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--gold)"></span>Convention Timeline — From Paris to Chicago</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 130" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="130" fill="#07101c"/>
+        <!-- Timeline line -->
+        <line x1="60" y1="65" x2="700" y2="65" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
+        <!-- Paris 1919 -->
+        <circle cx="120" cy="65" r="12" fill="rgba(168,85,247,.2)" stroke="rgba(168,85,247,.5)" stroke-width="2"/>
+        <text x="120" y="70" fill="#D8B4FE" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1919</text>
+        <rect x="65" y="20" width="110" height="36" rx="6" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1"/>
+        <text x="120" y="35" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Paris Convention</text>
+        <text x="120" y="49" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">13 Oct 1919 · ICAN</text>
+        <line x1="120" y1="56" x2="120" y2="77" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+        <text x="120" y="90" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">League of Nations</text>
+        <text x="120" y="103" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Forerunner of ICAO</text>
+        <!-- Arrow replaced by -->
+        <text x="320" y="62" fill="rgba(255,255,255,.25)" font-family="monospace" font-size="12" text-anchor="middle">replaced by ──────→</text>
+        <!-- Chicago 1944 -->
+        <circle cx="560" cy="65" r="14" fill="rgba(234,179,8,.2)" stroke="rgba(234,179,8,.6)" stroke-width="2.5"/>
+        <text x="560" y="70" fill="#FDE047" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1944</text>
+        <rect x="490" y="20" width="140" height="36" rx="6" fill="rgba(234,179,8,.10)" stroke="rgba(234,179,8,.4)" stroke-width="1.5"/>
+        <text x="560" y="35" fill="#FDE047" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Chicago Convention</text>
+        <text x="560" y="49" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">7 Dec 1944 · 96 Articles · ICAO</text>
+        <line x1="560" y1="56" x2="560" y2="79" stroke="rgba(234,179,8,.4)" stroke-width="1.5"/>
+        <text x="560" y="93" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">Still in force today ✓</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g4">
+    <div class="stat" style="border-color:rgba(234,179,8,.5);background:rgba(234,179,8,.08);">
+      <div class="sn" style="color:#FDE047;">96</div><div class="su">Articles</div><div class="sl">Total in Chicago Convention</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#7DD3FC;font-size:16px;">7 Dec 1944</div><div class="sl">Date signed at Chicago</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#86EFAC;">ICAO</div><div class="sl">Created by Convention</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#D8B4FE;font-size:14px;">19 Annexes</div><div class="sl">SARPs published as Annexes</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--gold)"></span>Most Tested Articles — Flashcard Style</div>
+    <div class="art-grid">
+      <div class="art-box" style="border-color:rgba(234,179,8,.4);background:rgba(234,179,8,.07);">
+        <div><div class="art-num">Art. 1</div><div class="art-topic">Sovereignty</div><div class="art-sub">Complete & exclusive over airspace</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05);">
+        <div><div class="art-num" style="color:#FCA5A5;">Art. 3</div><div class="art-topic">Civil & State Aircraft</div><div class="art-sub">Convention = Civil only. Military/Customs/Police = State</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.05);">
+        <div><div class="art-num" style="color:#7DD3FC;">Art. 5</div><div class="art-topic">Non-Scheduled Flights</div><div class="art-sub">Fly across + technical landing (no permission)</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+        <div><div class="art-num" style="color:#FCA5A5;">Art. 6</div><div class="art-topic">Scheduled Flights</div><div class="art-sub">Require special permission ★</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.05);">
+        <div><div class="art-num" style="color:#FDB785;">Art. 7</div><div class="art-topic">Cabotage</div><div class="art-sub">Domestic traffic by foreign airline = prohibited</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.05);">
+        <div><div class="art-num" style="color:#D8B4FE;">Art. 8</div><div class="art-topic">Pilotless Aircraft</div><div class="art-sub">Drones need special authorization</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.05);">
+        <div><div class="art-num" style="color:#5EEAD4;">Art. 12</div><div class="art-topic">Rules of the Air</div><div class="art-sub">Each State adopts + ensures compliance</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(234,179,8,.4);background:rgba(234,179,8,.07);">
+        <div><div class="art-num">Art. 17</div><div class="art-topic">Nationality of Aircraft</div><div class="art-sub">= State in which registered</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05);">
+        <div><div class="art-num" style="color:#FCA5A5;">Art. 18</div><div class="art-topic">Dual Registration</div><div class="art-sub">NOT allowed in two States simultaneously</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.05);">
+        <div><div class="art-num" style="color:#7DD3FC;">Art. 26</div><div class="art-topic">Accident Investigation</div><div class="art-sub">State where accident occurs conducts investigation</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.06);">
+        <div><div class="art-num" style="color:#86EFAC;">Art. 29</div><div class="art-topic">Documents Carried</div><div class="art-sub">7 documents required onboard ★</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(234,179,8,.3);background:rgba(234,179,8,.06);">
+        <div><div class="art-num">Art. 33</div><div class="art-topic">Recognition</div><div class="art-sub">Certs/licences recognised between States</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+        <div><div class="art-num" style="color:#FDB785;">Art. 37</div><div class="art-topic">SARPs Adoption</div><div class="art-sub">ICAO adopts International Standards & RPs</div></div>
+      </div>
+      <div class="art-box" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.09);">
+        <div><div class="art-num" style="color:#FCA5A5;">Art. 38</div><div class="art-topic">Differences ★★</div><div class="art-sub">State MUST notify ICAO if cannot comply</div></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Article 29 — Documents (RALJRPC)</div>
+      <div class="mf">Registration · Airworthiness · Licences · Journey Log · Radio Licence · Passenger List · Cargo Manifest</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== ALL ARTICLES ===== -->
+<div class="section" id="section-articles">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">📋</div>
+  <div><div class="st">All Chicago Convention Articles</div>
+  <div class="ss">Complete reference table — Articles 1 to 42</div></div></div>
+
+  <div class="tw" style="margin:0;">
+    <table>
+      <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FDE047;">Art.</th><th style="color:#FDE047;">Topic</th><th style="color:#FDE047;">Key Point</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(234,179,8,.04);"><td><span class="num">1</span></td><td><strong>Sovereignty</strong></td><td>Complete &amp; exclusive sovereignty over airspace</td></tr>
+        <tr><td><span class="num">2</span></td><td>Territory</td><td>Land area + territorial waters</td></tr>
+        <tr style="background:rgba(239,68,68,.04);"><td><span class="num">3</span></td><td><strong>Civil &amp; State Aircraft</strong></td><td>Convention = Civil only. Military/Customs/Police = State aircraft</td></tr>
+        <tr><td><span class="num">4</span></td><td>Misuse of Civil Aviation</td><td>Cannot use aviation inconsistently with Convention</td></tr>
+        <tr><td><span class="num">5</span></td><td><strong>Non-Scheduled Flights</strong></td><td>1st &amp; 2nd freedom without prior permission</td></tr>
+        <tr style="background:rgba(239,68,68,.04);"><td><span class="num">6</span></td><td><strong>Scheduled Flights</strong></td><td>Require special permission from State ★</td></tr>
+        <tr><td><span class="num">7</span></td><td><strong>Cabotage</strong></td><td>State may refuse foreign airline domestic traffic</td></tr>
+        <tr><td><span class="num">8</span></td><td><strong>Pilotless Aircraft</strong></td><td>Drones need special authorization to fly over State</td></tr>
+        <tr><td><span class="num">9</span></td><td>Prohibited Areas</td><td>Military necessity, public safety</td></tr>
+        <tr><td><span class="num">10</span></td><td>Customs Airport</td><td>Land at designated customs aerodrome</td></tr>
+        <tr><td><span class="num">11</span></td><td>Air Regulations</td><td>Equal treatment regardless of nationality</td></tr>
+        <tr style="background:rgba(20,184,166,.04);"><td><span class="num">12</span></td><td><strong>Rules of the Air</strong></td><td>Each State adopts + maintains uniformity with ICAO</td></tr>
+        <tr><td><span class="num">13</span></td><td>Entry &amp; Clearance</td><td>Comply with immigration, customs, quarantine</td></tr>
+        <tr><td><span class="num">14</span></td><td>Disease Prevention</td><td>Cholera, Plague, Smallpox, Yellow Fever</td></tr>
+        <tr><td><span class="num">15</span></td><td>Airport Charges</td><td>Equal treatment for all nationalities</td></tr>
+        <tr><td><span class="num">16</span></td><td>Search of Aircraft</td><td>States may search and inspect documents</td></tr>
+        <tr style="background:rgba(234,179,8,.04);"><td><span class="num">17</span></td><td><strong>Nationality</strong></td><td>Aircraft nationality = State of registration</td></tr>
+        <tr style="background:rgba(239,68,68,.04);"><td><span class="num">18</span></td><td><strong>Dual Registration</strong></td><td>NOT permitted in more than one State</td></tr>
+        <tr><td><span class="num">19</span></td><td>Registration Laws</td><td>Governed by laws of registering State</td></tr>
+        <tr><td><span class="num">20</span></td><td>Display of Marks</td><td>Must display nationality + registration marks</td></tr>
+        <tr><td><span class="num">21</span></td><td>Report Registrations</td><td>Report to ICAO</td></tr>
+        <tr><td><span class="num">22</span></td><td><strong>Facilitation</strong></td><td>Reduce delays for aircraft, crew, pax, cargo</td></tr>
+        <tr><td><span class="num">23</span></td><td>Customs &amp; Immigration</td><td>Standardize procedures</td></tr>
+        <tr style="background:rgba(34,197,94,.04);"><td><span class="num">24</span></td><td><strong>Customs Duty</strong></td><td>Exemption for fuel, oil, parts on board ★</td></tr>
+        <tr><td><span class="num">25</span></td><td>Aircraft in Distress</td><td>States must assist</td></tr>
+        <tr style="background:rgba(14,165,233,.04);"><td><span class="num">26</span></td><td><strong>Accident Investigation</strong></td><td>State of occurrence investigates; State of Registry sends observers</td></tr>
+        <tr><td><span class="num">27</span></td><td>Patent Claims</td><td>Aircraft cannot be seized for patent claims</td></tr>
+        <tr><td><span class="num">28</span></td><td>Nav Facilities</td><td>States provide airports, met, radio, charts</td></tr>
+        <tr style="background:rgba(34,197,94,.05);"><td><span class="num">29</span></td><td><strong>Documents Carried ★</strong></td><td>Certificate of Reg, CofA, Crew Licences, Journey Log, Radio Lic, Pax List, Cargo Manifest</td></tr>
+        <tr><td><span class="num">30</span></td><td>Radio Equipment</td><td>Licensed + operated by licensed personnel</td></tr>
+        <tr><td><span class="num">31</span></td><td>Certificate of Airworthiness</td><td>Required for international navigation</td></tr>
+        <tr><td><span class="num">32</span></td><td>Licences of Personnel</td><td>Pilots and crew must hold valid licences</td></tr>
+        <tr style="background:rgba(234,179,8,.04);"><td><span class="num">33</span></td><td><strong>Recognition of Certs ★</strong></td><td>Mutually recognized if ICAO standards met</td></tr>
+        <tr><td><span class="num">34</span></td><td>Journey Log Book</td><td>Every aircraft shall maintain</td></tr>
+        <tr><td><span class="num">35</span></td><td>Cargo Restrictions</td><td>No munitions without authorization</td></tr>
+        <tr><td><span class="num">36</span></td><td>Photography</td><td>States may regulate aerial photography</td></tr>
+        <tr style="background:rgba(249,115,22,.04);"><td><span class="num">37</span></td><td><strong>Adoption of SARPs ★</strong></td><td>ICAO adopts International Standards and Recommended Practices</td></tr>
+        <tr style="background:rgba(239,68,68,.05);"><td><span class="num">38</span></td><td><strong>Differences ★★</strong></td><td>MUST notify ICAO if State cannot comply with ICAO standards</td></tr>
+        <tr><td><span class="num">39</span></td><td>Endorsement</td><td>Certs not meeting ICAO standards must be endorsed</td></tr>
+        <tr><td><span class="num">40</span></td><td>Validity of Endorsed Certs</td><td>Need permission for international ops</td></tr>
+        <tr><td><span class="num">41</span></td><td>Existing Airworthiness Standards</td><td>Older types may continue under conditions</td></tr>
+        <tr><td><span class="num">42</span></td><td>Existing Competency Standards</td><td>Older licences may continue under conditions</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== ICAO ===== -->
+<div class="section" id="section-icao">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">🏛</div>
+  <div><div class="st">ICAO — Structure & Organisation</div>
+  <div class="ss">Assembly · Council · ANC · Committees · Headquarters · Regional Offices</div></div></div>
+
+  <!-- ICAO STRUCTURE SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>ICAO Hierarchy — Visual Structure</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 310" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="310" fill="#07101c"/>
+        <!-- ASSEMBLY (top) -->
+        <rect x="270" y="10" width="220" height="50" rx="10" fill="rgba(234,179,8,.14)" stroke="rgba(234,179,8,.5)" stroke-width="2"/>
+        <text x="380" y="32" fill="#FDE047" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">ASSEMBLY</text>
+        <text x="380" y="50" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Highest body · 1 State = 1 Vote · Meets every 3 years</text>
+        <!-- Line down to Council -->
+        <line x1="380" y1="60" x2="380" y2="88" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+        <!-- COUNCIL -->
+        <rect x="265" y="88" width="230" height="44" rx="10" fill="rgba(14,165,233,.12)" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+        <text x="380" y="107" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">COUNCIL</text>
+        <text x="380" y="124" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">36 States · Elects its President · Elects Secretary General</text>
+        <!-- Lines from Council -->
+        <line x1="265" y1="110" x2="200" y2="148" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <line x1="320" y1="132" x2="290" y2="148" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <line x1="380" y1="132" x2="380" y2="148" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <line x1="440" y1="132" x2="470" y2="148" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <line x1="495" y1="110" x2="560" y2="148" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <!-- ANC -->
+        <rect x="110" y="148" width="120" height="50" rx="8" fill="rgba(34,197,94,.09)" stroke="rgba(34,197,94,.35)" stroke-width="1.5"/>
+        <text x="170" y="168" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ANC</text>
+        <text x="170" y="183" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">19 members</text>
+        <!-- Air Transport Committee -->
+        <rect x="245" y="148" width="100" height="50" rx="8" fill="rgba(99,102,241,.09)" stroke="rgba(99,102,241,.3)" stroke-width="1.5"/>
+        <text x="295" y="168" fill="#A5B4FC" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Air Transport</text>
+        <text x="295" y="183" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Committee</text>
+        <!-- Legal Committee -->
+        <rect x="360" y="148" width="100" height="50" rx="8" fill="rgba(245,158,11,.09)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <text x="410" y="168" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Legal</text>
+        <text x="410" y="183" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Committee</text>
+        <!-- Finance Committee -->
+        <rect x="475" y="148" width="100" height="50" rx="8" fill="rgba(249,115,22,.09)" stroke="rgba(249,115,22,.3)" stroke-width="1.5"/>
+        <text x="525" y="168" fill="#FDB785" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Finance</text>
+        <text x="525" y="183" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">9-13 members</text>
+        <!-- Unlawful Interference -->
+        <rect x="590" y="148" width="110" height="50" rx="8" fill="rgba(239,68,68,.09)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+        <text x="645" y="165" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Unlawful</text>
+        <text x="645" y="179" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Interference</text>
+        <text x="645" y="192" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">15 members</text>
+        <!-- Secretariat -->
+        <line x1="380" y1="132" x2="380" y2="218" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="290" y="218" width="180" height="44" rx="8" fill="rgba(168,85,247,.09)" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <text x="380" y="237" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SECRETARIAT</text>
+        <text x="380" y="253" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Secretary General (appt. by Council)</text>
+        <!-- Key facts row -->
+        <rect x="20" y="272" width="720" height="30" rx="6" fill="rgba(234,179,8,.07)" stroke="rgba(234,179,8,.2)" stroke-width="1"/>
+        <text x="380" y="291" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">HQ: Montreal, Canada · UN Agency since 1947 · 193 member States · 7 Regional Offices</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>ICAO Key Numbers</div>
+      <div class="g2" style="gap:8px;">
+        <div class="stat" style="border-color:rgba(234,179,8,.4);background:rgba(234,179,8,.07);padding:10px;">
+          <div class="sn" style="color:#FDE047;">36</div><div class="sl">Council member States</div>
+        </div>
+        <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);padding:10px;">
+          <div class="sn" style="color:#86EFAC;">19</div><div class="sl">Air Navigation Commission</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#FCA5A5;">15</div><div class="sl">Unlawful Interference Committee</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#7DD3FC;">3 yrs</div><div class="sl">Assembly meets (minimum)</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#FDB785;">7</div><div class="sl">Regional Offices (9 regions)</div>
+        </div>
+        <div class="stat" style="padding:10px;">
+          <div class="sn" style="color:#D8B4FE;">193</div><div class="sl">Member States</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>ICAO Regional Offices</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(20,184,166,.11);"><tr><th style="color:#5EEAD4;">Region</th><th style="color:#5EEAD4;">City</th></tr></thead>
+          <tbody>
+            <tr><td>Asia-Pacific ★</td><td><strong style="color:#FDE047;">Bangkok, Thailand</strong></td></tr>
+            <tr><td>Middle East</td><td>Cairo, Egypt</td></tr>
+            <tr><td>Western &amp; Central Africa</td><td>Dakar, Senegal</td></tr>
+            <tr><td>South America</td><td>Lima, Peru</td></tr>
+            <tr><td>N. America, C. America &amp; Caribbean</td><td>Mexico City</td></tr>
+            <tr><td>Eastern &amp; Southern Africa</td><td>Nairobi, Kenya</td></tr>
+            <tr><td>Europe &amp; North Atlantic</td><td>Paris, France</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>ICAO Publications — SARPs · PANS · SUPPS</div>
+    <div class="g3">
+      <div style="background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.35);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#FDE047;font-size:15px;margin-bottom:5px;">SARPs</div>
+        <div style="font-size:12px;font-weight:600;color:#FDE047;margin-bottom:6px;">Standards And Recommended Practices</div>
+        <div style="font-size:12px;color:var(--text2);">Published as <strong style="color:#FDE047;">Annexes</strong> to the Convention<br>Under Articles 37, 54, 90<br>Standards = mandatory<br>Rec. Practices = desirable</div>
+      </div>
+      <div style="background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.35);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#7DD3FC;font-size:15px;margin-bottom:5px;">PANS</div>
+        <div style="font-size:12px;font-weight:600;color:#7DD3FC;margin-bottom:6px;">Procedures for Air Navigation Services</div>
+        <div style="font-size:12px;color:var(--text2);">Approved by <strong style="color:#7DD3FC;">Council</strong><br>More operational/procedural<br>Change more frequently<br>Too detailed for Annexes</div>
+      </div>
+      <div style="background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.35);border-radius:11px;padding:14px;">
+        <div style="font-weight:700;color:#D8B4FE;font-size:15px;margin-bottom:5px;">SUPPS</div>
+        <div style="font-size:12px;font-weight:600;color:#D8B4FE;margin-bottom:6px;">Regional Supplementary Procedures</div>
+        <div style="font-size:12px;color:var(--text2);">Approved by <strong style="color:#D8B4FE;">Council</strong><br>Like PANS but <strong>regional only</strong><br>Doc 7030<br>Apply to specific ICAO regions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANNEXES ===== -->
+<div class="section" id="section-annexes">
+  <div class="sh"><div class="si" style="background:var(--gn-bg);border:1px solid rgba(34,197,94,.3);">📚</div>
+  <div><div class="st">ICAO Annexes 1–19</div>
+  <div class="ss">All 19 Annexes · Group memory · Standards-only Annexes · Important Docs</div></div></div>
+
+  <!-- ANNEXES VISUAL SVG with grouped colours -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>All 19 Annexes — Colour-Grouped Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="240" fill="#07101c"/>
+        <text x="380" y="16" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Annexes 1–19 · Grouped by Category for Easy Memory</text>
+        <!-- Group 1: Pilot Basics (1-5) PURPLE -->
+        <rect x="10" y="24" width="140" height="190" rx="8" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.3)" stroke-width="1.5"/>
+        <text x="80" y="40" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">PILOT BASICS</text>
+        <text x="80" y="55" fill="#D8B4FE" font-family="monospace" font-size="10" text-anchor="middle">Annexes 1–5</text>
+        <g font-family="monospace" font-size="11" fill="#D8B4FE">
+          <text x="18" y="77">1 — Licensing</text>
+          <text x="18" y="95">2 — Rules of Air</text>
+          <text x="18" y="113">3 — Weather</text>
+          <text x="18" y="131">4 — Charts</text>
+          <text x="18" y="149">5 — Units</text>
+        </g>
+        <!-- Group 2: Operations (6-10) SKY -->
+        <rect x="160" y="24" width="145" height="190" rx="8" fill="rgba(14,165,233,.07)" stroke="rgba(14,165,233,.3)" stroke-width="1.5"/>
+        <text x="232" y="40" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">AC OPERATIONS</text>
+        <text x="232" y="55" fill="#7DD3FC" font-family="monospace" font-size="10" text-anchor="middle">Annexes 6–10</text>
+        <g font-family="monospace" font-size="11" fill="#7DD3FC">
+          <text x="168" y="77">6 — Operations</text>
+          <text x="168" y="95">7 — Registration</text>
+          <text x="168" y="113">8 — Airworthiness</text>
+          <text x="168" y="131">9 — Facilitation</text>
+          <text x="168" y="149">10 — Telecom</text>
+        </g>
+        <!-- Group 3: ATC (11-15) TEAL -->
+        <rect x="315" y="24" width="145" height="190" rx="8" fill="rgba(20,184,166,.07)" stroke="rgba(20,184,166,.3)" stroke-width="1.5"/>
+        <text x="387" y="40" fill="#5EEAD4" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ATC GROUP</text>
+        <text x="387" y="55" fill="#5EEAD4" font-family="monospace" font-size="10" text-anchor="middle">Annexes 11–15</text>
+        <g font-family="monospace" font-size="11" fill="#5EEAD4">
+          <text x="323" y="77">11 — ATS</text>
+          <text x="323" y="95">12 — SAR</text>
+          <text x="323" y="113">13 — Accidents</text>
+          <text x="323" y="131">14 — Aerodromes</text>
+          <text x="323" y="149">15 — AIS</text>
+        </g>
+        <!-- Group 4: Safety (16-19) AMBER -->
+        <rect x="470" y="24" width="145" height="190" rx="8" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+        <text x="542" y="40" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">SAFETY GROUP</text>
+        <text x="542" y="55" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Annexes 16–19</text>
+        <g font-family="monospace" font-size="11" fill="#FCD34D">
+          <text x="478" y="77">16 — Environment</text>
+          <text x="478" y="95">17 — Security</text>
+          <text x="478" y="113">18 — Dangerous Gds</text>
+          <text x="478" y="131">19 — Safety Mgmt</text>
+        </g>
+        <!-- Standards only box -->
+        <rect x="625" y="24" width="125" height="130" rx="8" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.35)" stroke-width="1.5"/>
+        <text x="687" y="44" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">STANDARDS</text>
+        <text x="687" y="59" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ONLY ★</text>
+        <text x="687" y="75" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">(No Rec. Practices)</text>
+        <g font-family="monospace" font-size="12" fill="#FCA5A5" font-weight="bold">
+          <text x="687" y="97" text-anchor="middle">2 = Rules</text>
+          <text x="687" y="115" text-anchor="middle">5 = Units</text>
+          <text x="687" y="133" text-anchor="middle">7 = Reg'n</text>
+          <text x="687" y="151" text-anchor="middle">8 = A'worthy</text>
+        </g>
+        <!-- Memory footnote -->
+        <rect x="625" y="170" width="125" height="36" rx="5" fill="rgba(239,68,68,.10)"/>
+        <text x="687" y="183" fill="#FCA5A5" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">Memory:</text>
+        <text x="687" y="197" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Rules·Units·Reg·Air</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Key ICAO Document Numbers</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Doc Number</th><th style="color:#FCD34D;">Name</th><th style="color:#FCD34D;">Content</th></tr></thead>
+        <tbody>
+          <tr><td><span class="num">4444</span></td><td><strong>PANS-ATM</strong></td><td>Air Traffic Management procedures ★</td></tr>
+          <tr><td><span class="num">7030</span></td><td>SUPPS</td><td>Regional Supplementary Procedures</td></tr>
+          <tr><td><span class="num">7910</span></td><td>Location Indicators</td><td>Airport codes (VIDP, VABB, VECC)</td></tr>
+          <tr><td><span class="num">8400</span></td><td>Abbreviations &amp; Codes</td><td>QNH, QFE, SSR, RVR etc.</td></tr>
+          <tr><td><span class="num">8585</span></td><td>Designators</td><td>Airline codes (AIC = Air India)</td></tr>
+          <tr><td><span class="num">8643</span></td><td>Aircraft Type Designators</td><td>A320, B738, AT72</td></tr>
+          <tr><td><span class="num">9432</span></td><td>Manual of Radiotelephony</td><td>RT procedures and phraseology ★</td></tr>
+          <tr><td><span class="num">9750</span></td><td>Global Air Navigation Plan</td><td>GANP</td></tr>
+          <tr><td><span class="num">9849</span></td><td>GNSS Manual</td><td>Global Navigation Satellite System</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Doc Number Memory</div>
+      <div class="mf">4444=ATM · 7030=SUPPS · 7910=Codes · 8400=Abbrev · 8643=Aircraft Types · 9432=Radiotelephony</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===== FREEDOMS ===== -->
+<div class="section" id="section-freedoms">
+  <div class="sh"><div class="si" style="background:var(--sk-bg);border:1px solid rgba(14,165,233,.3);">✈️</div>
+  <div><div class="st">Freedoms of the Air</div>
+  <div class="ss">IASTA (India ratified) · IATA (India NOT ratified) · 5 Freedoms · Air India examples</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>5 Freedoms — Visual with Examples</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="300" fill="#07101c"/>
+        <text x="380" y="17" fill="var(--text2)" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Freedoms 1 and 2 = Technical (IASTA) · Freedoms 3,4,5 = Commercial (IATA)</text>
+        <!-- Countries bar -->
+        <rect x="20" y="25" width="110" height="35" rx="6" fill="rgba(20,184,166,.15)" stroke="rgba(20,184,166,.4)" stroke-width="1.5"/>
+        <text x="75" y="48" fill="#5EEAD4" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">INDIA</text>
+        <rect x="330" y="25" width="100" height="35" rx="6" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="380" y="48" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TRANSIT</text>
+        <rect x="630" y="25" width="110" height="35" rx="6" fill="rgba(168,85,247,.12)" stroke="rgba(168,85,247,.35)" stroke-width="1.5"/>
+        <text x="685" y="48" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">ABROAD</text>
+
+        <!-- 1st Freedom -->
+        <rect x="10" y="75" width="740" height="36" rx="7" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+        <text x="20" y="97" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold">1</text>
+        <line x1="35" y1="93" x2="730" y2="93" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <polygon points="730,87 744,93 730,99" fill="rgba(34,197,94,.5)"/>
+        <text x="380" y="88" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">FLY OVER (no landing)</text>
+        <text x="380" y="103" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Air India India to Europe — cross foreign airspace without landing</text>
+
+        <!-- 2nd Freedom -->
+        <rect x="10" y="120" width="740" height="44" rx="7" fill="rgba(14,165,233,.07)" stroke="rgba(14,165,233,.3)" stroke-width="1"/>
+        <text x="20" y="143" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold">2</text>
+        <line x1="35" y1="141" x2="430" y2="141" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <line x1="430" y1="141" x2="430" y2="155" stroke="rgba(14,165,233,.4)" stroke-width="2"/>
+        <line x1="430" y1="155" x2="730" y2="155" stroke="rgba(14,165,233,.3)" stroke-width="2" stroke-dasharray="5,4"/>
+        <polygon points="730,149 744,155 730,161" fill="rgba(14,165,233,.4)"/>
+        <text x="430" y="136" fill="#7DD3FC" font-family="monospace" font-size="10" text-anchor="middle">Technical stop</text>
+        <text x="380" y="161" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Land for refuelling/maintenance — NO traffic picked up or dropped</text>
+
+        <!-- Divider line TECHNICAL / COMMERCIAL -->
+        <line x1="10" y1="174" x2="750" y2="174" stroke="rgba(245,158,11,.3)" stroke-width="1" stroke-dasharray="8,6"/>
+        <rect x="270" y="166" width="220" height="16" rx="5" fill="rgba(245,158,11,.12)"/>
+        <text x="380" y="178" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">COMMERCIAL FREEDOMS (below) — India NOT ratified</text>
+
+        <!-- 3rd Freedom -->
+        <rect x="10" y="184" width="740" height="30" rx="7" fill="rgba(249,115,22,.07)" stroke="rgba(249,115,22,.25)" stroke-width="1"/>
+        <text x="20" y="204" fill="#FDB785" font-family="monospace" font-size="13" font-weight="bold">3</text>
+        <line x1="35" y1="200" x2="680" y2="200" stroke="rgba(249,115,22,.4)" stroke-width="2"/>
+        <polygon points="680,194 694,200 680,206" fill="rgba(249,115,22,.5)"/>
+        <text x="380" y="196" fill="#FDB785" font-family="monospace" font-size="10" text-anchor="middle">Carry traffic FROM home country TO foreign — Air India Delhi to London</text>
+
+        <!-- 4th Freedom -->
+        <rect x="10" y="222" width="740" height="30" rx="7" fill="rgba(239,68,68,.07)" stroke="rgba(239,68,68,.25)" stroke-width="1"/>
+        <text x="20" y="242" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold">4</text>
+        <line x1="730" y1="238" x2="70" y2="238" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+        <polygon points="70,232 56,238 70,244" fill="rgba(239,68,68,.5)"/>
+        <text x="380" y="235" fill="#FCA5A5" font-family="monospace" font-size="10" text-anchor="middle">Carry traffic FROM foreign country TO home — Air India London to Delhi</text>
+
+        <!-- 5th Freedom -->
+        <rect x="10" y="260" width="740" height="32" rx="7" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.25)" stroke-width="1"/>
+        <text x="20" y="281" fill="#D8B4FE" font-family="monospace" font-size="13" font-weight="bold">5</text>
+        <line x1="35" y1="277" x2="390" y2="277" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+        <circle cx="390" cy="277" r="5" fill="#D8B4FE" opacity=".8"/>
+        <line x1="390" y1="277" x2="730" y2="277" stroke="rgba(168,85,247,.4)" stroke-width="2"/>
+        <polygon points="730,271 744,277 730,283" fill="rgba(168,85,247,.5)"/>
+        <text x="380" y="293" fill="var(--text2)" font-family="sans-serif" font-size="9" text-anchor="middle">Delhi-Dubai-London: Air India picks up pax in Dubai, drops in London = 5th Freedom</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>IASTA vs IATA — India's Ratification</div>
+      <div class="g2" style="gap:8px;">
+        <div style="background:rgba(34,197,94,.09);border:2px solid rgba(34,197,94,.45);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-weight:700;color:#86EFAC;font-size:14px;margin-bottom:6px;">IASTA ✅</div>
+          <div style="font-size:12px;font-weight:700;color:#86EFAC;margin-bottom:4px;">India RATIFIED ★</div>
+          <div style="font-size:11px;color:var(--text2);">1st Freedom + 2nd Freedom<br>Technical freedoms only</div>
+        </div>
+        <div style="background:rgba(239,68,68,.09);border:2px solid rgba(239,68,68,.45);border-radius:11px;padding:14px;text-align:center;">
+          <div style="font-weight:700;color:#FCA5A5;font-size:14px;margin-bottom:6px;">IATA ❌</div>
+          <div style="font-size:12px;font-weight:700;color:#FCA5A5;margin-bottom:4px;">India NOT Ratified ★</div>
+          <div style="font-size:11px;color:var(--text2);">1st + 2nd + 3rd + 4th + 5th<br>Includes commercial freedoms</div>
+        </div>
+      </div>
+      <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+        <div class="mt">Freedom Memory</div>
+        <div class="mf">1=Fly Over · 2=Tech Landing · 3=Home→Foreign · 4=Foreign→Home · 5=Foreign→Foreign</div>
+      </div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Both Agreements Signed</div>
+      <div class="chk-item" style="border-color:rgba(14,165,233,.35);background:rgba(14,165,233,.07);margin-bottom:8px;">
+        <span style="font-size:16px;">📅</span>
+        <div>Both IASTA and IATA signed at <strong>Chicago on 7 December 1944</strong></div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07);margin-bottom:8px;">
+        <span class="cy">✓</span><div><strong>Article 5</strong> of Chicago Convention grants 1st and 2nd freedoms to non-scheduled flights</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07);">
+        <span class="cn">!</span><div><strong>Article 6</strong> — scheduled services need permission from each State</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONVENTIONS ===== -->
+<div class="section" id="section-conventions">
+  <div class="sh"><div class="si" style="background:var(--rd-bg);border:1px solid rgba(239,68,68,.3);">⚖️</div>
+  <div><div class="st">Security & Liability Conventions</div>
+  <div class="ss">Tokyo · Hague · Montreal 1971 · 1988 · 1991 · Warsaw · Geneva · Rome · Cape Town</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Security Conventions Timeline — Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 130" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="130" fill="#07101c"/>
+        <line x1="30" y1="65" x2="730" y2="65" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+        <!-- Tokyo 1963 -->
+        <circle cx="80" cy="65" r="11" fill="rgba(14,165,233,.25)" stroke="rgba(14,165,233,.6)" stroke-width="2"/>
+        <text x="80" y="69" fill="#7DD3FC" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1963</text>
+        <line x1="80" y1="54" x2="80" y2="22" stroke="rgba(14,165,233,.4)" stroke-width="1.5"/>
+        <rect x="15" y="8" width="130" height="16" rx="5" fill="rgba(14,165,233,.12)"/>
+        <text x="80" y="20" fill="#7DD3FC" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">TOKYO — Onboard</text>
+        <text x="80" y="88" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Offences on board</text>
+        <text x="80" y="100" fill="#86EFAC" font-family="monospace" font-size="9" text-anchor="middle">State of Reg = Jurisdiction</text>
+        <!-- Hague 1970 -->
+        <circle cx="220" cy="65" r="11" fill="rgba(239,68,68,.25)" stroke="rgba(239,68,68,.6)" stroke-width="2"/>
+        <text x="220" y="69" fill="#FCA5A5" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1970</text>
+        <line x1="220" y1="54" x2="220" y2="22" stroke="rgba(239,68,68,.4)" stroke-width="1.5"/>
+        <rect x="155" y="8" width="130" height="16" rx="5" fill="rgba(239,68,68,.12)"/>
+        <text x="220" y="20" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">HAGUE — Hijack ★</text>
+        <text x="220" y="88" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Unlawful seizure</text>
+        <text x="220" y="100" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Punish + Extradite</text>
+        <!-- Montreal 1971 -->
+        <circle cx="380" cy="65" r="11" fill="rgba(249,115,22,.25)" stroke="rgba(249,115,22,.6)" stroke-width="2"/>
+        <text x="380" y="69" fill="#FDB785" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1971</text>
+        <line x1="380" y1="76" x2="380" y2="106" stroke="rgba(249,115,22,.4)" stroke-width="1.5"/>
+        <rect x="295" y="107" width="170" height="16" rx="5" fill="rgba(249,115,22,.12)"/>
+        <text x="380" y="119" fill="#FDB785" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">MONTREAL — AC Safety ★</text>
+        <!-- Montreal 1988 -->
+        <circle cx="530" cy="65" r="11" fill="rgba(245,158,11,.25)" stroke="rgba(245,158,11,.6)" stroke-width="2"/>
+        <text x="530" y="69" fill="#FCD34D" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1988</text>
+        <line x1="530" y1="54" x2="530" y2="22" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+        <rect x="455" y="8" width="150" height="16" rx="5" fill="rgba(245,158,11,.12)"/>
+        <text x="530" y="20" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">PROTOCOL — Airports ★</text>
+        <text x="530" y="88" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">Extended to airports</text>
+        <!-- Montreal 1991 -->
+        <circle cx="680" cy="65" r="11" fill="rgba(168,85,247,.25)" stroke="rgba(168,85,247,.6)" stroke-width="2"/>
+        <text x="680" y="69" fill="#D8B4FE" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">1991</text>
+        <line x1="680" y1="76" x2="680" y2="106" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+        <rect x="600" y="107" width="160" height="16" rx="5" fill="rgba(168,85,247,.12)"/>
+        <text x="680" y="119" fill="#D8B4FE" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">MONTREAL — Plastic Explosives</text>
+      </svg>
+    </div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(239,68,68,.11);"><tr><th style="color:#FCA5A5;">Convention</th><th style="color:#FCA5A5;">Year</th><th style="color:#FCA5A5;">Key Topic</th><th style="color:#FCA5A5;">India</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(14,165,233,.04);"><td><span class="b b-sk">Tokyo</span></td><td><span class="num">1963</span></td><td>Offences on board aircraft · Commander's powers · Jurisdiction = State of Registration</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr style="background:rgba(239,68,68,.04);"><td><span class="b b-rd">Hague</span></td><td><span class="num">1970</span></td><td>HIJACKING (Unlawful Seizure of Aircraft) · Punish + Extradite</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr style="background:rgba(249,115,22,.04);"><td><span class="b b-or">Montreal</span></td><td><span class="num">1971</span></td><td>Unlawful Acts Against Safety of Civil Aviation (beyond hijacking)</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr style="background:rgba(245,158,11,.04);"><td><span class="b b-am">Protocol</span></td><td><span class="num">1988</span></td><td>Extended Montreal 1971 to cover AIRPORT offences</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr style="background:rgba(168,85,247,.04);"><td><span class="b b-pu">Montreal</span></td><td><span class="num">1991</span></td><td>Marking of PLASTIC EXPLOSIVES for detection</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Memory: Tokyo→Hague→Montreal</div>
+      <div class="mf">Tokyo=Trouble onboard · Hague=Hijack · Montreal 1971=Aircraft Safety · 1988=Airport · 1991=Plastic Explosives</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Tokyo Convention — Commander's Powers (DGCA Favourite)</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">Commander may RESTRAIN a person to:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">→</span><div>Protect safety of aircraft</div></div>
+          <div class="chk-item"><span class="cy">→</span><div>Maintain good order and discipline</div></div>
+          <div class="chk-item"><span class="cy">→</span><div>Deliver offender to authorities</div></div>
+          <div class="chk-item"><span class="cy">→</span><div>Disembark offender</div></div>
+        </div>
+        <div class="al al-am" style="margin-top:8px;margin-bottom:0;"><strong>Primary Jurisdiction = State of Registration ★</strong></div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">Restraint CONTINUES beyond landing if:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+            <span class="cn">1</span><div>Authorities refuse disembarkation</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+            <span class="cn">2</span><div>Forced landing occurred</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+            <span class="cn">3</span><div>Passenger agrees to continue under restraint</div>
+          </div>
+        </div>
+        <div class="al al-tl" style="margin-top:8px;margin-bottom:0;"><strong>Tokyo does NOT apply to:</strong> Military · Customs · Police aircraft ★</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Liability & Financing Conventions</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.11);"><tr><th style="color:#FCD34D;">Convention</th><th style="color:#FCD34D;">Year</th><th style="color:#FCD34D;">Topic</th><th style="color:#FCD34D;">India</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-pu">Warsaw</span></td><td><span class="num">1929</span></td><td>International carriage by air — pax, baggage, cargo liability</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr><td><span class="b b-sk">Geneva</span></td><td><span class="num">1948</span></td><td>Protection of seller's rights in hire-purchase / lease / mortgage aircraft</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr style="background:rgba(239,68,68,.04);"><td><span class="b b-rd">Rome</span></td><td><span class="num">1952</span></td><td>Liability for damage to persons/property ON THE GROUND</td><td><span class="b b-rd">✗ NOT Ratified</span></td></tr>
+          <tr><td><span class="b b-tl">Montreal</span></td><td><span class="num">1999</span></td><td>Modern replacement of Warsaw — unlimited liability (113,100 SDR threshold)</td><td><span class="b b-gn">✓ Ratified</span></td></tr>
+          <tr><td><span class="b b-or">Cape Town</span></td><td><span class="num">2001</span></td><td>Aircraft financing, leasing, engines — international interests protection</td><td><span class="b b-gn">✓ 2008</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al al-rd" style="margin-bottom:0;"><strong>India has NOT ratified Rome Convention 1952 ★</strong></div>
+  </div>
+</div>
+
+<!-- ===== INDIA ===== -->
+<div class="section" id="section-india">
+  <div class="sh"><div class="si" style="background:var(--or-bg);border:1px solid rgba(249,115,22,.3);">🇮🇳</div>
+  <div><div class="st">Indian Aviation Organisations</div>
+  <div class="ss">MoCA · DGCA (Regulator) · AAI (Service Provider) · Formed 1 Apr 1995</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>DGCA vs AAI — Visual Comparison</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#07101c"/>
+        <!-- MoCA at top -->
+        <rect x="280" y="10" width="200" height="38" rx="9" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+        <text x="380" y="27" fill="#FCD34D" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">MoCA</text>
+        <text x="380" y="42" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Ministry of Civil Aviation — National Policy</text>
+        <line x1="280" y1="30" x2="170" y2="70" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+        <line x1="480" y1="30" x2="590" y2="70" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+        <!-- DGCA -->
+        <rect x="60" y="68" width="220" height="118" rx="12" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.42)" stroke-width="2"/>
+        <text x="170" y="92" fill="#FCA5A5" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">DGCA</text>
+        <text x="170" y="108" fill="#FCA5A5" font-family="sans-serif" font-size="12" text-anchor="middle">REGULATOR ★</text>
+        <text x="170" y="128" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Aircraft Registration</text>
+        <text x="170" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Airworthiness + Licensing</text>
+        <text x="170" y="158" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">AOC · Safety Oversight</text>
+        <text x="170" y="173" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">ICAO Coordination</text>
+        <!-- AAI -->
+        <rect x="480" y="68" width="220" height="118" rx="12" fill="rgba(14,165,233,.08)" stroke="rgba(14,165,233,.42)" stroke-width="2"/>
+        <text x="590" y="92" fill="#7DD3FC" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">AAI</text>
+        <text x="590" y="108" fill="#7DD3FC" font-family="sans-serif" font-size="12" text-anchor="middle">SERVICE PROVIDER ★</text>
+        <text x="590" y="128" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Airport Design/Ops/Maintenance</text>
+        <text x="590" y="143" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">ATS · AIS (AIP/NOTAM)</text>
+        <text x="590" y="158" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Navigation Aids (ILS/DVOR/DME)</text>
+        <text x="590" y="173" fill="#FCD34D" font-family="monospace" font-size="10" text-anchor="middle">Formed: 1 April 1995 ★</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>DGCA Key Functions</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="b b-rd">Aircraft Registration</span>
+        <span class="b b-rd">Airworthiness</span>
+        <span class="b b-rd">Pilot Licensing</span>
+        <span class="b b-rd">AME Licensing</span>
+        <span class="b b-rd">ATCO Licensing</span>
+        <span class="b b-rd">Aerodrome Certification</span>
+        <span class="b b-rd">AOC</span>
+        <span class="b b-rd">Accident Prevention</span>
+        <span class="b b-rd">ICAO Coordination</span>
+        <span class="b b-rd">Dangerous Goods Auth.</span>
+      </div>
+      <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+        <div class="mt">DGCA Memory: R-A-L-A-A</div>
+        <div class="mf">Registration · Airworthiness · Licensing · AOC · Accident Prevention</div>
+      </div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>AAI — Key Facts</div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(14,165,233,.35);background:rgba(14,165,233,.07);">
+          <span style="font-size:16px;">📅</span>
+          <div>Formed <strong>1 April 1995 ★</strong> by merger of IAAI + NAA</div>
+        </div>
+        <div class="chk-item"><span class="cy">→</span><div>Publishes AIP · NOTAM · AIC (Aeronautical Information Services)</div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Provides ILS · DVOR · DME · Radar (Navigation Aids)</div></div>
+        <div class="chk-item"><span class="cy">→</span><div>Controls and manages Indian airspace (ATS)</div></div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.07);">
+          <span class="cn">★</span>
+          <div>MoCA HQ: <strong>Rajiv Gandhi Bhavan, Safdarjung Airport, New Delhi</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh"><div class="si" style="background:var(--am-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+  <div><div class="st">Master Reference</div>
+  <div class="ss">Every critical number from Chapter 2 — Chicago Articles · ICAO · Annexes · Conventions</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--gold)"></span>All Critical Facts</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FDE047;">Question</th><th style="color:#FDE047;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Paris Convention signed</td><td><span class="num">13 Oct 1919</span> · ICAN created</td></tr>
+            <tr><td>Chicago Convention signed</td><td><span class="num">7 Dec 1944</span> · 96 Articles</td></tr>
+            <tr style="background:rgba(234,179,8,.04);"><td>Article 1</td><td>Sovereignty ★</td></tr>
+            <tr><td>Article 5</td><td>Non-scheduled flights (1st+2nd freedom)</td></tr>
+            <tr style="background:rgba(239,68,68,.04);"><td>Article 6</td><td>Scheduled flights = Permission required ★</td></tr>
+            <tr><td>Article 7</td><td>Cabotage</td></tr>
+            <tr><td>Article 8</td><td>Pilotless aircraft need authorization</td></tr>
+            <tr><td>Article 17</td><td>Nationality = State of Registration</td></tr>
+            <tr style="background:rgba(239,68,68,.04);"><td>Article 18</td><td>Dual registration NOT permitted ★</td></tr>
+            <tr><td>Article 24</td><td>Customs duty exemption</td></tr>
+            <tr><td>Article 26</td><td>Accident investigation by State of occurrence</td></tr>
+            <tr style="background:rgba(34,197,94,.04);"><td>Article 29</td><td>7 documents (RALJRPC) ★</td></tr>
+            <tr><td>Article 33</td><td>Recognition of certificates/licences</td></tr>
+            <tr><td>Article 37</td><td>ICAO adopts SARPs</td></tr>
+            <tr style="background:rgba(239,68,68,.04);"><td>Article 38</td><td>File differences with ICAO ★★</td></tr>
+            <tr><td>ICAO HQ</td><td>Montreal, Canada ★</td></tr>
+            <tr><td>ICAO UN specialized agency</td><td><span class="num">1947</span> ★</td></tr>
+            <tr><td>ICAO highest body</td><td>Assembly ★</td></tr>
+            <tr><td>Assembly meets</td><td>Every 3 years (minimum) ★</td></tr>
+            <tr><td>Assembly voting</td><td>1 State = 1 Vote</td></tr>
+            <tr><td>Council members</td><td><span class="num">36</span> ★</td></tr>
+            <tr><td>ANC members</td><td><span class="num">19</span> ★</td></tr>
+            <tr><td>Unlawful Interference Committee</td><td><span class="num">15</span> members ★</td></tr>
+            <tr><td>Secretary General appointed by</td><td>Council ★</td></tr>
+            <tr><td>ICAO Regional Offices</td><td><span class="num">7</span> offices (9 regions)</td></tr>
+            <tr><td>Asia-Pacific ICAO office</td><td>Bangkok, Thailand ★</td></tr>
+            <tr><td>Annexes with Standards ONLY</td><td>2, 5, 7, 8 ★</td></tr>
+            <tr><td>PANS approved by</td><td>Council</td></tr>
+            <tr><td>Doc 4444</td><td>PANS-ATM ★</td></tr>
+            <tr><td>Doc 8400</td><td>ICAO Abbreviations</td></tr>
+            <tr><td>Doc 7910</td><td>Location Indicators</td></tr>
+            <tr><td>Doc 9432</td><td>Manual of Radiotelephony</td></tr>
+            <tr><td>Doc 8643</td><td>Aircraft Type Designators</td></tr>
+            <tr><td>IASTA ratified by India?</td><td>YES ★</td></tr>
+            <tr><td>IATA ratified by India?</td><td>NO ★</td></tr>
+            <tr><td>Hague Convention</td><td>1970 · Hijacking ★</td></tr>
+            <tr><td>Montreal 1971</td><td>Safety of Civil Aviation ★</td></tr>
+            <tr><td>Montreal 1988</td><td>Airport offences ★</td></tr>
+            <tr><td>Montreal 1991</td><td>Plastic Explosives ★</td></tr>
+            <tr><td>Tokyo jurisdiction</td><td>State of Registration ★</td></tr>
+            <tr><td>Rome Convention India</td><td>NOT ratified ★</td></tr>
+            <tr><td>Cape Town Convention</td><td>2001 · India ratified 2008</td></tr>
+            <tr><td>Warsaw Convention</td><td>1929 · International carriage</td></tr>
+            <tr><td>AAI formed</td><td>1 April 1995 ★</td></tr>
+            <tr><td>DGCA =</td><td>Regulator ★</td></tr>
+            <tr><td>AAI =</td><td>Service Provider (ATS/AIS/Navaids) ★</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>Top Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Article 38 = Differences (NOT SARPs adoption)</div><div class="trap-d">Article 37 = ICAO adopts SARPs. Article 38 = State MUST notify ICAO if it cannot comply with a Standard. Both are asked. Don't mix 37 and 38.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">IASTA ratified by India · IATA NOT ratified by India</div><div class="trap-d">Both signed at Chicago 1944. India ratified IASTA (technical freedoms 1+2) but NOT IATA (commercial freedoms 3+4+5). Common trap: swapping which is ratified.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Hague=1970 Hijacking · Montreal=1971 Aviation Safety (not same year)</div><div class="trap-d">Hague 1970 = Hijacking specifically. Montreal 1971 = broader safety (bombs, violence, navigation interference). One year apart but completely different scope.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">ANC = 19 members (not 36 like Council)</div><div class="trap-d">Council = 36 contracting States. Air Navigation Commission = 19 members appointed by Council. Committee on Unlawful Interference = 15. These three numbers must be instant.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Annexes 2,5,7,8 = Standards ONLY (no Recommended Practices)</div><div class="trap-d">Only four Annexes have Standards without Recommended Practices: 2=Rules, 5=Units, 7=Registration, 8=Airworthiness. Memory: Rules, Units, Registration, Airworthiness.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Rome Convention = India NOT ratified (ground damage)</div><div class="trap-d">India has NOT ratified the Rome Convention 1952 which deals with damage to persons/property on the ground. All other major conventions listed here are ratified by India.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si" style="background:var(--tl-bg);border:1px solid rgba(20,184,166,.3);">🧠</div>
+  <div><div class="st">Practice Quiz — Chapter 2</div>
+  <div class="ss">30 DGCA-style questions on Chicago Convention, ICAO, Annexes, and Conventions</div></div></div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">&#8617; Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next &#8594;</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"Article 1 of the Chicago Convention deals with:",opts:["Nationality","Cabotage","Sovereignty of airspace","Scheduled flights"],ans:2,exp:"Article 1 = Sovereignty. Every State has complete and exclusive sovereignty over the airspace above its territory. This is the foundational principle of international aviation law."},
+{q:"Scheduled international air services require:",opts:["No permission","Only ICAO approval","Special permission or authorization from the State","Only bilateral agreement"],ans:2,exp:"Article 6: Scheduled international services require SPECIAL PERMISSION or authorization from the contracting State. Non-scheduled flights (Article 5) get first and second freedoms without prior permission."},
+{q:"Article 7 deals with:",opts:["Nationality of aircraft","Rules of the Air","Cabotage","Accident investigation"],ans:2,exp:"Article 7 = Cabotage: A State may refuse foreign aircraft permission to carry passengers/mail/cargo between two domestic points. Cabotage = domestic transport by foreign airline."},
+{q:"Under Article 29, how many documents must an aircraft carry in international navigation?",opts:["5","6","7","8"],ans:2,exp:"Article 29 = 7 documents: Certificate of Registration, Certificate of Airworthiness, Crew Licences, Journey Log Book, Radio Station Licence, Passenger List, Cargo Manifest. Memory: RALJRPC."},
+{q:"Article 38 of the Chicago Convention requires:",opts:["ICAO to adopt SARPs","States to adopt Rules of the Air","States to notify ICAO if they cannot comply with a Standard","All aircraft to carry journey log books"],ans:2,exp:"Article 38 = Filing Differences. If a State cannot comply with an ICAO Standard, it MUST notify ICAO of the difference. Article 37 = ICAO adopts SARPs. Don't mix 37 and 38."},
+{q:"Article 26 states that accident investigation is conducted by:",opts:["State of Registry","ICAO","State where the accident occurs","State of the operator"],ans:2,exp:"Article 26: Investigation conducted by the State WHERE THE ACCIDENT OCCURS. State of Registry may send observers. State of occurrence leads the investigation."},
+{q:"Article 33 deals with:",opts:["Cargo restrictions","Recognition of certificates and licences","Accident investigation","Customs duty"],ans:1,exp:"Article 33 = Recognition. Certificates and licences issued by one contracting State are recognized by others IF they meet ICAO minimum standards. This enables international operations."},
+{q:"ICAO was created by:",opts:["Paris Convention 1919","League of Nations","Chicago Convention 1944","United Nations"],ans:2,exp:"ICAO was created by the Chicago Convention (7 December 1944). ICAO replaced ICAN (created by Paris Convention 1919). ICAO became a UN specialized agency in 1947."},
+{q:"ICAO headquarters is located in:",opts:["Paris","London","Geneva","Montreal, Canada"],ans:3,exp:"ICAO HQ = Montreal, Canada. Very direct DGCA MCQ. ICAO became a UN specialized agency in 1947 linked to ECOSOC."},
+{q:"The highest body of ICAO is the:",opts:["Council","Air Navigation Commission","Secretariat","Assembly"],ans:3,exp:"Assembly = highest body of ICAO. It meets at least once every 3 years. Voting = 1 State = 1 Vote. Council = executive body of 36 members elected by Assembly."},
+{q:"The ICAO Assembly meets at least:",opts:["Every year","Every 2 years","Every 3 years","Every 5 years"],ans:2,exp:"ICAO Assembly meets at least once every 3 years (minimum). It can meet more often if called. Each contracting State has one vote."},
+{q:"The ICAO Council consists of:",opts:["19 member States","29 member States","36 member States","45 member States"],ans:2,exp:"ICAO Council = 36 contracting States elected by the Assembly. Council is the standing executive body. Air Navigation Commission (ANC) = 19 members. Committee on Unlawful Interference = 15."},
+{q:"The Air Navigation Commission (ANC) consists of:",opts:["9 members","15 members","19 members","36 members"],ans:2,exp:"ANC = 19 members appointed by Council. The Committee on Unlawful Interference = 15. Council = 36. These three numbers appear frequently in DGCA MCQs."},
+{q:"The ICAO Secretary General is appointed by:",opts:["Assembly","Member States","Council","Secretary-General of the UN"],ans:2,exp:"Secretary General is appointed by the Council. The Council President is also elected by the Council itself. The Secretariat is headed by the Secretary General."},
+{q:"SARPs (Standards and Recommended Practices) are published as:",opts:["PANS documents","ICAO Circulars","Annexes to the Convention","Air Navigation Plans"],ans:2,exp:"SARPs are published as ANNEXES to the Chicago Convention (under Articles 37, 54, 90). PANS are approved by Council and contain more operational procedures."},
+{q:"Which Annexes contain Standards ONLY (no Recommended Practices)?",opts:["1, 3, 11, 14","2, 5, 7, 8","6, 9, 13, 15","4, 10, 12, 16"],ans:1,exp:"Annexes 2, 5, 7, 8 contain Standards ONLY — no Recommended Practices. Memory: Rules(2) · Units(5) · Registration(7) · Airworthiness(8)."},
+{q:"ICAO Document 4444 is:",opts:["Manual of Radiotelephony","Aircraft Type Designators","PANS-ATM (Air Traffic Management)","ICAO Abbreviations"],ans:2,exp:"Doc 4444 = PANS-ATM (Procedures for Air Navigation Services - Air Traffic Management). One of the most referenced ICAO documents. Doc 9432 = Radiotelephony."},
+{q:"Annex 11 deals with:",opts:["Meteorological Service","Aeronautical Charts","Air Traffic Services","Aerodromes"],ans:2,exp:"Annex 11 = Air Traffic Services (ATS). Annex 3 = Met. Annex 4 = Charts. Annex 14 = Aerodromes."},
+{q:"Annex 17 deals with:",opts:["Safety Management","Dangerous Goods","Security","Environmental Protection"],ans:2,exp:"Annex 17 = Security (hijacking, bomb threats, unlawful interference). Annex 18 = Dangerous Goods. Annex 16 = Environment. Annex 19 = Safety Management."},
+{q:"The International Air Services Transit Agreement (IASTA) is ratified by India and provides:",opts:["3rd and 4th freedoms","1st and 2nd freedoms only","All 5 freedoms","Only the 5th freedom"],ans:1,exp:"IASTA = ratified by India. Provides 1st Freedom (fly over) and 2nd Freedom (technical landing) only — the technical freedoms. IATA provides commercial freedoms (3,4,5) but India has NOT ratified IATA."},
+{q:"The 5th Freedom of the Air allows:",opts:["Fly over a foreign country","Technical landing in a foreign country","Carry traffic between two foreign countries during a service from home country","Carry passengers from home to foreign country only"],ans:2,exp:"5th Freedom: carry traffic BETWEEN two foreign countries during a service originating/ending in home country. Example: Air India Delhi-Dubai-London — pick up passengers in Dubai and carry them to London."},
+{q:"The Hague Convention 1970 deals with:",opts:["Offences on board aircraft","Unlawful seizure of aircraft (Hijacking)","Airport security","Marking plastic explosives"],ans:1,exp:"Hague 1970 = HIJACKING (Unlawful Seizure of Aircraft). Memory: Hague = Hijack (both start with H). States must punish and extradite hijackers. Tokyo 1963 = offences on board."},
+{q:"Under the Tokyo Convention 1963, primary jurisdiction over offences on board belongs to:",opts:["State of the operator","State where aircraft is flying","State of Registration","ICAO"],ans:2,exp:"Tokyo Convention: primary jurisdiction = State of REGISTRATION. Even if flying over another country, the state where the aircraft is registered has primary jurisdiction."},
+{q:"The Montreal Protocol 1988 extended the Montreal Convention 1971 to cover:",opts:["Plastic explosives","Offences on aircraft","Airport offences","Hijacking"],ans:2,exp:"Montreal Protocol 1988 = extended protection to AIRPORTS. Montreal 1971 covered aircraft. The Protocol added offences at airport facilities, runways, terminal buildings, and aircraft on ground."},
+{q:"Which convention deals with marking of plastic explosives for detection?",opts:["Hague 1970","Montreal 1971","Tokyo 1963","Montreal 1991"],ans:3,exp:"Montreal Convention 1991 = Marking Plastic Explosives for Detection. Helps security screening and counter-terrorism. All five security conventions (Tokyo, Hague, Montreal 71, 88, 91) are ratified by India."},
+{q:"India has NOT ratified which convention?",opts:["Tokyo Convention 1963","Hague Convention 1970","Rome Convention 1952","Montreal Convention 1971"],ans:2,exp:"India has NOT ratified Rome Convention 1952, which deals with liability for damage to persons/property ON THE GROUND caused by foreign aircraft. All the security conventions and most others are ratified."},
+{q:"Airports Authority of India (AAI) was formed on:",opts:["1 January 1990","1 April 1995","15 August 1947","26 January 2000"],ans:1,exp:"AAI formed 1 April 1995 by merger of International Airports Authority of India and National Airports Authority. AAI = service provider (airports, ATS, AIS, navaids). DGCA = regulator."},
+{q:"DGCA is primarily responsible for:",opts:["Running airports","Providing Air Traffic Services","Regulation and safety oversight of civil aviation","Providing navigation aids"],ans:2,exp:"DGCA = REGULATOR. Functions: aircraft registration, airworthiness certification, pilot/AME/ATCO licensing, AOC, accident prevention, ICAO coordination. AAI = service provider (airports, ATS, AIS, navaids)."},
+{q:"The Cape Town Convention 2001 deals with:",opts:["Hijacking","Passenger liability","Aircraft financing, leasing and engines","Ground damage liability"],ans:2,exp:"Cape Town Convention (16 November 2001) = international interests in aircraft, aircraft engines, and financing/leasing. India ratified in 2008. Warsaw 1929 = carriage liability. Rome 1952 = ground damage."},
+{q:"The Warsaw Convention 1929 primarily deals with:",opts:["Security of aircraft","Airport design","International carriage by air — passenger, baggage, cargo liability","Navigation procedures"],ans:2,exp:"Warsaw Convention 1929 = international carriage by air — standardizes rules for passenger tickets, baggage, cargo, and airline liability. Montreal Convention 1999 is its modern replacement with unlimited liability."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML='<span class="qltr">'+l+'</span>'+q.opts[i];b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='Excellent!';sub='Chapter 2 mastered — DGCA ready!';}else if(pct>=75){msg='Strong!';sub='Review ICAO numbers and convention dates.';}else if(pct>=60){msg='Good!';sub='Drill Article numbers and Annex subjects.';}else{msg='Keep Revising!';sub='Focus on Articles 6/29/38, ICAO structure, and freedoms.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

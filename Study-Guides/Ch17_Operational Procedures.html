@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 17: Operational Procedures</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07101F;--bg2:#0B1829;--bg3:#0E1E32;
+  --card:#102035;--card2:#132742;
+  --teal:#00BFA5;--sky:#2196F3;--amber:#F59E0B;--green:#22C55E;
+  --red:#EF4444;--purple:#A855F7;--orange:#F97316;--pink:#EC4899;
+  --text:#DDE8F5;--text2:#8BA5C8;--text3:#4A6280;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.11);
+  --teal-bg:rgba(0,191,165,0.1);--sky-bg:rgba(33,150,243,0.1);
+  --amber-bg:rgba(245,158,11,0.1);--green-bg:rgba(34,197,94,0.1);
+  --red-bg:rgba(239,68,68,0.1);--purple-bg:rgba(168,85,247,0.1);
+  --orange-bg:rgba(249,115,22,0.1);--pink-bg:rgba(236,72,153,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(33,150,243,0.13) 0%,transparent 50%),radial-gradient(ellipse at 80% 0%,rgba(0,191,165,0.12) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(33,150,243,0.15);border:1px solid rgba(33,150,243,0.35);color:#90CAF9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#4DD0E1;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;position:relative;margin-top:14px;}
+.chip{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;letter-spacing:0.4px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:14px 18px;background:var(--bg3);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--teal);color:#4DD0E1;}
+.nb.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 60px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;background:var(--teal-bg);border:1px solid rgba(0,191,165,0.3);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:3px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#4DD0E1;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(0,191,165,0.13);color:#4DD0E1;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(0,191,165,0.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;letter-spacing:.3px;}
+.b-teal{background:var(--teal-bg);color:#4DD0E1;border:1px solid rgba(0,191,165,.25);}
+.b-blue{background:var(--sky-bg);color:#90CAF9;border:1px solid rgba(33,150,243,.25);}
+.b-amber{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-green{background:var(--green-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.25);}
+.b-red{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-purple{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-orange{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-t{background:rgba(0,191,165,.09);border-color:var(--teal);color:var(--text);}
+.al-a{background:rgba(245,158,11,.09);border-color:var(--amber);color:var(--text);}
+.al-r{background:rgba(239,68,68,.09);border-color:var(--red);color:var(--text);}
+.al-b{background:rgba(33,150,243,.09);border-color:var(--sky);color:var(--text);}
+.al strong{color:#FCD34D;}.al-t strong{color:#4DD0E1;}.al-r strong{color:#FCA5A5;}.al-b strong{color:#90CAF9;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 13px;background:var(--card2);border:1px solid var(--border);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+/* DOCS GRID */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
+.doc-item{background:var(--card2);border:1px solid var(--border2);border-radius:9px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;}
+.doc-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-bg);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* APPROACH BAN VISUAL */
+.app-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.app-card{border-radius:11px;padding:14px;}
+.app-stop{background:var(--red-bg);border:1px solid rgba(239,68,68,.3);}
+.app-go{background:var(--green-bg);border:1px solid rgba(34,197,94,.3);}
+.app-card h4{font-size:12.5px;font-weight:700;margin-bottom:8px;}
+.app-stop h4{color:#FCA5A5;}
+.app-go h4{color:#86EFAC;}
+/* OXYGEN TABLE */
+.oxy-row{display:grid;grid-template-columns:100px 110px 1fr;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.oxy-row:last-child{border-bottom:none;}
+.oxy-hpa{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;}
+/* FUEL CHAIN */
+.fuel-chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0;}
+.fuel-box{background:var(--card2);border:1px solid var(--border2);border-radius:9px;padding:10px 13px;font-size:12px;text-align:center;flex:1;min-width:90px;}
+.fuel-box .fn{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;margin-bottom:2px;}
+.fuel-arr{color:var(--text3);font-size:16px;flex-shrink:0;}
+/* FDTL TABLE */
+.fdtl-head{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
+.fdtl-card{background:var(--card2);border:1px solid var(--border2);border-radius:11px;padding:14px;}
+.fdtl-card h4{font-size:12px;font-weight:700;color:#4DD0E1;margin-bottom:10px;text-transform:uppercase;letter-spacing:.8px;}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--border2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--teal);color:#fff;background:var(--teal-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--teal-bg);border:1px solid rgba(0,191,165,.2);border-radius:8px;font-size:12.5px;color:#4DD0E1;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;}
+.btn{background:var(--teal);color:#fff;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#00D4C0;}
+.btn-o{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--teal) var(--pct,0%),var(--border2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#4DD0E1;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+/* TRAP BOX */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:11px;margin-bottom:9px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* number highlight */
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#4DD0E1;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+@media(max-width:600px){.app-box{grid-template-columns:1fr;}.fdtl-head{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈ DGCA CPL Exam Prep</div>
+  <h1>Chapter 17 — <span>Operational Procedures</span></h1>
+  <p>Annex 6 · Documents · AOC · Approach Ban · Fuel · FDTL · Equipment · ELT · Oxygen</p>
+  <div class="hero-chips">
+    <span class="chip">25 Board Documents</span><span class="chip">AOC Certification</span>
+    <span class="chip">Approach Ban Policy</span><span class="chip">Fuel Planning</span>
+    <span class="chip">FDTL Limits</span><span class="chip">Flight Recorders</span>
+    <span class="chip">Oxygen Requirements</span><span class="chip">ELT Rules</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('overview')">📋 Overview</button>
+  <button class="nb" onclick="show('docs')">📄 Documents</button>
+  <button class="nb" onclick="show('aoc')">🏢 AOC & Minima</button>
+  <button class="nb" onclick="show('equip')">🔧 Equipment</button>
+  <button class="nb" onclick="show('fuel')">⛽ Fuel Planning</button>
+  <button class="nb" onclick="show('fdtl')">⏱ FDTL</button>
+  <button class="nb" onclick="show('safety')">🆘 Safety Equip</button>
+  <button class="nb" onclick="show('numbers')">🔢 Numbers</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- =========== OVERVIEW =========== -->
+<div class="section active" id="section-overview">
+  <div class="sh"><div class="si">📋</div><div><div class="st">Overview & Core Concepts</div><div class="ss">Annex 6 · Quality System · Flight Deck Access · PEDs · Carriage Rules</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>ICAO Annex 6 — Three Parts</div>
+    <div class="g3">
+      <div class="stat" style="border-color:rgba(33,150,243,.4);background:rgba(33,150,243,.07);">
+        <div class="sn" style="font-size:16px;">Part I</div><div class="su" style="margin-top:4px;">International Commercial</div><div class="sl">Air Transport — Aeroplanes</div>
+      </div>
+      <div class="stat" style="border-color:rgba(0,191,165,.4);background:rgba(0,191,165,.07);">
+        <div class="sn" style="font-size:16px;">Part II</div><div class="su" style="margin-top:4px;">International</div><div class="sl">General Aviation</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.07);">
+        <div class="sn" style="font-size:16px;">Part III</div><div class="su" style="margin-top:4px;">International</div><div class="sl">Helicopter Operations</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;">
+      <div class="mi">🧠</div>
+      <div><div class="mt">Memory Trick</div><div class="mf">Annex 6 = HOW aircraft is OPERATED (not built)</div><div class="mc" style="font-size:12px;color:var(--text3);margin-top:4px;">Annex 8 = Airworthiness · Annex 6 = Operations</div></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Quality System</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span><div>Every operator must establish a <strong>Quality System</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div>Must appoint a <strong>Quality Manager</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div>Must include feedback system to <strong>Accountable Manager</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div>Purpose: monitor compliance, safe ops, airworthy aircraft</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Flight Deck Access Rules</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span><div><strong>Operating crew members</strong></div></div>
+        <div class="chk-item"><span class="cy">✓</span><div><strong>Authority representative</strong> (certification / licensing / inspection)</div></div>
+        <div class="chk-item"><span class="cy">✓</span><div><strong>Person permitted</strong> under Operations Manual</div></div>
+        <div class="chk-item"><span class="cn">✗</span><div>All others — denied entry by default</div></div>
+      </div>
+      <div class="al al-a" style="margin-bottom:0;">
+        <strong>Final authority</strong> on flight deck admission = <strong>Commander (PIC)</strong>. May deny access if safety is at risk.
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>Portable Electronic Devices (PEDs)</div>
+      <div class="al al-r" style="margin-bottom:10px;"><strong>Prohibited</strong> if they adversely affect aircraft systems or equipment</div>
+      <div class="g2" style="gap:8px;">
+        <div class="chk-item" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.2);"><span class="cn">✗</span>Mobile phones (if interfering)</div>
+        <div class="chk-item" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.2);"><span class="cn">✗</span>Tablets / Laptops (if interfering)</div>
+        <div class="chk-item" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.2);"><span class="cn">✗</span>Transmitters</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>Carriage of Persons — Exceptions</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">No person shall occupy a non-passenger area UNLESS:</div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">(a)</span><div>For safety of aircraft, persons, animals or cargo</div></div>
+        <div class="chk-item"><span class="cy">(b)</span><div>In cargo/store areas specifically designed to permit access during flight</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Top 10 DGCA MCQ Answers — Quick Reference</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><td>Which Annex deals with aircraft operations?</td><td><span class="b b-teal">Annex 6</span></td></tr>
+          <tr><td>Who has final authority for flight deck admission?</td><td><strong>Commander (PIC)</strong></td></tr>
+          <tr><td>Who monitors operator compliance?</td><td><strong>Quality Manager</strong></td></tr>
+          <tr><td>Document proving registration?</td><td><strong>Certificate of Registration</strong></td></tr>
+          <tr><td>Document proving airworthiness?</td><td><strong>Certificate of Airworthiness</strong></td></tr>
+          <tr><td>Inoperative equipment dispatch document?</td><td><strong>MEL (Minimum Equipment List)</strong></td></tr>
+          <tr><td>Document containing loading data?</td><td><strong>Load &amp; Trim Sheet</strong></td></tr>
+          <tr><td>Document showing cabin configuration?</td><td><strong>LOPA (Layout of Passenger Accommodation)</strong></td></tr>
+          <tr><td>Who must be told about dangerous goods?</td><td><strong>Pilot-in-Command (PIC)</strong></td></tr>
+          <tr><td>Can Authority enter flight deck?</td><td><span class="b b-green">Yes</span> — unless safety endangered</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- =========== DOCUMENTS =========== -->
+<div class="section" id="section-docs">
+  <div class="sh"><div class="si">📄</div><div><div class="st">Documents Carried on Board</div><div class="ss">25 documents · Aircraft · Crew · Operational · Cargo · Dangerous Goods</div></div></div>
+
+  <div class="al al-r">
+    <strong>Aircraft shall NOT fly</strong> unless the following documents are carried onboard (original or attested copy). This is the MOST IMPORTANT exam area of Chapter 17.
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Aircraft Documents (1–5)</div>
+    <div class="doc-grid">
+      <div class="doc-item"><span class="doc-num">1</span><div><strong>C of R</strong><div style="font-size:11px;color:var(--text3);">Certificate of Registration</div></div></div>
+      <div class="doc-item"><span class="doc-num">2</span><div><strong>C of A</strong><div style="font-size:11px;color:var(--text3);">Certificate of Airworthiness</div></div></div>
+      <div class="doc-item"><span class="doc-num">3</span><div><strong>ARC</strong><div style="font-size:11px;color:var(--text3);">Airworthiness Review Certificate</div></div></div>
+      <div class="doc-item"><span class="doc-num">4</span><div><strong>Noise Certificate</strong><div style="font-size:11px;color:var(--text3);">Noise Certification Document</div></div></div>
+      <div class="doc-item"><span class="doc-num">5</span><div><strong>AOP</strong><div style="font-size:11px;color:var(--text3);">Air Operator Permit</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Crew Documents (6–7)</div>
+    <div class="doc-grid">
+      <div class="doc-item" style="border-color:rgba(33,150,243,.3);"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">6</span><div><strong>Crew Licences</strong><div style="font-size:11px;color:var(--text3);">Appropriate crew licences</div></div></div>
+      <div class="doc-item" style="border-color:rgba(33,150,243,.3);"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">7</span><div><strong>Aeromobile Radio Licence</strong><div style="font-size:11px;color:var(--text3);">Radio operation authority</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Operational Documents (8–12)</div>
+    <div class="doc-grid">
+      <div class="doc-item" style="border-color:rgba(245,158,11,.3);"><span class="doc-num" style="background:var(--amber-bg);color:#FCD34D;">8</span><div><strong>Journey Log Book</strong></div></div>
+      <div class="doc-item" style="border-color:rgba(245,158,11,.3);"><span class="doc-num" style="background:var(--amber-bg);color:#FCD34D;">9</span><div><strong>Operations Manual</strong></div></div>
+      <div class="doc-item" style="border-color:rgba(245,158,11,.3);"><span class="doc-num" style="background:var(--amber-bg);color:#FCD34D;">10</span><div><strong>MEL</strong><div style="font-size:11px;color:var(--text3);">Minimum Equipment List</div></div></div>
+      <div class="doc-item" style="border-color:rgba(245,158,11,.3);"><span class="doc-num" style="background:var(--amber-bg);color:#FCD34D;">11</span><div><strong>Flight Manual</strong></div></div>
+      <div class="doc-item" style="border-color:rgba(245,158,11,.3);"><span class="doc-num" style="background:var(--amber-bg);color:#FCD34D;">12</span><div><strong>Cabin Crew Manual</strong></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Checklists (13–17) + Additional (18–25)</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#86EFAC;margin-bottom:8px;">CHECKLISTS</div>
+        <div class="doc-grid" style="grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="doc-item" style="border-color:rgba(34,197,94,.25);"><span class="doc-num" style="background:var(--green-bg);color:#86EFAC;">13</span><div>Cockpit Checklist</div></div>
+          <div class="doc-item" style="border-color:rgba(34,197,94,.25);"><span class="doc-num" style="background:var(--green-bg);color:#86EFAC;">14</span><div>Emergency Checklist</div></div>
+          <div class="doc-item" style="border-color:rgba(34,197,94,.25);"><span class="doc-num" style="background:var(--green-bg);color:#86EFAC;">15</span><div>Take-off Checklist</div></div>
+          <div class="doc-item" style="border-color:rgba(34,197,94,.25);"><span class="doc-num" style="background:var(--green-bg);color:#86EFAC;">16</span><div>Cruise Checklist</div></div>
+          <div class="doc-item" style="border-color:rgba(34,197,94,.25);"><span class="doc-num" style="background:var(--green-bg);color:#86EFAC;">17</span><div>Landing Checklist</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#90CAF9;margin-bottom:8px;">ADDITIONAL DOCUMENTS</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">18</span><div>Aircraft Search Procedure Checklist</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">19</span><div>Maintenance Release / Certificate of Release to Service</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">20</span><div>LOPA (Layout of Passenger Accommodation)</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">21</span><div>Emergency &amp; Safety Equipment Layout</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">22</span><div>Route Guide</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">23</span><div>Navigation Charts / Maps</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">24</span><div>Weight Schedule</div></div>
+          <div class="doc-item"><span class="doc-num" style="background:var(--sky-bg);color:#90CAF9;">25</span><div>Load &amp; Trim Sheet</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Special Cargo Documents</div>
+    <div class="g3">
+      <div style="padding:14px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;">
+        <div style="font-weight:700;color:#90CAF9;font-size:12px;margin-bottom:8px;">🧑‍🤝‍🧑 Passenger Manifest</div>
+        <div style="font-size:12px;color:var(--text2);">Required when carrying passengers:<br>Names · Place of embarkation · Destination</div>
+      </div>
+      <div style="padding:14px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;">
+        <div style="font-weight:700;color:#FCD34D;font-size:12px;margin-bottom:8px;">📦 Cargo Documents</div>
+        <div style="font-size:12px;color:var(--text2);">Cargo manifest + Detailed cargo declaration</div>
+      </div>
+      <div style="padding:14px;background:var(--red-bg);border:1px solid rgba(239,68,68,.3);border-radius:10px;">
+        <div style="font-weight:700;color:#FCA5A5;font-size:12px;margin-bottom:8px;">☢️ Dangerous Goods</div>
+        <div style="font-size:12px;color:var(--text2);">Dangerous Goods List — must be brought to notice of <strong style="color:#fff;">PIC before flight</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mem">
+    <div class="mi">🧠</div>
+    <div><div class="mt">Memory Trick — Core Documents</div><div class="mf">RCAN-AJOFC</div><div class="mc" style="font-size:12px;color:var(--text3);margin-top:4px;">R=Registration · C=Airworthiness · A=ARC · N=Noise · A=Air Operator Permit · J=Journey Log · O=Operations Manual · F=Flight Manual · C=Cabin Crew Manual</div></div>
+  </div>
+</div>
+
+<!-- =========== AOC & MINIMA =========== -->
+<div class="section" id="section-aoc">
+  <div class="sh"><div class="si">🏢</div><div><div class="st">AOC, Operating Minima & Approach Ban</div><div class="ss">Air Operator Certificate · Restricted AOM · Approach Ban · VFR rules</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Air Operator Certificate (AOC)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-t" style="margin-bottom:10px;">
+          <strong>AOC = Permission to run an airline.</strong> Authorises an operator to conduct specified commercial air transport operations.
+        </div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span><div>Issued by <strong>State of the Operator</strong></div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>State where principal place of business exists</div></div>
+          <div class="chk-item"><span class="cy">✓</span><div>Other contracting states shall <strong>recognise AOC</strong> if it meets Annex 6 standards</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:8px;">Before granting AOC, State must verify:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Adequate <strong>organisation</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>Training programs</div>
+          <div class="chk-item"><span class="cy">✓</span>Flight operations</div>
+          <div class="chk-item"><span class="cy">✓</span>Ground handling</div>
+          <div class="chk-item"><span class="cy">✓</span>Maintenance arrangements</div>
+          <div class="chk-item"><span class="cy">✓</span>Capability for <strong>safe operations</strong></div>
+        </div>
+        <div class="al al-a" style="margin-top:10px;margin-bottom:0;font-size:12px;">
+          <strong>AOC stays valid</strong> only if operator continues to maintain original certification standards and continuous surveillance requirements.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Restricted Aerodrome Operating Minima (AOM)</div>
+    <div class="g2">
+      <div>
+        <div class="al al-a">
+          <strong>Restricted AOM = Normal DA(H)/MDA(H) + 100 ft</strong><br>
+          AND Normal Visibility/RVR + 400 m
+        </div>
+        <div class="mem" style="margin-bottom:0;">
+          <div class="mi">🧠</div>
+          <div><div class="mt">Memory Trick</div><div class="mf">Restricted = +100 ft and +400 m</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="ch" style="margin-bottom:10px;"><span class="pip" style="background:var(--sky)"></span>RVR Controlling Values</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">1st</span><div><strong>Touchdown Zone RVR</strong> — always the primary controlling value</div></div>
+          <div class="chk-item"><span class="cy">2nd</span><div><strong>Mid-point RVR</strong> — if reported</div></div>
+          <div class="chk-item"><span class="cy">3rd</span><div><strong>Stop-end RVR</strong> — if reported</div></div>
+        </div>
+        <div class="g2" style="gap:8px;margin-top:10px;">
+          <div class="stat"><div class="sn">125 m</div><div class="sl">Min mid-point RVR</div></div>
+          <div class="stat"><div class="sn">50 m</div><div class="sl">Min stop-end RVR</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Approach Ban Policy — Most Asked DGCA Topic</div>
+    <div class="app-box" style="margin-bottom:14px;">
+      <div class="app-card app-stop">
+        <h4>❌ Cannot Commence Approach</h4>
+        <div style="font-size:12.5px;color:var(--text2);">PIC shall NOT start instrument approach if reported RVR/Visibility is <strong style="color:#FCA5A5;">below applicable minimum</strong></div>
+      </div>
+      <div class="app-card app-stop">
+        <h4>❌ Approach NOT Continued if aircraft is:</h4>
+        <div style="font-size:12.5px;color:var(--text2);">
+          <div style="margin-bottom:5px;">• <strong style="color:#FCA5A5;">Above 1000 ft</strong> over aerodrome</div>
+          <div>• <strong style="color:#FCA5A5;">Not yet in final approach</strong> segment</div>
+        </div>
+      </div>
+      <div class="app-card app-go">
+        <h4>✅ Approach MAY Continue if:</h4>
+        <div style="font-size:12.5px;color:var(--text2);">
+          <div style="margin-bottom:5px;">• Aircraft has entered <strong style="color:#86EFAC;">final approach segment</strong></div>
+          <div>• Descended <strong style="color:#86EFAC;">below 1000 ft</strong> above aerodrome</div>
+        </div>
+      </div>
+      <div class="app-card app-go">
+        <h4>✅ Landing Allowed Only If:</h4>
+        <div style="font-size:12.5px;color:var(--text2);">Required visual reference established at <strong style="color:#86EFAC;">DA/H or MDA/H</strong> AND maintained</div>
+      </div>
+    </div>
+    <div class="al al-a" style="margin-bottom:0;"><strong>Key threshold:</strong> 1000 ft above aerodrome is the decision point. Once below 1000 ft or in final approach — approach may continue to DA/MDA.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>VFR Operating Rules</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>VFR flights must be conducted under VFR and in VMC</div>
+        <div class="chk-item"><span class="cn">✗</span><div><strong>Special VFR NOT permitted</strong> for commercial air transport aeroplanes</div></div>
+      </div>
+      <div class="al al-r" style="margin:0;">
+        <strong>Exam Trap:</strong> Special VFR is NOT allowed for commercial air transport. This is a common MCQ.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== EQUIPMENT =========== -->
+<div class="section" id="section-equip">
+  <div class="sh"><div class="si">🔧</div><div><div class="st">Equipment Requirements</div><div class="ss">Flight recorders · GPWS · ACAS II · Fuses · Windshield · Reinforced door</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Flight Recorders — Key Numbers</div>
+    <div class="g4" style="margin-bottom:14px;">
+      <div class="stat"><div class="sn">25 hrs</div><div class="sl">FDR retention (last 25 hours)</div></div>
+      <div class="stat"><div class="sn">2 hrs</div><div class="sl">CVR retention (last 2 hours)</div></div>
+      <div class="stat"><div class="sn">2 hrs</div><div class="sl">Data Link Recorder retention</div></div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.07);"><div class="sn" style="color:#D8B4FE;">25 hrs</div><div class="sl">New CVR (post Jan 2022, >27,000 kg)</div></div>
+    </div>
+    <div class="tw" style="margin-bottom:14px;">
+      <table>
+        <thead><tr><th>Weight</th><th>Requirement</th><th>Placement</th></tr></thead>
+        <tbody>
+          <tr><td>Aircraft <span class="num">&gt;15,000 kg</span></td><td>Two combined recorders (FDR/CVR)</td><td>One near cockpit · One as far aft as practical</td></tr>
+          <tr><td>Aircraft <span class="num">&gt;27,000 kg</span> (C of A after 1 Jan 2022)</td><td>CVR must record 25 hours</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#4DD0E1;margin-bottom:8px;">CRASH PROTECTED RECORDERS</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item"><span class="b b-teal">FDR</span> Flight Data Recorder</div>
+          <div class="chk-item"><span class="b b-teal">CVR</span> Cockpit Voice Recorder</div>
+          <div class="chk-item"><span class="b b-teal">AIR</span> Airborne Image Recorder</div>
+          <div class="chk-item"><span class="b b-teal">DLR</span> Data Link Recorder</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:8px;">LIGHTWEIGHT RECORDERS</div>
+        <div class="chklist" style="gap:5px;">
+          <div class="chk-item"><span class="b b-amber">ADRS</span> Aircraft Data Recording System</div>
+          <div class="chk-item"><span class="b b-amber">CARS</span> Cockpit Audio Recording System</div>
+          <div class="chk-item"><span class="b b-amber">AIRS</span> Airborne Image Recording System</div>
+          <div class="chk-item"><span class="b b-amber">DLRS</span> Data Link Recording System</div>
+        </div>
+      </div>
+    </div>
+    <div class="al al-t" style="margin-top:12px;margin-bottom:0;">
+      <strong>CVR/CARS Operation:</strong> Starts recording <strong>before aircraft moves under its own power</strong>. Stops when <strong>aircraft can no longer move under its own power</strong>.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Key Equipment Thresholds</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Equipment</th><th>Threshold</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Windshield Wipers</strong></td><td>MTOM <span class="num">&gt;5700 kg</span></td><td>Or equivalent precipitation system</td></tr>
+          <tr><td><strong>Airborne Weather Radar</strong></td><td>Pressurized, passenger-carrying aircraft</td><td>When thunderstorms/hazardous weather/night/IMC expected</td></tr>
+          <tr><td><strong>Forward-Looking Windshear</strong></td><td>Turbojet: MTOM <span class="num">&gt;5700 kg</span> OR <span class="num">&gt;9 passengers</span></td><td>—</td></tr>
+          <tr><td><strong>GPWS</strong></td><td>Same as windshear requirement (turbojet)</td><td>With forward-looking terrain avoidance</td></tr>
+          <tr><td><strong>ACAS II</strong></td><td>Turbine: MTOM <span class="num">&gt;5700 kg</span> OR <span class="num">&gt;19 passengers</span></td><td>Airborne Collision Avoidance System</td></tr>
+          <tr><td><strong>Reinforced Cockpit Door</strong></td><td>MTOM <span class="num">&gt;45,500 kg</span> OR seating <span class="num">&gt;60</span></td><td>Resists arms fire, grenade fragments, forced entry</td></tr>
+          <tr><td><strong>Crash Axe/Crowbar</strong></td><td>MTOM <span class="num">&gt;5700 kg</span> OR seats <span class="num">&gt;9</span></td><td>If &gt;200 seats: additional axe near rear galley</td></tr>
+          <tr><td><strong>Pressure Altitude Source</strong></td><td>All IFR aircraft</td><td>Resolution: <span class="num">25 ft (7.62 m)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Spare Fuses Rule</div>
+    <div class="g2">
+      <div class="stat"><div class="sn">10%</div><div class="sl">of installed fuses</div></div>
+      <div style="display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--amber);">OR — whichever is GREATER</div>
+      <div class="stat"><div class="sn">3</div><div class="sl">fuses of each rating</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>First Aid Kits</div>
+    <div class="tw" style="margin-bottom:10px;">
+      <table>
+        <thead><tr><th>Passengers on Board</th><th>First Aid Kits Required</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 100</td><td><span class="num">1</span></td></tr>
+          <tr><td>101 – 199</td><td><span class="num">2</span></td></tr>
+          <tr><td>200 – 299</td><td><span class="num">3</span></td></tr>
+          <tr><td>300+</td><td><span class="num">4</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory Trick</div><div class="mf">Every 100 passengers = +1 kit (starting from 1 for 0–100)</div></div></div>
+  </div>
+</div>
+
+<!-- =========== FUEL =========== -->
+<div class="section" id="section-fuel">
+  <div class="sh"><div class="si">⛽</div><div><div class="st">Fuel Planning Requirements</div><div class="ss">7 fuel components · Final reserve · Isolated aerodrome · Contingency</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>The 7 Fuel Components — Chain</div>
+    <div class="fuel-chain">
+      <div class="fuel-box sky" style="border-color:rgba(33,150,243,.3)"><div class="fn" style="color:#90CAF9;">TAXI</div><div style="font-size:11px;color:var(--text3);">Before T/O incl APU</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(0,191,165,.3)"><div class="fn" style="color:#4DD0E1;">TRIP</div><div style="font-size:11px;color:var(--text3);">T/O → Destination</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(245,158,11,.3)"><div class="fn" style="color:#FCD34D;">CONT</div><div style="font-size:11px;color:var(--text3);">5% trip fuel</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(168,85,247,.3)"><div class="fn" style="color:#D8B4FE;">ALT</div><div style="font-size:11px;color:var(--text3);">To alternate</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(239,68,68,.3)"><div class="fn" style="color:#FCA5A5;">FINAL</div><div style="font-size:11px;color:var(--text3);">Reserve</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(249,115,22,.3)"><div class="fn" style="color:#FDB785;">ADDL</div><div style="font-size:11px;color:var(--text3);">If needed</div></div>
+      <div class="fuel-arr">+</div>
+      <div class="fuel-box" style="border-color:rgba(34,197,94,.3)"><div class="fn" style="color:#86EFAC;">DISC</div><div style="font-size:11px;color:var(--text3);">PIC discretion</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Critical Fuel Numbers</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Fuel Type</th><th>Amount</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Contingency Fuel</strong></td><td><span class="num">5% of trip fuel</span></td><td>Never less than <span class="num">5 min</span> holding at <span class="num">1500 ft</span> above destination</td></tr>
+          <tr><td><strong>No Alternate Fuel</strong></td><td><span class="num">15 min holding</span></td><td>At 1500 ft above destination aerodrome</td></tr>
+          <tr><td><strong>Final Reserve — Reciprocating</strong></td><td><span class="num">45 minutes</span></td><td>Holding at 1500 ft above aerodrome</td></tr>
+          <tr><td><strong>Final Reserve — Turbine</strong></td><td><span class="num">30 minutes</span></td><td>Holding at 1500 ft above aerodrome</td></tr>
+          <tr><td><strong>Isolated Aerodrome — Turbine</strong></td><td><span class="num">2 hours</span></td><td>At normal cruise consumption above destination</td></tr>
+          <tr><td><strong>Isolated Aerodrome — Recip</strong></td><td><span class="num">45 min + 15% cruise</span> OR <span class="num">2 hrs</span></td><td>Whichever is less</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-top:10px;margin-bottom:0;">
+      <div class="mi">🧠</div>
+      <div><div class="mt">Memory Trick — Final Reserve</div><div class="mf">Recip = 45 min · Turbine = 30 min (piston needs more)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== FDTL =========== -->
+<div class="section" id="section-fdtl">
+  <div class="sh"><div class="si">⏱</div><div><div class="st">Flight Duty Time Limitations (FDTL)</div><div class="ss">FDP limits · Cumulative limits · WOCL · Unforeseen circumstances · Rest requirements</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Key FDTL Definitions</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Term</th><th>Definition / Key Point</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Flight Time / Block Time</strong></td><td>Aircraft first moves for T/O → aircraft finally comes to rest. Same as <em>Chocks-to-Chocks</em></td></tr>
+          <tr><td><strong>Flight Duty Period (FDP)</strong></td><td>Starts: reporting for flight duty. Ends: engine shutdown after last flight</td></tr>
+          <tr><td><strong>Duty Period</strong></td><td>Starts: reporting for any duty. Ends: free from all duties</td></tr>
+          <tr><td><strong>Local Night</strong></td><td>8-hour period between <span class="num">2200 and 0800</span> local time</td></tr>
+          <tr><td><strong>Night Duty</strong></td><td>Any duty period touching <span class="num">0000–0600</span> in acclimatized zone</td></tr>
+          <tr><td><strong>WOCL</strong></td><td>Window of Circadian Low = <span class="num">0200–0600</span> in acclimatized time zone</td></tr>
+          <tr><td><strong>Acclimatized</strong></td><td>Within <span class="num">3-hour</span> time zone band around local departure time</td></tr>
+          <tr><td><strong>New time zone rule</strong></td><td>If next duty differs by <span class="num">&gt;3 hours</span>: acclimatized to departure zone for first <span class="num">48 hours</span>, then local</td></tr>
+          <tr><td><strong>Positioning / Deadheading</strong></td><td>Transfer of non-operating crew from one place to another</td></tr>
+          <tr><td><strong>ULR Operations</strong></td><td>Flight Time ≥ <span class="num">14 hrs</span> AND Duty Period ≤ <span class="num">22 hrs</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Two-Pilot Operations — FDP & Landing Limits</div>
+    <div class="tw" style="margin-bottom:10px;">
+      <table>
+        <thead><tr><th>Max Flight Time</th><th>Max FDP</th><th>Max Landings</th></tr></thead>
+        <tbody>
+          <tr><td>8 hrs</td><td>11:00</td><td><span class="num">6</span></td></tr>
+          <tr><td>8 hrs</td><td>11:30</td><td><span class="num">5</span></td></tr>
+          <tr><td>8 hrs</td><td>12:00</td><td><span class="num">4</span></td></tr>
+          <tr><td>8 hrs</td><td>12:30</td><td><span class="num">3</span></td></tr>
+          <tr><td>9 hrs</td><td>13:00</td><td><span class="num">2</span></td></tr>
+          <tr><td>10 hrs</td><td>13:00</td><td><span class="num">1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al al-a"><strong>Night encroachment:</strong> When FDP encroaches on night → Flight Time <span class="num">8 hrs</span>, FDP <span class="num">10 hrs</span>, Landings <span class="num">2</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Augmented & ULR Operations</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">3-CREW OPERATIONS</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Rest Facility</th><th>Max FDP</th></tr></thead>
+            <tbody>
+              <tr><td>Bunk</td><td><span class="num">16 hrs</span></td></tr>
+              <tr><td>Isolated Rest Seat</td><td><span class="num">15 hrs</span></td></tr>
+              <tr><td>Basic Rest Seat</td><td><span class="num">14 hrs</span></td></tr>
+              <tr><td>Flight Time</td><td><span class="num">12 hrs</span></td></tr>
+              <tr><td>Max Landings</td><td><span class="num">2</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#90CAF9;margin-bottom:8px;">4-CREW &amp; ULR OPERATIONS</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Operation</th><th>FT</th><th>FDP</th><th>Ldg</th></tr></thead>
+            <tbody>
+              <tr><td>4-crew (Bunk)</td><td><span class="num">14 hr</span></td><td><span class="num">18 hr</span></td><td><span class="num">1</span></td></tr>
+              <tr><td>4-crew (Isolated Seat)</td><td>14 hr</td><td><span class="num">16 hr</span></td><td>1</td></tr>
+              <tr><td>ULR (≥14 hr)</td><td><span class="num">17 hr</span></td><td><span class="num">21 hr</span></td><td><span class="num">1</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Cumulative Flight Time Limits</div>
+    <div class="tw" style="margin-bottom:12px;">
+      <table>
+        <thead><tr><th>Period</th><th>Max Flight Time</th><th>Max Duty</th></tr></thead>
+        <tbody>
+          <tr><td><span class="num">7</span> consecutive days</td><td><span class="num">35 hrs</span></td><td><span class="num">60 hrs</span></td></tr>
+          <tr><td><span class="num">14</span> consecutive days</td><td><span class="num">65 hrs</span></td><td><span class="num">100 hrs</span></td></tr>
+          <tr><td><span class="num">28</span> consecutive days</td><td><span class="num">100 hrs</span></td><td><span class="num">190 hrs</span></td></tr>
+          <tr><td><span class="num">90</span> consecutive days</td><td><span class="num">300 hrs</span></td><td><span class="num">600 hrs</span></td></tr>
+          <tr><td><span class="num">365</span> consecutive days</td><td><span class="num">1000 hrs</span></td><td><span class="num">1800 hrs</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;">
+      <div class="mi">🧠</div>
+      <div><div class="mt">Memory Formula</div><div class="mf">7→35/60 · 14→65/100 · 28→100/190 · 90→300/600 · 365→1000/1800</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--orange)"></span>Unforeseen Circumstances & Extensions</div>
+    <div class="g4" style="margin-bottom:14px;">
+      <div class="stat"><div class="sn">1 hr</div><div class="sl">Max Flight Time extension</div></div>
+      <div class="stat"><div class="sn">2 hrs</div><div class="sl">Max FDP extension</div></div>
+      <div class="stat"><div class="sn">+1</div><div class="sl">Extra landing allowed</div></div>
+      <div class="stat"><div class="sn">18 mo</div><div class="sl">Record retention period</div></div>
+    </div>
+    <div class="tw" style="margin-bottom:10px;">
+      <table>
+        <thead><tr><th>Extension Amount</th><th>Additional Rest Required</th></tr></thead>
+        <tbody>
+          <tr><td>FDP extension <span class="num">≤ 1 hr</span> OR FT extension <span class="num">≤ 30 min</span></td><td><span class="num">+2 hours</span></td></tr>
+          <tr><td>FDP extension <span class="num">&gt; 1 hr</span> OR FT extension <span class="num">&gt; 30 min</span></td><td><span class="num">+4 hours</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="g3">
+      <div class="al al-t" style="margin:0;font-size:12px;"><strong>28-day cumulative extension cap:</strong> FT = 4 hrs · FDP = 8 hrs</div>
+      <div class="al al-a" style="margin:0;font-size:12px;"><strong>Roster published:</strong> at least 7 days in advance</div>
+      <div class="al al-b" style="margin:0;font-size:12px;"><strong>Quarterly report</strong> to DGCA by Head of Operations on all FDP extensions</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== SAFETY EQUIPMENT =========== -->
+<div class="section" id="section-safety">
+  <div class="sh"><div class="si">🆘</div><div><div class="st">Safety, Survival & Communication Equipment</div><div class="ss">ELT · Oxygen · PBE · Megaphones · Life Rafts · Comm equipment</div></div></div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Emergency Locator Transmitter (ELT)</div>
+    <div class="g3">
+      <div class="stat"><div class="sn">1</div><div class="sl">Minimum ELT per aircraft (Automatic)</div></div>
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);"><div class="sn" style="color:#FCA5A5;">2</div><div class="sl">ELTs required for &gt;19 pax (min 1 automatic)</div></div>
+      <div class="stat"><div class="sn">2</div><div class="sl">Survival ELTs in life rafts</div></div>
+    </div>
+    <div class="al al-r" style="margin-top:12px;margin-bottom:0;"><strong>DGCA Favourite:</strong> Aircraft with &gt;19 passengers must carry 2 ELTs (at least 1 must be automatic). Life rafts must carry minimum 2 survival ELTs.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Oxygen Requirements — Altitude Thresholds</div>
+    <div class="card" style="margin-bottom:12px;background:var(--card2);">
+      <div class="oxy-row" style="padding-top:0;">
+        <div class="oxy-hpa" style="color:#86EFAC;">700 hPa</div>
+        <div style="font-size:13px;color:#86EFAC;font-weight:700;">10,000 ft</div>
+        <div style="font-size:12.5px;color:var(--text2);">If exposure between 700–620 hPa exceeds <span class="num">30 min</span>: oxygen for <strong>all crew</strong> + <span class="num">10%</span> of passengers</div>
+      </div>
+      <div class="oxy-row">
+        <div class="oxy-hpa" style="color:#FCD34D;">620 hPa</div>
+        <div style="font-size:13px;color:#FCD34D;font-weight:700;">13,000 ft</div>
+        <div style="font-size:12.5px;color:var(--text2);">Oxygen for <strong style="color:#fff;">ALL crew AND ALL passengers</strong></div>
+      </div>
+      <div class="oxy-row" style="padding-bottom:0;border-bottom:none;">
+        <div class="oxy-hpa" style="color:#FCA5A5;">376 hPa</div>
+        <div style="font-size:13px;color:#FCA5A5;font-weight:700;">25,000 ft</div>
+        <div style="font-size:12.5px;color:var(--text2);">If unable to descend to 13,000 ft in 4 min: passenger compartment needs <span class="num">10 min</span> oxygen supply. Also requires <strong>positive loss-of-pressurization warning device</strong></div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory Trick</div><div class="mf">700=10k · 620=13k · 376=25k (pressure goes down, altitude goes up)</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Protective Breathing Equipment (PBE)</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;color:var(--text2);margin-bottom:10px;">Required for pressurized aeroplanes OR unpressurized aeroplanes with MTOM &gt;5700 kg OR &gt;19 seats</div>
+        <div class="stat"><div class="sn">15 min</div><div class="sl">Minimum PBE breathing gas duration</div></div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Protects eyes, nose and mouth</div>
+        <div class="chk-item"><span class="cy">✓</span>Portable PBE required if &gt;1 flight crew member and no cabin crew</div>
+        <div class="chk-item"><span class="cy">✓</span>Cabin crew PBE for all required cabin crew members (15 min)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Medical Kits</div>
+    <div class="tw" style="margin-bottom:10px;">
+      <table>
+        <thead><tr><th>Kit</th><th>When Required</th><th>Quantity</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Universal Precaution Kit (UPK)</strong></td><td>Aircraft carrying cabin crew</td><td><span class="num">1</span> (or <span class="num">2</span> if &gt;250 passengers)</td></tr>
+          <tr><td><strong>Medical Kit</strong></td><td>&gt;100 passengers AND sector &gt;2 hours</td><td>As required</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Megaphones & Emergency Lighting</div>
+    <div class="g2">
+      <div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead><tr><th>Passenger Seating</th><th>Megaphones</th></tr></thead>
+            <tbody>
+              <tr><td>Up to 60</td><td>Not required</td></tr>
+              <tr><td>61–99</td><td><span class="num">1</span></td></tr>
+              <tr><td>100+</td><td><span class="num">2</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="al al-t" style="margin:0;"><strong>Emergency Lighting:</strong> Required for passenger aircraft with seating &gt;<span class="num">9</span>. Must have independent emergency lighting system for evacuation.</div>
+        <div class="al al-a" style="margin-top:8px;margin-bottom:0;"><strong>Break-in points:</strong> Marked Red or Yellow, may be outlined in White for contrast.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Communication Equipment</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Two-way aerodrome control communication</div>
+        <div class="chk-item"><span class="cy">✓</span>Receive meteorological information during flight</div>
+        <div class="chk-item"><span class="cy">✓</span>Two-way communication with aeronautical stations at any time</div>
+      </div>
+      <div>
+        <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);margin-bottom:10px;">
+          <div class="sn" style="color:#FCA5A5;">121.5</div><div class="su">MHz</div><div class="sl">Emergency frequency — must always be capable</div>
+        </div>
+        <div class="al al-t" style="margin:0;font-size:12px;"><strong>IFR requirement:</strong> Audio Selector Panel mandatory, accessible to each required flight crew member</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Navigation Equipment</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PBN</strong></td><td>Performance Based Navigation — aircraft must have approved nav equipment and DGCA authorization</td></tr>
+          <tr><td><strong>MNPS → NAT HLA</strong></td><td>Minimum Navigation Performance Specifications now redesignated as <strong>North Atlantic High Level Airspace (NAT HLA)</strong></td></tr>
+          <tr><td><strong>Survival Radio</strong></td><td>Portable, VHF capable, independent of aircraft power, usable away from aircraft</td></tr>
+          <tr><td><strong>RCP Airspace</strong></td><td>Requires approved communication equipment and State Operator authorization</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- =========== NUMBERS =========== -->
+<div class="section" id="section-numbers">
+  <div class="sh"><div class="si">🔢</div><div><div class="st">Master Numbers Reference</div><div class="ss">Every critical number from Chapter 17 in one place</div></div></div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Equipment Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>Windshield wiper required above</td><td><span class="num">5700 kg MTOM</span></td></tr>
+            <tr><td>Windshear system (turbojet)</td><td><span class="num">&gt;5700 kg OR &gt;9 pax</span></td></tr>
+            <tr><td>ACAS II (turbine)</td><td><span class="num">&gt;5700 kg OR &gt;19 pax</span></td></tr>
+            <tr><td>Reinforced cockpit door</td><td><span class="num">&gt;45,500 kg OR &gt;60 seats</span></td></tr>
+            <tr><td>FDR retention</td><td><span class="num">25 hours</span></td></tr>
+            <tr><td>CVR retention</td><td><span class="num">2 hours</span></td></tr>
+            <tr><td>New CVR (post Jan 2022)</td><td><span class="num">25 hours</span></td></tr>
+            <tr><td>Pressure altitude resolution</td><td><span class="num">25 ft</span></td></tr>
+            <tr><td>Spare fuses</td><td><span class="num">10% or 3 each</span></td></tr>
+            <tr><td>Crash axe — basic</td><td><span class="num">&gt;5700 kg or &gt;9 seats</span></td></tr>
+            <tr><td>Crash axe — additional</td><td><span class="num">&gt;200 seats</span></td></tr>
+            <tr><td>Megaphone 1</td><td><span class="num">61–99 seats</span></td></tr>
+            <tr><td>Megaphone 2</td><td><span class="num">100+ seats</span></td></tr>
+            <tr><td>Emergency lighting</td><td><span class="num">&gt;9 seats</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Oxygen & Safety Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>700 hPa</td><td><span class="num">10,000 ft</span></td></tr>
+            <tr><td>620 hPa</td><td><span class="num">13,000 ft</span></td></tr>
+            <tr><td>376 hPa</td><td><span class="num">25,000 ft</span></td></tr>
+            <tr><td>10% pax oxygen (10k–13k ft)</td><td><span class="num">&gt;30 min exposure</span></td></tr>
+            <tr><td>All pax oxygen above</td><td><span class="num">13,000 ft</span></td></tr>
+            <tr><td>Extra oxygen above 25,000 ft</td><td><span class="num">10 min supply</span></td></tr>
+            <tr><td>PBE duration</td><td><span class="num">15 min</span></td></tr>
+            <tr><td>UPK (standard)</td><td><span class="num">1</span></td></tr>
+            <tr><td>UPK (&gt;250 pax)</td><td><span class="num">2</span></td></tr>
+            <tr><td>Medical Kit</td><td><span class="num">&gt;100 pax + &gt;2 hr sector</span></td></tr>
+            <tr><td>ELT per aircraft (min)</td><td><span class="num">1 automatic</span></td></tr>
+            <tr><td>ELT for &gt;19 pax</td><td><span class="num">2 (1 automatic)</span></td></tr>
+            <tr><td>Survival ELTs in rafts</td><td><span class="num">2</span></td></tr>
+            <tr><td>Emergency frequency</td><td><span class="num">121.5 MHz</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Fuel Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>Contingency fuel</td><td><span class="num">5% of trip fuel</span></td></tr>
+            <tr><td>Min holding (contingency)</td><td><span class="num">5 min @ 1500 ft</span></td></tr>
+            <tr><td>No alternate fuel</td><td><span class="num">15 min @ 1500 ft</span></td></tr>
+            <tr><td>Final reserve (Recip)</td><td><span class="num">45 min</span></td></tr>
+            <tr><td>Final reserve (Turbine)</td><td><span class="num">30 min</span></td></tr>
+            <tr><td>Isolated aero (Turbine)</td><td><span class="num">2 hours</span></td></tr>
+            <tr><td>Restricted AOM</td><td><span class="num">+100 ft / +400 m</span></td></tr>
+            <tr><td>Approach ban threshold</td><td><span class="num">1000 ft AAL / final</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>FDTL Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Number</th></tr></thead>
+          <tbody>
+            <tr><td>7-day flight limit</td><td><span class="num">35 hrs</span></td></tr>
+            <tr><td>14-day flight limit</td><td><span class="num">65 hrs</span></td></tr>
+            <tr><td>28-day flight limit</td><td><span class="num">100 hrs</span></td></tr>
+            <tr><td>90-day flight limit</td><td><span class="num">300 hrs</span></td></tr>
+            <tr><td>365-day flight limit</td><td><span class="num">1000 hrs</span></td></tr>
+            <tr><td>7-day duty limit</td><td><span class="num">60 hrs</span></td></tr>
+            <tr><td>28-day duty limit</td><td><span class="num">190 hrs</span></td></tr>
+            <tr><td>365-day duty limit</td><td><span class="num">1800 hrs</span></td></tr>
+            <tr><td>Max FT extension</td><td><span class="num">1 hr</span></td></tr>
+            <tr><td>Max FDP extension</td><td><span class="num">2 hrs</span></td></tr>
+            <tr><td>WOCL</td><td><span class="num">0200–0600</span></td></tr>
+            <tr><td>ULR flight time</td><td><span class="num">≥14 hrs</span></td></tr>
+            <tr><td>Record retention</td><td><span class="num">18 months</span></td></tr>
+            <tr><td>Roster published</td><td><span class="num">7 days</span> in advance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Common DGCA Exam Traps</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">FDR vs CVR retention</div><div class="trap-text">FDR = <strong style="color:#fff;">25 hours</strong>. CVR = <strong style="color:#fff;">2 hours</strong> (standard). New large aircraft CVR post-2022 = 25 hours too.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Special VFR for commercial air transport</div><div class="trap-text">Special VFR is <strong style="color:#FCA5A5;">NOT permitted</strong> for commercial air transport aeroplanes. Very common trap.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Final Reserve — Recip vs Turbine</div><div class="trap-text">Reciprocating = <strong style="color:#fff;">45 min</strong>. Turbine = <strong style="color:#fff;">30 min</strong>. Piston engines need more reserve due to lower efficiency at altitude.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">ACAS II vs GPWS threshold</div><div class="trap-text">ACAS II = turbine &gt;5700 kg OR <strong style="color:#fff;">&gt;19 pax</strong>. GPWS (windshear) = turbojet &gt;5700 kg OR <strong style="color:#fff;">&gt;9 pax</strong>. Different passenger thresholds!</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Positioning vs Deadheading</div><div class="trap-text">Both mean the same thing. <strong style="color:#fff;">Positioning = Deadheading</strong>. Transfer of non-operating crew.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">ELT threshold</div><div class="trap-text">Every aircraft = 1 automatic ELT. Aircraft with <strong style="color:#fff;">&gt;19 pax</strong> = 2 ELTs (1 must be automatic). Life rafts = 2 survival ELTs.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== QUIZ =========== -->
+<div class="section" id="section-quiz">
+  <div class="sh"><div class="si">🧠</div><div><div class="st">Practice Quiz</div><div class="ss">30 DGCA-style questions covering all topics in Chapter 17</div></div></div>
+
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 30</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:3.3%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/30</div></div>
+    <div class="smsg" id="smsg"></div>
+    <div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"Which ICAO Annex deals with the Operation of Aircraft?",opts:["Annex 2","Annex 6","Annex 8","Annex 12"],ans:1,exp:"Annex 6 deals with Operation of Aircraft. Part I = Commercial Air Transport (Aeroplanes), Part II = General Aviation, Part III = Helicopter Operations."},
+  {q:"Who has final authority for admission to the flight deck?",opts:["Quality Manager","DGCA Inspector","Commander (PIC)","Head of Operations"],ans:2,exp:"The Commander (PIC) has the final decision on flight deck admission. Even an authority representative can be denied if the Commander believes safety may be endangered."},
+  {q:"Which document specifies equipment that may be inoperative for dispatch?",opts:["Flight Manual","Operations Manual","Minimum Equipment List (MEL)","Maintenance Release"],ans:2,exp:"The MEL (Minimum Equipment List) specifies which items of equipment may be inoperative while still allowing dispatch under defined conditions."},
+  {q:"What document shows the layout of passenger accommodation in the cabin?",opts:["Operations Manual","Emergency Equipment Layout","LOPA","Cabin Crew Manual"],ans:2,exp:"LOPA = Layout of Passenger Accommodation. It shows the cabin configuration — seat rows, emergency exits etc."},
+  {q:"Before a flight with dangerous goods, the dangerous goods list must be brought to the notice of:",opts:["Quality Manager","Ground engineer","Pilot-in-Command","Cabin crew supervisor"],ans:2,exp:"The dangerous goods list must be specifically brought to the notice of the Pilot-in-Command before the flight departs."},
+  {q:"An AOC (Air Operator Certificate) authorises an operator to:",opts:["Register aircraft","Maintain aircraft","Conduct specified commercial air transport operations","Issue pilot licences"],ans:2,exp:"An AOC is the permission to run an airline — it authorises an operator to conduct specified commercial air transport operations."},
+  {q:"Restricted Aerodrome Operating Minima equals normal minima plus:",opts:["+50 ft and +200 m","+100 ft and +400 m","+200 ft and +500 m","+150 ft and +300 m"],ans:1,exp:"Restricted AOM = Normal DA(H)/MDA(H) + 100 ft AND Normal Visibility/RVR + 400 m. Memory: +100 ft and +400 m."},
+  {q:"An instrument approach shall NOT be continued (once visibility falls below minimum) if the aircraft is:",opts:["Below 500 ft AAL","Below DA/H","Above 1000 ft AAL or not yet in final approach segment","At any height above the runway"],ans:2,exp:"If visibility falls below minimum after commencing, approach shall not be continued if the aircraft is above 1000 ft over the aerodrome OR not yet in the final approach segment."},
+  {q:"Special VFR flights for commercial air transport aeroplanes are:",opts:["Permitted in day only","Permitted in night only","Not permitted","Permitted with DGCA approval"],ans:2,exp:"Special VFR is NOT permitted for commercial air transport aeroplanes. This is a common exam trap."},
+  {q:"What is the minimum spare fuse requirement?",opts:["5% of installed fuses or 2 of each","10% of installed fuses or 3 of each (whichever greater)","10% of installed fuses only","5 of each rating"],ans:1,exp:"Aircraft using fuses must carry spares equal to the greater of: 10% of installed fuses OR 3 fuses of each rating."},
+  {q:"Airborne weather radar is required for:",opts:["All aeroplanes regardless of pressurization","Pressurized aeroplanes carrying passengers in areas with expected thunderstorms/hazardous weather","Turbojet aeroplanes only","All night flights only"],ans:1,exp:"Pressurized aeroplanes carrying passengers must have operative weather radar when operating where thunderstorms, hazardous weather, night operations, or IMC operations are expected."},
+  {q:"The FDR must retain the last:",opts:["10 hours of flight","15 hours of flight","25 hours of flight","2 hours of flight"],ans:2,exp:"The FDR must retain at least the last 25 hours of flight data. The CVR retains the last 2 hours."},
+  {q:"The CVR must retain the last:",opts:["25 hours","15 hours","5 hours","2 hours"],ans:3,exp:"The CVR must retain at least the last 2 hours. However, aircraft above 27,000 kg with individual C of A first issued after 1 January 2022 must have CVR capable of recording 25 hours."},
+  {q:"ACAS II is required for turbine-engine aeroplanes with:",opts:["MTOM > 5700 kg or more than 9 passengers","MTOM > 5700 kg or more than 19 passengers","MTOM > 15,000 kg only","All turbine aircraft"],ans:1,exp:"ACAS II is required for turbine-engine aeroplanes with MTOM > 5700 kg OR more than 19 passengers. Note: windshear/GPWS threshold is 9 passengers (different!)."},
+  {q:"A reinforced cockpit door is required for aircraft with:",opts:["MTOM > 5700 kg","MTOM > 45,500 kg or seating capacity > 60","MTOM > 27,000 kg","Seating capacity > 19"],ans:1,exp:"Reinforced cockpit door is required when MTOM > 45,500 kg OR seating capacity > 60 passengers. It must resist small arms fire, grenade fragments, and forced entry."},
+  {q:"First aid kits required for 250 passengers on board:",opts:["1","2","3","4"],ans:2,exp:"200–299 passengers = 3 first aid kits. The rule is every 100 passengers adds one kit: 0-100=1, 101-199=2, 200-299=3, 300+=4."},
+  {q:"Final reserve fuel for turbine engine aircraft is:",opts:["45 minutes","30 minutes","20 minutes","15 minutes"],ans:1,exp:"Final reserve for turbine engines = 30 minutes holding at 1500 ft above aerodrome. Reciprocating engines = 45 minutes."},
+  {q:"Contingency fuel is normally:",opts:["2% of trip fuel","5% of trip fuel","10% of trip fuel","15% of trip fuel"],ans:1,exp:"Contingency fuel = 5% of planned trip fuel. Never less than 5 minutes holding fuel at 1500 ft above destination."},
+  {q:"When no alternate aerodrome is required, how much holding fuel must be carried?",opts:["5 minutes @ 1500 ft","10 minutes @ 1500 ft","15 minutes @ 1500 ft","30 minutes @ 1500 ft"],ans:2,exp:"When no alternate aerodrome is required, the aircraft must carry fuel for 15 minutes holding at 1500 ft above destination."},
+  {q:"Below what pressure altitude must oxygen be available for all crew and passengers?",opts:["700 hPa (10,000 ft)","620 hPa (13,000 ft)","376 hPa (25,000 ft)","All altitudes"],ans:1,exp:"Above 620 hPa (13,000 ft), oxygen must be provided for ALL crew and ALL passengers. Between 700-620 hPa (10,000-13,000 ft) and exposure >30 min: oxygen for all crew + 10% of passengers."},
+  {q:"Minimum PBE (Protective Breathing Equipment) breathing gas duration is:",opts:["10 minutes","15 minutes","20 minutes","30 minutes"],ans:1,exp:"PBE must provide breathing gas for at least 15 minutes. It must also protect eyes, nose and mouth."},
+  {q:"Every aircraft must carry at minimum how many ELTs?",opts:["Zero, only if required by DGCA","One automatic ELT","Two ELTs","One automatic and one manual"],ans:1,exp:"Every aeroplane must carry at least one automatic ELT. Aircraft carrying more than 19 passengers must carry minimum 2 ELTs (at least 1 automatic)."},
+  {q:"Life rafts must carry a minimum of how many survival ELTs?",opts:["One","Two","Three","Four"],ans:1,exp:"Life rafts must carry a minimum of two survival ELTs. This is a favourite DGCA question."},
+  {q:"The aviation emergency frequency is:",opts:["118.0 MHz","121.5 MHz","123.45 MHz","156.8 MHz"],ans:1,exp:"121.5 MHz is the international aviation emergency frequency. All aircraft must be capable of communicating on this frequency."},
+  {q:"MNPS airspace is now redesignated as:",opts:["PBN airspace","RVSM airspace","NAT HLA","ETOPS airspace"],ans:2,exp:"MNPS (Minimum Navigation Performance Specifications) airspace is now redesignated as NAT HLA (North Atlantic High Level Airspace)."},
+  {q:"What is WOCL and during what hours does it occur?",opts:["Window of Crew Limitations — 0000 to 0400","Window of Circadian Low — 0200 to 0600","Warning of Cockpit Load — 0300 to 0700","Window of Crew Low — 0100 to 0500"],ans:1,exp:"WOCL = Window of Circadian Low. It occurs from 0200 to 0600 in the acclimatized time zone. This is when human performance is at its lowest point in the circadian cycle."},
+  {q:"What is the maximum cumulative flight time in 28 consecutive days?",opts:["80 hours","90 hours","100 hours","120 hours"],ans:2,exp:"Maximum cumulative flight time in 28 consecutive days = 100 hours. The duty limit for the same period is 190 hours."},
+  {q:"What is 'Positioning' also known as in FDTL?",opts:["Augmented duty","Standby","Deadheading","Split duty"],ans:2,exp:"Positioning is also called Deadheading. It refers to the transfer of a non-operating crew member from one place to another as required by the operator."},
+  {q:"Under unforeseen operational circumstances, the maximum FDP extension allowed is:",opts:["1 hour","2 hours","3 hours","4 hours"],ans:1,exp:"Under unforeseen operational circumstances, the maximum FDP extension is 2 hours (and max flight time extension is 1 hour, max 1 extra landing)."},
+  {q:"For how long must operators retain duty and rest records?",opts:["6 months","12 months","18 months","24 months"],ans:2,exp:"Operators must maintain duty and rest records for 18 months. Quarterly reports on all FDP extensions must be submitted to DGCA by the Head of Operations."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');
+    b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);
+    o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');
+  e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){
+  cur++;
+  if(cur>=qs.length)showResult();
+  else renderQ();
+}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=90){msg='🏆 Excellent!';sub='Chapter 17 mastered. You are ready!';}
+  else if(pct>=75){msg='✈️ Strong Performance!';sub='Great work. Review the numbers you missed.';}
+  else if(pct>=60){msg='📚 Good Progress!';sub='Focus on FDTL limits, fuel numbers, and equipment thresholds.';}
+  else{msg='🔄 Keep Revising!';sub='Use the Numbers section to drill all the critical figures.';}
+  document.getElementById('smsg').textContent=msg;
+  document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

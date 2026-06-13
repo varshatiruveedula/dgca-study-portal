@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 12: Visual Aids for Navigation</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06101C;--bg2:#081422;--bg3:#0A1828;
+  --card:#0D1B2F;--card2:#102038;
+  --yellow:#EAB308;--green:#22C55E;--red:#EF4444;
+  --blue:#3B82F6;--sky:#0EA5E9;--amber:#F59E0B;
+  --teal:#14B8A6;--purple:#A855F7;--orange:#F97316;
+  --text:#D0E8FA;--text2:#6898BE;--text3:#30506A;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --y-bg:rgba(234,179,8,.11);--g-bg:rgba(34,197,94,.11);
+  --r-bg:rgba(239,68,68,.11);--b-bg:rgba(59,130,246,.11);
+  --s-bg:rgba(14,165,233,.11);--a-bg:rgba(245,158,11,.11);
+  --t-bg:rgba(20,184,166,.11);--p-bg:rgba(168,85,247,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(234,179,8,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(34,197,94,.10),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);color:#FDE047;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#FDE047;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.nb:hover{border-color:var(--yellow);color:#FDE047;}
+.nb.active{background:var(--yellow);border-color:var(--yellow);color:#000;}
+.content{max-width:1040px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:24px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.b{display:inline-block;padding:2px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-y{background:var(--y-bg);color:#FDE047;border:1px solid rgba(234,179,8,.3);}
+.b-g{background:var(--g-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.b-r{background:var(--r-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.b-b{background:var(--b-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.3);}
+.b-s{background:var(--s-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.3);}
+.b-a{background:var(--a-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.b-t{background:var(--t-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.3);}
+.b-w{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);}
+.b-bl{background:#1a1a1a;color:#FDE047;border:1px solid rgba(255,255,255,.15);}
+.mem{background:linear-gradient(135deg,rgba(234,179,8,.09),rgba(249,115,22,.06));border:1px solid rgba(234,179,8,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-y{background:var(--y-bg);border-color:var(--yellow);}
+.al-r{background:var(--r-bg);border-color:var(--red);}
+.al-g{background:var(--g-bg);border-color:var(--green);}
+.al-b{background:var(--b-bg);border-color:var(--blue);}
+.al-s{background:var(--s-bg);border-color:var(--sky);}
+.al strong{color:#FCD34D;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#86EFAC;}.al-s strong{color:#7DD3FC;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FDE047;}
+/* SVG wrapper */
+.svg-wrap{background:var(--card2);border:1px solid var(--bdr2);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.svg-wrap svg{display:block;width:100%;height:auto;}
+/* PAPI rows */
+.papi-row{display:flex;align-items:center;gap:14px;padding:12px 14px;border-bottom:1px solid var(--bdr);}
+.papi-row:last-child{border-bottom:none;}
+.papi-lights{display:flex;gap:7px;flex-shrink:0;}
+.pl{width:32px;height:32px;border-radius:50%;border:2px solid rgba(0,0,0,.3);}
+.pl-r{background:radial-gradient(circle at 40% 35%,#FF8080,#DC2626);box-shadow:0 0 10px rgba(220,38,38,.6);}
+.pl-w{background:radial-gradient(circle at 40% 35%,#ffffff,#d0d0d0);box-shadow:0 0 10px rgba(255,255,255,.5);}
+.papi-text{flex:1;}
+.papi-title{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;margin-bottom:3px;}
+.papi-desc{font-size:12.5px;color:var(--text2);}
+/* SIGN boxes */
+.sign-demo{border-radius:9px;padding:13px 18px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;min-width:130px;}
+/* COLOUR swatch row */
+.swatch-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--bdr);}
+.swatch-row:last-child{border-bottom:none;}
+.sw{width:36px;height:36px;border-radius:9px;flex-shrink:0;border:2px solid rgba(255,255,255,.15);}
+.sw-name{font-size:14px;font-weight:700;flex:1;}
+.sw-use{font-size:12.5px;color:var(--text2);}
+/* TRAP */
+.trap{background:var(--r-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--yellow),var(--orange));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--yellow);color:#fff;background:var(--y-bg);}
+.qopt.correct{border-color:var(--green);background:var(--g-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--r-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--y-bg);border:1px solid rgba(234,179,8,.22);border-radius:8px;font-size:12.5px;color:#FDE047;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--yellow);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--yellow) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FDE047;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:520px){.nav-bar{gap:3px;}.nb{font-size:10px;padding:5px 9px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">✈ DGCA CPL — Visual Aids</div>
+  <h1>Chapter 12 — <span>Visual Aids for Navigation</span></h1>
+  <p>Runway markings · PAPI · Approach lighting · Signs · Lights · Declared distances · RFF</p>
+  <div class="hero-chips">
+    <span class="chip">Runway=White · Taxiway=Yellow</span>
+    <span class="chip">PAPI 2R+2W = On Path</span>
+    <span class="chip">Simple=420m · CAT I=900m</span>
+    <span class="chip">4 solid + 4 dashed = Hold</span>
+    <span class="chip">TODA=TORA+CWY</span>
+    <span class="chip">RFF 3min max / 2min goal</span>
+    <span class="chip">Threshold stripes: 18→4 · 60→16</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('wind')">💨 Wind & Signals</button>
+  <button class="nb" onclick="show('runway')">🛬 Runway</button>
+  <button class="nb" onclick="show('papi')">🔴 PAPI</button>
+  <button class="nb" onclick="show('approach')">🔦 Approach Lighting</button>
+  <button class="nb" onclick="show('taxiway')">🟡 Taxiway & Signs</button>
+  <button class="nb" onclick="show('declared')">📏 Distances & RFF</button>
+  <button class="nb" onclick="show('lights')">💡 All Lights</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ======= WIND & SIGNALS ======= -->
+<div class="section active" id="section-wind">
+  <div class="sh">
+    <div class="si" style="background:var(--s-bg);border:1px solid rgba(14,165,233,.3);">💨</div>
+    <div><div class="st">Wind Indicators & Signal Area</div><div class="ss">Windsock · Landing T · Signal area size</div></div>
+  </div>
+
+  <!-- WINDSOCK SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Wind Direction Indicator (Windsock)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg">
+        <rect width="700" height="240" fill="#080f1a"/>
+        <!-- pole -->
+        <rect x="180" y="30" width="6" height="170" rx="3" fill="#4a5a6a"/>
+        <rect x="178" y="195" width="10" height="12" rx="2" fill="#3a4a5a"/>
+        <!-- windsock shape -->
+        <path d="M186,45 L340,70 L340,130 L186,140 Z" fill="#EF4444" opacity=".9"/>
+        <path d="M186,45 L190,92 L186,140" fill="rgba(0,0,0,.2)"/>
+        <!-- orange stripes on sock -->
+        <path d="M220,48 L222,136" stroke="#F97316" stroke-width="12" stroke-linecap="round" opacity=".8"/>
+        <path d="M260,54 L262,133" stroke="white" stroke-width="10" stroke-linecap="round" opacity=".7"/>
+        <path d="M300,61 L302,131" stroke="#F97316" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+        <!-- wind arrow -->
+        <line x1="480" y1="92" x2="370" y2="92" stroke="#7DD3FC" stroke-width="3"/>
+        <polygon points="370,85 350,92 370,99" fill="#7DD3FC"/>
+        <text x="490" y="88" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold">WIND</text>
+        <text x="490" y="104" fill="#7DD3FC" font-family="monospace" font-size="11">direction →</text>
+        <!-- labels -->
+        <rect x="20" y="52" width="130" height="70" rx="8" fill="rgba(14,165,233,.12)" stroke="rgba(14,165,233,.3)" stroke-width="1"/>
+        <text x="85" y="75" fill="#7DD3FC" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">WINDSOCK</text>
+        <text x="85" y="93" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">→ Wind direction</text>
+        <text x="85" y="108" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">→ Approx strength</text>
+        <!-- annotation: sock points downwind -->
+        <text x="340" y="165" fill="#FCD34D" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Sock points DOWNWIND</text>
+        <text x="340" y="182" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Aircraft lands into wind (towards sock opening)</text>
+        <!-- must illuminate at night -->
+        <rect x="450" y="140" width="200" height="60" rx="8" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="550" y="162" fill="#FCD34D" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Night Aerodrome:</text>
+        <text x="550" y="178" fill="#FCD34D" font-family="sans-serif" font-size="11" text-anchor="middle">At least 1 windsock must be</text>
+        <text x="550" y="192" fill="#FCD34D" font-family="sans-serif" font-size="11" text-anchor="middle">illuminated 💡</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Shows wind direction and approximate strength</div>
+        <div class="chk-item"><span class="cy">✓</span>At least <strong>ONE</strong> required at every aerodrome</div>
+        <div class="chk-item"><span class="cy">✓</span>Must be visible from aircraft in flight</div>
+        <div class="chk-item"><span class="cy">✓</span>Must be free from building turbulence effects</div>
+      </div>
+      <div class="mem" style="margin:0;align-self:center;"><div class="mi">🧠</div><div><div class="mt">Landing T (LDI)</div><div class="mf">Land/take off parallel to T-stem<br>toward the crossbar<br>T = Traffic Direction</div></div></div>
+    </div>
+  </div>
+
+  <!-- LANDING T SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Landing Direction Indicator (Landing T)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="700" height="200" fill="#080f1a"/>
+        <!-- grass background -->
+        <rect x="0" y="100" width="700" height="100" fill="#0e1a0e" opacity=".5"/>
+        <!-- Landing T shape (white/orange) -->
+        <rect x="310" y="40" width="80" height="10" rx="3" fill="#F97316"/><!-- crossbar top -->
+        <rect x="342" y="50" width="16" height="90" rx="3" fill="#F97316"/><!-- stem -->
+        <!-- arrows showing approach -->
+        <line x1="180" y1="100" x2="310" y2="100" stroke="#86EFAC" stroke-width="2.5" stroke-dasharray="8,5"/>
+        <polygon points="310,93 335,100 310,107" fill="#86EFAC"/>
+        <text x="220" y="88" fill="#86EFAC" font-family="sans-serif" font-size="12" font-weight="bold">Land this way ✈</text>
+        <line x1="520" y1="100" x2="430" y2="100" stroke="#86EFAC" stroke-width="2.5" stroke-dasharray="8,5"/>
+        <polygon points="430,93 405,100 430,107" fill="#86EFAC"/>
+        <text x="475" y="88" fill="#86EFAC" font-family="sans-serif" font-size="12" font-weight="bold">Or this way ✈</text>
+        <!-- label -->
+        <rect x="300" y="150" width="100" height="36" rx="8" fill="rgba(249,115,22,.15)" stroke="rgba(249,115,22,.4)" stroke-width="1"/>
+        <text x="350" y="168" fill="#FDB785" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">Landing T</text>
+        <text x="350" y="182" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">crossbar shows threshold end</text>
+        <!-- parallel to stem label -->
+        <text x="350" y="25" fill="#FDE047" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Land PARALLEL to the stem → TOWARD the crossbar</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SIGNAL AREA + LIGHT SIGNALS -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Signalling Lamp — ATC Light Signals (radio failure)</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Aircraft in FLIGHT:</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead style="background:rgba(245,158,11,.12);"><tr><th style="color:#FCD34D;">Signal</th><th style="color:#FCD34D;">Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><span class="b b-g">Steady Green</span></td><td>Cleared to land</td></tr>
+              <tr><td><span class="b b-r">Steady Red</span></td><td>Continue circling</td></tr>
+              <tr><td><span class="b b-g">Green Flashes</span></td><td>Return for landing</td></tr>
+              <tr><td><span class="b b-r">Red Flashes</span></td><td>Aerodrome unsafe</td></tr>
+              <tr><td><span class="b b-w">White Flashes</span></td><td>Land &amp; proceed to apron</td></tr>
+              <tr><td><span class="b b-r">Red Pyrotechnic</span></td><td>Do not land</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Aircraft on GROUND:</div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead style="background:rgba(245,158,11,.12);"><tr><th style="color:#FCD34D;">Signal</th><th style="color:#FCD34D;">Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><span class="b b-g">Steady Green</span></td><td>Cleared for take-off</td></tr>
+              <tr><td><span class="b b-r">Steady Red</span></td><td>Stop</td></tr>
+              <tr><td><span class="b b-g">Green Flashes</span></td><td>Taxi</td></tr>
+              <tr><td><span class="b b-r">Red Flashes</span></td><td>Taxi clear of landing area</td></tr>
+              <tr><td><span class="b b-w">White Flashes</span></td><td>Return to starting point</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="al al-s" style="margin-top:4px;margin-bottom:0;font-size:12px;"><strong>Signal area</strong> = ground area for displaying visual signals. Minimum size: <strong>9 m²</strong></div>
+  </div>
+</div>
+
+<!-- ======= RUNWAY MARKINGS ======= -->
+<div class="section" id="section-runway">
+  <div class="sh">
+    <div class="si" style="background:var(--y-bg);border:1px solid rgba(234,179,8,.3);">🛬</div>
+    <div><div class="st">Runway Markings</div><div class="ss">Colours · Threshold stripes · Aiming point · TDZ · Holding · All markings explained visually</div></div>
+  </div>
+
+  <!-- FULL RUNWAY LAYOUT SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Complete Runway Layout — Landing Sequence (Top View)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grass" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect width="20" height="20" fill="#0a140a"/>
+            <circle cx="5" cy="8" r="1" fill="#0d1a0d"/>
+            <circle cx="15" cy="15" r="1" fill="#0d1a0d"/>
+          </pattern>
+        </defs>
+        <!-- background -->
+        <rect width="760" height="520" fill="url(#grass)"/>
+        <!-- runway asphalt -->
+        <rect x="60" y="100" width="640" height="320" rx="4" fill="#1e2a30"/>
+        <!-- runway edge white stripes -->
+        <rect x="60" y="100" width="12" height="320" fill="white" opacity=".85"/>
+        <rect x="688" y="100" width="12" height="320" fill="white" opacity=".85"/>
+
+        <!-- THRESHOLD - piano keys LEFT (4 stripes = 18m runway example) -->
+        <g fill="white" opacity=".9">
+          <rect x="74" y="130" width="34" height="12" rx="1"/>
+          <rect x="74" y="152" width="34" height="12" rx="1"/>
+          <rect x="74" y="174" width="34" height="12" rx="1"/>
+          <rect x="74" y="196" width="34" height="12" rx="1"/>
+          <rect x="74" y="298" width="34" height="12" rx="1"/>
+          <rect x="74" y="320" width="34" height="12" rx="1"/>
+          <rect x="74" y="342" width="34" height="12" rx="1"/>
+          <rect x="74" y="364" width="34" height="12" rx="1"/>
+        </g>
+        <!-- threshold annotation -->
+        <line x1="60" y1="90" x2="110" y2="90" stroke="rgba(34,197,94,.7)" stroke-width="2"/>
+        <text x="85" y="82" fill="#86EFAC" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">THRESHOLD</text>
+        <text x="85" y="70" fill="#86EFAC" font-family="sans-serif" font-size="10" text-anchor="middle">(Piano Keys)</text>
+
+        <!-- Green threshold lights row -->
+        <g fill="#22C55E">
+          <circle cx="65" cy="110" r="5" opacity=".9"/>
+          <circle cx="65" cy="130" r="5" opacity=".9"/>
+          <circle cx="65" cy="150" r="5" opacity=".9"/>
+          <circle cx="65" cy="370" r="5" opacity=".9"/>
+          <circle cx="65" cy="390" r="5" opacity=".9"/>
+          <circle cx="65" cy="410" r="5" opacity=".9"/>
+        </g>
+        <text x="30" y="260" fill="#22C55E" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(-90,30,260)">THRESHOLD LIGHTS (GREEN)</text>
+
+        <!-- Runway number -->
+        <text x="175" y="175" fill="white" font-family="monospace" font-size="44" font-weight="bold" text-anchor="middle" opacity=".8">09</text>
+
+        <!-- CENTRELINE dashes -->
+        <g fill="white" opacity=".7">
+          <rect x="255" y="252" width="36" height="10" rx="2"/>
+          <rect x="315" y="252" width="36" height="10" rx="2"/>
+          <rect x="375" y="252" width="36" height="10" rx="2"/>
+          <rect x="435" y="252" width="36" height="10" rx="2"/>
+          <rect x="495" y="252" width="36" height="10" rx="2"/>
+        </g>
+        <text x="380" y="292" fill="rgba(255,255,255,.5)" font-family="sans-serif" font-size="10" text-anchor="middle">─ ─ ─ CENTRELINE (WHITE BROKEN) ─ ─ ─</text>
+
+        <!-- AIMING POINT - big white blocks -->
+        <rect x="225" y="140" width="52" height="100" rx="3" fill="white" opacity=".88"/>
+        <rect x="485" y="140" width="52" height="100" rx="3" fill="white" opacity=".88"/>
+        <!-- aiming point label -->
+        <line x1="251" y1="135" x2="251" y2="105" stroke="#FDE047" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="511" y1="135" x2="511" y2="105" stroke="#FDE047" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="380" y="98" fill="#FDE047" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">AIMING POINT (big white blocks — pilot aims here)</text>
+
+        <!-- TDZ markings - paired bars -->
+        <g fill="white" opacity=".7">
+          <rect x="300" y="118" width="20" height="16" rx="1"/>
+          <rect x="445" y="118" width="20" height="16" rx="1"/>
+          <rect x="300" y="140" width="20" height="16" rx="1"/>
+          <rect x="445" y="140" width="20" height="16" rx="1"/>
+          <rect x="300" y="350" width="20" height="16" rx="1"/>
+          <rect x="445" y="350" width="20" height="16" rx="1"/>
+          <rect x="300" y="374" width="20" height="16" rx="1"/>
+          <rect x="445" y="374" width="20" height="16" rx="1"/>
+        </g>
+        <!-- TDZ label -->
+        <line x1="310" y1="113" x2="310" y2="86" stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="380" y="78" fill="#93C5FD" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">TDZ — Touchdown Zone (paired bars — wheels touch HERE)</text>
+
+        <!-- Runway end lights RED -->
+        <g fill="#EF4444">
+          <circle cx="695" cy="110" r="5" opacity=".9"/>
+          <circle cx="695" cy="130" r="5" opacity=".9"/>
+          <circle cx="695" cy="370" r="5" opacity=".9"/>
+          <circle cx="695" cy="390" r="5" opacity=".9"/>
+        </g>
+        <!-- Runway end number -->
+        <text x="590" y="370" fill="white" font-family="monospace" font-size="44" font-weight="bold" text-anchor="middle" opacity=".8">27</text>
+        <line x1="688" y1="430" x2="730" y2="430" stroke="rgba(239,68,68,.7)" stroke-width="2"/>
+        <text x="720" y="424" fill="#FCA5A5" font-family="sans-serif" font-size="10" text-anchor="start">RUNWAY END (RED)</text>
+
+        <!-- Edge lights white on sides -->
+        <g fill="white" opacity=".55">
+          <circle cx="72" cy="218" r="3"/><circle cx="72" cy="238" r="3"/><circle cx="72" cy="258" r="3"/>
+          <circle cx="72" cy="278" r="3"/><circle cx="72" cy="300" r="3"/>
+          <circle cx="688" cy="218" r="3"/><circle cx="688" cy="238" r="3"/><circle cx="688" cy="258" r="3"/>
+        </g>
+        <!-- Last 600m edge = YELLOW -->
+        <g fill="#EAB308" opacity=".8">
+          <circle cx="616" cy="108" r="3"/><circle cx="636" cy="108" r="3"/><circle cx="656" cy="108" r="3"/>
+          <circle cx="676" cy="108" r="3"/>
+          <circle cx="616" cy="412" r="3"/><circle cx="636" cy="412" r="3"/><circle cx="656" cy="412" r="3"/>
+        </g>
+        <rect x="605" y="420" width="88" height="16" rx="4" fill="rgba(234,179,8,.15)" stroke="rgba(234,179,8,.3)" stroke-width="1"/>
+        <text x="649" y="432" fill="#FDE047" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">Last 600m = YELLOW</text>
+
+        <!-- Landing sequence arrow -->
+        <line x1="40" y1="480" x2="720" y2="480" stroke="rgba(134,239,172,.5)" stroke-width="2"/>
+        <polygon points="720,473 740,480 720,487" fill="rgba(134,239,172,.5)"/>
+        <text x="380" y="500" fill="#86EFAC" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Landing sequence → Threshold → Aiming Point → TDZ → Rollout</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- MARKING COLOURS SWATCH -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Marking Colours — #1 Exam Topic</div>
+    <div class="g2">
+      <div>
+        <div class="swatch-row">
+          <div class="sw" style="background:white;border-color:rgba(255,255,255,.3);"></div>
+          <div class="sw-name" style="color:white;">⬜ WHITE</div>
+          <div class="sw-use">All runway markings, runway centreline, side stripes, aiming point, TDZ</div>
+        </div>
+        <div class="swatch-row">
+          <div class="sw" style="background:#EAB308;border-color:rgba(234,179,8,.4);"></div>
+          <div class="sw-name" style="color:#FDE047;">🟡 YELLOW</div>
+          <div class="sw-use">Taxiway markings, aircraft stand, centreline (taxi), enhanced taxi centreline</div>
+        </div>
+        <div class="swatch-row">
+          <div class="sw" style="background:#EF4444;border-color:rgba(239,68,68,.4);"></div>
+          <div class="sw-name" style="color:#FCA5A5;">🔴 RED</div>
+          <div class="sw-use">Apron safety lines (India). Mandatory instruction markings background.</div>
+        </div>
+      </div>
+      <div class="mem" style="margin:0;align-self:center;"><div class="mi">🧠</div><div><div class="mt">Colour Memory (India)</div><div class="mf">RUNWAY = White<br>TAXIWAY = Yellow<br>APRON SAFETY = Red ← INDIA</div></div></div>
+    </div>
+  </div>
+
+  <!-- THRESHOLD STRIPES SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Threshold Stripes — "Piano Keys" (Most Asked Table)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#060e18"/>
+        <!-- show different runway widths and stripe counts -->
+        <!-- 18m = 4 stripes -->
+        <rect x="20" y="30" width="120" height="130" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <g fill="white" opacity=".9">
+          <rect x="30" y="45" width="20" height="100" rx="2"/>
+          <rect x="55" y="45" width="20" height="100" rx="2"/>
+          <rect x="80" y="45" width="20" height="100" rx="2"/>
+          <rect x="105" y="45" width="20" height="100" rx="2"/>
+        </g>
+        <text x="80" y="180" fill="#FDE047" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">18m → 4</text>
+
+        <!-- 30m = 8 stripes -->
+        <rect x="165" y="30" width="170" height="130" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <g fill="white" opacity=".9">
+          <rect x="172" y="45" width="16" height="100" rx="2"/>
+          <rect x="192" y="45" width="16" height="100" rx="2"/>
+          <rect x="212" y="45" width="16" height="100" rx="2"/>
+          <rect x="232" y="45" width="16" height="100" rx="2"/>
+          <rect x="252" y="45" width="16" height="100" rx="2"/>
+          <rect x="272" y="45" width="16" height="100" rx="2"/>
+          <rect x="292" y="45" width="16" height="100" rx="2"/>
+          <rect x="312" y="45" width="16" height="100" rx="2"/>
+        </g>
+        <text x="250" y="180" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">30m → 8</text>
+
+        <!-- 45m = 12 stripes -->
+        <rect x="358" y="30" width="200" height="130" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <g fill="white" opacity=".9">
+          <rect x="362" y="45" width="13" height="100" rx="1"/>
+          <rect x="378" y="45" width="13" height="100" rx="1"/>
+          <rect x="394" y="45" width="13" height="100" rx="1"/>
+          <rect x="410" y="45" width="13" height="100" rx="1"/>
+          <rect x="426" y="45" width="13" height="100" rx="1"/>
+          <rect x="442" y="45" width="13" height="100" rx="1"/>
+          <rect x="458" y="45" width="13" height="100" rx="1"/>
+          <rect x="474" y="45" width="13" height="100" rx="1"/>
+          <rect x="490" y="45" width="13" height="100" rx="1"/>
+          <rect x="506" y="45" width="13" height="100" rx="1"/>
+          <rect x="522" y="45" width="13" height="100" rx="1"/>
+          <rect x="538" y="45" width="13" height="100" rx="1"/>
+        </g>
+        <text x="458" y="180" fill="#7DD3FC" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">45m → 12</text>
+
+        <!-- 60m = 16 stripes -->
+        <rect x="580" y="30" width="160" height="130" rx="4" fill="#1e2a30" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <g fill="white" opacity=".9">
+          <rect x="583" y="45" width="7" height="100" rx="1"/>
+          <rect x="593" y="45" width="7" height="100" rx="1"/>
+          <rect x="603" y="45" width="7" height="100" rx="1"/>
+          <rect x="613" y="45" width="7" height="100" rx="1"/>
+          <rect x="623" y="45" width="7" height="100" rx="1"/>
+          <rect x="633" y="45" width="7" height="100" rx="1"/>
+          <rect x="643" y="45" width="7" height="100" rx="1"/>
+          <rect x="653" y="45" width="7" height="100" rx="1"/>
+          <rect x="663" y="45" width="7" height="100" rx="1"/>
+          <rect x="673" y="45" width="7" height="100" rx="1"/>
+          <rect x="683" y="45" width="7" height="100" rx="1"/>
+          <rect x="693" y="45" width="7" height="100" rx="1"/>
+          <rect x="703" y="45" width="7" height="100" rx="1"/>
+          <rect x="713" y="45" width="7" height="100" rx="1"/>
+          <rect x="723" y="45" width="7" height="100" rx="1"/>
+          <rect x="733" y="45" width="7" height="100" rx="1"/>
+        </g>
+        <text x="660" y="180" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">60m → 16</text>
+      </svg>
+    </div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FDE047;">Runway Width</th><th style="color:#FDE047;">No. of Stripes</th><th style="color:#FDE047;">Memory</th></tr></thead>
+        <tbody>
+          <tr><td>18 m</td><td><span class="num">4</span></td><td>18 ÷ 4.5 ≈ 4</td></tr>
+          <tr><td>23 m</td><td><span class="num">6</span></td><td>23 → 6</td></tr>
+          <tr><td>30 m</td><td><span class="num">8</span></td><td>30 → 8</td></tr>
+          <tr><td>45 m</td><td><span class="num">12</span></td><td>45 → 12 (double)</td></tr>
+          <tr><td>60 m</td><td><span class="num">16</span></td><td>60 → 16 (largest!)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Memory Sequence</div><div class="mf">18→4 · 23→6 · 30→8 · 45→12 · 60→16</div></div></div>
+  </div>
+
+  <!-- DISPLACED THRESHOLD SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Displaced Threshold vs Normal Threshold</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#060e18"/>
+        <!-- LEFT: Normal threshold -->
+        <text x="180" y="22" fill="#86EFAC" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">NORMAL THRESHOLD</text>
+        <rect x="40" y="60" width="280" height="100" rx="3" fill="#1e2a30"/>
+        <rect x="40" y="60" width="8" height="100" fill="white" opacity=".8"/>
+        <g fill="white" opacity=".85">
+          <rect x="50" y="73" width="22" height="8" rx="1"/>
+          <rect x="50" y="87" width="22" height="8" rx="1"/>
+          <rect x="50" y="101" width="22" height="8" rx="1"/>
+          <rect x="50" y="115" width="22" height="8" rx="1"/>
+        </g>
+        <!-- landing zone shaded green -->
+        <rect x="75" y="60" width="245" height="100" fill="rgba(34,197,94,.08)"/>
+        <text x="195" y="120" fill="#86EFAC" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">✅ Full runway usable</text>
+        <text x="180" y="180" fill="#86EFAC" font-family="sans-serif" font-size="11" text-anchor="middle">Landing starts at threshold</text>
+
+        <!-- RIGHT: Displaced threshold -->
+        <text x="560" y="22" fill="#FCA5A5" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">DISPLACED THRESHOLD</text>
+        <rect x="400" y="60" width="320" height="100" rx="3" fill="#1e2a30"/>
+        <rect x="400" y="60" width="8" height="100" fill="white" opacity=".8"/>
+        <!-- arrows (displaced zone) -->
+        <g fill="white" opacity=".6">
+          <polygon points="440,95 460,85 460,105"/>
+          <polygon points="460,95 480,85 480,105"/>
+          <polygon points="480,95 500,85 500,105"/>
+        </g>
+        <text x="453" y="130" fill="rgba(255,255,255,.4)" font-family="sans-serif" font-size="10" text-anchor="middle">arrows</text>
+        <!-- displaced threshold marker -->
+        <g fill="white" opacity=".9">
+          <rect x="508" y="73" width="22" height="8" rx="1"/>
+          <rect x="508" y="87" width="22" height="8" rx="1"/>
+          <rect x="508" y="101" width="22" height="8" rx="1"/>
+          <rect x="508" y="115" width="22" height="8" rx="1"/>
+        </g>
+        <line x1="508" y1="58" x2="508" y2="168" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="508" y="178" fill="#FCA5A5" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Displaced Threshold</text>
+        <!-- usable landing zone -->
+        <rect x="532" y="60" width="188" height="100" fill="rgba(34,197,94,.08)"/>
+        <text x="620" y="120" fill="#86EFAC" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Usable for landing</text>
+        <!-- reason label -->
+        <text x="453" y="196" fill="rgba(239,68,68,.8)" font-family="sans-serif" font-size="10" text-anchor="middle">Obstacle/Noise/Pavement</text>
+        <text x="453" y="210" fill="rgba(234,179,8,.8)" font-family="sans-serif" font-size="10" text-anchor="middle">Arrows = DO NOT LAND here</text>
+      </svg>
+    </div>
+    <div class="al al-y" style="margin-bottom:0;"><strong>Exam question:</strong> Arrows before the threshold mark = Displaced threshold. The area before displaced threshold cannot be used for landing but CAN be used for take-off roll and taxi.</div>
+  </div>
+
+  <!-- RUNWAY HOLDING POSITION SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Runway Holding Position Marking</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="260" fill="#060e18"/>
+        <!-- taxiway -->
+        <rect x="0" y="70" width="760" height="130" rx="4" fill="#1e2a30"/>
+        <!-- yellow taxiway centreline -->
+        <line x1="0" y1="135" x2="760" y2="135" stroke="#EAB308" stroke-width="3" stroke-dasharray="18,10"/>
+        <!-- SOLID lines (stop side - aircraft side) -->
+        <line x1="310" y1="72" x2="310" y2="198" stroke="#EAB308" stroke-width="5"/>
+        <line x1="322" y1="72" x2="322" y2="198" stroke="#EAB308" stroke-width="5"/>
+        <line x1="334" y1="72" x2="334" y2="198" stroke="#EAB308" stroke-width="5"/>
+        <line x1="346" y1="72" x2="346" y2="198" stroke="#EAB308" stroke-width="5"/>
+        <!-- DASHED lines (runway side) -->
+        <line x1="358" y1="72" x2="358" y2="198" stroke="#EAB308" stroke-width="5" stroke-dasharray="12,8"/>
+        <line x1="370" y1="72" x2="370" y2="198" stroke="#EAB308" stroke-width="5" stroke-dasharray="12,8"/>
+        <line x1="382" y1="72" x2="382" y2="198" stroke="#EAB308" stroke-width="5" stroke-dasharray="12,8"/>
+        <line x1="394" y1="72" x2="394" y2="198" stroke="#EAB308" stroke-width="5" stroke-dasharray="12,8"/>
+        <!-- runway beyond -->
+        <rect x="420" y="70" width="340" height="130" rx="2" fill="#253035"/>
+        <text x="590" y="142" fill="rgba(255,255,255,.4)" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle">R U N W A Y</text>
+        <!-- aircraft icon (simplified) -->
+        <g transform="translate(210,125)">
+          <ellipse cx="0" cy="0" rx="40" ry="9" fill="#5EEAD4" opacity=".8"/>
+          <ellipse cx="0" cy="0" rx="10" ry="5" fill="#7DD3FC"/>
+          <line x1="5" y1="0" x2="-38" y2="-20" stroke="#5EEAD4" stroke-width="3"/>
+          <line x1="5" y1="0" x2="-38" y2="20" stroke="#5EEAD4" stroke-width="3"/>
+        </g>
+        <!-- STOP label -->
+        <rect x="80" y="102" width="120" height="36" rx="8" fill="rgba(239,68,68,.18)" stroke="rgba(239,68,68,.4)" stroke-width="1"/>
+        <text x="140" y="125" fill="#FCA5A5" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STOP HERE ✋</text>
+        <!-- Labels -->
+        <text x="328" y="225" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">← SOLID = STOP SIDE</text>
+        <text x="376" y="245" fill="#FDE047" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">DASHED = RUNWAY SIDE →</text>
+        <!-- count labels -->
+        <rect x="304" y="48" width="46" height="20" rx="4" fill="rgba(239,68,68,.2)" stroke="rgba(239,68,68,.4)" stroke-width="1"/>
+        <text x="327" y="62" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">4 solid</text>
+        <rect x="352" y="48" width="48" height="20" rx="4" fill="rgba(234,179,8,.15)" stroke="rgba(234,179,8,.3)" stroke-width="1"/>
+        <text x="376" y="62" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">4 dashed</text>
+      </svg>
+    </div>
+    <div class="al al-r" style="margin-bottom:0;"><strong>Golden Rule:</strong> 4 solid + 4 dashed yellow lines. Aircraft STOPS before crossing the SOLID lines. Dashed side faces the runway.</div>
+  </div>
+
+  <!-- AIMING POINT vs TDZ visual comparison -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Aiming Point vs Touchdown Zone — Easy Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="220" fill="#060e18"/>
+        <!-- runway strip -->
+        <rect x="30" y="60" width="700" height="130" rx="4" fill="#1e2a30"/>
+        <line x1="30" y1="125" x2="730" y2="125" stroke="white" stroke-dasharray="14,8" stroke-width="2" opacity=".5"/>
+        <!-- THRESHOLD left -->
+        <rect x="30" y="60" width="8" height="130" fill="white" opacity=".8"/>
+        <g fill="white" opacity=".85">
+          <rect x="40" y="75" width="20" height="8" rx="1"/>
+          <rect x="40" y="89" width="20" height="8" rx="1"/>
+          <rect x="40" y="103" width="20" height="8" rx="1"/>
+          <rect x="40" y="117" width="20" height="8" rx="1"/>
+          <rect x="40" y="155" width="20" height="8" rx="1"/>
+          <rect x="40" y="169" width="20" height="8" rx="1"/>
+        </g>
+        <!-- AIMING POINT - big blocks -->
+        <rect x="165" y="75" width="60" height="100" rx="4" fill="white" opacity=".9"/>
+        <rect x="500" y="75" width="60" height="100" rx="4" fill="white" opacity=".9"/>
+        <!-- AIMING POINT label -->
+        <rect x="120" y="30" width="220" height="26" rx="6" fill="rgba(234,179,8,.15)" stroke="rgba(234,179,8,.4)" stroke-width="1"/>
+        <text x="230" y="47" fill="#FDE047" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">AIMING POINT — pilot visually aims here</text>
+        <line x1="195" y1="56" x2="195" y2="75" stroke="rgba(234,179,8,.6)" stroke-width="1.5"/>
+        <line x1="530" y1="56" x2="530" y2="75" stroke="rgba(234,179,8,.6)" stroke-width="1.5"/>
+        <text x="362" y="47" fill="#FDE047" font-family="sans-serif" font-size="10" text-anchor="middle">[big rectangular blocks]</text>
+        <!-- TDZ markings - paired bars -->
+        <g fill="white" opacity=".72">
+          <rect x="280" y="76" width="18" height="14" rx="1"/>
+          <rect x="460" y="76" width="18" height="14" rx="1"/>
+          <rect x="280" y="96" width="18" height="14" rx="1"/>
+          <rect x="460" y="96" width="18" height="14" rx="1"/>
+          <rect x="280" y="156" width="18" height="14" rx="1"/>
+          <rect x="460" y="156" width="18" height="14" rx="1"/>
+          <rect x="280" y="176" width="18" height="14" rx="1"/>
+          <rect x="460" y="176" width="18" height="14" rx="1"/>
+        </g>
+        <!-- TDZ label -->
+        <rect x="300" y="30" width="240" height="26" rx="6" fill="rgba(59,130,246,.15)" stroke="rgba(59,130,246,.4)" stroke-width="1"/>
+        <text x="420" y="47" fill="#93C5FD" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">TDZ — wheels actually touch down here</text>
+        <line x1="289" y1="56" x2="289" y2="75" stroke="rgba(59,130,246,.6)" stroke-width="1.5"/>
+        <text x="420" y="22" fill="#93C5FD" font-family="sans-serif" font-size="10" text-anchor="middle">[small paired bars]</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="mem" style="margin:0;"><div class="mi">🧠</div><div><div class="mt">Key Difference</div><div class="mf">AIMING POINT = Big fat white blocks = Pilot AIMS here<br>TDZ = Small paired white bars = Aircraft LANDS here</div></div></div>
+      <div>
+        <div class="tw" style="margin:0;">
+          <table>
+            <thead style="background:rgba(59,130,246,.12);"><tr><th style="color:#93C5FD;">TDZ Pairs</th><th style="color:#93C5FD;">Landing Distance</th></tr></thead>
+            <tbody>
+              <tr><td><span class="num">1</span> pair</td><td>&lt; 900 m</td></tr>
+              <tr><td><span class="num">2</span> pairs</td><td>900–1200 m</td></tr>
+              <tr><td><span class="num">3</span> pairs</td><td>1200–1500 m</td></tr>
+              <tr><td><span class="num">4</span> pairs</td><td>1500–2400 m</td></tr>
+              <tr><td><span class="num">6</span> pairs</td><td>&gt; 2400 m</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= PAPI ======= -->
+<div class="section" id="section-papi">
+  <div class="sh">
+    <div class="si" style="background:var(--r-bg);border:1px solid rgba(239,68,68,.3);">🔴</div>
+    <div><div class="st">PAPI & APAPI</div><div class="ss">Precision Approach Path Indicator — Visual glide path guidance</div></div>
+  </div>
+
+  <!-- PAPI FULL DIAGRAM -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>PAPI — What the Pilot Sees on Final Approach</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="420" fill="#060e18"/>
+        <text x="380" y="22" fill="#FCD34D" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">PAPI = 4 light boxes on LEFT side of runway · Normal glide path ≈ 3°</text>
+
+        <!-- ROW labels -->
+        <text x="80" y="68" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Glide path</text>
+
+        <!-- TOO HIGH -->
+        <rect x="20" y="75" width="130" height="28" rx="6" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>
+        <text x="85" y="93" fill="#93C5FD" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">⬆ TOO HIGH</text>
+        <circle cx="235" cy="89" r="22" fill="radial-gradient(circle,#fff,#ddd)" style="fill:white;"/><circle cx="295" cy="89" r="22" fill="white"/><circle cx="355" cy="89" r="22" fill="white"/><circle cx="415" cy="89" r="22" fill="white"/>
+        <!-- white glow effect -->
+        <circle cx="235" cy="89" r="22" fill="white" opacity=".9" filter="url(#wglow)"/>
+        <circle cx="295" cy="89" r="22" fill="white" opacity=".9"/>
+        <circle cx="355" cy="89" r="22" fill="white" opacity=".9"/>
+        <circle cx="415" cy="89" r="22" fill="white" opacity=".9"/>
+        <text x="580" y="87" fill="#93C5FD" font-family="monospace" font-size="16" font-weight="bold">4 WHITE</text>
+        <text x="580" y="104" fill="var(--text2)" font-family="sans-serif" font-size="11">Pull up / too high</text>
+
+        <!-- SLIGHTLY HIGH -->
+        <rect x="20" y="138" width="130" height="28" rx="6" fill="rgba(59,130,246,.08)" stroke="rgba(59,130,246,.2)" stroke-width="1"/>
+        <text x="85" y="156" fill="#93C5FD" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">↑ Slightly High</text>
+        <circle cx="235" cy="152" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="295" cy="152" r="22" fill="white" opacity=".9"/>
+        <circle cx="355" cy="152" r="22" fill="white" opacity=".9"/>
+        <circle cx="415" cy="152" r="22" fill="white" opacity=".9"/>
+        <text x="580" y="150" fill="var(--text2)" font-family="monospace" font-size="16" font-weight="bold">1R + 3W</text>
+        <text x="580" y="167" fill="var(--text2)" font-family="sans-serif" font-size="11">slightly above path</text>
+
+        <!-- ON PATH — highlighted -->
+        <rect x="15" y="198" width="740" height="50" rx="8" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.4)" stroke-width="2"/>
+        <rect x="20" y="203" width="130" height="36" rx="6" fill="rgba(34,197,94,.18)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+        <text x="85" y="221" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">✅ ON PATH</text>
+        <text x="85" y="235" fill="#86EFAC" font-family="monospace" font-size="10" text-anchor="middle">← CORRECT</text>
+        <circle cx="235" cy="222" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="295" cy="222" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="355" cy="222" r="22" fill="white" opacity=".9"/>
+        <circle cx="415" cy="222" r="22" fill="white" opacity=".9"/>
+        <text x="580" y="218" fill="#86EFAC" font-family="monospace" font-size="18" font-weight="bold">2R + 2W</text>
+        <text x="580" y="236" fill="#86EFAC" font-family="sans-serif" font-size="12" font-weight="bold">← ON GLIDE PATH ✓</text>
+
+        <!-- SLIGHTLY LOW -->
+        <rect x="20" y="268" width="130" height="28" rx="6" fill="rgba(249,115,22,.08)" stroke="rgba(249,115,22,.2)" stroke-width="1"/>
+        <text x="85" y="286" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">↓ Slightly Low</text>
+        <circle cx="235" cy="282" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="295" cy="282" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="355" cy="282" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="415" cy="282" r="22" fill="white" opacity=".9"/>
+        <text x="580" y="280" fill="#FDB785" font-family="monospace" font-size="16" font-weight="bold">3R + 1W</text>
+        <text x="580" y="297" fill="var(--text2)" font-family="sans-serif" font-size="11">slightly below path</text>
+
+        <!-- TOO LOW -->
+        <rect x="20" y="338" width="130" height="28" rx="6" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+        <text x="85" y="356" fill="#FCA5A5" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">⬇ TOO LOW ⚠</text>
+        <circle cx="235" cy="352" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="295" cy="352" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="355" cy="352" r="22" fill="#DC2626" opacity=".95"/>
+        <circle cx="415" cy="352" r="22" fill="#DC2626" opacity=".95"/>
+        <text x="580" y="350" fill="#FCA5A5" font-family="monospace" font-size="16" font-weight="bold">4 RED</text>
+        <text x="580" y="367" fill="#FCA5A5" font-family="sans-serif" font-size="11">Go around / too low</text>
+
+        <!-- memory rule -->
+        <rect x="20" y="390" width="720" height="24" rx="6" fill="rgba(245,158,11,.10)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="380" y="406" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">🧠 More WHITE = Higher · More RED = Lower · 2R+2W = ON PATH (most important!)</text>
+
+        <!-- box labels -->
+        <text x="235" y="46" fill="rgba(255,255,255,.4)" font-family="monospace" font-size="10" text-anchor="middle">Box 1</text>
+        <text x="295" y="46" fill="rgba(255,255,255,.4)" font-family="monospace" font-size="10" text-anchor="middle">Box 2</text>
+        <text x="355" y="46" fill="rgba(255,255,255,.4)" font-family="monospace" font-size="10" text-anchor="middle">Box 3</text>
+        <text x="415" y="46" fill="rgba(255,255,255,.4)" font-family="monospace" font-size="10" text-anchor="middle">Box 4</text>
+        <text x="325" y="60" fill="rgba(255,255,255,.3)" font-family="sans-serif" font-size="11" text-anchor="middle">← PAPI 4 light boxes (on LEFT side of runway) →</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- APAPI + comparison -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>APAPI — Abbreviated PAPI (2 lights only)</div>
+    <div class="g2">
+      <div class="svg-wrap" style="margin:0;">
+        <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="340" height="190" fill="#060e18"/>
+          <text x="170" y="22" fill="#FCD34D" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">APAPI — 2 Lights Only</text>
+          <!-- TOO HIGH -->
+          <rect x="15" y="38" width="100" height="24" rx="5" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>
+          <text x="65" y="54" fill="#93C5FD" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TOO HIGH</text>
+          <circle cx="165" cy="50" r="20" fill="white" opacity=".9"/>
+          <circle cx="215" cy="50" r="20" fill="white" opacity=".9"/>
+          <text x="255" y="56" fill="#93C5FD" font-family="monospace" font-size="13" font-weight="bold">2W</text>
+          <!-- ON PATH -->
+          <rect x="15" y="78" width="100" height="24" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.4)" stroke-width="1"/>
+          <text x="65" y="94" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">✅ ON PATH</text>
+          <circle cx="165" cy="90" r="20" fill="#DC2626" opacity=".95"/>
+          <circle cx="215" cy="90" r="20" fill="white" opacity=".9"/>
+          <text x="255" y="96" fill="#86EFAC" font-family="monospace" font-size="13" font-weight="bold">1R+1W</text>
+          <!-- TOO LOW -->
+          <rect x="15" y="118" width="100" height="24" rx="5" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+          <text x="65" y="134" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TOO LOW ⚠</text>
+          <circle cx="165" cy="130" r="20" fill="#DC2626" opacity=".95"/>
+          <circle cx="215" cy="130" r="20" fill="#DC2626" opacity=".95"/>
+          <text x="255" y="136" fill="#FCA5A5" font-family="monospace" font-size="13" font-weight="bold">2R</text>
+          <text x="170" y="168" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">Left side of runway</text>
+        </svg>
+      </div>
+      <div>
+        <div class="tw" style="margin-bottom:12px;">
+          <table>
+            <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FCD34D;">Feature</th><th style="color:#FCD34D;">PAPI</th><th style="color:#FCD34D;">APAPI</th></tr></thead>
+            <tbody>
+              <tr><td>Number of lights</td><td><span class="num">4</span></td><td><span class="num">2</span></td></tr>
+              <tr><td>On-path indication</td><td>2R + 2W</td><td>1R + 1W</td></tr>
+              <tr><td>Too high</td><td>4 White</td><td>2 White</td></tr>
+              <tr><td>Too low</td><td>4 Red</td><td>2 Red</td></tr>
+              <tr><td>Location</td><td>Left of runway</td><td>Left of runway</td></tr>
+              <tr><td>Accuracy</td><td>More accurate</td><td>Simpler</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mem" style="margin:0;"><div class="mi">🧠</div><div><div class="mt">PAPI Rule Summary</div><div class="mf">4W=High · 1R3W=Sl.High<br>2R2W=ON PATH ← KEY<br>3R1W=Sl.Low · 4R=Low</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= APPROACH LIGHTING ======= -->
+<div class="section" id="section-approach">
+  <div class="sh">
+    <div class="si" style="background:var(--b-bg);border:1px solid rgba(59,130,246,.3);">🔦</div>
+    <div><div class="st">Approach Lighting Systems</div><div class="ss">Simple (420m) · CAT I (900m) · CAT II/III · Beacons · RTIL</div></div>
+  </div>
+
+  <!-- APPROACH LIGHTING COMPARISON SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Three Systems — Side by Side Visual</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="440" fill="#060e18"/>
+        <!-- TITLE ROW -->
+        <text x="120" y="22" fill="#FCD34D" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SIMPLE (420m)</text>
+        <text x="120" y="36" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Non-Instrument / NPA</text>
+        <text x="395" y="22" fill="#7DD3FC" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">CAT I (900m)</text>
+        <text x="395" y="36" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Precision Runway CAT I</text>
+        <text x="650" y="22" fill="#D8B4FE" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">CAT II / III (900m)</text>
+        <text x="650" y="36" fill="var(--text2)" font-family="sans-serif" font-size="10" text-anchor="middle">Side rows (RED) · 2 crossbars</text>
+
+        <!-- ====== SIMPLE APPROACH ====== -->
+        <!-- threshold (bottom) -->
+        <rect x="80" y="380" width="80" height="20" rx="3" fill="#2a3a4a"/>
+        <text x="120" y="395" fill="white" font-family="monospace" font-size="10" text-anchor="middle">THRESHOLD</text>
+        <!-- centreline lights yellow -->
+        <g fill="#FDE047" opacity=".8">
+          <circle cx="120" cy="365" r="4"/><circle cx="120" cy="350" r="4"/><circle cx="120" cy="335" r="4"/>
+          <circle cx="120" cy="320" r="4"/><circle cx="120" cy="305" r="4"/><circle cx="120" cy="290" r="4"/>
+          <circle cx="120" cy="275" r="4"/><circle cx="120" cy="260" r="4"/><circle cx="120" cy="245" r="4"/>
+        </g>
+        <!-- crossbar at 300m (proportional) -->
+        <line x1="68" y1="200" x2="172" y2="200" stroke="#FDE047" stroke-width="4"/>
+        <circle cx="78" cy="200" r="4" fill="#FDE047"/><circle cx="92" cy="200" r="4" fill="#FDE047"/>
+        <circle cx="106" cy="200" r="4" fill="#FDE047"/><circle cx="120" cy="200" r="4" fill="#FDE047"/>
+        <circle cx="134" cy="200" r="4" fill="#FDE047"/><circle cx="148" cy="200" r="4" fill="#FDE047"/>
+        <circle cx="162" cy="200" r="4" fill="#FDE047"/>
+        <!-- more lights above crossbar to 420m -->
+        <g fill="#FDE047" opacity=".7">
+          <circle cx="120" cy="185" r="3"/><circle cx="120" cy="172" r="3"/><circle cx="120" cy="159" r="3"/>
+        </g>
+        <!-- 420m end marker -->
+        <circle cx="120" cy="148" r="5" fill="#FDE047"/>
+        <!-- dimension line -->
+        <line x1="50" y1="148" x2="50" y2="380" stroke="rgba(253,224,71,.4)" stroke-width="1"/>
+        <line x1="45" y1="148" x2="55" y2="148" stroke="rgba(253,224,71,.4)" stroke-width="1"/>
+        <line x1="45" y1="380" x2="55" y2="380" stroke="rgba(253,224,71,.4)" stroke-width="1"/>
+        <text x="38" y="270" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" transform="rotate(-90,38,270)">420 m</text>
+        <!-- crossbar label -->
+        <rect x="155" y="192" width="65" height="16" rx="4" fill="rgba(253,224,71,.12)" stroke="rgba(253,224,71,.3)" stroke-width="1"/>
+        <text x="187" y="204" fill="#FDE047" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">←300m</text>
+
+        <!-- ====== CAT I ====== -->
+        <rect x="355" y="380" width="80" height="20" rx="3" fill="#2a3a4a"/>
+        <text x="395" y="395" fill="white" font-family="monospace" font-size="10" text-anchor="middle">THRESHOLD</text>
+        <!-- long centreline white -->
+        <g fill="white" opacity=".8">
+          <circle cx="395" cy="365" r="4"/><circle cx="395" cy="350" r="4"/><circle cx="395" cy="335" r="4"/>
+          <circle cx="395" cy="320" r="4"/><circle cx="395" cy="305" r="4"/><circle cx="395" cy="290" r="4"/>
+          <circle cx="395" cy="275" r="4"/><circle cx="395" cy="260" r="4"/><circle cx="395" cy="245" r="4"/>
+          <circle cx="395" cy="230" r="4"/><circle cx="395" cy="215" r="4"/><circle cx="395" cy="200" r="4"/>
+          <circle cx="395" cy="185" r="4"/><circle cx="395" cy="170" r="4"/><circle cx="395" cy="155" r="4"/>
+          <circle cx="395" cy="140" r="4"/><circle cx="395" cy="125" r="4"/><circle cx="395" cy="110" r="4"/>
+        </g>
+        <!-- crossbar at 300m -->
+        <line x1="338" y1="195" x2="452" y2="195" stroke="white" stroke-width="4"/>
+        <circle cx="348" cy="195" r="4" fill="white"/><circle cx="362" cy="195" r="4" fill="white"/>
+        <circle cx="376" cy="195" r="4" fill="white"/><circle cx="390" cy="195" r="4" fill="white"/>
+        <circle cx="404" cy="195" r="4" fill="white"/><circle cx="418" cy="195" r="4" fill="white"/>
+        <circle cx="432" cy="195" r="4" fill="white"/>
+        <!-- 900m end -->
+        <circle cx="395" cy="98" r="5" fill="white"/>
+        <!-- dimension -->
+        <line x1="320" y1="98" x2="320" y2="380" stroke="rgba(125,211,252,.4)" stroke-width="1"/>
+        <line x1="315" y1="98" x2="325" y2="98" stroke="rgba(125,211,252,.4)" stroke-width="1"/>
+        <line x1="315" y1="380" x2="325" y2="380" stroke="rgba(125,211,252,.4)" stroke-width="1"/>
+        <text x="310" y="240" fill="#7DD3FC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" transform="rotate(-90,310,240)">900 m</text>
+        <!-- crossbar label -->
+        <rect x="420" y="187" width="65" height="16" rx="4" fill="rgba(125,211,252,.12)" stroke="rgba(125,211,252,.3)" stroke-width="1"/>
+        <text x="452" y="199" fill="#7DD3FC" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">←300m</text>
+
+        <!-- ====== CAT II / III ====== -->
+        <rect x="610" y="380" width="80" height="20" rx="3" fill="#2a3a4a"/>
+        <text x="650" y="395" fill="white" font-family="monospace" font-size="10" text-anchor="middle">THRESHOLD</text>
+        <!-- central white lights -->
+        <g fill="white" opacity=".75">
+          <circle cx="650" cy="365" r="3"/><circle cx="650" cy="352" r="3"/><circle cx="650" cy="339" r="3"/>
+          <circle cx="650" cy="326" r="3"/><circle cx="650" cy="313" r="3"/><circle cx="650" cy="300" r="3"/>
+          <circle cx="650" cy="287" r="3"/><circle cx="650" cy="274" r="3"/><circle cx="650" cy="261" r="3"/>
+          <circle cx="650" cy="248" r="3"/><circle cx="650" cy="235" r="3"/><circle cx="650" cy="222" r="3"/>
+          <circle cx="650" cy="209" r="3"/><circle cx="650" cy="196" r="3"/><circle cx="650" cy="183" r="3"/>
+          <circle cx="650" cy="170" r="3"/><circle cx="650" cy="157" r="3"/><circle cx="650" cy="144" r="3"/>
+        </g>
+        <!-- RED SIDE ROWS (270m) -->
+        <g fill="#EF4444" opacity=".9">
+          <!-- left side row -->
+          <circle cx="616" cy="365" r="3"/><circle cx="616" cy="352" r="3"/><circle cx="616" cy="339" r="3"/>
+          <circle cx="616" cy="326" r="3"/><circle cx="616" cy="313" r="3"/><circle cx="616" cy="300" r="3"/>
+          <circle cx="616" cy="287" r="3"/><circle cx="616" cy="274" r="3"/><circle cx="616" cy="261" r="3"/>
+          <!-- right side row -->
+          <circle cx="684" cy="365" r="3"/><circle cx="684" cy="352" r="3"/><circle cx="684" cy="339" r="3"/>
+          <circle cx="684" cy="326" r="3"/><circle cx="684" cy="313" r="3"/><circle cx="684" cy="300" r="3"/>
+          <circle cx="684" cy="287" r="3"/><circle cx="684" cy="274" r="3"/><circle cx="684" cy="261" r="3"/>
+        </g>
+        <!-- Red side labels -->
+        <rect x="594" y="302" width="18" height="60" rx="3" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.4)" stroke-width="1"/>
+        <text x="590" y="338" fill="#FCA5A5" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" transform="rotate(-90,590,338)">RED 270m</text>
+        <!-- Crossbar at 150m -->
+        <line x1="595" y1="320" x2="705" y2="320" stroke="#EF4444" stroke-width="3"/>
+        <!-- Crossbar at 300m -->
+        <line x1="595" y1="248" x2="705" y2="248" stroke="white" stroke-width="3"/>
+        <!-- labels -->
+        <rect x="708" y="312" width="44" height="16" rx="4" fill="rgba(239,68,68,.12)"/>
+        <text x="730" y="324" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">150m</text>
+        <rect x="708" y="240" width="44" height="16" rx="4" fill="rgba(255,255,255,.06)"/>
+        <text x="730" y="252" fill="white" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">300m</text>
+        <!-- 900m end -->
+        <circle cx="650" cy="131" r="5" fill="white"/>
+        <!-- dimension -->
+        <line x1="578" y1="131" x2="578" y2="380" stroke="rgba(216,180,254,.4)" stroke-width="1"/>
+        <text x="568" y="256" fill="#D8B4FE" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" transform="rotate(-90,568,256)">900 m</text>
+      </svg>
+    </div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(59,130,246,.12);"><tr><th style="color:#93C5FD;">Feature</th><th style="color:#FCD34D;">Simple</th><th style="color:#7DD3FC;">CAT I</th><th style="color:#D8B4FE;">CAT II/III</th></tr></thead>
+        <tbody>
+          <tr><td>Total Length</td><td><span class="num">420 m</span></td><td><span class="num">900 m</span></td><td><span class="num">900 m</span></td></tr>
+          <tr><td>Crossbar(s)</td><td>300 m</td><td>300 m</td><td><span class="b b-r">150 m &amp; 300 m</span></td></tr>
+          <tr><td>Side Rows</td><td>None</td><td>None</td><td><span class="b b-r">YES — RED, 270 m</span></td></tr>
+          <tr><td>Centreline colour</td><td>White</td><td>Variable White</td><td>Variable White</td></tr>
+          <tr><td>Used for</td><td>Non-Inst / NPA</td><td>Precision CAT I</td><td>Precision CAT II/III</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Key Memory</div><div class="mf">Simple=420m · CAT I=900m · CAT II/III=900m + RED side rows + 2 crossbars(150m&300m)</div></div></div>
+  </div>
+
+  <!-- AERODROME BEACON -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Aerodrome Beacon & Identification Beacon</div>
+    <div class="g2">
+      <div class="svg-wrap" style="margin:0;">
+        <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="340" height="200" fill="#060e18"/>
+          <text x="170" y="18" fill="#FCD34D" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Aerodrome Beacon — Night</text>
+          <!-- beacon base -->
+          <rect x="156" y="145" width="28" height="30" rx="3" fill="#3a4a5a"/>
+          <rect x="162" y="130" width="16" height="15" rx="2" fill="#4a5a6a"/>
+          <!-- rotating light beams -->
+          <!-- green beam -->
+          <path d="M170,128 L80,60 L90,70 Z" fill="#22C55E" opacity=".3"/>
+          <path d="M170,128 L80,60" stroke="#22C55E" stroke-width="3" opacity=".7"/>
+          <!-- white beam -->
+          <path d="M170,128 L260,60 L250,70 Z" fill="white" opacity=".2"/>
+          <path d="M170,128 L260,60" stroke="white" stroke-width="3" opacity=".6"/>
+          <!-- center glow -->
+          <circle cx="170" cy="128" r="12" fill="#22C55E" opacity=".4"/>
+          <circle cx="170" cy="128" r="6" fill="white" opacity=".8"/>
+          <!-- LAND label -->
+          <rect x="10" y="50" width="100" height="36" rx="6" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.35)" stroke-width="1"/>
+          <text x="60" y="66" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">LAND</text>
+          <text x="60" y="80" fill="#86EFAC" font-family="monospace" font-size="11" text-anchor="middle">Green+White</text>
+          <!-- WATER label -->
+          <rect x="230" y="50" width="100" height="36" rx="6" fill="rgba(234,179,8,.12)" stroke="rgba(234,179,8,.35)" stroke-width="1"/>
+          <text x="280" y="66" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">WATER</text>
+          <text x="280" y="80" fill="#FDE047" font-family="monospace" font-size="11" text-anchor="middle">Yellow+White</text>
+          <!-- flash rate -->
+          <rect x="70" y="165" width="200" height="24" rx="6" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+          <text x="170" y="181" fill="#FCD34D" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">20–30 flashes/min</text>
+        </svg>
+      </div>
+      <div>
+        <div class="tw" style="margin-bottom:12px;">
+          <table>
+            <thead style="background:rgba(34,197,94,.12);"><tr><th style="color:#86EFAC;">Beacon Type</th><th style="color:#86EFAC;">Land</th><th style="color:#86EFAC;">Water</th></tr></thead>
+            <tbody>
+              <tr><td>Aerodrome Beacon</td><td>Green + White</td><td>Yellow + White</td></tr>
+              <tr><td>Identification Beacon</td><td><span class="b b-g">Flashing Green</span></td><td><span class="b b-y">Flashing Yellow</span></td></tr>
+              <tr><td>Identification code</td><td colspan="2">Transmitted in Morse code</td></tr>
+              <tr><td>Flash rate (Aero Beacon)</td><td colspan="2"><span class="num">20–30/min</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mem" style="margin:0;"><div class="mi">🧠</div><div><div class="mt">Beacon Memory</div><div class="mf">LAND = GREEN · WATER = YELLOW<br>Rate = 20-30/min · Ident = Morse</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= TAXIWAY & SIGNS ======= -->
+<div class="section" id="section-taxiway">
+  <div class="sh">
+    <div class="si" style="background:var(--y-bg);border:1px solid rgba(234,179,8,.3);">🟡</div>
+    <div><div class="st">Taxiway, Signs & Special Markings</div><div class="ss">Taxiway lights · Enhanced centreline · Signs · VOR checkpoint · Apron</div></div>
+  </div>
+
+  <!-- TAXIWAY CROSS SECTION SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Taxiway Layout — All Lights & Markings</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="250" fill="#060e18"/>
+        <!-- taxiway surface -->
+        <rect x="50" y="70" width="660" height="120" rx="4" fill="#1e2a30"/>
+        <!-- edge markers - BLUE -->
+        <g fill="#3B82F6" opacity=".9">
+          <circle cx="60" cy="78" r="5"/><circle cx="100" cy="78" r="5"/><circle cx="140" cy="78" r="5"/>
+          <circle cx="180" cy="78" r="5"/><circle cx="220" cy="78" r="5"/><circle cx="260" cy="78" r="5"/>
+          <circle cx="300" cy="78" r="5"/><circle cx="340" cy="78" r="5"/><circle cx="380" cy="78" r="5"/>
+          <circle cx="420" cy="78" r="5"/><circle cx="460" cy="78" r="5"/><circle cx="500" cy="78" r="5"/>
+          <circle cx="540" cy="78" r="5"/><circle cx="580" cy="78" r="5"/><circle cx="620" cy="78" r="5"/>
+          <circle cx="660" cy="78" r="5"/>
+          <!-- bottom edge -->
+          <circle cx="60" cy="182" r="5"/><circle cx="100" cy="182" r="5"/><circle cx="140" cy="182" r="5"/>
+          <circle cx="180" cy="182" r="5"/><circle cx="220" cy="182" r="5"/><circle cx="260" cy="182" r="5"/>
+          <circle cx="300" cy="182" r="5"/><circle cx="340" cy="182" r="5"/><circle cx="380" cy="182" r="5"/>
+          <circle cx="420" cy="182" r="5"/><circle cx="460" cy="182" r="5"/><circle cx="500" cy="182" r="5"/>
+        </g>
+        <!-- blue label -->
+        <text x="30" y="132" fill="#3B82F6" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle" transform="rotate(-90,30,132)">EDGE (BLUE)</text>
+
+        <!-- Normal centreline - GREEN -->
+        <g fill="#22C55E" opacity=".9">
+          <circle cx="80" cy="130" r="5"/><circle cx="120" cy="130" r="5"/>
+          <circle cx="160" cy="130" r="5"/><circle cx="200" cy="130" r="5"/>
+          <circle cx="240" cy="130" r="5"/>
+        </g>
+        <rect x="55" y="50" width="200" height="18" rx="5" fill="rgba(34,197,94,.12)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+        <text x="155" y="63" fill="#86EFAC" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">CENTRE (GREEN)</text>
+
+        <!-- Enhanced centreline (before holding) - yellow side dashes -->
+        <g fill="#22C55E" opacity=".9">
+          <circle cx="340" cy="130" r="5"/><circle cx="380" cy="130" r="5"/>
+          <circle cx="420" cy="130" r="5"/>
+        </g>
+        <!-- yellow dashes on sides = enhanced -->
+        <g fill="#EAB308" opacity=".8">
+          <rect x="330" y="118" width="8" height="6" rx="1"/>
+          <rect x="330" y="106" width="8" height="6" rx="1"/>
+          <rect x="360" y="118" width="8" height="6" rx="1"/>
+          <rect x="360" y="106" width="8" height="6" rx="1"/>
+          <rect x="390" y="118" width="8" height="6" rx="1"/>
+          <rect x="390" y="106" width="8" height="6" rx="1"/>
+          <rect x="330" y="140" width="8" height="6" rx="1"/>
+          <rect x="330" y="152" width="8" height="6" rx="1"/>
+          <rect x="360" y="140" width="8" height="6" rx="1"/>
+          <rect x="360" y="152" width="8" height="6" rx="1"/>
+          <rect x="390" y="140" width="8" height="6" rx="1"/>
+          <rect x="390" y="152" width="8" height="6" rx="1"/>
+        </g>
+        <rect x="285" y="50" width="170" height="18" rx="5" fill="rgba(234,179,8,.12)" stroke="rgba(234,179,8,.3)" stroke-width="1"/>
+        <text x="370" y="63" fill="#FDE047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ENHANCED (47m before hold)</text>
+
+        <!-- Holding position marking -->
+        <line x1="460" y1="70" x2="460" y2="190" stroke="#EAB308" stroke-width="4"/>
+        <line x1="470" y1="70" x2="470" y2="190" stroke="#EAB308" stroke-width="4"/>
+        <line x1="480" y1="70" x2="480" y2="190" stroke="#EAB308" stroke-width="4"/>
+        <line x1="490" y1="70" x2="490" y2="190" stroke="#EAB308" stroke-width="4"/>
+        <line x1="500" y1="70" x2="500" y2="190" stroke="#EAB308" stroke-width="4" stroke-dasharray="10,6"/>
+        <line x1="510" y1="70" x2="510" y2="190" stroke="#EAB308" stroke-width="4" stroke-dasharray="10,6"/>
+        <line x1="520" y1="70" x2="520" y2="190" stroke="#EAB308" stroke-width="4" stroke-dasharray="10,6"/>
+        <line x1="530" y1="70" x2="530" y2="190" stroke="#EAB308" stroke-width="4" stroke-dasharray="10,6"/>
+        <!-- Stop bar -->
+        <line x1="460" y1="70" x2="538" y2="70" stroke="#EF4444" stroke-width="5"/>
+        <rect x="430" y="188" width="115" height="20" rx="5" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+        <text x="487" y="202" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">STOP BAR (RED)</text>
+        <!-- holding label -->
+        <rect x="445" y="50" width="105" height="18" rx="5" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="497" y="63" fill="#FCD34D" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">HOLD (4+4)</text>
+
+        <!-- Beyond hold = runway area -->
+        <rect x="540" y="70" width="170" height="120" rx="3" fill="#253035" opacity=".8"/>
+        <text x="625" y="132" fill="rgba(255,255,255,.4)" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">RUNWAY</text>
+
+        <!-- Guard lights - YELLOW flashing -->
+        <g fill="#EAB308" opacity=".9">
+          <circle cx="540" cy="75" r="6"/><circle cx="555" cy="75" r="6"/>
+          <circle cx="540" cy="185" r="6"/><circle cx="555" cy="185" r="6"/>
+        </g>
+        <rect x="550" y="215" width="125" height="16" rx="4" fill="rgba(234,179,8,.12)" stroke="rgba(234,179,8,.3)" stroke-width="1"/>
+        <text x="612" y="227" fill="#FDE047" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">GUARD (YELLOW flash)</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SIGNS VISUAL -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Airport Signs — Visual Reference</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="200" fill="#060e18"/>
+        <text x="380" y="20" fill="#FCD34D" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Airport Sign Colours — Memorise All Three</text>
+
+        <!-- MANDATORY - WHITE on RED -->
+        <rect x="40" y="40" width="180" height="90" rx="12" fill="#DC2626"/>
+        <text x="130" y="85" fill="white" font-family="monospace" font-size="24" font-weight="bold" text-anchor="middle">09-27</text>
+        <text x="130" y="108" fill="white" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">NO ENTRY</text>
+        <rect x="40" y="138" width="180" height="24" rx="6" fill="rgba(239,68,68,.2)" stroke="rgba(239,68,68,.4)" stroke-width="1"/>
+        <text x="130" y="154" fill="#FCA5A5" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">MANDATORY</text>
+        <text x="130" y="175" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">White on Red — Must obey</text>
+
+        <!-- LOCATION - YELLOW on BLACK -->
+        <rect x="290" y="40" width="180" height="90" rx="12" fill="#111111" stroke="#EAB308" stroke-width="3"/>
+        <text x="380" y="100" fill="#EAB308" font-family="monospace" font-size="44" font-weight="bold" text-anchor="middle">B</text>
+        <rect x="290" y="138" width="180" height="24" rx="6" fill="rgba(234,179,8,.15)" stroke="rgba(234,179,8,.35)" stroke-width="1"/>
+        <text x="380" y="154" fill="#FDE047" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">LOCATION SIGN</text>
+        <text x="380" y="175" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Yellow on Black — "You are HERE"</text>
+
+        <!-- DIRECTION - BLACK on YELLOW -->
+        <rect x="540" y="40" width="180" height="90" rx="12" fill="#EAB308"/>
+        <text x="630" y="80" fill="#000" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">← APRON</text>
+        <text x="630" y="105" fill="#000" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">→ RWY 09</text>
+        <rect x="540" y="138" width="180" height="24" rx="6" fill="rgba(234,179,8,.15)" stroke="rgba(234,179,8,.35)" stroke-width="1"/>
+        <text x="630" y="154" fill="#FDE047" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">DIRECTION / INFO</text>
+        <text x="630" y="175" fill="var(--text2)" font-family="sans-serif" font-size="11" text-anchor="middle">Black on Yellow — Information</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Sign Colour Rule</div><div class="mf">RED = Mandatory · Black Square = Location (Yellow/Black) · Yellow Sign = Direction/Info (Black/Yellow)</div></div></div>
+  </div>
+
+  <!-- VOR CHECKPOINT SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>VOR Aerodrome Checkpoint</div>
+    <div class="g2">
+      <div class="svg-wrap" style="margin:0;">
+        <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="340" height="200" fill="#060e18"/>
+          <text x="170" y="18" fill="#7DD3FC" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">VOR Ground Check Marking</text>
+          <!-- asphalt -->
+          <rect x="60" y="40" width="220" height="140" rx="4" fill="#1e2a30"/>
+          <!-- white circle (6m diameter) -->
+          <circle cx="170" cy="110" r="50" fill="none" stroke="white" stroke-width="4" opacity=".9"/>
+          <!-- direction line -->
+          <line x1="170" y1="110" x2="260" y2="110" stroke="white" stroke-width="3" opacity=".9"/>
+          <!-- arrowhead -->
+          <polygon points="260,104 278,110 260,116" fill="white" opacity=".9"/>
+          <!-- measurements -->
+          <line x1="120" y1="160" x2="220" y2="160" stroke="rgba(125,211,252,.5)" stroke-width="1"/>
+          <line x1="120" y1="156" x2="120" y2="164" stroke="rgba(125,211,252,.5)" stroke-width="1"/>
+          <line x1="220" y1="156" x2="220" y2="164" stroke="rgba(125,211,252,.5)" stroke-width="1"/>
+          <text x="170" y="177" fill="#7DD3FC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">⌀ 6 m</text>
+          <text x="290" y="115" fill="white" font-family="monospace" font-size="10" text-anchor="start">Line = 15cm</text>
+        </svg>
+      </div>
+      <div>
+        <div class="chklist">
+          <div class="chk-item"><span class="num">6 m</span><div>Circle diameter</div></div>
+          <div class="chk-item"><span class="num">15 cm</span><div>Line width</div></div>
+          <div class="chk-item" style="border-color:rgba(255,255,255,.15);"><span style="color:#fff;font-weight:700;">White</span><div>Colour of marking</div></div>
+        </div>
+        <div class="al al-s" style="margin-top:10px;margin-bottom:0;"><strong>Purpose:</strong> Aircraft aligns on the checkpoint to verify VOR accuracy on the ground before flight.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= DECLARED DISTANCES ======= -->
+<div class="section" id="section-declared">
+  <div class="sh">
+    <div class="si" style="background:var(--t-bg);border:1px solid rgba(20,184,166,.3);">📏</div>
+    <div><div class="st">Declared Distances & RFF</div><div class="ss">TORA · TODA · ASDA · LDA · Clearway · Stopway · RFF response times</div></div>
+  </div>
+
+  <!-- DECLARED DISTANCES SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Declared Distances — Visual Diagram</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="300" fill="#060e18"/>
+        <!-- Ground line -->
+        <line x1="0" y1="200" x2="760" y2="200" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <!-- STOPWAY (before runway) -->
+        <rect x="20" y="150" width="100" height="50" rx="3" fill="#1a1a10" stroke="#EAB308" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <text x="70" y="180" fill="#EAB308" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">STOPWAY</text>
+        <text x="70" y="195" fill="var(--text2)" font-family="monospace" font-size="9" text-anchor="middle">(ground stop)</text>
+        <!-- RUNWAY -->
+        <rect x="120" y="145" width="440" height="55" rx="3" fill="#253035" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+        <text x="340" y="177" fill="white" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">R U N W A Y</text>
+        <!-- CLEARWAY (air only) -->
+        <rect x="560" y="162" width="160" height="25" rx="3" fill="#0a1510" stroke="#22C55E" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <text x="640" y="178" fill="#86EFAC" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">CLEARWAY (air)</text>
+        <!-- DER marker -->
+        <line x1="560" y1="130" x2="560" y2="205" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="560" y="125" fill="rgba(255,255,255,.5)" font-family="monospace" font-size="9" text-anchor="middle">DER</text>
+        <!-- Displaced threshold marker -->
+        <line x1="170" y1="130" x2="170" y2="205" stroke="rgba(168,85,247,.5)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="170" y="125" fill="#D8B4FE" font-family="monospace" font-size="9" text-anchor="middle">THR</text>
+
+        <!-- TORA arrow -->
+        <line x1="120" y1="220" x2="560" y2="220" stroke="#FDE047" stroke-width="2.5"/>
+        <line x1="120" y1="215" x2="120" y2="225" stroke="#FDE047" stroke-width="2"/>
+        <polygon points="560,214 578,220 560,226" fill="#FDE047"/>
+        <text x="340" y="238" fill="#FDE047" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TORA (Take-Off Run Available = Runway only)</text>
+
+        <!-- TODA arrow -->
+        <line x1="120" y1="248" x2="720" y2="248" stroke="#86EFAC" stroke-width="2.5"/>
+        <line x1="120" y1="243" x2="120" y2="253" stroke="#86EFAC" stroke-width="2"/>
+        <polygon points="720,242 738,248 720,254" fill="#86EFAC"/>
+        <text x="420" y="266" fill="#86EFAC" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">TODA = TORA + Clearway (air distance)</text>
+
+        <!-- ASDA arrow -->
+        <line x1="20" y1="210" x2="560" y2="210" stroke="#FDB785" stroke-width="2"/>
+        <line x1="20" y1="205" x2="20" y2="215" stroke="#FDB785" stroke-width="2"/>
+        <text x="285" y="207" fill="#FDB785" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ASDA = TORA + Stopway</text>
+
+        <!-- LDA arrow -->
+        <line x1="170" y1="136" x2="560" y2="136" stroke="#D8B4FE" stroke-width="2"/>
+        <line x1="170" y1="131" x2="170" y2="141" stroke="#D8B4FE" stroke-width="2"/>
+        <polygon points="560,130 578,136 560,142" fill="#D8B4FE"/>
+        <text x="365" y="130" fill="#D8B4FE" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">LDA (Landing Distance Available)</text>
+      </svg>
+    </div>
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="stat" style="border-color:rgba(234,179,8,.4);background:rgba(234,179,8,.07);">
+        <div class="sn" style="color:#FDE047;font-size:16px;">TORA</div>
+        <div class="sl">Runway length only</div>
+      </div>
+      <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);">
+        <div class="sn" style="color:#86EFAC;font-size:14px;">TODA</div>
+        <div class="sl">TORA + Clearway (air)</div>
+      </div>
+      <div class="stat" style="border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.07);">
+        <div class="sn" style="color:#FDB785;font-size:14px;">ASDA</div>
+        <div class="sl">TORA + Stopway (ground)</div>
+      </div>
+      <div class="stat" style="border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.07);">
+        <div class="sn" style="color:#D8B4FE;font-size:14px;">LDA</div>
+        <div class="sl">Landing runway available</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Key Formulas</div><div class="mf">TODA = TORA + Clearway (AIR) · ASDA = TORA + Stopway (GROUND) · Clearway ≠ Stopway!</div></div></div>
+  </div>
+
+  <!-- RFF card -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>Rescue & Fire Fighting (RFF)</div>
+    <div class="g2">
+      <div>
+        <div class="g2" style="gap:8px;margin-bottom:10px;">
+          <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.09);">
+            <div class="sn" style="color:#FCA5A5;font-size:28px;">3 min</div>
+            <div class="sl">Maximum response time to any point of operational runway</div>
+          </div>
+          <div class="stat" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);">
+            <div class="sn" style="color:#86EFAC;font-size:28px;">2 min</div>
+            <div class="sl">Operational objective (under optimum conditions)</div>
+          </div>
+        </div>
+        <div class="al al-r" style="margin-bottom:0;"><strong>DGCA MCQ:</strong> RFF response = not more than <strong>3 minutes</strong>.</div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCD34D;margin-bottom:8px;">Extinguishing Agents:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.07);">
+            <span class="b b-o">Principal</span><div><strong>FOAM</strong> — main extinguishing agent</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+            <span class="b b-a">Complementary</span><div><strong>Dry Chemical Powder (DCP)</strong> — for hydrocarbon fires</div>
+          </div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">RFF Memory</div><div class="mf">Main = FOAM · Support = DCP · Time = 3min max</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= ALL LIGHTS TABLE ======= -->
+<div class="section" id="section-lights">
+  <div class="sh">
+    <div class="si" style="background:var(--a-bg);border:1px solid rgba(245,158,11,.3);">💡</div>
+    <div><div class="st">Complete Light Colour Reference</div><div class="ss">Every runway, taxiway & obstacle light colour in one place</div></div>
+  </div>
+
+  <!-- RUNWAY CENTRELINE COLOUR CHANGE SVG -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Runway Centreline Light Colour Change (CAT II/III)</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 130" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="130" fill="#060e18"/>
+        <!-- runway strip -->
+        <rect x="20" y="40" width="720" height="60" rx="4" fill="#1e2a30"/>
+        <!-- WHITE section (0 → 900m from end) -->
+        <g fill="white" opacity=".85">
+          <circle cx="40" cy="70" r="5"/><circle cx="80" cy="70" r="5"/><circle cx="120" cy="70" r="5"/>
+          <circle cx="160" cy="70" r="5"/><circle cx="200" cy="70" r="5"/><circle cx="240" cy="70" r="5"/>
+          <circle cx="280" cy="70" r="5"/><circle cx="320" cy="70" r="5"/>
+          <circle cx="360" cy="70" r="5"/>
+        </g>
+        <!-- ALTERNATING Red/White (900m → 300m remaining) -->
+        <circle cx="400" cy="70" r="5" fill="#EF4444" opacity=".9"/>
+        <circle cx="440" cy="70" r="5" fill="white" opacity=".85"/>
+        <circle cx="480" cy="70" r="5" fill="#EF4444" opacity=".9"/>
+        <circle cx="520" cy="70" r="5" fill="white" opacity=".85"/>
+        <circle cx="560" cy="70" r="5" fill="#EF4444" opacity=".9"/>
+        <!-- ALL RED (last 300m) -->
+        <circle cx="600" cy="70" r="5" fill="#EF4444" opacity=".95"/>
+        <circle cx="640" cy="70" r="5" fill="#EF4444" opacity=".95"/>
+        <circle cx="680" cy="70" r="5" fill="#EF4444" opacity=".95"/>
+        <circle cx="720" cy="70" r="5" fill="#EF4444" opacity=".95"/>
+        <!-- markers -->
+        <line x1="395" y1="35" x2="395" y2="105" stroke="rgba(245,158,11,.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="395" y="28" fill="#FCD34D" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">900m left</text>
+        <line x1="585" y1="35" x2="585" y2="105" stroke="rgba(239,68,68,.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="585" y="28" fill="#FCA5A5" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">300m left</text>
+        <!-- labels -->
+        <text x="200" y="118" fill="white" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">WHITE</text>
+        <text x="490" y="118" fill="#F97316" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">RED / WHITE</text>
+        <text x="660" y="118" fill="#EF4444" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ALL RED</text>
+        <!-- landing direction arrow -->
+        <polygon points="730,60 750,70 730,80" fill="rgba(134,239,172,.5)"/>
+        <line x1="20" y1="70" x2="730" y2="70" stroke="rgba(134,239,172,.15)" stroke-width="1"/>
+        <text x="12" y="73" fill="rgba(134,239,172,.5)" font-family="monospace" font-size="10">←LAND</text>
+      </svg>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Centreline Colour Rule</div><div class="mf">WHITE → Red/White (900m) → ALL RED (300m) — "More red = runway ending"</div></div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Runway Lights</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FDE047;">Light</th><th style="color:#FDE047;">Colour</th></tr></thead>
+          <tbody>
+            <tr><td>Threshold Lights</td><td><span class="b b-g">Green</span></td></tr>
+            <tr><td>Wing Bar Lights</td><td><span class="b b-g">Green</span></td></tr>
+            <tr><td>RTIL (Threshold ID)</td><td><span class="b b-w">Flashing White</span> (60–120/min)</td></tr>
+            <tr><td>Runway Edge</td><td><span class="b b-w">Variable White</span></td></tr>
+            <tr><td>Runway Edge (last 600m)</td><td><span class="b b-y">Yellow</span></td></tr>
+            <tr><td>Runway End Lights</td><td><span class="b b-r">Red</span></td></tr>
+            <tr><td>Centreline (normal)</td><td><span class="b b-w">White</span></td></tr>
+            <tr><td>Centreline (900-300m)</td><td><span class="b b-r">Alt Red/White</span></td></tr>
+            <tr><td>Centreline (last 300m)</td><td><span class="b b-r">All Red</span></td></tr>
+            <tr><td>Touchdown Zone (TDZ)</td><td><span class="b b-w">Variable White</span></td></tr>
+            <tr><td>Stopway Lights</td><td><span class="b b-r">Red</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--blue)"></span>Taxiway & Obstacle Lights</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(59,130,246,.12);"><tr><th style="color:#93C5FD;">Light</th><th style="color:#93C5FD;">Colour</th></tr></thead>
+          <tbody>
+            <tr><td>Taxiway Centreline</td><td><span class="b b-g">Green</span></td></tr>
+            <tr><td>Taxiway Edge</td><td><span class="b b-b">Blue</span></td></tr>
+            <tr><td>RET (near runway)</td><td><span class="b b-g">Green/Yellow alt</span></td></tr>
+            <tr><td>Stop Bar</td><td><span class="b b-r">Red</span></td></tr>
+            <tr><td>Runway Guard Lights</td><td><span class="b b-y">Flashing Yellow</span></td></tr>
+            <tr><td>Stand Guidance</td><td><span class="b b-y">Yellow</span></td></tr>
+            <tr><td>Stand Stop</td><td><span class="b b-r">Red</span></td></tr>
+            <tr><td>REL / THL (RWSL)</td><td><span class="b b-r">Red</span></td></tr>
+            <tr><td>Low obstacle (A/B)</td><td><span class="b b-r">Fixed Red</span></td></tr>
+            <tr><td>Medium obstacle (A)</td><td><span class="b b-w">Flashing White</span></td></tr>
+            <tr><td>High obstacle (A/B)</td><td><span class="b b-w">Flashing White</span></td></tr>
+            <tr><td>Wind turbine</td><td>Medium Intensity</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MASTER REF ======= -->
+<div class="section" id="section-master">
+  <div class="sh">
+    <div class="si" style="background:var(--a-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div class="st">Master Reference & Exam Traps</div><div class="ss">Every key number from Chapter 12 in one place</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--yellow)"></span>Critical Numbers</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(234,179,8,.12);"><tr><th style="color:#FDE047;">Topic</th><th style="color:#FDE047;">Value</th></tr></thead>
+          <tbody>
+            <tr><td>PAPI on glide path</td><td><span class="num">2R + 2W</span></td></tr>
+            <tr><td>APAPI on glide path</td><td><span class="num">1R + 1W</span></td></tr>
+            <tr><td>PAPI location</td><td>Left side of runway</td></tr>
+            <tr><td>Simple approach length</td><td><span class="num">420 m</span></td></tr>
+            <tr><td>CAT I length</td><td><span class="num">900 m</span></td></tr>
+            <tr><td>CAT II/III crossbars</td><td><span class="num">150m &amp; 300m</span></td></tr>
+            <tr><td>CAT II/III side rows</td><td><span class="num">Red, 270m</span></td></tr>
+            <tr><td>Aerodrome beacon rate</td><td><span class="num">20–30/min</span></td></tr>
+            <tr><td>Land beacon colour</td><td>Green + White</td></tr>
+            <tr><td>Water beacon colour</td><td>Yellow + White</td></tr>
+            <tr><td>Threshold stripes 45m</td><td><span class="num">12</span></td></tr>
+            <tr><td>Threshold stripes 60m</td><td><span class="num">16</span></td></tr>
+            <tr><td>Enhanced taxiway CL starts</td><td><span class="num">47m before hold</span></td></tr>
+            <tr><td>Holding position marking</td><td>4 solid + 4 dashed yellow</td></tr>
+            <tr><td>VOR checkpoint circle</td><td><span class="num">6m diameter</span></td></tr>
+            <tr><td>Taxiway CL width</td><td><span class="num">15 cm min</span></td></tr>
+            <tr><td>Isolated parking (hijack)</td><td><span class="num">100m from others</span></td></tr>
+            <tr><td>RFF max response</td><td><span class="num">3 minutes</span></td></tr>
+            <tr><td>TODA formula</td><td>TORA + Clearway</td></tr>
+            <tr><td>ASDA formula</td><td>TORA + Stopway</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">PAPI side — LEFT of runway</div><div class="trap-d">PAPI is on the LEFT side of the runway (when looking toward the threshold). Frequently asked trap.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Apron Safety Line = RED (India only)</div><div class="trap-d">Apron safety lines are RED in India. Don't confuse with taxiway (Yellow) or runway (White).</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Aiming Point ≠ Touchdown Zone</div><div class="trap-d">Aiming Point = big blocks = pilot visually aims. TDZ = small paired bars = where wheels touch. Different markings!</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Location sign = Yellow on BLACK</div><div class="trap-d">Location = Yellow on Black ("black square = you are there"). Direction/Info = Black on Yellow. Opposite!</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">CAT II/III side rows = RED, not white</div><div class="trap-d">CAT I has NO side rows. CAT II/III has RED side rows (270m). The centreline is white in both.</div></div></div>
+          <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Clearway vs Stopway</div><div class="trap-d">Clearway = AIR (aircraft climbs over it, cannot land/stop on it). Stopway = GROUND (aircraft stops on it for rejected takeoff).</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ ======= -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--y-bg);border:1px solid rgba(234,179,8,.3);">🧠</div>
+    <div><div class="st">Practice Quiz — Chapter 12</div><div class="ss">25 DGCA-style questions on all visual aids topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"Runway markings are always which colour?",opts:["Yellow","White","Green","Red"],ans:1,exp:"Runway markings = WHITE. Taxiway = Yellow. Apron safety lines (India) = Red."},
+{q:"Apron safety lines in India are which colour?",opts:["White","Yellow","Green","Red"],ans:3,exp:"Apron safety lines in India = RED. This is a very commonly asked DGCA MCQ."},
+{q:"PAPI showing 2 Red + 2 White means:",opts:["Slightly high","Too high","On glide path","Slightly low"],ans:2,exp:"2R + 2W = ON GLIDE PATH. This is the single most important PAPI fact. More RED = lower, more WHITE = higher."},
+{q:"PAPI is normally located on which side of the runway?",opts:["Right side","Left side","Both sides","Centreline"],ans:1,exp:"PAPI is on the LEFT side of the runway. This is a favourite DGCA trap."},
+{q:"PAPI showing 4 Red means:",opts:["On glide path","Slightly high","Slightly low","Too low — dangerously below path"],ans:3,exp:"4 RED = Too low. 4 WHITE = Too high. Memory: More red = lower."},
+{q:"APAPI showing 1 Red + 1 White means:",opts:["Too high","Too low","On correct glide path","Glide path unavailable"],ans:2,exp:"APAPI: 1R+1W = On correct path. 2W = Too high. 2R = Too low."},
+{q:"The total length of a Simple Approach Lighting system is:",opts:["300 m","420 m","600 m","900 m"],ans:1,exp:"Simple approach = 420 m. Crossbar at 300m. Used for non-instrument and non-precision runways."},
+{q:"CAT I approach lighting length is:",opts:["420 m","600 m","900 m","1200 m"],ans:2,exp:"CAT I = 900 m. Crossbar at 300m. No side rows."},
+{q:"CAT II/III side rows are which colour?",opts:["White","Yellow","Blue","Red"],ans:3,exp:"CAT II/III side rows = RED, extending 270m. Centreline = Variable White. CAT I has no side rows."},
+{q:"CAT II/III approach lighting has crossbars at:",opts:["300m only","150m only","150m and 300m","100m and 200m"],ans:2,exp:"CAT II/III = two crossbars at 150m AND 300m from threshold. CAT I = only one crossbar at 300m."},
+{q:"A 45m wide runway has how many threshold stripes?",opts:["8","10","12","16"],ans:2,exp:"45m runway = 12 stripes. Memory: 18→4, 23→6, 30→8, 45→12, 60→16."},
+{q:"A 60m wide runway has how many threshold stripes?",opts:["12","14","16","18"],ans:2,exp:"60m runway = 16 stripes. The largest standard runway width."},
+{q:"Aerodrome beacon flash rate is:",opts:["10-15/min","20-30/min","30-45/min","60/min"],ans:1,exp:"Aerodrome beacon = 20-30 flashes per minute."},
+{q:"Land aerodrome beacon colour is:",opts:["White only","Red and white","Green and white","Yellow and white"],ans:2,exp:"Land aerodrome beacon = Green + White alternating. Water = Yellow + White."},
+{q:"Runway holding position marking consists of:",opts:["4 white lines","4 solid + 4 dashed yellow lines","2 yellow lines","Red stop bars"],ans:1,exp:"4 solid + 4 dashed yellow lines. Aircraft stops before the SOLID side."},
+{q:"Mandatory instruction signs are:",opts:["Yellow on black","Black on yellow","White on red","Green on white"],ans:2,exp:"Mandatory = White on Red. Like a road stop sign — red background = mandatory compliance."},
+{q:"Location signs (showing where you are) are:",opts:["Black on yellow","White on red","Yellow on black","Green on black"],ans:2,exp:"Location sign = Yellow on Black. Direction/destination = Black on Yellow. Opposite colours — classic trap!"},
+{q:"TODA equals:",opts:["TORA only","TORA + Stopway","TORA + Clearway","LDA + Stopway"],ans:2,exp:"TODA = TORA + Clearway. Clearway = AIR space beyond runway. ASDA = TORA + Stopway (GROUND)."},
+{q:"Taxiway edge lights are which colour?",opts:["Green","White","Yellow","Blue"],ans:3,exp:"Taxiway EDGE = Blue. Taxiway CENTRELINE = Green. Blue = boundary, Green = guidance."},
+{q:"Runway centreline lights change from white to alternate red/white when:",opts:["500m remaining","900m remaining","300m remaining","1000m remaining"],ans:1,exp:"White → Red/White (starts at 900m from runway end) → All Red (last 300m)."},
+{q:"VOR aerodrome checkpoint circle diameter is:",opts:["3 m","4.5 m","6 m","9 m"],ans:2,exp:"VOR checkpoint circle = 6m diameter. Line width = 15cm."},
+{q:"Arrows painted before the threshold indicate:",opts:["Runway closed","Touchdown zone","Displaced threshold","Aiming point"],ans:2,exp:"Arrows before threshold = Displaced threshold. Landing cannot start until after the displaced threshold."},
+{q:"The principal fire extinguishing agent for aircraft fires is:",opts:["CO2","Halon","Foam","Dry Chemical Powder"],ans:2,exp:"Principal = FOAM. Complementary = DCP (Dry Chemical Powder) for hydrocarbon fires."},
+{q:"Maximum RFF response time to any point on the operational runway is:",opts:["1 minute","2 minutes","3 minutes","5 minutes"],ans:2,exp:"RFF = not more than 3 minutes. Operational objective = 2 minutes."},
+{q:"Runway centreline lights in the last 300m are:",opts:["White","Alternate red and white","All red","Yellow"],ans:2,exp:"Last 300m of centreline = ALL RED. This warns pilots the runway is nearly finished."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=88){msg='🏆 Excellent!';sub='Chapter 12 fully mastered. DGCA ready!';}else if(pct>=72){msg='✅ Strong!';sub='Review PAPI readings and sign colours.';}else if(pct>=60){msg='📚 Good!';sub='Focus on approach lighting lengths and threshold stripes.';}else{msg='🔄 Keep Revising!';sub='Use the visual sections to drill each concept.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 20: Aircraft Accident & Incident</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B18;--bg2:#0A1020;--bg3:#0D1428;
+  --card:#0F1A30;--card2:#122038;
+  --red:#EF4444;--amber:#F59E0B;--green:#10B981;
+  --blue:#3B82F6;--purple:#A855F7;--teal:#14B8A6;
+  --orange:#F97316;--pink:#EC4899;--sky:#0EA5E9;
+  --text:#D8E8FA;--text2:#7A9CC0;--text3:#3C5878;
+  --bdr:rgba(255,255,255,0.055);--bdr2:rgba(255,255,255,0.10);
+  --red-bg:rgba(239,68,68,.11);--amber-bg:rgba(245,158,11,.11);
+  --green-bg:rgba(16,185,129,.11);--blue-bg:rgba(59,130,246,.11);
+  --purple-bg:rgba(168,85,247,.11);--teal-bg:rgba(20,184,166,.11);
+  --orange-bg:rgba(249,115,22,.11);--sky-bg:rgba(14,165,233,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(239,68,68,.13) 0%,transparent 50%),radial-gradient(ellipse at 80% 0%,rgba(245,158,11,.10) 0%,transparent 50%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.35);color:#FCA5A5;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(23px,4.5vw,44px);font-weight:700;color:#fff;position:relative;margin-bottom:8px;}
+.hero h1 span{color:#FCD34D;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:13px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 12px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;white-space:nowrap;}
+.nb:hover{border-color:var(--amber);color:#FCD34D;}
+.nb.active{background:var(--amber);border-color:var(--amber);color:#000;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 64px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#FCD34D;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:11.5px;color:var(--text2);margin-top:5px;font-weight:500;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:rgba(245,158,11,.13);color:#FCD34D;padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(245,158,11,.22);}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-r{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-a{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-g{background:var(--green-bg);color:#6EE7B7;border:1px solid rgba(16,185,129,.25);}
+.b-b{background:var(--blue-bg);color:#93C5FD;border:1px solid rgba(59,130,246,.25);}
+.b-p{background:var(--purple-bg);color:#D8B4FE;border:1px solid rgba(168,85,247,.25);}
+.b-t{background:var(--teal-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.25);}
+.b-o{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mc{font-size:13.5px;color:var(--text);}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:11px 0;font-size:13px;}
+.al-r{background:var(--red-bg);border-color:var(--red);}
+.al-a{background:var(--amber-bg);border-color:var(--amber);}
+.al-g{background:var(--green-bg);border-color:var(--green);}
+.al-b{background:var(--blue-bg);border-color:var(--blue);}
+.al-p{background:var(--purple-bg);border-color:var(--purple);}
+.al strong{color:#FCD34D;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#6EE7B7;}.al-b strong{color:#93C5FD;}.al-p strong{color:#D8B4FE;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#6EE7B7;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#FCD34D;}
+/* CLASSIFICATION CARDS */
+.class-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px;}
+.cls{border-radius:13px;padding:18px;border:2px solid;position:relative;overflow:hidden;}
+.cls::before{content:attr(data-letter);position:absolute;right:12px;top:8px;font-family:'JetBrains Mono',monospace;font-size:60px;font-weight:700;opacity:.07;line-height:1;}
+.cls-a{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.35);}
+.cls-si{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.35);}
+.cls-i{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.35);}
+.cls-sig{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.35);}
+.cls-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.cls-a .cls-label{color:#FCA5A5;}.cls-si .cls-label{color:#FCD34D;}.cls-i .cls-label{color:#6EE7B7;}.cls-sig .cls-label{color:#93C5FD;}
+.cls-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;}
+.cls-def{font-size:12.5px;color:var(--text2);line-height:1.55;}
+/* SERIOUS INJURY CRITERIA */
+.inj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px;}
+.inj-box{border-radius:10px;padding:13px;border:1px solid;}
+.inj-ico{font-size:22px;margin-bottom:6px;}
+.inj-title{font-size:12.5px;font-weight:700;margin-bottom:4px;}
+.inj-desc{font-size:12px;color:var(--text2);}
+/* TIMELINE */
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--red),var(--amber),var(--green));}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-dot{position:absolute;left:-28px;width:16px;height:16px;border-radius:50%;border:2px solid;top:3px;}
+.tl-content{padding:0 0 0 4px;}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;margin-bottom:3px;}
+.tl-desc{font-size:13px;color:var(--text2);}
+/* FLOW STEPS */
+.flow-steps{display:flex;flex-direction:column;gap:0;}
+.fs-item{display:flex;gap:14px;}
+.fs-left{display:flex;flex-direction:column;align-items:center;}
+.fs-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;flex-shrink:0;}
+.fs-line{width:2px;flex:1;min-height:12px;margin:4px 0;}
+.fs-item:last-child .fs-line{display:none;}
+.fs-body{padding-bottom:18px;flex:1;}
+.fs-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.fs-desc{font-size:12.5px;color:var(--text2);}
+/* ANNEX STATES */
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px;}
+.state-box{background:var(--card2);border:1px solid var(--bdr2);border-radius:10px;padding:13px;}
+.state-name{font-size:12px;font-weight:700;color:#FCD34D;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+.state-def{font-size:12.5px;color:var(--text2);}
+/* TRAP */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-title{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-text{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--amber));border-radius:2px;transition:width .4s ease;}
+.qnum{font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .14s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--amber);color:#fff;background:var(--amber-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#6EE7B7;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--amber-bg);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12.5px;color:#FCD34D;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--amber);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .17s;}
+.btn:hover{background:#FCD34D;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:40px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--amber) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#FCD34D;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈ DGCA CPL Exam Prep</div>
+  <h1>Chapter 20 — <span>Aircraft Accident & Incident</span></h1>
+  <p>Accident · Serious Incident · Serious Injury · AIRPROX · AAIB · Notification · Evidence Protection</p>
+  <div class="hero-chips">
+    <span class="chip">Accident vs Incident</span><span class="chip">Fatal Injury 30 days</span>
+    <span class="chip">Serious Injury 48 hrs</span><span class="chip">AIRPROX</span>
+    <span class="chip">AAIB India</span><span class="chip">24-hr Notification</span>
+    <span class="chip">CVR/FDR Protection</span><span class="chip">Annex 13 States</span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nb active" onclick="show('classify')">📊 Classification</button>
+  <button class="nb" onclick="show('injury')">🏥 Injuries</button>
+  <button class="nb" onclick="show('serious')">⚠️ Serious Incident</button>
+  <button class="nb" onclick="show('reporting')">📋 Reporting</button>
+  <button class="nb" onclick="show('evidence')">🔒 Evidence</button>
+  <button class="nb" onclick="show('annex')">🌐 Annex 13</button>
+  <button class="nb" onclick="show('numbers')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="content">
+
+<!-- ======= CLASSIFICATION ======= -->
+<div class="section active" id="section-classify">
+  <div class="sh">
+    <div class="si" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.3);">📊</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Classification of Occurrences</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Accident · Serious Incident · Incident · Significant Incident — the #1 exam topic</div></div>
+  </div>
+
+  <!-- 4-BOX OVERVIEW -->
+  <div class="class-grid">
+    <div class="cls cls-a" data-letter="A">
+      <div class="cls-label">Level 1 — Most Severe</div>
+      <div class="cls-title">ACCIDENT</div>
+      <div class="cls-def">Fatal/serious injury, major aircraft damage, or aircraft missing. Occurred during flight operation.</div>
+    </div>
+    <div class="cls cls-si" data-letter="SI">
+      <div class="cls-label">Level 2</div>
+      <div class="cls-title">SERIOUS INCIDENT</div>
+      <div class="cls-def">High probability of accident. Almost became an accident but did not.</div>
+    </div>
+    <div class="cls cls-sig" data-letter="S">
+      <div class="cls-label">Level 3</div>
+      <div class="cls-title">SIGNIFICANT INCIDENT</div>
+      <div class="cls-def">Accident or serious incident <em>could have</em> occurred if safety margins had not existed.</div>
+    </div>
+    <div class="cls cls-i" data-letter="I">
+      <div class="cls-label">Level 4 — Least Severe</div>
+      <div class="cls-title">INCIDENT</div>
+      <div class="cls-def">Not an accident. Safety jeopardized but lower impact than accident.</div>
+    </div>
+  </div>
+
+  <!-- ACCIDENT DEFINITION -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>ACCIDENT — Full Definition & Timeframe</div>
+    <div class="g2">
+      <div>
+        <div class="al al-r" style="margin-bottom:12px;">
+          <strong>Timeframe for manned aircraft:</strong><br>
+          From: person boards with <strong>intention of flight</strong><br>
+          Until: <strong>all persons have disembarked</strong>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">An occurrence is an ACCIDENT if ANY of these occur:</div>
+        <div class="chklist">
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span style="color:#FCA5A5;font-weight:700;font-family:'JetBrains Mono',monospace;">A</span>
+            <div><strong>Fatal or Serious Injury</strong> — person in aircraft, direct contact, or jet blast exposure</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span style="color:#FCA5A5;font-weight:700;font-family:'JetBrains Mono',monospace;">B</span>
+            <div><strong>Aircraft Damage / Structural Failure</strong> — adversely affects structural strength, performance, or flight characteristics</div>
+          </div>
+          <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+            <span style="color:#FCA5A5;font-weight:700;font-family:'JetBrains Mono',monospace;">C</span>
+            <div><strong>Aircraft Missing or Completely Inaccessible</strong></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#6EE7B7;margin-bottom:8px;">✅ NOT Considered Accident (Minor Damage Only)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+          <span class="b b-g">Engine cowling</span><span class="b b-g">Propeller</span>
+          <span class="b b-g">Wing tips</span><span class="b b-g">Antennas</span>
+          <span class="b b-g">Tires / Brakes / Wheels</span><span class="b b-g">Fairings / Panels</span>
+          <span class="b b-g">Landing gear doors</span><span class="b b-g">Windscreen</span>
+          <span class="b b-g">Bird strike damage</span><span class="b b-g">Hail damage</span>
+        </div>
+        <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);">
+          <div class="sn" style="color:#FCA5A5;">30 days</div>
+          <div class="sl">Death within this period = <strong>Fatal Injury</strong></div>
+        </div>
+        <div class="mem" style="margin-top:10px;margin-bottom:0;"><div class="mi">🧠</div><div>
+          <div class="mt">Fatal Injury Memory</div>
+          <div class="mf">Death within 30 days of accident = Fatal Injury</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCIDENT TYPES -->
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Incident, Significant Incident & Air Traffic Incident</div>
+    <div class="g2">
+      <div>
+        <div class="al al-g" style="margin-bottom:10px;"><strong>Incident:</strong> An occurrence NOT qualifying as an accident. Safety jeopardized but lower impact.</div>
+        <div style="font-size:12px;font-weight:700;color:#6EE7B7;margin-bottom:7px;">Examples of Incidents:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">→</span>Forced landing</div>
+          <div class="chk-item"><span class="cy">→</span>Landing with unserviceability</div>
+          <div class="chk-item"><span class="cy">→</span>Aircraft position unknown</div>
+          <div class="chk-item"><span class="cy">→</span>Aircraft damaged below accident threshold</div>
+        </div>
+      </div>
+      <div>
+        <div class="al al-b" style="margin-bottom:10px;"><strong>Significant Incident:</strong> Accident or Serious Incident <em>could have</em> occurred — safety margins existed and prevented it.</div>
+        <div class="al al-p" style="margin-bottom:10px;"><strong>Air Traffic Incident (AIRPROX):</strong> Serious occurrence related to ATS. Aircraft come dangerously close.</div>
+        <div class="al al-p" style="margin-bottom:0;font-size:12px;">ATS Difficulties caused by: faulty procedures · non-compliance · ground facility failure</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Quick Comparison — The 4 Levels</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Level</th><th>Type</th><th>Definition</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-r">1</span></td><td><strong>Accident</strong></td><td>Fatal/serious injury OR major damage OR missing aircraft</td><td>Occurred</td></tr>
+          <tr><td><span class="b b-a">2</span></td><td><strong>Serious Incident</strong></td><td>High probability of accident</td><td>Almost occurred</td></tr>
+          <tr><td><span class="b b-b">3</span></td><td><strong>Significant Incident</strong></td><td>Accident/Serious incident could have occurred</td><td>Safety margin saved it</td></tr>
+          <tr><td><span class="b b-g">4</span></td><td><strong>Incident</strong></td><td>Not an accident; safety jeopardized</td><td>No accident</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Severity Ladder Memory</div>
+      <div class="mf">Accident &gt; Serious Incident &gt; Significant Incident &gt; Incident</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= INJURIES ======= -->
+<div class="section" id="section-injury">
+  <div class="sh">
+    <div class="si" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.3);">🏥</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Fatal & Serious Injury Definitions</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">30 days · 48 hours · Fractures · Burns · Internal organs — all exam favourites</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>Fatal Injury</div>
+      <div class="stat" style="border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.1);margin-bottom:12px;">
+        <div class="sn" style="color:#FCA5A5;font-size:36px;">30</div>
+        <div class="su">DAYS</div>
+        <div class="sl">Death occurring within <strong>30 days</strong> of the accident = Fatal Injury</div>
+      </div>
+      <div class="al al-r" style="margin-bottom:0;font-size:12.5px;">
+        <strong>DGCA Exam Favourite #1:</strong> Death must occur within 30 days to be classified as a fatal injury from that accident.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Serious Injury — Hospitalization Criterion</div>
+      <div class="stat" style="border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.1);margin-bottom:12px;">
+        <div class="sn">48 hrs</div>
+        <div class="su">hospitalization</div>
+        <div class="sl">Within <strong>7 days</strong> of injury — to qualify as Serious Injury</div>
+      </div>
+      <div class="al al-a" style="margin-bottom:0;font-size:12.5px;">
+        <strong>DGCA Exam Favourite #2:</strong> Hospitalization for MORE THAN 48 hours within 7 days of injury.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Serious Injury — All Criteria</div>
+    <div class="inj-grid">
+      <div class="inj-box" style="background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3);">
+        <div class="inj-ico">🏥</div>
+        <div class="inj-title" style="color:#FCD34D;">Hospitalization</div>
+        <div class="inj-desc">More than <strong>48 hours</strong> within 7 days of injury</div>
+      </div>
+      <div class="inj-box" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.3);">
+        <div class="inj-ico">🦴</div>
+        <div class="inj-title" style="color:#FCA5A5;">Fracture</div>
+        <div class="inj-desc">Any fracture <strong>EXCEPT</strong>: fingers, toes, nose</div>
+      </div>
+      <div class="inj-box" style="background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.3);">
+        <div class="inj-ico">🩸</div>
+        <div class="inj-title" style="color:#FCA5A5;">Severe Laceration</div>
+        <div class="inj-desc">Causing: severe bleeding · nerve · muscle · tendon damage</div>
+      </div>
+      <div class="inj-box" style="background:rgba(168,85,247,.07);border-color:rgba(168,85,247,.3);">
+        <div class="inj-ico">🫀</div>
+        <div class="inj-title" style="color:#D8B4FE;">Internal Organ Injury</div>
+        <div class="inj-desc">Any internal organ damage</div>
+      </div>
+      <div class="inj-box" style="background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.3);">
+        <div class="inj-ico">🔥</div>
+        <div class="inj-title" style="color:#FDB785;">Burns</div>
+        <div class="inj-desc">2nd or 3rd degree burns OR more than <strong>5%</strong> body surface area</div>
+      </div>
+      <div class="inj-box" style="background:rgba(20,184,166,.07);border-color:rgba(20,184,166,.3);">
+        <div class="inj-ico">☢️</div>
+        <div class="inj-title" style="color:#5EEAD4;">Radiation / Infection</div>
+        <div class="inj-desc">Verified exposure to radiation or infectious substances</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:4px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">Serious Injury Memory Formula</div>
+      <div class="mf">48 hrs Hospital + Fracture (not finger/toe/nose) + Organ + Burns &gt;5%</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Fatal vs Serious Injury Quick Comparison</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead><tr><th>Criterion</th><th>Fatal Injury</th><th>Serious Injury</th></tr></thead>
+        <tbody>
+          <tr><td>Time threshold</td><td><strong>Death within 30 days</strong></td><td><strong>Hospitalized &gt;48 hrs within 7 days</strong></td></tr>
+          <tr><td>Fracture</td><td>N/A</td><td>Any fracture except finger, toe, nose</td></tr>
+          <tr><td>Burns</td><td>N/A</td><td>2nd/3rd degree OR &gt;5% body area</td></tr>
+          <tr><td>Internal organ</td><td>N/A</td><td>Any internal organ injury</td></tr>
+          <tr><td>Radiation</td><td>N/A</td><td>Verified exposure</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SERIOUS INCIDENT ======= -->
+<div class="section" id="section-serious">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⚠️</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Serious Incident Examples</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">High probability of accident · Must memorize all categories</div></div>
+  </div>
+
+  <div class="al al-a">
+    <strong>Serious Incident Definition:</strong> An incident that indicates a <strong>high probability of an accident</strong> but where an accident did NOT actually occur. Memory: "Almost became an accident."
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Serious Incident Categories — All Exam-Relevant</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-r">1</span>
+          <div><strong>Near Collision / AIRPROX</strong> — requiring avoidance action</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-r">2</span>
+          <div><strong>CFIT Marginally Avoided</strong> — Controlled Flight Into Terrain narrowly avoided</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+          <span class="b b-a">3</span>
+          <div><strong>Wrong Runway Operations</strong> — T/O or landing from closed runway, taxiway, or wrong runway</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+          <span class="b b-a">4</span>
+          <div><strong>Performance Problems</strong> — failure to achieve expected T/O or climb performance</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-r">5</span>
+          <div><strong>Fire / Smoke</strong> — cockpit, cabin, cargo, engine (even if extinguished)</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);">
+          <span class="b b-o">6</span>
+          <div><strong>Emergency Oxygen Use</strong> — crew required supplemental oxygen</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-r">7</span>
+          <div><strong>Engine Failures</strong> — uncontained engine failure or engine disintegration</div>
+        </div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+          <span class="b b-p">8</span>
+          <div><strong>Multiple System Failures</strong> — seriously affecting aircraft operation</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+          <span class="b b-p">9</span>
+          <div><strong>Crew Incapacitation</strong> — pilot becomes incapacitated in flight</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+          <span class="b b-a">10</span>
+          <div><strong>Fuel Emergencies</strong> — fuel starvation, exhaustion, unable to use fuel onboard</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+          <span class="b b-r">11</span>
+          <div><strong>Runway Incursion — Severity A</strong></div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+          <span class="b b-a">12</span>
+          <div><strong>Undershoot / Overrun / Excursion</strong> — off the runway</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+          <span class="b b-t">13</span>
+          <div><strong>Severe Weather / System Failure</strong> — causing or potentially causing loss of control</div>
+        </div>
+        <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+          <span class="b b-t">14</span>
+          <div><strong>External Load Release</strong> — intentional emergency release of sling load</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>AIRPROX — Aircraft Proximity</div>
+    <div class="g2">
+      <div>
+        <div class="al al-r" style="margin-bottom:10px;">
+          <strong>AIRPROX</strong> = Aircraft Proximity Event. Aircraft come dangerously close. Classified as a Serious Incident if avoidance action was required.
+        </div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-r">A</span><div>Falls under <strong>Serious Incident</strong> category</div></div>
+          <div class="chk-item"><span class="b b-r">B</span><div>Requires immediate reporting on air-ground frequency</div></div>
+          <div class="chk-item"><span class="b b-r">C</span><div>Also classified as <strong>Air Traffic Incident</strong></div></div>
+        </div>
+      </div>
+      <div class="mem" style="margin:0;"><div class="mi">🧠</div><div>
+        <div class="mt">AIRPROX Memory</div>
+        <div class="mf">AIRPROX = AIR + PROXimity = Aircraft too close</div>
+        <div class="mc" style="font-size:12px;margin-top:4px;color:var(--text3);">If it required avoidance action = Serious Incident<br>Without avoidance = Air Traffic Incident</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= REPORTING ======= -->
+<div class="section" id="section-reporting">
+  <div class="sh">
+    <div class="si" style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);">📋</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Reporting & Notification Requirements</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Who reports · When · To whom · AAIB responsibilities</div></div>
+  </div>
+
+  <!-- KEY NUMBERS -->
+  <div class="g4" style="margin-bottom:14px;">
+    <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);">
+      <div class="sn" style="color:#FCA5A5;">24 hrs</div>
+      <div class="sl">Notification deadline after becoming aware</div>
+    </div>
+    <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);">
+      <div class="sn" style="color:#FCA5A5;">24 hrs</div>
+      <div class="sl">Incident report submission to DGCA after landing</div>
+    </div>
+    <div class="stat">
+      <div class="sn">AAIB</div>
+      <div class="sl">Investigation agency in India</div>
+    </div>
+    <div class="stat">
+      <div class="sn">DG</div>
+      <div class="sl">Head of AAIB (Director General)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Reporting Flow — Step by Step</div>
+    <div class="flow-steps">
+      <div class="fs-item">
+        <div class="fs-left">
+          <div class="fs-num" style="background:var(--red-bg);border:1px solid rgba(239,68,68,.4);color:#FCA5A5;">1</div>
+          <div class="fs-line" style="background:var(--bdr2);"></div>
+        </div>
+        <div class="fs-body">
+          <div class="fs-title">During flight — Report immediately</div>
+          <div class="fs-desc">Transmit initial radio report on the appropriate air-ground frequency. Include: Aircraft identification · Type of incident · Details · Miscellaneous information</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-left">
+          <div class="fs-num" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.4);color:#FCD34D;">2</div>
+          <div class="fs-line" style="background:var(--bdr2);"></div>
+        </div>
+        <div class="fs-body">
+          <div class="fs-title">After landing — Notify within 24 hours</div>
+          <div class="fs-desc">Notification sent <strong>as soon as practicable</strong> and <strong>not later than 24 hours</strong> after becoming aware. Use fastest available communication method.</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-left">
+          <div class="fs-num" style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.4);color:#93C5FD;">3</div>
+          <div class="fs-line" style="background:var(--bdr2);"></div>
+        </div>
+        <div class="fs-body">
+          <div class="fs-title">Notify AAIB and DGCA</div>
+          <div class="fs-desc">Primary notifications go to <strong>AAIB</strong> and <strong>DGCA</strong>.</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-left">
+          <div class="fs-num" style="background:var(--green-bg);border:1px solid rgba(16,185,129,.4);color:#6EE7B7;">4</div>
+          <div class="fs-line" style="background:var(--bdr2);"></div>
+        </div>
+        <div class="fs-body">
+          <div class="fs-title">If accident occurred in India — Additional notifications</div>
+          <div class="fs-desc">Also inform: <strong>District Magistrate</strong> and <strong>Nearest Police Station</strong>.</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-left">
+          <div class="fs-num" style="background:var(--purple-bg);border:1px solid rgba(168,85,247,.4);color:#D8B4FE;">5</div>
+        </div>
+        <div class="fs-body">
+          <div class="fs-title">Submit full incident report to DGCA</div>
+          <div class="fs-desc">Written report within <strong>24 hours</strong> after landing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--blue)"></span>Who Must Notify & Who Else Must Notify AAIB</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#93C5FD;margin-bottom:8px;">WHO MUST NOTIFY (within 24 hrs):</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Pilot in Command</div>
+          <div class="chk-item"><span class="cy">✓</span>Owner</div>
+          <div class="chk-item"><span class="cy">✓</span>Operator</div>
+          <div class="chk-item"><span class="cy">✓</span>Hirer</div>
+          <div class="chk-item"><span class="cy">✓</span>Person in charge of aircraft</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#D8B4FE;margin-bottom:8px;">WHO ELSE MUST NOTIFY AAIB:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">✓</span>Aerodrome Operator</div>
+          <div class="chk-item"><span class="cy">✓</span>ATS Unit concerned</div>
+          <div class="chk-item"><span class="cy">✓</span>DGCA (where applicable)</div>
+        </div>
+        <div class="al al-b" style="margin-top:10px;margin-bottom:0;font-size:12px;">
+          <strong>AAIB</strong> = Aircraft Accident Investigation Bureau (India)<br>
+          <strong>DG, AAIB</strong> = Director General, AAIB — head of the investigation body
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= EVIDENCE ======= -->
+<div class="section" id="section-evidence">
+  <div class="sh">
+    <div class="si" style="background:var(--purple-bg);border:1px solid rgba(168,85,247,.3);">🔒</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Protection of Evidence</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">CVR/FDR protection · When aircraft may be moved · Investigator access</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--purple)"></span>Investigator-in-Charge Access Rights</div>
+    <div class="al al-p" style="margin-bottom:12px;">After an accident or serious incident, the <strong>Investigator-in-Charge</strong> has <strong>unrestricted access</strong> to:</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Aircraft wreckage</div>
+        <div class="chk-item"><span class="cy">✓</span>Flight Recorders (FDR / CVR)</div>
+        <div class="chk-item"><span class="cy">✓</span>ATS records</div>
+      </div>
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>All relevant material</div>
+        <div class="chk-item"><span class="cy">✓</span>Full accident site</div>
+        <div class="chk-item"><span class="cy">✓</span>Maintenance records</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>When Aircraft MAY Be Disturbed / Moved</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Aircraft shall <strong>NOT</strong> be disturbed UNLESS one of these conditions applies:</div>
+    <div class="chklist" style="margin-bottom:12px;">
+      <div class="chk-item" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.07);">
+        <span class="cy">✓</span>
+        <div><strong>Rescue Operations:</strong> To save lives, rescue injured, or prevent further damage</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.07);">
+        <span class="cy">✓</span>
+        <div><strong>Water Accident:</strong> To move aircraft to a safe place</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+        <span class="cy">✓</span>
+        <div><strong>Cargo Removal:</strong> Allowed under AAIB supervision</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.07);">
+        <span class="cy">✓</span>
+        <div><strong>Passenger Baggage:</strong> Allowed after photography, weighing, documentation — under supervision</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>CVR / FDR Data Protection — Critical Exam Topic</div>
+    <div style="background:rgba(239,68,68,.08);border:2px solid rgba(239,68,68,.35);border-radius:12px;padding:18px;margin-bottom:14px;">
+      <div style="font-size:14px;font-weight:700;color:#FCA5A5;margin-bottom:10px;">CVR/FDR data SHALL NOT be used for:</div>
+      <div class="g3">
+        <div class="chk-item" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);">
+          <span class="cn">✗</span><div><strong>Disciplinary proceedings</strong></div>
+        </div>
+        <div class="chk-item" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);">
+          <span class="cn">✗</span><div><strong>Civil proceedings</strong></div>
+        </div>
+        <div class="chk-item" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);">
+          <span class="cn">✗</span><div><strong>Criminal proceedings</strong></div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-top:10px;">Applies against employees or organizations. Purpose: encourage honest reporting without fear of prosecution.</div>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">CVR/FDR Memory</div>
+      <div class="mf">No Disciplinary · No Civil · No Criminal = "No DCC"</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======= ANNEX 13 ======= -->
+<div class="section" id="section-annex">
+  <div class="sh">
+    <div class="si" style="background:var(--teal-bg);border:1px solid rgba(20,184,166,.3);">🌐</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Annex 13 — Key States & Framework</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">ICAO Annex 13 · State of Occurrence · Registry · Design · Manufacture</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>ICAO Annex 13 — Aircraft Accident Investigation</div>
+    <div class="al al-g" style="margin-bottom:14px;">
+      <strong>Annex 13</strong> = ICAO standard for aircraft accident investigation. It defines responsibilities and obligations of states when an accident occurs.
+    </div>
+    <div class="state-grid">
+      <div class="state-box" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+        <div class="state-name" style="color:#FCA5A5;">State of Occurrence</div>
+        <div class="state-def">Country where the accident happened</div>
+      </div>
+      <div class="state-box" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <div class="state-name" style="color:#FCD34D;">State of Registry</div>
+        <div class="state-def">Country where the aircraft is registered</div>
+      </div>
+      <div class="state-box" style="border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.06);">
+        <div class="state-name" style="color:#93C5FD;">State of Operator</div>
+        <div class="state-def">Country of the aircraft operator</div>
+      </div>
+      <div class="state-box" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.06);">
+        <div class="state-name" style="color:#6EE7B7;">State of Design</div>
+        <div class="state-def">Country that designed the aircraft type</div>
+      </div>
+      <div class="state-box" style="border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.06);">
+        <div class="state-name" style="color:#D8B4FE;">State of Manufacture</div>
+        <div class="state-def">Country that manufactured the aircraft</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:14px;margin-bottom:0;"><div class="mi">🧠</div><div>
+      <div class="mt">5 States Memory</div>
+      <div class="mf">ORDOM = Occurrence · Registry · Design · Operator · Manufacture</div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip"></span>Annex 13 — Practical Application Example</div>
+    <div style="background:var(--card2);border:1px solid var(--bdr2);border-radius:11px;padding:16px;">
+      <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;">Scenario: An Air India Boeing 737 (registered in India, manufactured in USA, designed in USA) has an accident in Dubai.</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>State Role</th><th>Country</th></tr></thead>
+          <tbody>
+            <tr><td>State of Occurrence</td><td><strong>UAE (Dubai)</strong> — leads investigation</td></tr>
+            <tr><td>State of Registry</td><td><strong>India</strong> — may participate</td></tr>
+            <tr><td>State of Operator</td><td><strong>India</strong> (Air India)</td></tr>
+            <tr><td>State of Design</td><td><strong>USA</strong> (Boeing)</td></tr>
+            <tr><td>State of Manufacture</td><td><strong>USA</strong> (Boeing)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MASTER REF ======= -->
+<div class="section" id="section-numbers">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Master Reference & Exam Traps</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">Every key number and fact from Chapter 20 in one place</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip"></span>Critical Numbers & Definitions</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Fatal Injury time limit</td><td><span class="num">Death within 30 days</span></td></tr>
+            <tr><td>Serious Injury hospitalization</td><td><span class="num">&gt;48 hours within 7 days</span></td></tr>
+            <tr><td>Burns = Serious Injury if</td><td><span class="num">2nd/3rd degree OR &gt;5% BSA</span></td></tr>
+            <tr><td>Fractures NOT serious injury</td><td>Finger, Toe, Nose only</td></tr>
+            <tr><td>Notification deadline</td><td><span class="num">Within 24 hours</span></td></tr>
+            <tr><td>Incident report to DGCA</td><td><span class="num">Within 24 hours</span> after landing</td></tr>
+            <tr><td>India investigation agency</td><td><span class="num">AAIB</span></td></tr>
+            <tr><td>Head of AAIB</td><td><span class="num">DG, AAIB</span></td></tr>
+            <tr><td>AIRPROX stands for</td><td>Aircraft Proximity</td></tr>
+            <tr><td>Serious Incident definition</td><td>High probability of accident</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--red)"></span>What IS / IS NOT an Accident</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>IS an Accident</th><th>IS NOT an Accident</th></tr></thead>
+          <tbody>
+            <tr><td>Fatal/serious injury to person</td><td>Damage to engine cowling only</td></tr>
+            <tr><td>Aircraft missing</td><td>Bird strike damage</td></tr>
+            <tr><td>Major structural damage</td><td>Hail damage</td></tr>
+            <tr><td>Aircraft completely inaccessible</td><td>Tyre/brake/wheel damage</td></tr>
+            <tr><td>Jet blast exposure injury</td><td>Antenna/fairing/panel damage</td></tr>
+            <tr><td>Structural failure affecting performance</td><td>Windscreen damage</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--amber)"></span>Serious Incident Quick List</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Event</th><th>Category</th></tr></thead>
+          <tbody>
+            <tr><td>AIRPROX requiring avoidance action</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>CFIT marginally avoided</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>T/O or landing from closed runway</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Uncontained engine failure</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Runway incursion Severity A</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Crew incapacitation in flight</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Fuel starvation / exhaustion</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Fire/smoke even if extinguished</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Runway excursion</td><td><span class="b b-a">Serious Incident</span></td></tr>
+            <tr><td>Emergency oxygen use by crew</td><td><span class="b b-a">Serious Incident</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--purple)"></span>CVR/FDR & Annex 13 States</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead><tr><th>Item</th><th>Rule / Value</th></tr></thead>
+          <tbody>
+            <tr><td>CVR/FDR — disciplinary use</td><td><strong style="color:#FCA5A5;">Prohibited</strong></td></tr>
+            <tr><td>CVR/FDR — civil proceedings</td><td><strong style="color:#FCA5A5;">Prohibited</strong></td></tr>
+            <tr><td>CVR/FDR — criminal proceedings</td><td><strong style="color:#FCA5A5;">Prohibited</strong></td></tr>
+            <tr><td>State of Occurrence</td><td>Where accident happened</td></tr>
+            <tr><td>State of Registry</td><td>Where aircraft is registered</td></tr>
+            <tr><td>State of Operator</td><td>Operator's country</td></tr>
+            <tr><td>State of Design</td><td>Aircraft design country</td></tr>
+            <tr><td>State of Manufacture</td><td>Manufacturing country</td></tr>
+            <tr><td>Notifying police</td><td>District Magistrate + nearest police if in India</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps — Chapter 20</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Fatal Injury time limit</div><div class="trap-text">Death must occur within <strong style="color:#fff;">30 days</strong> to count as a fatal injury from that accident. After 30 days, it is NOT counted as a fatal injury from the accident.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Serious Injury hospitalization</div><div class="trap-text">Must be hospitalized for <strong style="color:#fff;">MORE THAN 48 hours</strong> and within <strong style="color:#fff;">7 days</strong> of the injury. Both conditions must be met.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Fractures that are NOT Serious Injury</div><div class="trap-text">Fractures of <strong style="color:#fff;">fingers, toes, and nose</strong> do NOT qualify as serious injury. Any other bone fracture qualifies.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Tire/brake damage is NOT an accident</div><div class="trap-text">Damage limited to: engine cowling, propeller, wing tips, antennas, tires, brakes, wheels, fairings, panels, landing gear doors, windscreen, bird strike, hail — these are <strong style="color:#FCA5A5;">NOT</strong> accidents.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Fire even if extinguished = Serious Incident</div><div class="trap-text">Any fire or smoke in cockpit, cabin, cargo, or engine — <strong style="color:#fff;">even if extinguished</strong> — is a Serious Incident. The fact it was put out does not downgrade it.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">CVR/FDR protection</div><div class="trap-text">CVR/FDR data cannot be used for <strong style="color:#fff;">disciplinary, civil, or criminal proceedings</strong>. This is intentional — to encourage open reporting culture without fear of prosecution.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-title">Notification — who and when</div><div class="trap-text">Notify AAIB + DGCA within <strong style="color:#fff;">24 hours</strong>. Also notify District Magistrate and nearest Police Station if accident in India. PIC, owner, operator, hirer or person-in-charge all have this obligation.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUIZ ======= -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">🧠</div>
+    <div><div style="font-size:21px;font-weight:700;color:#fff;">Practice Quiz</div>
+    <div style="font-size:12px;color:var(--text3);margin-top:2px;">25 DGCA-style questions covering all Chapter 20 topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span class="qnum" id="qn">Q 1 / 25</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:4%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard">
+      <div class="qq" id="qt"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qex" id="qe"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/25</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const qs=[
+  {q:"An aircraft accident occurs from the moment:",opts:["The aircraft engine starts","The aircraft leaves the gate","A person boards the aircraft with intention of flight, until all persons have disembarked","The aircraft takes off until it lands"],ans:2,exp:"An accident can occur from the moment a person boards the aircraft with the intention of flight until all persons have disembarked — even on the ground."},
+  {q:"Fatal Injury is defined as death occurring within:",opts:["7 days of the accident","14 days of the accident","30 days of the accident","60 days of the accident"],ans:2,exp:"Fatal Injury = death occurring within 30 days of the accident. This is the most important number in Chapter 20. Death after 30 days does not count as a fatal injury from that accident."},
+  {q:"Which of the following is NOT classified as an aircraft accident?",opts:["Aircraft goes missing","Structural failure affecting flight characteristics","Damage limited to tires, brakes and wheel fairings","Person suffers serious injury from jet blast"],ans:2,exp:"Minor damage to tires, brakes, wheels, fairings, engine cowlings, antennas, wing tips, propeller, landing gear doors, windscreen, and bird/hail damage is NOT classified as an accident."},
+  {q:"A Serious Incident is defined as:",opts:["Any incident requiring a report to DGCA","An incident indicating a high probability of an accident but where accident did not occur","An incident involving serious injury","Any runway incursion"],ans:1,exp:"Serious Incident = an incident that indicates a HIGH PROBABILITY of an accident, but where an accident did not actually occur. Memory: 'Almost became an accident.'"},
+  {q:"Serious Injury due to hospitalization requires the person to be hospitalized for:",opts:["More than 24 hours","More than 48 hours within 7 days","More than 72 hours","More than 5 days"],ans:1,exp:"Serious injury hospitalization = MORE THAN 48 hours within 7 days of the injury. Both conditions (>48 hrs AND within 7 days) must be met."},
+  {q:"Which fracture qualifies as a Serious Injury?",opts:["Fractured toe","Fractured nose bone","Fractured finger","Fractured femur (thigh bone)"],ans:3,exp:"Any fracture except fingers, toes, and nose qualifies as a Serious Injury. A fractured femur, arm, rib, skull, spine, etc. all qualify. Fingers, toes, and nose are the only exceptions."},
+  {q:"Burns qualify as Serious Injury if they are:",opts:["Any burn requiring hospital treatment","First degree burns","Second or third degree burns OR more than 5% body surface area","Burns affecting the face only"],ans:2,exp:"Burns = Serious Injury if: 2nd or 3rd degree burns OR burns covering more than 5% of body surface area. First degree (superficial) burns do not qualify."},
+  {q:"Which of the following is a Serious Incident?",opts:["Forced landing due to weather","Aircraft position unknown for 10 minutes","AIRPROX requiring avoidance action","Minor hydraulic leak fixed in flight"],ans:2,exp:"AIRPROX requiring avoidance action is a classic Serious Incident. Forced landing is typically an Incident (not Serious Incident) unless other serious criteria are met."},
+  {q:"Uncontained engine failure during flight is classified as:",opts:["An Accident","A Serious Incident","An Incident","A Significant Incident"],ans:1,exp:"Uncontained engine failure (where parts escape the engine cowling) is classified as a Serious Incident — it indicates high probability of an accident."},
+  {q:"An aircraft taking off from a closed runway is classified as:",opts:["Incident","Significant Incident","Serious Incident","Accident"],ans:2,exp:"Takeoff or landing from a closed runway, taxiway, or wrong runway is a Serious Incident. It indicates high probability of collision or other serious consequence."},
+  {q:"A Significant Incident is defined as:",opts:["An incident where injury occurred","An incident where accident or serious incident COULD have occurred if safety margins had not existed","A serious incident that was reported late","An incident requiring AAIB investigation"],ans:1,exp:"Significant Incident = accident or serious incident could have occurred if safety margins had not existed. It is one level below Serious Incident in severity."},
+  {q:"AIRPROX stands for:",opts:["Aircraft Report","Air Proximity","Aircraft Proximity event","Airspace Report"],ans:2,exp:"AIRPROX = Aircraft Proximity. It describes a situation where aircraft come dangerously close. It is an Air Traffic Incident and may also be a Serious Incident if avoidance action was required."},
+  {q:"An incident must be reported to DGCA within:",opts:["6 hours after landing","12 hours after landing","24 hours after landing","48 hours after landing"],ans:2,exp:"Incidents must be reported to DGCA within 24 hours after landing. During flight, report immediately on the appropriate air-ground frequency."},
+  {q:"Notification of an accident must be sent to AAIB and DGCA:",opts:["Within 6 hours","As soon as practicable and not later than 24 hours","Within 48 hours","Within 7 days"],ans:1,exp:"Notification must be sent as soon as practicable and not later than 24 hours after becoming aware of the accident. Use the fastest available communication method."},
+  {q:"In India, the authority responsible for investigating aircraft accidents is:",opts:["DGCA","Directorate of Air Safety","AAIB (Aircraft Accident Investigation Bureau)","Ministry of Civil Aviation"],ans:2,exp:"AAIB = Aircraft Accident Investigation Bureau — the responsible investigation authority in India. The head is the DG (Director General), AAIB."},
+  {q:"If an aircraft accident occurs in India, in addition to AAIB and DGCA, who else must be informed?",opts:["State Police Headquarters and Ministry of Defence","District Magistrate and nearest Police Station","State Government and Ministry of Aviation","Airport Authority and the nearest Hospital"],ans:1,exp:"If an accident occurs in India, additionally inform: the District Magistrate and the nearest Police Station."},
+  {q:"Who among the following is NOT listed as a person required to notify AAIB?",opts:["Pilot in Command","Operator","Aircraft Manufacturer","Owner"],ans:2,exp:"The persons required to notify are: PIC, Owner, Operator, Hirer, and Person in Charge. The Aircraft Manufacturer is NOT in this list (though State of Design/Manufacture may be involved)."},
+  {q:"After an accident, the aircraft wreckage shall NOT be disturbed unless:",opts:["DGCA gives permission","It is for rescue operations, water safety, or under AAIB supervision","72 hours have elapsed","Police have completed their investigation"],ans:1,exp:"Aircraft shall not be disturbed unless: (a) for rescue operations (save lives/rescue injured/prevent further damage), (b) water accident (move to safe place), (c) cargo removal under AAIB supervision, (d) passenger baggage after photography/weighing/documentation under supervision."},
+  {q:"CVR and FDR data shall NOT be used for:",opts:["Safety investigations only","Disciplinary, civil, or criminal proceedings against employees","International accident investigations","Technical analysis by the manufacturer"],ans:1,exp:"CVR/FDR data cannot be used for disciplinary, civil, or criminal proceedings against employees or organizations. This protection encourages honest open reporting without fear of prosecution."},
+  {q:"In ICAO Annex 13, the 'State of Occurrence' refers to:",opts:["The country where the aircraft is registered","The country where the aircraft was manufactured","The country where the accident happened","The country of the aircraft operator"],ans:2,exp:"State of Occurrence = the country where the accident happened. This state typically leads the investigation. State of Registry = where aircraft is registered. State of Design = where aircraft was designed."},
+  {q:"Fuel exhaustion (running completely out of fuel) during flight is classified as:",opts:["An Accident","An Incident","A Serious Incident","A Significant Incident"],ans:2,exp:"Fuel exhaustion, fuel starvation, or being unable to use available fuel onboard are all Serious Incidents — they indicate high probability of an accident."},
+  {q:"Crew incapacitation during flight is classified as:",opts:["An Accident","An Incident","A Serious Incident","A Significant Incident"],ans:2,exp:"Pilot/crew incapacitation during flight is a Serious Incident — it creates a high probability of accident by removing a critical safety element."},
+  {q:"Which of the following qualifies as Serious Injury?",opts:["Fractured little finger","Fractured nose","Any internal organ injury","First degree burns over 10% body surface"],ans:2,exp:"Any internal organ injury qualifies as Serious Injury. Fractured fingers, toes, and nose do NOT qualify. Burns must be 2nd/3rd degree or >5% BSA to qualify."},
+  {q:"Fire in the cargo compartment that was extinguished before landing is classified as:",opts:["Incident — because it was put out","Serious Incident — regardless of whether it was extinguished","Accident — because fire occurred","Significant Incident"],ans:1,exp:"Fire or smoke in cockpit, cabin, cargo compartment, or engine is a Serious Incident EVEN IF extinguished. The fact it was put out does not change the classification."},
+  {q:"A runway incursion of Severity A is classified as:",opts:["Incident","Significant Incident","Serious Incident","Accident"],ans:2,exp:"Runway Incursion Severity A is classified as a Serious Incident. Severity A is the most serious category of runway incursion, involving collision avoidance action."}
+];
+
+let cur=0,sc=0;
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;
+  document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('qt').textContent=q.q;
+  document.getElementById('qe').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const o=document.getElementById('qo');o.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);o.appendChild(b);
+  });
+}
+function pick(i){
+  const q=qs[cur];
+  document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));
+  document.querySelectorAll('.qopt')[q.ans].classList.add('correct');
+  if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');
+  else sc++;
+  document.getElementById('qlive').textContent='Score: '+sc;
+  const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';
+  document.getElementById('nbtn').style.display='block';
+}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  const rs=document.getElementById('qscore');rs.style.display='block';
+  const pct=Math.round(sc/qs.length*100);
+  document.getElementById('scircle').style.setProperty('--pct',pct+'%');
+  document.getElementById('sinner').textContent=sc+'/'+qs.length;
+  let msg='',sub='';
+  if(pct>=92){msg='🏆 Excellent!';sub='Chapter 20 fully mastered. DGCA ready!';}
+  else if(pct>=76){msg='✈️ Strong!';sub='Great work. Review any classification edge cases.';}
+  else if(pct>=60){msg='📚 Good!';sub='Focus on the 30-day / 48-hr numbers and what IS/IS NOT an accident.';}
+  else{msg='🔄 Keep Revising!';sub='Drill the Classification and Injuries sections — the key exam areas.';}
+  document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;
+}
+function restartQ(){
+  cur=0;sc=0;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qscore').style.display='none';
+  document.getElementById('qlive').textContent='Score: 0';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

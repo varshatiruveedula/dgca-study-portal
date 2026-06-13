@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA CPL – Chapter 11: Search & Rescue (SAR)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070F1C;--bg2:#091526;--bg3:#0B192E;--card:#0E1E34;--card2:#112238;
+--sky:#0EA5E9;--teal:#14B8A6;--green:#22C55E;--amber:#F59E0B;--red:#EF4444;--orange:#F97316;--purple:#A855F7;
+--text:#D4E8FA;--text2:#6C96BE;--text3:#325060;
+--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.11);
+--sky-bg:rgba(14,165,233,.11);--teal-bg:rgba(20,184,166,.11);--green-bg:rgba(34,197,94,.11);
+--amber-bg:rgba(245,158,11,.11);--red-bg:rgba(239,68,68,.11);--orange-bg:rgba(249,115,22,.11);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 0,rgba(14,165,233,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(20,184,166,.10),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(14,165,233,.15);border:1px solid rgba(14,165,233,.4);color:#7DD3FC;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,46px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#7DD3FC;}
+.hero p{color:var(--text2);font-size:13px;position:relative;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;position:relative;margin-top:12px;}
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;}
+.nav-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.nb{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:6px 13px;border-radius:18px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.nb:hover{border-color:var(--sky);color:#7DD3FC;}
+.nb.active{background:var(--sky);border-color:var(--sky);color:#000;}
+.content{max-width:1000px;margin:0 auto;padding:28px 16px 72px;}
+.section{display:none;}.section.active{display:block;}
+.sh{display:flex;align-items:center;gap:13px;margin-bottom:26px;}
+.si{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.st{font-size:21px;font-weight:700;color:#fff;}
+.ss{font-size:12px;color:var(--text3);margin-top:2px;}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ch{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;}
+.stat{background:var(--card2);border:1px solid var(--bdr2);border-radius:12px;padding:14px;text-align:center;transition:transform .17s;}
+.stat:hover{transform:translateY(-2px);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;line-height:1.1;}
+.su{font-size:12px;color:var(--text3);}
+.sl{font-size:12px;color:var(--text2);margin-top:5px;}
+.tw{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:9px 13px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;}
+td{padding:9px 13px;border-bottom:1px solid var(--bdr);color:var(--text2);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.014);}
+.b{display:inline-block;padding:2px 8px;border-radius:18px;font-size:10.5px;font-weight:700;}
+.b-sky{background:var(--sky-bg);color:#7DD3FC;border:1px solid rgba(14,165,233,.25);}
+.b-t{background:var(--teal-bg);color:#5EEAD4;border:1px solid rgba(20,184,166,.25);}
+.b-g{background:var(--green-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.25);}
+.b-a{background:var(--amber-bg);color:#FCD34D;border:1px solid rgba(245,158,11,.25);}
+.b-r{background:var(--red-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.25);}
+.b-o{background:var(--orange-bg);color:#FDB785;border:1px solid rgba(249,115,22,.25);}
+.mem{background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(249,115,22,.07));border:1px solid rgba(245,158,11,.28);border-radius:11px;padding:14px;margin-bottom:14px;display:flex;gap:11px;}
+.mi{font-size:20px;flex-shrink:0;margin-top:2px;}
+.mt{font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:3px;}
+.mf{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#FCD34D;margin-top:5px;padding:6px 11px;background:rgba(0,0,0,.25);border-radius:7px;display:inline-block;}
+.al{border-left:3px solid;border-radius:0 9px 9px 0;padding:11px 14px;margin:10px 0;font-size:13px;}
+.al-sky{background:var(--sky-bg);border-color:var(--sky);}
+.al-a{background:var(--amber-bg);border-color:var(--amber);}
+.al-r{background:var(--red-bg);border-color:var(--red);}
+.al-g{background:var(--green-bg);border-color:var(--green);}
+.al-t{background:var(--teal-bg);border-color:var(--teal);}
+.al strong{color:#FCD34D;}.al-sky strong{color:#7DD3FC;}.al-r strong{color:#FCA5A5;}.al-g strong{color:#86EFAC;}.al-t strong{color:#5EEAD4;}
+.chk-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--card2);border:1px solid var(--bdr);border-radius:8px;font-size:13px;}
+.chklist{display:flex;flex-direction:column;gap:6px;}
+.cy{color:#86EFAC;font-size:14px;flex-shrink:0;margin-top:1px;}
+.cn{color:#FCA5A5;font-size:14px;flex-shrink:0;margin-top:1px;}
+.num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#7DD3FC;}
+/* SIGNAL BLOCKS */
+.sig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:9px;}
+.sig-box{border-radius:12px;padding:16px 12px;text-align:center;border:1px solid;}
+.sig-sym{font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:700;line-height:1.1;margin-bottom:6px;}
+.sig-label{font-size:11.5px;font-weight:600;}
+/* TRAP */
+.trap{background:var(--red-bg);border:1px solid rgba(239,68,68,.22);border-radius:9px;padding:12px;display:flex;gap:10px;margin-bottom:8px;}
+.trap-ico{font-size:17px;flex-shrink:0;}
+.trap-t{font-weight:700;color:#FCA5A5;font-size:11.5px;margin-bottom:3px;}
+.trap-d{font-size:12.5px;color:var(--text2);}
+/* QUIZ */
+.qprog{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+.pbar{flex:1;height:4px;background:var(--bdr2);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--sky),var(--teal));border-radius:2px;transition:width .4s;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:15px;padding:24px;}
+.qq{font-size:15px;font-weight:600;color:#fff;margin-bottom:20px;line-height:1.55;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--card2);border:1px solid var(--bdr2);border-radius:9px;padding:11px 15px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .13s;text-align:left;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:10px;}
+.qopt:hover{border-color:var(--sky);color:#fff;background:var(--sky-bg);}
+.qopt.correct{border-color:var(--green);background:var(--green-bg);color:#86EFAC;pointer-events:none;}
+.qopt.wrong{border-color:var(--red);background:var(--red-bg);color:#FCA5A5;pointer-events:none;}
+.qopt.disabled{pointer-events:none;opacity:.4;}
+.qltr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.qex{margin-top:12px;padding:10px 14px;background:var(--sky-bg);border:1px solid rgba(14,165,233,.2);border-radius:8px;font-size:12.5px;color:#7DD3FC;display:none;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.btn{background:var(--sky);color:#000;border:none;padding:9px 22px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;}
+.btn:hover{background:#38BDF8;}
+.btn-o{background:transparent;border:1px solid var(--bdr2);color:var(--text2);}
+.btn-o:hover{background:rgba(255,255,255,.05);color:#fff;}
+.qscore{display:none;text-align:center;padding:44px 16px;}
+.scircle{width:115px;height:115px;border-radius:50%;background:conic-gradient(var(--sky) var(--pct,0%),var(--bdr2) 0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.sinner{width:85px;height:85px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#7DD3FC;}
+.smsg{font-size:17px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ssub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">🔍 DGCA CPL Exam Prep</div>
+  <h1>Chapter 11 — <span>Search & Rescue</span></h1>
+  <p>Annex 12 · NASARCC · NMSARB · RCC · MRCC · COSPAS-SARSAT · Ground-Air Signals</p>
+  <div class="hero-chips">
+    <span class="chip">Annex 12</span><span class="chip">SAR 24 hrs</span>
+    <span class="chip">NASARCC = Land</span><span class="chip">NMSARB = Ocean</span>
+    <span class="chip">4 RCCs · 3 MRCCs</span><span class="chip">406 MHz COSPAS</span>
+    <span class="chip">V X N Y ↑</span><span class="chip">LLL LL XX NN</span>
+    <span class="chip">Blue Streamers</span><span class="chip">SAR Agreement = Bhutan</span>
+  </div>
+</div>
+<div class="nav-bar">
+  <button class="nb active" onclick="show('overview')">📡 Overview</button>
+  <button class="nb" onclick="show('india')">🇮🇳 India SAR</button>
+  <button class="nb" onclick="show('signals')">📶 Signals</button>
+  <button class="nb" onclick="show('cospas')">🛰 COSPAS-SARSAT</button>
+  <button class="nb" onclick="show('lights')">💡 Light Signals</button>
+  <button class="nb" onclick="show('master')">⭐ Master Ref</button>
+  <button class="nb" onclick="show('quiz')">🧠 Quiz</button>
+</div>
+<div class="content">
+
+<!-- ===== OVERVIEW ===== -->
+<div class="section active" id="section-overview">
+  <div class="sh">
+    <div class="si" style="background:var(--sky-bg);border:1px solid rgba(14,165,233,.3);">🆘</div>
+    <div><div class="st">What is SAR? — Annex 12</div><div class="ss">Purpose · SRR · Equipment · Pilot actions at scene</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>SAR Purpose (Annex 12)</div>
+    <div class="g2">
+      <div class="chklist">
+        <div class="chk-item"><span class="cy">✓</span>Locate persons/aircraft in distress</div>
+        <div class="chk-item"><span class="cy">✓</span>Provide assistance</div>
+        <div class="chk-item"><span class="cy">✓</span>Rescue survivors</div>
+        <div class="chk-item"><span class="cy">✓</span>Available <strong>24 hours a day</strong></div>
+      </div>
+      <div>
+        <div class="al al-sky"><strong>SRR = Search and Rescue Region</strong><br>Designated area where SAR service is provided.</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cn">✗</span>SRRs shall <strong>NOT overlap</strong></div>
+          <div class="chk-item"><span class="cy">✓</span>Adjacent SRRs must be <strong>contiguous</strong> (no gaps)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>SAR Frequencies</div>
+    <div class="g4">
+      <div class="stat" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);">
+        <div class="sn" style="color:#FCA5A5;">121.5</div><div class="su">MHz</div><div class="sl">Aeronautical Emergency</div>
+      </div>
+      <div class="stat">
+        <div class="sn" style="color:#7DD3FC;">2182</div><div class="su">kHz</div><div class="sl">Maritime Emergency</div>
+      </div>
+      <div class="stat">
+        <div class="sn" style="color:#7DD3FC;">4125</div><div class="su">kHz</div><div class="sl">Maritime SAR</div>
+      </div>
+      <div class="stat" style="border-color:rgba(20,184,166,.4);background:rgba(20,184,166,.08);">
+        <div class="sn" style="color:#5EEAD4;">406</div><div class="su">MHz</div><div class="sl">COSPAS-SARSAT Satellite</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Survival Equipment</div>
+    <div class="g2">
+      <div style="background:rgba(59,130,246,.08);border:2px solid rgba(59,130,246,.3);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:48px;margin-bottom:8px;">🔵</div>
+        <div style="font-size:18px;font-weight:700;color:#93C5FD;margin-bottom:4px;">BLUE STREAMERS</div>
+        <div style="font-size:13px;color:var(--text2);">Mark all dropped survival packages</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px;">(food + water = basic survival kit)</div>
+      </div>
+      <div>
+        <div class="mem" style="margin-bottom:10px;"><div class="mi">🧠</div><div><div class="mt">Blue Memory</div><div class="mf">Blue = Basic survival kit</div></div></div>
+        <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">Maritime SAR aircraft must carry:</div>
+        <div class="chk-item"><span class="cy">✓</span><strong>International Code of Signals</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Pilot Actions at Accident Scene</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#86EFAC;margin-bottom:8px;">If pilot sees craft in distress — MUST:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-g">1</span>Keep distress craft in sight</div>
+          <div class="chk-item"><span class="b b-g">2</span>Determine position</div>
+          <div class="chk-item"><span class="b b-g">3</span>Inform RCC / ATS</div>
+        </div>
+        <div class="al al-a" style="margin-top:10px;"><strong>First aircraft (non-SAR) at scene:</strong> Takes charge of on-scene operations until SAR aircraft arrives.</div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#86EFAC;margin-bottom:8px;">When distress transmission intercepted:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="cy">→</span>Acknowledge distress message</div>
+          <div class="chk-item"><span class="cy">→</span>Record position</div>
+          <div class="chk-item"><span class="cy">→</span>Take bearing</div>
+          <div class="chk-item"><span class="cy">→</span>Inform RCC / ATS</div>
+          <div class="chk-item"><span class="cy">→</span>Proceed to position if appropriate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INDIA SAR ===== -->
+<div class="section" id="section-india">
+  <div class="sh">
+    <div class="si" style="background:var(--orange-bg);border:1px solid rgba(249,115,22,.3);">🇮🇳</div>
+    <div><div class="st">India SAR Organisation</div><div class="ss">NASARCC · NMSARB · RCC (AAI) · MRCC (Coast Guard) · Bhutan Agreement</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Over Land — NASARCC</div>
+      <div style="background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.3);border-radius:12px;padding:16px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:#7DD3FC;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;">NASARCC</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">National Aeronautical Search &amp; Rescue Coordination Committee</div>
+        <div style="font-size:13px;color:var(--text2);">Chairman: <strong style="color:#FCD34D;">Secretary, Ministry of Civil Aviation</strong></div>
+      </div>
+      <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">4 RCCs (AAI) — at FIRs:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <span class="b b-sky">Delhi FIR</span><span class="b b-sky">Mumbai FIR</span>
+        <span class="b b-sky">Kolkata FIR</span><span class="b b-sky">Chennai FIR</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--teal)"></span>Over Oceans — NMSARB</div>
+      <div style="background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.3);border-radius:12px;padding:16px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:#5EEAD4;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;">NMSARB</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">National Maritime SAR Board</div>
+        <div style="font-size:13px;color:var(--text2);">Chairman: <strong style="color:#FCD34D;">Director General, Indian Coast Guard</strong></div>
+      </div>
+      <div style="font-size:12.5px;font-weight:700;color:#5EEAD4;margin-bottom:8px;">3 MRCCs (Coast Guard):</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <span class="b b-t">Mumbai</span><span class="b b-t">Chennai</span><span class="b b-t">Port Blair</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Quick Comparison Table</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">Item</th><th style="color:#7DD3FC;">NASARCC (Land)</th><th style="color:#5EEAD4;">NMSARB (Ocean)</th></tr></thead>
+        <tbody>
+          <tr><td>Chairman</td><td>Secretary, MCA</td><td>DG, Indian Coast Guard</td></tr>
+          <tr><td>Coordination Units</td><td>RCCs (AAI)</td><td>MRCCs (Coast Guard)</td></tr>
+          <tr><td>Number</td><td>4 RCCs</td><td>3 MRCCs</td></tr>
+          <tr><td>Locations</td><td>Delhi · Mumbai · Kolkata · Chennai</td><td>Mumbai · Chennai · Port Blair</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>SAR Agreement & Key Fact</div>
+    <div class="g2">
+      <div style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.3);border-radius:11px;padding:16px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">🇧🇹</div>
+        <div style="font-size:16px;font-weight:700;color:#FDB785;margin-bottom:3px;">Bhutan</div>
+        <div style="font-size:12.5px;color:var(--text2);">India has SAR arrangement with Bhutan only</div>
+      </div>
+      <div class="mem" style="margin:0;align-self:center;"><div class="mi">🧠</div><div><div class="mt">India SAR Memory</div><div class="mf">Land = NASARCC (Secy MCA)<br>Ocean = NMSARB (DG CoastGuard)<br>RCCs = 4 FIRs · MRCCs = 3 cities</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SIGNALS ===== -->
+<div class="section" id="section-signals">
+  <div class="sh">
+    <div class="si" style="background:var(--green-bg);border:1px solid rgba(34,197,94,.3);">📶</div>
+    <div><div class="st">Ground-Air Visual Signals</div><div class="ss">Survivors · Rescue Units · Aircraft directing ships · Day/Night acknowledgement</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--green)"></span>Survivors — Ground-Air Signals (Most Asked)</div>
+    <div class="al al-r" style="margin-bottom:14px;"><strong>DGCA MCQ FAVOURITE:</strong> These symbols appear directly in exam questions. Ground symbols minimum size: <strong>2.5 m (8 ft)</strong>.</div>
+    <div class="sig-grid">
+      <div class="sig-box" style="background:rgba(14,165,233,.08);border-color:rgba(14,165,233,.4);">
+        <div class="sig-sym" style="color:#7DD3FC;">V</div>
+        <div class="sig-label" style="color:#7DD3FC;">Require Assistance</div>
+      </div>
+      <div class="sig-box" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.4);">
+        <div class="sig-sym" style="color:#FCA5A5;">X</div>
+        <div class="sig-label" style="color:#FCA5A5;">Require Medical Assistance</div>
+      </div>
+      <div class="sig-box" style="background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.4);">
+        <div class="sig-sym" style="color:#D8B4FE;">N</div>
+        <div class="sig-label" style="color:#D8B4FE;">No / Negative</div>
+      </div>
+      <div class="sig-box" style="background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.4);">
+        <div class="sig-sym" style="color:#86EFAC;">Y</div>
+        <div class="sig-label" style="color:#86EFAC;">Yes / Affirmative</div>
+      </div>
+      <div class="sig-box" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.4);">
+        <div class="sig-sym" style="color:#FCD34D;">↑</div>
+        <div class="sig-label" style="color:#FCD34D;">Proceeding In This Direction</div>
+      </div>
+    </div>
+    <div class="mem" style="margin-top:12px;margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Survivor Signal Memory</div><div class="mf">V X N Y ↑ → Assistance · Medical · No · Yes · Direction</div></div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>Rescue Units — Ground-Air Signals</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(20,184,166,.12);"><tr><th style="color:#5EEAD4;">Symbol</th><th style="color:#5EEAD4;">Meaning</th><th style="color:#5EEAD4;">Memory</th></tr></thead>
+        <tbody>
+          <tr><td><span class="num" style="font-size:20px;">LLL</span></td><td><strong>Operation Completed</strong></td><td>Three L's = all Letters done</td></tr>
+          <tr><td><span class="num" style="font-size:20px;">LL</span></td><td><strong>We found ALL personnel</strong></td><td>LL = all Lives Located</td></tr>
+          <tr><td><span class="num" style="font-size:20px;">✚✚</span></td><td><strong>Found ONLY SOME personnel</strong></td><td>Plus/cross = medical cross = some found</td></tr>
+          <tr><td><span class="num" style="font-size:20px;">XX</span></td><td><strong>Unable to continue — returning to base</strong></td><td>X = cancelled/stopped</td></tr>
+          <tr><td><span class="num" style="font-size:20px;">→→</span></td><td><strong>Aircraft is in this direction</strong></td><td>Arrows point toward aircraft</td></tr>
+          <tr><td><span class="num" style="font-size:20px;">NN</span></td><td><strong>Nothing found — continuing search</strong></td><td>NN = Nothing, Not done</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mem" style="margin-bottom:0;"><div class="mi">🧠</div><div><div class="mt">Rescue Unit Memory</div><div class="mf">LLL=done · LL=all found · ✚✚=some · XX=quit · NN=nothing found</div></div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--sky)"></span>Aircraft Directing Surface Craft to Distress</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#7DD3FC;margin-bottom:8px;">Signal: "Follow me to distress location"</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-sky">1</span>Circle surface craft at least once</div>
+          <div class="chk-item"><span class="b b-sky">2</span>Cross ahead at low altitude while:</div>
+          <div class="chk-item" style="padding-left:24px;"><span class="cy">→</span>Rocking wings, OR</div>
+          <div class="chk-item" style="padding-left:24px;"><span class="cy">→</span>Opening/closing throttle, OR</div>
+          <div class="chk-item" style="padding-left:24px;"><span class="cy">→</span>Changing propeller pitch</div>
+          <div class="chk-item"><span class="b b-sky">3</span>Fly in direction of distress</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12.5px;font-weight:700;color:#FCA5A5;margin-bottom:8px;">Signal: "Assistance no longer required"</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-r">1</span>Cross the wake of ship close astern</div>
+          <div class="chk-item"><span class="b b-r">2</span>Rock wings</div>
+        </div>
+        <div style="font-size:12.5px;font-weight:700;color:#86EFAC;margin-top:12px;margin-bottom:8px;">Surface craft replies:</div>
+        <div class="chklist">
+          <div class="chk-item"><span class="b b-g">Understood</span>Code pennant (red &amp; white) <strong>OR</strong> Morse T</div>
+          <div class="chk-item"><span class="b b-r">Cannot comply</span>Flag N (blue &amp; white) <strong>OR</strong> Morse N</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>Air-to-Ground Acknowledgement</div>
+    <div class="g2">
+      <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">☀️</div>
+        <div style="font-size:16px;font-weight:700;color:#FCD34D;margin-bottom:4px;">DAYTIME</div>
+        <div style="font-size:15px;color:#fff;font-weight:600;">Rock Wings</div>
+      </div>
+      <div style="background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.3);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">🌙</div>
+        <div style="font-size:16px;font-weight:700;color:#7DD3FC;margin-bottom:4px;">NIGHTTIME</div>
+        <div style="font-size:15px;color:#fff;font-weight:600;">Flash Landing Lights × 2</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px;">If no landing lights → Flash Nav Lights × 2</div>
+      </div>
+    </div>
+    <div class="al al-r" style="margin-top:10px;margin-bottom:0;"><strong>No reply = Signal NOT understood</strong></div>
+  </div>
+</div>
+
+<!-- ===== COSPAS-SARSAT ===== -->
+<div class="section" id="section-cospas">
+  <div class="sh">
+    <div class="si" style="background:var(--teal-bg);border:1px solid rgba(20,184,166,.3);">🛰</div>
+    <div><div class="st">COSPAS-SARSAT System</div><div class="ss">Satellite-aided SAR · 406 MHz · 5 km accuracy · India LUT / INMCC</div></div>
+  </div>
+  <div class="g4" style="margin-bottom:14px;">
+    <div class="stat" style="border-color:rgba(20,184,166,.5);background:rgba(20,184,166,.09);">
+      <div class="sn" style="color:#5EEAD4;">406</div><div class="su">MHz</div><div class="sl">ELT/EPIRB frequency used by COSPAS-SARSAT</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#7DD3FC;">≈5 km</div><div class="su">accuracy</div><div class="sl">Position fix precision</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#FCD34D;font-size:16px;">Bangalore<br>Lucknow</div><div class="sl">India LUT (Local User Terminal) stations</div>
+    </div>
+    <div class="stat">
+      <div class="sn" style="color:#FDB785;font-size:16px;">INMCC<br>Bangalore</div><div class="sl">Indian Mission Control Centre</div>
+    </div>
+  </div>
+  <div class="mem"><div class="mi">🧠</div><div><div class="mt">COSPAS-SARSAT Memory</div><div class="mf">406 MHz · ~5 km · LUT at Bangalore + Lucknow · INMCC at Bangalore</div></div></div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--teal)"></span>How COSPAS-SARSAT Works — Step by Step</div>
+    <div class="chklist">
+      <div class="chk-item" style="border-color:rgba(20,184,166,.3);background:rgba(20,184,166,.06);">
+        <span class="b b-t">1</span><div>ELT/EPIRB transmits on <strong>406 MHz</strong> when activated</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(14,165,233,.3);background:rgba(14,165,233,.06);">
+        <span class="b b-sky">2</span><div>Satellite receives signal and forwards to LUT (Local User Terminal)</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);">
+        <span class="b b-a">3</span><div>LUT passes data to Mission Control Centre (MCC)</div>
+      </div>
+      <div class="chk-item" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);">
+        <span class="b b-g">4</span><div>MCC alerts RCC — SAR operation launched</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LIGHT SIGNALS ===== -->
+<div class="section" id="section-lights">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">💡</div>
+    <div><div class="st">Signalling Lamp — Light Signals</div><div class="ss">ATC to aircraft by light gun when radio fails</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--amber)"></span>ATC Light Signals to Aircraft</div>
+    <div class="tw" style="margin:0;">
+      <table>
+        <thead style="background:rgba(245,158,11,.12);"><tr><th style="color:#FCD34D;">Signal</th><th style="color:#FCD34D;">Aircraft in FLIGHT</th><th style="color:#FCD34D;">Aircraft on GROUND</th></tr></thead>
+        <tbody>
+          <tr><td><span class="b b-g">Steady Green</span></td><td>Cleared to land</td><td>Cleared for take-off</td></tr>
+          <tr><td><span class="b b-r">Steady Red</span></td><td>Continue circling — do not land</td><td>Stop</td></tr>
+          <tr><td><span class="b b-g">Green Flashes</span></td><td>Return for landing</td><td>Taxi</td></tr>
+          <tr><td><span class="b b-r">Red Flashes</span></td><td>Aerodrome unsafe — do not land</td><td>Taxi clear of landing area</td></tr>
+          <tr><td><span class="b" style="background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);">White Flashes</span></td><td>Land at this aerodrome &amp; proceed to apron</td><td>Return to starting point</td></tr>
+          <tr><td><span class="b b-r">Red Pyrotechnic</span></td><td>Do not land — wait for permission</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MASTER REF ===== -->
+<div class="section" id="section-master">
+  <div class="sh">
+    <div class="si" style="background:var(--amber-bg);border:1px solid rgba(245,158,11,.3);">⭐</div>
+    <div><div class="st">Master Reference & Exam Traps</div><div class="ss">All key numbers, signals and critical facts in one place</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--sky)"></span>Critical One-Liners</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(14,165,233,.12);"><tr><th style="color:#7DD3FC;">DGCA Question</th><th style="color:#7DD3FC;">Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Emergency frequency</td><td><span class="num">121.5 MHz</span></td></tr>
+            <tr><td>COSPAS-SARSAT frequency</td><td><span class="num">406 MHz</span></td></tr>
+            <tr><td>COSPAS accuracy</td><td><span class="num">~5 km</span></td></tr>
+            <tr><td>Survival streamer colour</td><td><span class="num">Blue</span></td></tr>
+            <tr><td>Signal size minimum</td><td><span class="num">2.5 m</span></td></tr>
+            <tr><td>India SAR land chairman</td><td>Secy, MCA</td></tr>
+            <tr><td>India SAR ocean chairman</td><td>DG, Coast Guard</td></tr>
+            <tr><td>RCCs in India</td><td>4 (Delhi/Mumbai/Kolkata/Chennai)</td></tr>
+            <tr><td>MRCCs in India</td><td>3 (Mumbai/Chennai/Port Blair)</td></tr>
+            <tr><td>India SAR agreement</td><td>Bhutan</td></tr>
+            <tr><td>INMCC location</td><td>Bangalore</td></tr>
+            <tr><td>India LUT stations</td><td>Bangalore + Lucknow</td></tr>
+            <tr><td>Day acknowledgement</td><td>Rock wings</td></tr>
+            <tr><td>Night acknowledgement</td><td>Flash landing lights × 2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="pip" style="background:var(--green)"></span>All SAR Signals Quick Reference</div>
+      <div class="tw" style="margin:0;">
+        <table>
+          <thead style="background:rgba(34,197,94,.12);"><tr><th style="color:#86EFAC;">Symbol</th><th style="color:#86EFAC;">Type</th><th style="color:#86EFAC;">Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><strong style="font-size:18px;color:#7DD3FC;">V</strong></td><td>Survivors</td><td>Require Assistance</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FCA5A5;">X</strong></td><td>Survivors</td><td>Require Medical Assistance</td></tr>
+            <tr><td><strong style="font-size:18px;color:#D8B4FE;">N</strong></td><td>Survivors</td><td>No / Negative</td></tr>
+            <tr><td><strong style="font-size:18px;color:#86EFAC;">Y</strong></td><td>Survivors</td><td>Yes / Affirmative</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FCD34D;">↑</strong></td><td>Survivors</td><td>Proceeding In This Direction</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">LLL</strong></td><td>Rescue Unit</td><td>Operation Completed</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">LL</strong></td><td>Rescue Unit</td><td>Found ALL personnel</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">✚✚</strong></td><td>Rescue Unit</td><td>Found SOME personnel</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">XX</strong></td><td>Rescue Unit</td><td>Returning to base</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">→→</strong></td><td>Rescue Unit</td><td>Aircraft in this direction</td></tr>
+            <tr><td><strong style="font-size:18px;color:#FDB785;">NN</strong></td><td>Rescue Unit</td><td>Nothing found, continuing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="pip" style="background:var(--red)"></span>⚠️ Top DGCA Exam Traps</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">V vs X — Most Confused</div><div class="trap-d">V = Require Assistance (general). X = Require MEDICAL Assistance. X looks like a medical cross.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">LL vs LLL</div><div class="trap-d">LL = Found ALL personnel. LLL = Operation Completed. These are different — don't confuse!</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">NASARCC Chairman vs NMSARB Chairman</div><div class="trap-d">NASARCC = Secretary, Ministry of Civil Aviation. NMSARB = DG, Indian Coast Guard. Common exam mix-up.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Night acknowledgement — no landing lights</div><div class="trap-d">Normal = Flash landing lights × 2. If NO landing lights → Flash NAVIGATION lights × 2.</div></div></div>
+      <div class="trap"><div class="trap-ico">🪤</div><div><div class="trap-t">Mumbai and Chennai appear in BOTH lists</div><div class="trap-d">Mumbai + Chennai = both RCC and MRCC locations. Port Blair = MRCC only. Delhi + Kolkata = RCC only.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="section-quiz">
+  <div class="sh">
+    <div class="si" style="background:var(--sky-bg);border:1px solid rgba(14,165,233,.3);">🧠</div>
+    <div><div class="st">Practice Quiz</div><div class="ss">20 DGCA-style questions covering all Chapter 11 topics</div></div>
+  </div>
+  <div id="qmain">
+    <div class="qprog">
+      <span style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;" id="qn">Q 1 / 20</span>
+      <div class="pbar"><div class="pfill" id="pf" style="width:5%"></div></div>
+      <span id="qlive" style="font-size:11.5px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Score: 0</span>
+    </div>
+    <div class="qcard"><div class="qq" id="qt"></div><div class="qopts" id="qo"></div><div class="qex" id="qe"></div></div>
+    <div class="qnav">
+      <button class="btn btn-o" onclick="restartQ()">↩ Restart</button>
+      <button class="btn" id="nbtn" onclick="nextQ()" style="display:none;">Next →</button>
+    </div>
+  </div>
+  <div class="qscore" id="qscore">
+    <div class="scircle" id="scircle"><div class="sinner" id="sinner">0/20</div></div>
+    <div class="smsg" id="smsg"></div><div class="ssub" id="ssub"></div>
+    <button class="btn" onclick="restartQ()">Restart Quiz</button>
+  </div>
+</div>
+
+</div><!-- end content -->
+<script>
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+id).classList.add('active');document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+const qs=[
+{q:"What ICAO Annex covers Search and Rescue?",opts:["Annex 9","Annex 11","Annex 12","Annex 13"],ans:2,exp:"Annex 12 = Search and Rescue (SAR). Annex 11 = ATS. Annex 9 = Facilitation. Annex 13 = Accident Investigation."},
+{q:"NASARCC handles SAR over which area?",opts:["Oceanic areas","Land areas","Both land and ocean","Mountainous areas only"],ans:1,exp:"NASARCC (National Aeronautical SAR Coordination Committee) handles SAR over LAND areas. NMSARB handles oceanic/maritime."},
+{q:"Who chairs NMSARB?",opts:["Secretary, Ministry of Civil Aviation","Director General, DGCA","Director General, Indian Coast Guard","Director, AAI"],ans:2,exp:"NMSARB chairman = DG, Indian Coast Guard. NASARCC chairman = Secretary, Ministry of Civil Aviation."},
+{q:"How many RCCs (Rescue Coordination Centres) does India have?",opts:["3","4","5","6"],ans:1,exp:"India has 4 RCCs at: Delhi FIR, Mumbai FIR, Kolkata FIR, Chennai FIR. Coordinated by AAI."},
+{q:"India's MRCCs (Maritime RCCs) are located at:",opts:["Delhi, Mumbai, Chennai","Mumbai, Chennai, Port Blair","Kolkata, Chennai, Mumbai","Delhi, Kolkata, Port Blair"],ans:1,exp:"3 MRCCs operated by Indian Coast Guard: Mumbai, Chennai, Port Blair."},
+{q:"What colour streamers mark dropped survival packages?",opts:["Red","Orange","Yellow","Blue"],ans:3,exp:"BLUE streamers mark dropped survival packages. Memory: Blue = Basic survival kit (food + water)."},
+{q:"Ground signal 'V' from survivors means:",opts:["Require Medical Assistance","Yes / Affirmative","Require Assistance","No / Negative"],ans:2,exp:"V = Require Assistance (general). X = Require Medical Assistance. Very commonly confused."},
+{q:"Ground signal 'X' from survivors means:",opts:["Require Assistance","Require Medical Assistance","No / Negative","Operation Completed"],ans:1,exp:"X = Require Medical Assistance. V = Require Assistance (general). X looks like a medical cross."},
+{q:"Rescue unit signal 'LLL' means:",opts:["Found all personnel","Nothing found","Unable to continue","Operation completed"],ans:3,exp:"LLL = Operation Completed. LL = Found all personnel. ✚✚ = Found only some."},
+{q:"Rescue unit signal 'LL' means:",opts:["Operation completed","Found ALL personnel","Found some personnel","Returning to base"],ans:1,exp:"LL = Found ALL personnel. LLL = Operation Completed. Don't confuse LL and LLL."},
+{q:"Rescue unit signal 'NN' means:",opts:["Negative — cannot comply","Nothing found, continuing search","Not navigable","Returning to base"],ans:1,exp:"NN = Nothing found, continuing search. XX = Unable to continue, returning to base."},
+{q:"An aircraft acknowledges a ground signal during the day by:",opts:["Flashing landing lights twice","Rocking its wings","Firing a green flare","Transmitting on 121.5"],ans:1,exp:"Day acknowledgement = Rock wings. Night = Flash landing lights twice (or nav lights if no landing lights)."},
+{q:"COSPAS-SARSAT operates on which frequency?",opts:["121.5 MHz","243 MHz","500 kHz","406 MHz"],ans:3,exp:"406 MHz is the COSPAS-SARSAT satellite-monitored ELT frequency."},
+{q:"INMCC (Indian Mission Control Centre) for COSPAS-SARSAT is at:",opts:["Delhi","Mumbai","Lucknow","Bangalore"],ans:3,exp:"INMCC is at Bangalore. India's LUT (Local User Terminal) stations are at Bangalore and Lucknow."},
+{q:"India has a SAR agreement with:",opts:["Nepal","Bhutan","Sri Lanka","Bangladesh"],ans:1,exp:"India has a SAR arrangement with Bhutan only."},
+{q:"Minimum size of ground signals is:",opts:["1.5 m","2.0 m","2.5 m","3.0 m"],ans:2,exp:"Ground symbols shall be at least 2.5 metres (8 feet) long."},
+{q:"SRRs (Search and Rescue Regions) must:",opts:["Overlap for complete coverage","Be non-overlapping and contiguous with adjacent SRRs","Be separated by buffer zones","Be identical in size"],ans:1,exp:"SRRs shall NOT overlap, and adjacent SRRs must be contiguous (no gaps between them)."},
+{q:"An aircraft indicates 'follow me to distress' by crossing ahead at low altitude while:",opts:["Firing a flare","Transmitting MAYDAY","Rocking wings OR changing throttle/prop pitch","Turning on all lights"],ans:2,exp:"Rock wings OR open/close throttle OR change propeller pitch while crossing ahead = 'follow me to distress'."},
+{q:"COSPAS-SARSAT position accuracy is approximately:",opts:["100 m","1 km","5 km","20 km"],ans:2,exp:"COSPAS-SARSAT provides position accuracy of approximately 5 km."},
+{q:"Night air-to-ground acknowledgement when no landing lights:",opts:["Rock wings","Fire a red flare","Flash navigation lights twice","Broadcast on 121.5"],ans:2,exp:"No landing lights → Flash navigation lights twice. With landing lights → Flash landing lights twice."}
+];
+let cur=0,sc=0;
+function renderQ(){const q=qs[cur];document.getElementById('qn').textContent='Q '+(cur+1)+' / '+qs.length;document.getElementById('pf').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('qt').textContent=q.q;document.getElementById('qe').style.display='none';document.getElementById('nbtn').style.display='none';const o=document.getElementById('qo');o.innerHTML='';['A','B','C','D'].forEach((l,i)=>{const b=document.createElement('button');b.className='qopt';b.innerHTML=`<span class="qltr">${l}</span>${q.opts[i]}`;b.onclick=()=>pick(i);o.appendChild(b);});}
+function pick(i){const q=qs[cur];document.querySelectorAll('.qopt').forEach(b=>b.classList.add('disabled'));document.querySelectorAll('.qopt')[q.ans].classList.add('correct');if(i!==q.ans)document.querySelectorAll('.qopt')[i].classList.add('wrong');else sc++;document.getElementById('qlive').textContent='Score: '+sc;const e=document.getElementById('qe');e.textContent='💡 '+q.exp;e.style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){cur++;if(cur>=qs.length)showResult();else renderQ();}
+function showResult(){document.getElementById('qmain').style.display='none';const rs=document.getElementById('qscore');rs.style.display='block';const pct=Math.round(sc/qs.length*100);document.getElementById('scircle').style.setProperty('--pct',pct+'%');document.getElementById('sinner').textContent=sc+'/'+qs.length;let msg,sub;if(pct>=90){msg='🏆 Excellent!';sub='Chapter 11 mastered. DGCA ready!';}else if(pct>=75){msg='✅ Strong!';sub='Review any missed signals.';}else if(pct>=60){msg='📚 Good!';sub='Drill the signal tables and India SAR org.';}else{msg='🔄 Keep Revising!';sub='Focus on COSPAS numbers and ground signals.';}document.getElementById('smsg').textContent=msg;document.getElementById('ssub').textContent=sub;}
+function restartQ(){cur=0;sc=0;document.getElementById('qmain').style.display='block';document.getElementById('qscore').style.display='none';document.getElementById('qlive').textContent='Score: 0';renderQ();}
+renderQ();
+</script>
+</body>
+</html>

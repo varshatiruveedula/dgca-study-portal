@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA &mdash; Human Performance &amp; Limitations &mdash; Sample Paper 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;--bg2:#08111F;--bg3:#0A1628;--card:#0D1A2E;--card2:#101E38;
+  --teal:#14B8A6;--sky:#0EA5E9;--green:#22C55E;--amber:#F59E0B;--red:#EF4444;
+  --text:#D0E6FA;--text2:#6688B4;--text3:#2C4860;
+  --bdr:rgba(255,255,255,.055);--bdr2:rgba(255,255,255,.11);
+  --tl-bg:rgba(20,184,166,.11);--gn-bg:rgba(34,197,94,.11);
+  --rd-bg:rgba(239,68,68,.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+.hero{background:var(--bg2);border-bottom:1px solid var(--bdr2);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(20,184,166,.14),transparent 55%),radial-gradient(ellipse at 80% 0,rgba(14,165,233,.10),transparent 55%);}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.45);color:#5EEAD4;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,42px);font-weight:700;color:#fff;margin-bottom:8px;position:relative;}
+.hero h1 span{color:#2DD4BF;}
+.hero-sub{color:var(--text2);font-size:13px;position:relative;margin-bottom:14px;}
+.meta{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;position:relative;}
+.mc{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--text2);font-size:11px;font-weight:600;padding:4px 12px;border-radius:9px;}
+.mc strong{color:var(--text);}
+.stats-bar{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:12px 24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
+.sb{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bdr);border-radius:9px;padding:8px 14px;}
+.sb-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;}
+.sb-lbl{font-size:11px;color:var(--text3);}
+.timer-wrap{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.22);border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;}
+.timer-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#FCA5A5;min-width:54px;}
+.timer-lbl{font-size:11px;color:var(--text2);}
+.content{max-width:820px;margin:0 auto;padding:24px 16px 80px;}
+.prog-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:11px 16px;margin-bottom:18px;}
+.pbar{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:3px;transition:width .4s;}
+.pctr{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2);flex-shrink:0;white-space:nowrap;}
+.qcard{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:26px;margin-bottom:12px;}
+.qnum{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.qtext{font-size:15.5px;font-weight:600;color:#fff;line-height:1.65;margin-bottom:22px;}
+.qopts{display:flex;flex-direction:column;gap:9px;}
+.qopt{background:var(--card2);border:1.5px solid var(--bdr2);border-radius:10px;padding:13px 16px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .13s;display:flex;align-items:flex-start;gap:12px;font-family:'Space Grotesk',sans-serif;line-height:1.55;text-align:left;}
+.qopt:hover:not(.dis){border-color:var(--teal);color:#fff;background:var(--tl-bg);}
+.qopt.cor{border-color:var(--green)!important;background:var(--gn-bg)!important;color:#86EFAC!important;}
+.qopt.wrg{border-color:var(--red)!important;background:var(--rd-bg)!important;color:#FCA5A5!important;}
+.qopt.dis{pointer-events:none;}
+.qlbl{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.qopt.cor .qlbl{background:rgba(34,197,94,.25);border-color:var(--green);color:#86EFAC;}
+.qopt.wrg .qlbl{background:rgba(239,68,68,.25);border-color:var(--red);color:#FCA5A5;}
+.qexp{display:none;margin-top:14px;padding:13px 16px;background:var(--tl-bg);border:1px solid rgba(20,184,166,.25);border-radius:10px;font-size:13px;color:#5EEAD4;line-height:1.65;}
+.qexp-h{font-weight:700;color:#2DD4BF;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.btn{background:var(--teal);color:#000;border:none;padding:11px 26px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .13s;}
+.btn:hover{background:#2DD4BF;}
+.btn-ghost{background:transparent;border:1px solid var(--bdr2);color:var(--text2);padding:10px 18px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--teal);color:#5EEAD4;}
+.dis-btn{opacity:.35;pointer-events:none;}
+.score-wrap{text-align:center;padding:36px 12px;}
+.score-ring{width:148px;height:148px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--teal) var(--p,0%),rgba(255,255,255,.05) 0);margin:0 auto 22px;}
+.score-inner{width:110px;height:110px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#2DD4BF;}
+.score-pct{font-size:12px;color:var(--text3);margin-top:2px;}
+.score-grade{font-size:24px;font-weight:700;color:#fff;margin-bottom:6px;}
+.score-msg{font-size:14px;color:var(--text2);margin-bottom:28px;}
+.score-table{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:18px;max-width:420px;margin:0 auto 24px;}
+.str{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdr);}
+.str:last-child{border-bottom:none;}
+.stl{font-size:13px;color:var(--text2);}
+.stv{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;}
+.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.review-q{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:20px;margin-bottom:12px;}
+.review-q.correct{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.04);}
+.review-q.wrong{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.04);}
+.review-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;margin-bottom:8px;}
+.review-badge.c{background:var(--gn-bg);color:#86EFAC;border:1px solid rgba(34,197,94,.3);}
+.review-badge.w{background:var(--rd-bg);color:#FCA5A5;border:1px solid rgba(239,68,68,.3);}
+.review-qtext{font-size:14px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.55;}
+.review-opts{display:flex;flex-direction:column;gap:5px;}
+.review-opt{font-size:13px;padding:8px 12px;border-radius:8px;display:flex;gap:8px;}
+.review-opt.cor{background:var(--gn-bg);color:#86EFAC;}
+.review-opt.wrg-sel{background:var(--rd-bg);color:#FCA5A5;}
+.review-opt.dim{color:var(--text3);}
+.review-exp{margin-top:10px;padding:10px 14px;background:var(--tl-bg);border:1px solid rgba(20,184,166,.2);border-radius:8px;font-size:12.5px;color:#5EEAD4;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+@media(max-width:540px){.qtext{font-size:14px;}.qopt{font-size:13px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">&#129504; DGCA CPL &#8212; Sample Paper 2</div>
+  <h1>Human Performance <span>&amp; Limitations &#8212; Set 2</span></h1>
+  <div class="hero-sub">Official Sample Paper &#183; Converted to Interactive Mock Test</div>
+  <div class="meta">
+    <span class="mc"><strong>Questions:</strong> 30</span>
+    <span class="mc"><strong>Time:</strong> 30 minutes</span>
+    <span class="mc"><strong>Pass Mark:</strong> 75% (23/30)</span>
+    <span class="mc"><strong>Topics:</strong> Physiology &#183; Gas Laws &#183; CRM &#183; Memory &#183; Automation &#183; G-Forces &#183; Arousal</span>
+    <span class="mc"><strong>No negative marking</strong></span>
+  </div>
+</div>
+
+<div class="stats-bar" id="statsbar">
+  <div class="sb"><div class="sb-val" style="color:#2DD4BF;" id="stat-q">1 / 30</div><div class="sb-lbl">Question</div></div>
+  <div class="timer-wrap"><span style="font-size:18px;">&#9200;</span><div><div class="timer-val" id="tval">30:00</div><div class="timer-lbl">Time Left</div></div></div>
+  <div class="sb"><div class="sb-val" style="color:#86EFAC;" id="stat-s">0</div><div class="sb-lbl">Correct</div></div>
+  <div class="sb"><div class="sb-val" style="color:#FCA5A5;" id="stat-w">0</div><div class="sb-lbl">Wrong</div></div>
+</div>
+
+<div class="content">
+<div id="quiz-mode">
+  <div class="prog-row">
+    <div class="pctr" id="pctr">Q 1 / 30</div>
+    <div class="pbar"><div class="pfill" id="pfill" style="width:3.3%"></div></div>
+    <div class="pctr" id="plive">Score: 0</div>
+  </div>
+  <div id="qwrap"></div>
+  <div class="qnav">
+    <button class="btn-ghost" onclick="confirmExit()">&#10005; Exit</button>
+    <button class="btn dis-btn" id="btnnext" onclick="nextQ()">Next &#8594;</button>
+  </div>
+</div>
+
+<div id="score-mode" style="display:none;">
+  <div class="score-wrap">
+    <div class="score-ring" id="sring"><div class="score-inner"><div class="score-num" id="snum">0/30</div><div class="score-pct" id="spct">0%</div></div></div>
+    <div class="score-grade" id="sgrade"></div>
+    <div class="score-msg" id="smsg"></div>
+    <div class="score-table">
+      <div class="str"><span class="stl">Correct Answers</span><span class="stv" style="color:#86EFAC;" id="r-correct"></span></div>
+      <div class="str"><span class="stl">Wrong Answers</span><span class="stv" style="color:#FCA5A5;" id="r-wrong"></span></div>
+      <div class="str"><span class="stl">Not Attempted</span><span class="stv" style="color:#6688B4;" id="r-skip"></span></div>
+      <div class="str"><span class="stl">Score</span><span class="stv" style="color:#2DD4BF;" id="r-pct"></span></div>
+      <div class="str"><span class="stl">Pass Mark</span><span class="stv">75% (23/30)</span></div>
+      <div class="str"><span class="stl">Result</span><span class="stv" id="r-result"></span></div>
+    </div>
+    <div class="acts">
+      <button class="btn" onclick="showReview()">&#128203; Review Answers</button>
+      <button class="btn-ghost" onclick="restartTest()">&#8617; Restart</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-mode" style="display:none;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+    <div style="font-size:18px;font-weight:700;color:#fff;">&#128203; Answer Review &#8212; Sample Paper 2</div>
+    <button class="btn-ghost" onclick="backToScore()">&#8592; Back to Score</button>
+  </div>
+  <div id="review-wrap"></div>
+</div>
+</div>
+<script>
+
+const QS = [{"q": "Pilots are more easily inclined to make mistakes when:", "o": ["Making decisions independently of others", "They are not constrained by time", "They are not able to assess and control the risks involved in a situation"], "a": 2, "e": "Errors increase when pilots CANNOT ASSESS AND CONTROL RISKS. Loss of situational awareness is the core cause. Time pressure also increases errors, but inability to evaluate risk is the primary factor. This is why TEM (Threat and Error Management) training is critical."}, {"q": "Low levels of arousal are:", "o": ["Good on final approach", "Not good on final approach", "Good for general flying"], "a": 1, "e": "Final approach is a HIGH-DEMAND phase requiring peak SA. Low arousal = underperformance, missed callouts, slow reactions. Yerkes-Dodson: moderate-high arousal needed for complex tasks like final approach."}, {"q": "The amount of light which strikes the retina is controlled by:", "o": ["The cornea", "The lens", "The pupil"], "a": 2, "e": "The PUPIL controls the amount of light entering the eye - dilates in low light, constricts in bright light. The cornea refracts light. The lens focuses it. Only the pupil regulates QUANTITY of light reaching the retina."}, {"q": "Which of the following statements in regard to motivation is correct?", "o": ["Too much motivation may result in hypo-vigilance and thus a decrease in attention", "Motivation will reduce the task automation process hence performance will degrade", "The learning process is vastly improved with motivation"], "a": 2, "e": "MOTIVATION vastly improves learning and performance. Too much motivation = HYPER-vigilance (not hypo). Motivation enhances task automation and skills acquisition. It is one of the most powerful factors in training effectiveness."}, {"q": "Five hours after a rapid decompression at FL 320 you experience pain in the joints. Which answer is correct?", "o": ["This symptom indicates DCS and will disappear within 24 hours", "This phenomenon is treated by breathing 100% oxygen under pressure", "You should ask for medical advice since this is a symptom of decompression sickness"], "a": 2, "e": "Joint pain 5 hours after decompression = DECOMPRESSION SICKNESS (the bends). Correct action = SEEK MEDICAL ADVICE IMMEDIATELY. Do not assume it resolves in 24 hours. Treatment is hyperbaric recompression chamber, but medical assessment must come first."}, {"q": "A high degree of cockpit automation may alter the traditional tasks of pilots in a way that:", "o": ["The crew always maintains SA by being more alert", "The crew pays more attention to always be in the loop", "The attention of the cockpit crew will become reduced with the consequence of being out of the loop"], "a": 2, "e": "Automation complacency = crews become PASSIVE MONITORS, attention drifts, SA lost - out of the loop. This is a known accident cause (AF447, Asiana 214). High automation demands ACTIVE monitoring strategies to counteract this passive tendency."}, {"q": "Long-term memory is an essential component of the pilot's knowledge and expertise:", "o": ["The information stored in LTM is always fresh and easy to retrieve", "It is desirable to pre-activate knowledge stored in LTM to have it available when required", "The capacity of LTM is limited to a few weeks"], "a": 1, "e": "Pre-activation (priming) of LTM = retrieving relevant knowledge BEFORE it is needed (briefing, planning, checklist review). LTM capacity is theoretically UNLIMITED. Information is NOT always fresh - retrieval can be difficult without activation."}, {"q": "The human information processing system is highly efficient compared to computers because of its:", "o": ["Speed", "Working memory capacity", "Flexibility"], "a": 2, "e": "Humans excel at FLEXIBILITY - adapting to novel, unexpected, ambiguous situations computers cannot handle. Computers outperform humans in speed and working memory. Human adaptability and pattern recognition in novel contexts is unmatched."}, {"q": "What are easily observable indications of stress?", "o": ["Rising blood pressure, pupils narrowing, stabbing pain around the heart", "Perspiration, flushed skin, dilated pupils, fast breathing", "Faster deep inhalation, stabbing pain around the heart"], "a": 1, "e": "Observable stress signs = PERSPIRATION, FLUSHED SKIN, DILATED PUPILS, FAST BREATHING (sympathetic fight-or-flight activation). Blood pressure rise is real but not easily observable. Pupils DILATE (not narrow) under stress."}, {"q": "CRM (Crew Resource Management) training is:", "o": ["Intended to develop effectiveness of crew performance by improving attitudes towards flight safety and human relationship management", "Not intended to change the individual's attitude towards other crew members", "Intended to alter an individual's stress management capabilities only"], "a": 0, "e": "CRM = develops effectiveness by improving ATTITUDES toward flight safety AND human relationship management. It absolutely IS intended to change attitudes - that is a core CRM goal. CRM encompasses communication, decision-making, SA, workload management, and leadership."}, {"q": "As a result of automation in cockpits:", "o": ["Coordination is facilitated by provision of more precise information", "Communication and coordination call for an even greater effort on the part of the crew", "Man-man communication has been significantly improved"], "a": 1, "e": "Automation INCREASES the demand for explicit communication and coordination - because automation handles routine tasks, crew must actively share mental models. Automation does NOT automatically improve communication - it requires greater deliberate crew effort."}, {"q": "Which statement is correct about oxygen diffusion?", "o": ["Oxygen diffusion from lungs into blood does not depend on partial oxygen pressure", "Oxygen diffusion from the blood into the cells depends on their partial oxygen pressure gradient", "The gradient of diffusion is higher at altitude than at sea level"], "a": 1, "e": "Oxygen diffuses from HIGH to LOW partial pressure. Blood to cells = depends on partial pressure GRADIENT. At ALTITUDE the gradient from lungs to blood DECREASES (less O2 in lungs) - diffusion is HARDER at altitude, not easier. Dalton's Law underlies this."}, {"q": "A pilot after pulling out of a steep dive moves the control column firmly forward. He may suffer a:", "o": ["Grey Out", "Black Out", "Red Out"], "a": 2, "e": "After pulling OUT of a steep dive, pushing forward = NEGATIVE G. Negative G forces blood UPWARD toward the head causing RED OUT (blood engorging retinal vessels). Grey/black out = POSITIVE G (blood pulled away from head). Red out = negative G."}, {"q": "A pilot has flown as Captain for 1,000 hours. With what phase of motor programme can he be associated?", "o": ["Automatic", "Cognitive", "Associate"], "a": 0, "e": "1,000 hours as Captain = AUTOMATIC phase. Fitts and Posner 3 stages: Cognitive (learning, conscious effort) then Associative (practising, refining) then AUTOMATIC (skilled, effortless, unconscious competence). 1,000 hours = deeply ingrained automatic motor programmes."}, {"q": "Too low a workload can:", "o": ["Degrade performance", "Enhance arousal", "Help plan future activities better"], "a": 0, "e": "Too LOW workload = DEGRADES performance through under-arousal, boredom, complacency, and reduced vigilance. Yerkes-Dodson: both extremes (too low AND too high) degrade performance. Long cruise phases require active monitoring strategies to counteract this."}, {"q": "In civil air transport, linear accelerations (Gx) - which is correct? (1)do not exist; (2)have slight physiological consequences; (3)may in pull-out lead to loss of consciousness; (4)cause sensory illusions on pitch axis", "o": ["1 and 4 only", "2 only", "3 and 4 only"], "a": 1, "e": "In civil transport, linear accelerations (Gx = fore-aft) have only SLIGHT physiological consequences (option 2). Transport aircraft do NOT generate G-forces sufficient for G-LOC (option 3 = high-performance military aircraft). Hence answer B = option 2 only."}, {"q": "Thinking on human reliability is changing. Which is correct?", "o": ["Human errors can be avoided - all it takes is vigilance and knowledge", "It is thought errors will be possible to eliminate in the near future", "Human errors are now considered inherent to cognitive function and generally inescapable"], "a": 2, "e": "Modern human factors: errors are INHERENT to human cognition - they cannot be eliminated, only managed and mitigated. The vigilance-alone approach is DISCREDITED. SMS and TEM focus on CATCHING errors before they cause accidents."}, {"q": "Gases of physiological importance to man are:", "o": ["Oxygen and carbon dioxide", "Nitrogen and carbon dioxide", "Oxygen and carbon monoxide"], "a": 0, "e": "Primary physiological gases = O2 (cellular respiration) and CO2 (primary respiratory driver, acid-base balance). Nitrogen is relevant for DCS but not normal respiration. CO is toxic, not physiologically normal."}, {"q": "You can survive at any altitude, provided that:", "o": ["Enough oxygen, pressure and heat is available", "21% oxygen is available in the air you breathe", "Pressure respiration is guaranteed for that altitude"], "a": 0, "e": "Survival requires OXYGEN (adequate partial pressure) + PRESSURE (to allow gas exchange and prevent ebullism above Armstrong Line) + HEAT (thermal protection). Just 21% O2 is not enough at altitude - partial pressure is what matters."}, {"q": "Fatigue and permanent concentration:", "o": ["Increase the tolerance to hypoxia", "Lower the tolerance to hypoxia", "Do not affect hypoxia at all"], "a": 1, "e": "Fatigue and prolonged mental effort LOWER tolerance to hypoxia - fatigued tissues have higher O2 demand. Alcohol, illness, and physical exercise also lower hypoxia tolerance."}, {"q": "An increase in the amount of carbon dioxide in the blood leads to:", "o": ["A decrease of acidity in the blood", "A reduction of red blood cells", "Shortness of breath"], "a": 2, "e": "Increased CO2 = increased carbonic acid in blood = INCREASED ACIDITY (not decreased). CO2 stimulates respiratory centres causing SHORTNESS OF BREATH. CO2 does NOT affect red blood cell count."}, {"q": "Total pressure of a gas mixture equals the sum of partial pressures. This corresponds to:", "o": ["Henry's Law", "Dalton's Law", "Graham's Law"], "a": 1, "e": "DALTON'S LAW = total pressure = sum of partial pressures. Essential for understanding hypoxia (O2 partial pressure drops with altitude). Henry's Law = gas solubility proportional to partial pressure (DCS). Graham's Law = diffusion inversely proportional to molecular weight."}, {"q": "Barometric pressure drops to 1/2 of sea level pressure at approximately:", "o": ["10,000 feet", "18,000 feet", "25,000 feet"], "a": 1, "e": "Pressure halves approximately every 18,000 ft. At 18,000 ft = ~50% of sea level pressure (~506 hPa vs 1013 hPa). At 18,000 ft O2 partial pressure = ~10.6 kPa (vs 21.3 kPa at sea level). Critical threshold for unpressurised flight."}, {"q": "Boyle's Law is directly applicable in case of:", "o": ["The expansion of trapped gases in the human body with increasing altitude", "The occurrence of decompression sickness at high altitude", "Hyperventilation with increasing altitude"], "a": 0, "e": "Boyle's Law (P x V = constant) = as pressure decreases, trapped gas VOLUME INCREASES. Affects ears, sinuses, gut, dental cavities. DCS = Henry's Law. Hyperventilation = not a gas law. Boyle's Law = barotrauma."}, {"q": "Dalton's Law explains the occurrence of:", "o": ["Bends", "Creeps", "Altitude hypoxia"], "a": 2, "e": "Dalton's Law = partial pressure of O2 decreases with altitude. Less partial pressure = less O2 available for diffusion into blood = ALTITUDE HYPOXIA. Bends = Henry's Law. Creeps (skin DCS) = also Henry's Law."}, {"q": "The respiratory process consists mainly of:", "o": ["Diffusion of O2 through respiratory membranes into blood, transportation to cells, diffusion into cells, and elimination of CO2", "Transportation of oxygen to the cell and elimination of carbon monoxide", "Transportation of oxygen to the cell and elimination of nitrogen"], "a": 0, "e": "Complete respiration: O2 diffuses lung to blood (partial pressure gradient) then transported by haemoglobin then diffuses blood to cells then CO2 produced then eliminated via blood to lungs to exhaled. CO and nitrogen are not normal respiratory byproducts."}, {"q": "Carbon monoxide poisoning:", "o": ["Occurs only above 15 degrees OAT", "Is more likely in aeroplanes where cabin heat is supplied from the exhaust system", "Is more likely in aeroplanes with twin-engines"], "a": 1, "e": "CO poisoning most likely when CABIN HEAT USES EXHAUST SYSTEM - a crack in the heat exchanger allows CO into cabin. Common in piston aircraft. CO is odourless and colourless - undetectable without CO detector. Not temperature-dependent or engine-count dependent."}, {"q": "Mark symptoms referring specifically to carbon monoxide poisoning (not general hypoxia):", "o": ["Muscular spasms, mental confusion, impairment of hearing", "High levels of arousal, increased error proneness, lack of accuracy", "Headache, increasing nausea, dizziness"], "a": 2, "e": "CO poisoning classic presentation = HEADACHE + NAUSEA + DIZZINESS (cherry-red lips in severe cases). These first symptoms differentiate CO from pure hypoxia (which causes euphoria and cyanosis). Headache/nausea/dizziness = characteristic CO triad."}, {"q": "A pilot climbing in an unpressurised aircraft without supplemental oxygen will pass the critical threshold at approximately:", "o": ["16,000 ft", "18,000 ft", "22,000 ft"], "a": 2, "e": "Critical threshold for unprotected pilot = approximately 22,000 ft where TUC is very short and performance is severely impaired. Night vision affected from 5,000 ft. Significant impairment from 12,000-14,000 ft. Critical threshold = approximately 22,000 ft."}, {"q": "Breathing 100% oxygen will lift the pilot's physiological safe altitude to approximately:", "o": ["38,000 ft", "10,000 ft", "22,000 ft"], "a": 0, "e": "Breathing 100% O2 extends physiological safe altitude to approximately 38,000-40,000 ft (replacing all nitrogen with O2 maximises available partial pressure). Above 40,000 ft, pressure breathing is required. Above Armstrong Line (63,000 ft), even pressure breathing cannot prevent ebullism."}];
+
+let CQ=0,SC=0,WC=0,ANS=false,TI=null,TL=1800,USERSEL=[];
+
+function startTimer(){
+  TI=setInterval(function(){
+    TL--;
+    var m=Math.floor(TL/60),s=TL%60;
+    var d=document.getElementById('tval');
+    if(d){d.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;if(TL<=120)d.style.color='#EF4444';}
+    if(TL<=0){clearInterval(TI);finishTest();}
+  },1000);
+}
+
+function renderQ(){
+  var q=QS[CQ];ANS=false;
+  var tot=QS.length;
+  document.getElementById('stat-q').textContent=(CQ+1)+' / '+tot;
+  document.getElementById('pctr').textContent='Q '+(CQ+1)+' / '+tot;
+  document.getElementById('pfill').style.width=(((CQ+1)/tot)*100)+'%';
+  document.getElementById('plive').textContent='Score: '+SC;
+  var nb=document.getElementById('btnnext');
+  nb.className='btn dis-btn';
+  nb.textContent=CQ===tot-1?'Finish':'Next';
+  var labs=['A','B','C'];
+  var optsHTML='';
+  for(var i=0;i<q.o.length;i++){
+    optsHTML+='<div class="qopt" id="opt'+i+'" onclick="pick('+i+')">'
+      +'<div class="qlbl">'+labs[i]+'</div>'
+      +'<div>'+q.o[i]+'</div></div>';
+  }
+  document.getElementById('qwrap').innerHTML=
+    '<div class="qcard">'
+    +'<div class="qnum">Question '+(CQ+1)+' of '+tot+'</div>'
+    +'<div class="qtext">'+q.q+'</div>'
+    +'<div class="qopts">'+optsHTML+'</div>'
+    +'<div class="qexp" id="qexp">'
+    +'<div class="qexp-h">Explanation</div>'
+    +q.e+'</div></div>';
+}
+
+function pick(i){
+  if(ANS)return;ANS=true;
+  var q=QS[CQ];USERSEL[CQ]=i;
+  for(var k=0;k<q.o.length;k++){
+    var el=document.getElementById('opt'+k);
+    el.classList.add('dis');
+    if(k===q.a)el.classList.add('cor');
+    else if(k===i&&i!==q.a)el.classList.add('wrg');
+  }
+  if(i===q.a){SC++;WC=CQ+1-SC;}else{WC++;}
+  document.getElementById('stat-s').textContent=SC;
+  document.getElementById('stat-w').textContent=WC;
+  document.getElementById('plive').textContent='Score: '+SC;
+  document.getElementById('qexp').style.display='block';
+  document.getElementById('btnnext').className='btn';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextQ(){
+  if(!ANS)return;CQ++;
+  if(CQ>=QS.length)finishTest();else renderQ();
+}
+
+function finishTest(){
+  clearInterval(TI);
+  var tot=QS.length,skipped=tot-(SC+WC),pct=Math.round(SC/tot*100),pass=pct>=75;
+  var grade=pct>=90?'Distinction':pct>=80?'Credit':pct>=75?'Pass':'Fail - Re-attempt';
+  var msg=pct>=90?'Outstanding! Full command of HP&L Set 2.':pct>=80?'Excellent! Minor weak areas.':pct>=75?'Passed! Review wrong answers carefully.':'Revise gas laws, automation effects, and memory concepts.';
+  document.getElementById('sring').style.setProperty('--p',pct+'%');
+  document.getElementById('snum').textContent=SC+'/'+tot;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('sgrade').textContent=grade;
+  document.getElementById('smsg').textContent=msg;
+  document.getElementById('r-correct').textContent=SC;
+  document.getElementById('r-wrong').textContent=WC;
+  document.getElementById('r-skip').textContent=skipped;
+  document.getElementById('r-pct').textContent=pct+'%';
+  document.getElementById('r-result').innerHTML=pass?'<span style="color:#86EFAC">PASS</span>':'<span style="color:#FCA5A5">FAIL</span>';
+  document.getElementById('quiz-mode').style.display='none';
+  document.getElementById('score-mode').style.display='block';
+  document.getElementById('statsbar').style.display='none';
+}
+
+function showReview(){
+  document.getElementById('score-mode').style.display='none';
+  document.getElementById('review-mode').style.display='block';
+  var labs=['A','B','C'];
+  var html='';
+  for(var qi=0;qi<QS.length;qi++){
+    var q=QS[qi],sel=USERSEL[qi],correct=sel===q.a,skipped=sel===undefined;
+    var cls=skipped?'':correct?'correct':'wrong';
+    var badge=skipped?'<span class="review-badge w">Skipped</span>':correct?'<span class="review-badge c">Correct</span>':'<span class="review-badge w">Wrong</span>';
+    var opts='';
+    for(var oi=0;oi<q.o.length;oi++){
+      var c2='dim';
+      if(oi===q.a)c2='cor';
+      else if(oi===sel&&!correct)c2='wrg-sel';
+      var icon=oi===q.a?'[Correct] ':(oi===sel&&!correct)?'[Your Answer] ':'';
+      opts+='<div class="review-opt '+c2+'"><strong>'+labs[oi]+'.</strong> '+icon+q.o[oi]+'</div>';
+    }
+    html+='<div class="review-q '+cls+'">'+badge+'<div class="review-qtext"><strong>Q'+(qi+1)+'.</strong> '+q.q+'</div><div class="review-opts">'+opts+'</div><div class="review-exp">'+q.e+'</div></div>';
+  }
+  document.getElementById('review-wrap').innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function backToScore(){document.getElementById('review-mode').style.display='none';document.getElementById('score-mode').style.display='block';}
+
+function restartTest(){
+  CQ=0;SC=0;WC=0;ANS=false;TL=1800;USERSEL=[];
+  clearInterval(TI);
+  document.getElementById('score-mode').style.display='none';
+  document.getElementById('review-mode').style.display='none';
+  document.getElementById('quiz-mode').style.display='block';
+  document.getElementById('statsbar').style.display='flex';
+  document.getElementById('stat-s').textContent='0';
+  document.getElementById('stat-w').textContent='0';
+  var tv=document.getElementById('tval');tv.textContent='30:00';tv.style.color='#FCA5A5';
+  startTimer();renderQ();
+}
+
+function confirmExit(){if(confirm('Exit test? Progress will be lost.'))restartTest();}
+
+startTimer();
+renderQ();
+
+</script>
+</body>
+</html>
