@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGCA Mock Test — Set 15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0d12;
+    --panel:#141b24;
+    --panel-2:#1b2430;
+    --panel-3:#222d3a;
+    --line:#2a3543;
+    --amber:#ffb300;
+    --amber-dim:rgba(255,179,0,0.16);
+    --cyan:#4fd1e8;
+    --green:#4ade80;
+    --green-dim:rgba(74,222,128,0.14);
+    --red:#ff5c68;
+    --red-dim:rgba(255,92,104,0.14);
+    --text:#e7ecf3;
+    --text-dim:#8a93a4;
+    --text-faint:#5b6473;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255,179,0,0.07), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 110%, rgba(79,209,232,0.05), transparent 60%),
+      var(--void);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:880px;margin:0 auto;padding:18px 16px 60px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+
+  /* ---------- Top strip (instrument bezel) ---------- */
+  .bezel{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 16px;border:1px solid var(--line);border-radius:10px;
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    margin-bottom:18px;
+  }
+  .bezel-title{display:flex;align-items:center;gap:10px;}
+  .bezel-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);}
+  .bezel-title span{font-size:13px;letter-spacing:0.06em;color:var(--text-dim);text-transform:uppercase;}
+  .bezel-readout{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);letter-spacing:0.04em;}
+
+  /* ---------- Screens ---------- */
+  .screen{display:none;}
+  .screen.active{display:block;}
+
+  /* ===== START SCREEN ===== */
+  .start-card{
+    border:1px solid var(--line);border-radius:16px;background:var(--panel);
+    padding:36px 28px;text-align:center;position:relative;overflow:hidden;
+  }
+  .start-card::before{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(transparent 0 28px, rgba(255,255,255,0.012) 28px 29px);
+    pointer-events:none;
+  }
+  .dial{width:120px;height:120px;margin:0 auto 22px;position:relative;}
+  .dial svg{width:100%;height:100%;}
+  .dial-needle{transform-origin:60px 60px;animation:sweep 3.2s ease-in-out infinite;}
+  @keyframes sweep{
+    0%{transform:rotate(-35deg);}
+    50%{transform:rotate(35deg);}
+    100%{transform:rotate(-35deg);}
+  }
+  .start-card h1{font-family:'Space Grotesk',sans-serif;font-size:28px;margin:0 0 6px;letter-spacing:-0.01em;}
+  .start-card .sub{color:var(--text-dim);font-size:14.5px;line-height:1.6;max-width:480px;margin:0 auto 26px;}
+  .meta-grid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .meta-chip{
+    border:1px solid var(--line);background:var(--panel-2);border-radius:10px;
+    padding:12px 18px;min-width:108px;
+  }
+  .meta-chip .num{font-family:'IBM Plex Mono',monospace;font-size:20px;color:var(--amber);font-weight:600;}
+  .meta-chip .lbl{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
+  .btn{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+    border:none;border-radius:10px;cursor:pointer;padding:14px 30px;
+    transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--amber);color:#1a1300;box-shadow:0 0 0 0 transparent;}
+  .btn-primary:hover{box-shadow:0 4px 20px rgba(255,179,0,0.35);}
+  .btn-ghost{background:var(--panel-2);color:var(--text);border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--text-faint);}
+  .start-note{font-size:12px;color:var(--text-faint);margin-top:18px;line-height:1.6;}
+
+  /* ===== TEST SCREEN ===== */
+  .status-bar{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:12px;background:var(--panel);
+    padding:12px 16px;margin-bottom:14px;
+  }
+  .qcount{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--text);white-space:nowrap;}
+  .qcount b{color:var(--amber);}
+  .progress-track{flex:1;height:6px;border-radius:4px;background:var(--panel-3);overflow:hidden;min-width:90px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--amber),#ffd166);border-radius:4px;transition:width .25s ease;}
+  .timer{
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--cyan);
+    display:flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .timer::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);}
+
+  .qcard{
+    border:1px solid var(--line);border-radius:14px;background:var(--panel);
+    padding:26px 24px 22px;margin-bottom:14px;min-height:300px;
+  }
+  .qtag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:13px;
+    border:1px solid var(--amber-dim);background:var(--amber-dim);border-radius:7px;
+    padding:4px 10px;margin-bottom:14px;
+  }
+  .qtext{font-size:17.5px;line-height:1.55;font-weight:500;color:var(--text);margin-bottom:22px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    display:flex;align-items:flex-start;gap:14px;
+    border:1px solid var(--line);background:var(--panel-2);border-radius:11px;
+    padding:13px 16px;cursor:pointer;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:var(--text-faint);}
+  .opt.selected{border-color:var(--amber);background:var(--amber-dim);}
+  .opt-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;
+    width:26px;height:26px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);color:var(--text-dim);margin-top:1px;
+  }
+  .opt.selected .opt-badge{border-color:var(--amber);color:var(--amber);background:rgba(255,179,0,0.12);}
+  .opt-text{font-size:15px;line-height:1.5;color:var(--text);}
+
+  .nav-bar{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  .nav-left,.nav-right{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn-sm{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
+    border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);
+    background:var(--panel-2);color:var(--text);transition:border-color .12s, background .12s;
+  }
+  .btn-sm:hover{border-color:var(--text-faint);}
+  .btn-sm:disabled{opacity:0.35;cursor:not-allowed;}
+  .btn-sm.mark.active{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
+  .btn-submit{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
+    border:none;border-radius:9px;padding:10px 20px;cursor:pointer;
+    background:var(--red);color:#1a0000;
+  }
+  .btn-submit:hover{box-shadow:0 4px 16px rgba(255,92,104,0.3);}
+
+  /* ===== MAP OVERLAY ===== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(5,7,10,0.78);backdrop-filter:blur(2px);
+    display:none;align-items:center;justify-content:center;z-index:50;padding:20px;
+  }
+  .overlay.active{display:flex;}
+  .map-panel{
+    width:100%;max-width:520px;background:var(--panel);border:1px solid var(--line);
+    border-radius:16px;padding:22px;max-height:85vh;overflow-y:auto;
+  }
+  .map-panel h3{font-family:'Space Grotesk',sans-serif;margin:0 0 4px;font-size:17px;}
+  .map-panel .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--text-dim);margin:12px 0 16px;}
+  .legend-item{display:flex;align-items:center;gap:6px;}
+  .legend-swatch{width:10px;height:10px;border-radius:3px;}
+  .map-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;}
+  .map-tile{
+    aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel-2);color:var(--text-dim);
+    position:relative;
+  }
+  .map-tile.answered{background:var(--amber-dim);border-color:var(--amber);color:var(--amber);}
+  .map-tile.current{box-shadow:0 0 0 2px var(--cyan);}
+  .map-tile.marked::after{
+    content:"";position:absolute;top:3px;right:3px;width:5px;height:5px;border-radius:50%;background:var(--cyan);
+  }
+  .map-close{width:100%;margin-top:16px;}
+
+  .confirm-panel{max-width:380px;text-align:center;padding:28px 24px;}
+  .confirm-panel p{color:var(--text-dim);font-size:14px;line-height:1.6;margin:10px 0 22px;}
+  .confirm-actions{display:flex;gap:10px;}
+  .confirm-actions .btn-sm{flex:1;text-align:center;padding:12px;}
+
+  /* ===== RESULTS SCREEN ===== */
+  .result-hero{
+    border:1px solid var(--line);border-radius:16px;background:var(--panel);
+    padding:32px 24px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden;
+  }
+  .result-badge{
+    display:inline-block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;
+    letter-spacing:0.06em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:18px;
+  }
+  .result-badge.pass{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.4);}
+  .result-badge.fail{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,92,104,0.4);}
+  .score-ring{width:170px;height:170px;margin:0 auto 14px;position:relative;}
+  .score-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+  .score-ring-bg{fill:none;stroke:var(--panel-3);stroke-width:10;}
+  .score-ring-fg{fill:none;stroke:var(--amber);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .score-ring-label{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .score-ring-label .pct{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:var(--text);}
+  .score-ring-label .frac{font-size:12px;color:var(--text-dim);margin-top:2px;}
+  .result-note{font-size:12px;color:var(--text-faint);max-width:420px;margin:0 auto;line-height:1.6;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+  .stat-box{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:16px 10px;text-align:center;}
+  .stat-box .v{font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:600;}
+  .stat-box .l{font-size:10.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;}
+  .stat-box.correct .v{color:var(--green);}
+  .stat-box.incorrect .v{color:var(--red);}
+  .stat-box.unanswered .v{color:var(--text-dim);}
+  .stat-box.time .v{color:var(--cyan);font-size:18px;}
+
+  .result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+  /* ===== REVIEW SCREEN ===== */
+  .review-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .tab{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;
+    border:1px solid var(--line);background:var(--panel-2);color:var(--text-dim);
+    border-radius:9px;padding:9px 14px;cursor:pointer;
+  }
+  .tab.active{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
+  .rev-card{
+    border:1px solid var(--line);background:var(--panel);border-radius:13px;
+    padding:18px 20px;margin-bottom:12px;
+  }
+  .rev-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px;}
+  .rev-num{font-family:'IBM Plex Mono',monospace;color:var(--text-dim);font-size:12.5px;}
+  .rev-status{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px;}
+  .rev-status.correct{background:var(--green-dim);color:var(--green);}
+  .rev-status.incorrect{background:var(--red-dim);color:var(--red);}
+  .rev-status.skipped{background:var(--panel-3);color:var(--text-dim);}
+  .rev-q{font-size:15px;line-height:1.55;margin-bottom:14px;color:var(--text);}
+  .rev-opt{
+    display:flex;align-items:flex-start;gap:12px;border-radius:9px;padding:10px 13px;margin-bottom:7px;
+    border:1px solid var(--line);background:var(--panel-2);font-size:14px;line-height:1.5;
+  }
+  .rev-opt.correct-pick{border-color:var(--green);background:var(--green-dim);}
+  .rev-opt.wrong-pick{border-color:var(--red);background:var(--red-dim);}
+  .rev-opt .tagchip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:2px 7px;border-radius:5px;margin-left:auto;flex-shrink:0;}
+  .rev-opt .tagchip.your{background:var(--red);color:#1a0000;}
+  .rev-opt .tagchip.right{background:var(--green);color:#04210f;}
+  .back-row{margin-top:6px;margin-bottom:18px;}
+
+  @media (max-width:560px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .map-grid{grid-template-columns:repeat(5,1fr);}
+    .qtext{font-size:16.5px;}
+    .nav-bar{flex-direction:column;align-items:stretch;}
+    .nav-left,.nav-right{justify-content:space-between;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="bezel">
+    <div class="bezel-title"><span class="bezel-dot"></span><span>DGCA Mock Test · Set 15</span></div>
+    <div class="bezel-readout mono" id="bezelReadout">STANDBY</div>
+  </div>
+
+  <!-- ===================== START SCREEN ===================== -->
+  <div class="screen active" id="screen-start">
+    <div class="start-card">
+      <div class="dial">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#2a3543" stroke-width="2"/>
+          <circle cx="60" cy="60" r="54" fill="none" stroke="#ffb300" stroke-width="2" stroke-dasharray="6 10" opacity="0.5"/>
+          <g class="dial-needle">
+            <line x1="60" y1="60" x2="60" y2="16" stroke="#ffb300" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="60" cy="60" r="5" fill="#ffb300"/>
+          </g>
+          <circle cx="60" cy="16" r="2.5" fill="#4fd1e8"/>
+          <circle cx="60" cy="104" r="2.5" fill="#4fd1e8" opacity="0.4"/>
+        </svg>
+      </div>
+      <h1>Ground Subjects — Mock Test</h1>
+      <p class="sub">Air Law &amp; Conventions · RTF &amp; Lighting · Separation &amp; Human Performance — Set 15, reconstructed from your uploaded paper.</p>
+      <div class="meta-grid">
+        <div class="meta-chip"><div class="num">50</div><div class="lbl">Questions</div></div>
+        <div class="meta-chip"><div class="num">3</div><div class="lbl">Options each</div></div>
+        <div class="meta-chip"><div class="num">∞</div><div class="lbl">Time (self-paced)</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="startTest()">Start Test</button>
+      <div class="start-note">A stopwatch runs in the background so you can see your pace — there's no enforced time limit. You can mark questions for review and jump between them freely before submitting.</div>
+    </div>
+  </div>
+
+  <!-- ===================== TEST SCREEN ===================== -->
+  <div class="screen" id="screen-test">
+    <div class="status-bar">
+      <div class="qcount mono">Q <b id="qNumNow">01</b> / 50</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:2%"></div></div>
+      <div class="qcount mono" id="answeredCount">Answered: 0</div>
+      <div class="timer mono" id="timerDisplay">00:00</div>
+    </div>
+
+    <div class="qcard">
+      <div class="qtag" id="qTag">QUESTION 1</div>
+      <div class="qtext" id="qText">Loading…</div>
+      <div class="options" id="optionsWrap"></div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="nav-left">
+        <button class="btn-sm" id="btnPrev" onclick="prevQ()">‹ Previous</button>
+        <button class="btn-sm mark" id="btnMark" onclick="toggleMark()">★ Mark for Review</button>
+      </div>
+      <div class="nav-right">
+        <button class="btn-sm" onclick="openMap()">▦ Question Map</button>
+        <button class="btn-sm" id="btnNext" onclick="nextQ()">Next ›</button>
+        <button class="btn-submit" onclick="confirmSubmit()">Submit Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RESULTS SCREEN ===================== -->
+  <div class="screen" id="screen-results">
+    <div class="result-hero">
+      <div class="result-badge" id="resultBadge">—</div>
+      <div class="score-ring">
+        <svg viewBox="0 0 160 160">
+          <circle class="score-ring-bg" cx="80" cy="80" r="68"/>
+          <circle class="score-ring-fg" id="ringFg" cx="80" cy="80" r="68" stroke-dasharray="427" stroke-dashoffset="427"/>
+        </svg>
+        <div class="score-ring-label">
+          <div class="pct mono" id="pctLabel">0%</div>
+          <div class="frac mono" id="fracLabel">0 / 50</div>
+        </div>
+      </div>
+      <div class="result-note" id="resultNote"></div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box correct"><div class="v mono" id="statCorrect">0</div><div class="l">Correct</div></div>
+      <div class="stat-box incorrect"><div class="v mono" id="statIncorrect">0</div><div class="l">Incorrect</div></div>
+      <div class="stat-box unanswered"><div class="v mono" id="statSkipped">0</div><div class="l">Unanswered</div></div>
+      <div class="stat-box time"><div class="v mono" id="statTime">00:00</div><div class="l">Time Taken</div></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" onclick="openReview('all')">Review Answers</button>
+      <button class="btn btn-ghost" onclick="retakeTest()">Retake Test</button>
+    </div>
+  </div>
+
+  <!-- ===================== REVIEW SCREEN ===================== -->
+  <div class="screen" id="screen-review">
+    <div class="back-row">
+      <button class="btn-sm" onclick="backToResults()">‹ Back to Results</button>
+    </div>
+    <div class="review-tabs" id="reviewTabs"></div>
+    <div id="reviewList"></div>
+  </div>
+
+</div>
+
+<!-- ===================== MAP OVERLAY ===================== -->
+<div class="overlay" id="mapOverlay">
+  <div class="map-panel">
+    <h3>Question Map</h3>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:#ffb300"></span>Answered</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#1b2430;border:1px solid #2a3543"></span>Not answered</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#4fd1e8"></span>Marked</div>
+    </div>
+    <div class="map-grid" id="mapGrid"></div>
+    <button class="btn-sm map-close" onclick="closeMap()">Close</button>
+  </div>
+</div>
+
+<!-- ===================== SUBMIT CONFIRM OVERLAY ===================== -->
+<div class="overlay" id="confirmOverlay">
+  <div class="map-panel confirm-panel">
+    <h3>Submit Test?</h3>
+    <p id="confirmText">You're about to submit your answers. This can't be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn-sm" onclick="closeConfirm()">Keep Going</button>
+      <button class="btn-sm" style="border-color:var(--red);color:var(--red);" onclick="doSubmit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== QUESTION DATA ===================== */
+const QUESTIONS = [
+{q:"According to which Convention may an aircraft commander impose measures upon a person committing a crime or an offense on board the aircraft?",o:["The Convention of Rome.","The Convention of Warsaw.","The Convention of Tokyo."],a:2},
+{q:"The aircraft commander, when he has reasonable grounds to believe that a person has committed or is about to commit, on board the aircraft, an offense against penal law:",o:["Can not authorize the assistance of other crew members.","Can not request for the assistance of passengers to restrain such persons.","May deliver such person to the competent authorities."],a:2},
+{q:"When letters are used for the registration mark combinations shall not be used which might be confused with urgent or distress signals for example:",o:["XXX.","RWY.","DDD."],a:0},
+{q:"If you are requested to report your height, to which Q-code-setting would you refer?",o:["QFE.","QNH.","QNE."],a:0},
+{q:"The crew member certificate (CMC) shall be accepted by each contracting state for identification purposes:",o:["Together with a valid flight crew license.","Together with a valid passport and flight crew licence.","None of the above."],a:2},
+{q:"Series of red and green projection fired at an interval of 10 secs means:",o:["Do not land for the time being.","Exercise caution while landing.","Keep away from danger area."],a:2},
+{q:"The phrase used by ATC to instruct you to listen out on a frequency is:",o:["Pay attention.","Monitor.","Select Frequency."],a:1},
+{q:"Navigation light are to be displayed by all aircraft in flight:",o:["From 30 mins after sunset till 30 mins before sunrise.","From sunset to sunrise.","At all time."],a:1},
+{q:"A person dies of Typhus; his body can be brought to India if:",o:["Packed in a wooden box.","Cannot be brought.","Sealed in zinc and packed in a wooden box. Closed in a shell of zinc, joints sealed, shell enclosed in a teak wooden box which is enclosed in zinc lined box, filled with saw dust impregnated with carbolic powder."],a:2},
+{q:"ILS Category I, DH equal to or greater than 75 m (250 ft) is a:",o:["3D-Type A precision approach.","3D-Type A non-precision approach.","3D-Type B precision approach."],a:0},
+{q:"Aircraft meets with an accident on runway, its wreckage can be removed:",o:["Can be removed only after investigating authority's permission.","Can be removed only after DGCA permission.","For removing dead body of a dog."],a:2},
+{q:"Nationality marks used in India are:",o:["Letters VT, VU and U","Letters VT only","Letters AT to AW"],a:0},
+{q:"The convention on offenses and certain acts committed on board aircraft is:",o:["The convention of Rome.","The convention of Tokyo.","The convention of Chicago."],a:1},
+{q:"When a controlled flight deviates from its current flight plan, ATC has to be informed in case:",o:["The TAS varies by plus or minus 5% or more of the TAS notified in the flight plan.","The estimated time is in error by more than 3 minutes.","The TAS varies by plus or minus 10 knots or more of the TAS notified in the flight plan."],a:2},
+{q:"For a VFR flight in Airspace F and G in India 'At and below 900 m (3000 ft.) AMSL, or 300 m (1000 ft.) above terrain, whichever is the higher':",o:["Flight visibility reduced to not less than 3000 m may be permitted for helicopters.","Flight visibility reduced to not less than 3000 m may be permitted for all aircraft.","Flight visibility not less than 5000 m is required for fixed wing aircraft."],a:1},
+{q:"A series of red flashes sent to an aircraft in flight means:",o:["Return to the airfield and land.","Airfield is unsafe, do not land.","Notwithstanding any other instructions do not land at the moment."],a:2},
+{q:"Where ADS-B is used for identification, aircraft may be identified by the following procedure:",o:["Asking him to squawk assigned mode A code C.","Direct recognition of the aircraft identification in an ADS-B label.","Recognition of an assigned discrete code, the setting of which has been verified."],a:1},
+{q:"During the transmission of numbers containing a decimal point:",o:["The term Decimal can be omitted if no chance of misunderstandings exists.","The term Decimal must always be transmitted.","The term Decimal must be spoken only if followed by three digits."],a:1},
+{q:"An aircraft flying over the territory of another state must:",o:["Follow the rules of the Air of the State it is over flying.","Follow the rules of the Air of the State of the Operator.","Follow the rules of the Air of the State of Registration."],a:0},
+{q:"The VMC minima for an airspace classified as “G” above 10000ft MSL are:",o:["1500m horizontally, 1000ft vertically from clouds; 8km visibility.","1 nautical mile horizontally and 1000ft vertically from clouds; 8km visibility.","1 nautical mile horizontally and 1000ft vertically from clouds; 5km visibility."],a:0},
+{q:"An aircraft is considered to overtake another if it approaches the other aircraft from the rear on a line forming an angle of less than:",o:["50 degrees with the plane of symmetry of the latter.","70 degrees with the plane of symmetry of the latter.","60 degrees with the plane of symmetry of the latter."],a:1},
+{q:"You observe thunderstorms without hail on our route. On radio telephony you shall report the phenomenon as:",o:["Thunderstorms, no hail.","Thunderstorms.","Thunderstorms, hail not observed."],a:1},
+{q:"Aerodrome Operations Vehicles are considered to be:",o:["FOD.","Flight Operation Hazards.","A possible source of FOD."],a:2},
+{q:"Pilots will feel more confident intervening (when they think that a colleague has missed something) if they know that:",o:["The colleague has acted irresponsibly and needs to be reprimanded to be more careful.","It is common for everyone to miss obvious things, and the colleague also knows this.","No intervention is required if the colleague is a senior captain and must be doing the right thing."],a:1},
+{q:"The minimum radar separation to be provided to aircraft established on the localizer course shall be:",o:["2.0NM between aircraft on adjacent localizer course,","2.5NM between aircraft on the same localizer course.","3.0NM between aircraft on the same localizer course."],a:1},
+{q:"What is the purpose of a Crew Member’s Certificate (CMC)?",o:["To allow flight crew to be exempted from customs, health and immigration formalities when disembarking.","To permit access to the air side of an aerodrome for aircrew.","To provide identification of aircrew."],a:2},
+{q:"Operational Threats outside the control of flight crew are:",o:["Adverse weather, Terrain, Airport conditions, Heavy traffic/TCAS events, Unfamiliar airports etc.","Time pressure, Irregular operations, Flight diversions, Missed approaches etc.","Aircraft malfunctions, Automation events etc."],a:0},
+{q:"The closure of a runway for a year, because of maintenance, will be published:",o:["Only in AIP.","In NOTAM and AIP, inclusive Supplement.","Only in NOTAM."],a:1},
+{q:"Night Duty is any Duty Period encroaching upon any portion of the time period between _________ in the time zone to which the crew is acclimatized.",o:["2200 hrs. and 0600 hrs.","2300 hrs. and 0500 hrs.","0000 hrs. and 0500 hrs."],a:2},
+{q:"While flying on a magnetic track of 157 degrees the aircraft on VFR plan will select the following levels:",o:["70.","75.","85."],a:1},
+{q:"Which part of the ear could be affected due to air pressure changes during climb and/or descent?",o:["The cochlea.","The eustachian tube and the tympanic membrane (ear drum).","The semicircular canal and inner ear."],a:1},
+{q:"High intensity obstacle lights should be:",o:["Flashing red.","Flashing white.","Fixed orange."],a:1},
+{q:"An AIRAC is:",o:["An acronym for a system aimed at advance notification based on common effective dates, of circumstances necessitating significant changes in operating procedures.","A notice distributed by means of telecommunication containing information concerning the establishment, condition or change in any aeronautical facility service, procedure or hazard, the timely knowledge of which is essential to personnel concerned with flight operations.","A package which consists of the following elements: AIP, supplements to the AIP, NOTAM, AIC, checklists and summaries."],a:0},
+{q:"Which of the following systems describes an abbreviated precision approach path indicator?",o:["Ten light units arranged on one side of the runway in the form of a single wing bar of four light units, with a bisecting longitudinal line of six lights.","Twenty light units symmetrically disposed about the runway center line in the form of two wing bars of four light units each, with bisecting longitudinal lines of six lights.","A wing bar of 2 sharp transition multi-lamp units normally located on the left side of the runway unless it is physically impracticable to do so."],a:2},
+{q:"During an extensive gym work out, one experiences:",o:["Angina due to increased blood circulation.","Hypoxia due to lack of oxygen.","Hyperventilation due to excessive CO₂ in blood."],a:2},
+{q:"In a severe case of hypoxia:",o:["Only brain and heart functions are maintained.","Only blood pressure and heart functions are maintained.","Only blood pressure and brain functions are maintained."],a:1},
+{q:"Which of the following is defined as “The length of the take-off run available plus the length of the stop way, if provided”?",o:["Take off distance available.","Landing distance available.","Accelerate stop distance available."],a:2},
+{q:"Who is responsible for providing search and rescue facilities over land?",o:["The State of Registry of the aircraft.","The State from which the aircraft took off.","The State in whose territory the crash occurred."],a:2},
+{q:"If a pilot in the air sees a 2.5 meter symbol “X” on the ground. What does it mean?",o:["A survivor requires medical assistance.","Aircraft not permitted to proceed beyond this point.","Flying is prohibited over this area."],a:0},
+{q:"If you fly into Severe Turbulence which flight condition should you intend to maintain:",o:["Constant Airspeed.","Level flight Altitude.","Constant Altitude and Constant Speed."],a:1},
+{q:"Identify Runway Lighting on center line lighting system:",o:["Amber light from 3000’ to 1000 ft then Alternative Red and white light to the end.","Alternative Red and white light from 3000’ ft to 1000 ft and then Red light to the end.","Alternative Red and white light from 3000’ ft to end of runway."],a:1},
+{q:"Identify Taxi way lights associated with center line lighting system:",o:["Alternate Blue and White light covering from the center line of the Taxiway.","Blue light covering from the center line of R/Way to the center line of taxiway.","Alternate green & white light covering from the center line of Runway to the center line of taxiway."],a:2},
+{q:"When instructed by ATC to hold short of Runway pilot should stop:",o:["With nose gear on hold line.","So that no part of the A/C extends beyond hold line.","So that the Flt Deck Area of A/c is even with the hold line."],a:1},
+{q:"State aircraft includes:",o:["Air India Aircraft.","Military aircraft.","All aircraft registered in India."],a:1},
+{q:"For landing minima considerations, the following values out of the multiple RVR values are taken into account.",o:["RVR at the beginning of the runway.","RVR at the middle of the runway.","RVR at the end of the runway."],a:0},
+{q:"Traffic Advisories can be issued against any:",o:["Transponder-equipped aircraft that responds to the ICAO Mode C interrogations.","Transponder-equipped aircraft that has altitude-reporting capability.","Aircraft even when it is not transponder-equipped."],a:0},
+{q:"Ac ‘A’ reports 27 NMs inbound of DPN VOR at F 150. Ac ‘B’ reports 39 NMs inbound of DPN VOR on same track & level. Which statement is true if A is 10 kts faster than ‘B’.",o:["‘A’ will be advised to increase speed by 10 kts to achieve longitudinal separation.","Longitudinal Separation exists.","‘B’ will be advised to decrease speed by 5 kts to achieve longitudinal separation."],a:0},
+{q:"Ac ‘A’ at F 90 is reciprocal to ‘B’ at F 80 in class ‘A’ airspace. ‘A’ can descend through ‘B’s level:",o:["After 5 mins of crossing each other.","‘A’ can descend remaining in VMC & maintaining own separation.","Immediately after estimated time of crossing."],a:1},
+{q:"STAR is a:",o:["Designated IFR arrival route.","Designated VFR arrival route.","Pole Star used to ascertain the true North."],a:0},
+{q:"The west end of a runway oriented east and west is numbered:",o:["09.","10 if the magnetic heading online up is 097 degrees.","28."],a:1}
+];
+
+const TOTAL = QUESTIONS.length;
+const PASS_PCT = 70; // generic benchmark — verify the actual passing criteria for this subject with current DGCA CARs
+
+/* ===================== STATE ===================== */
+let current = 0;
+let answers = new Array(TOTAL).fill(null);   // selected option index or null
+let marked = new Array(TOTAL).fill(false);
+let timerSeconds = 0;
+let timerHandle = null;
+let testStartTime = null;
+let finalTimeTaken = 0;
+
+/* ===================== HELPERS ===================== */
+function fmtTime(s){
+  const m = Math.floor(s/60).toString().padStart(2,'0');
+  const sec = (s%60).toString().padStart(2,'0');
+  return m+":"+sec;
+}
+function show(id){
+  document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ===================== START / TIMER ===================== */
+function startTest(){
+  current = 0;
+  answers = new Array(TOTAL).fill(null);
+  marked = new Array(TOTAL).fill(false);
+  timerSeconds = 0;
+  document.getElementById('bezelReadout').textContent = 'IN PROGRESS';
+  show('screen-test');
+  renderQuestion();
+  if(timerHandle) clearInterval(timerHandle);
+  timerHandle = setInterval(()=>{
+    timerSeconds++;
+    document.getElementById('timerDisplay').textContent = fmtTime(timerSeconds);
+  },1000);
+}
+
+/* ===================== RENDER QUESTION ===================== */
+function renderQuestion(){
+  const data = QUESTIONS[current];
+  document.getElementById('qNumNow').textContent = String(current+1).padStart(2,'0');
+  document.getElementById('qTag').textContent = 'QUESTION ' + (current+1);
+  document.getElementById('qText').textContent = data.q;
+  document.getElementById('progressFill').style.width = (((current+1)/TOTAL)*100)+'%';
+
+  const answeredN = answers.filter(a=>a!==null).length;
+  document.getElementById('answeredCount').textContent = 'Answered: '+answeredN+'/'+TOTAL;
+
+  const wrap = document.getElementById('optionsWrap');
+  wrap.innerHTML = '';
+  const letters = ['A','B','C'];
+  data.o.forEach((optText,idx)=>{
+    const div = document.createElement('div');
+    div.className = 'opt' + (answers[current]===idx ? ' selected' : '');
+    div.onclick = ()=>selectOption(idx);
+    div.innerHTML = '<div class="opt-badge mono">'+letters[idx]+'</div><div class="opt-text">'+optText+'</div>';
+    wrap.appendChild(div);
+  });
+
+  document.getElementById('btnPrev').disabled = current===0;
+  document.getElementById('btnNext').textContent = current===TOTAL-1 ? 'Next ›' : 'Next ›';
+  document.getElementById('btnMark').classList.toggle('active', marked[current]);
+}
+
+function selectOption(idx){
+  answers[current] = idx;
+  renderQuestion();
+}
+
+function nextQ(){
+  if(current < TOTAL-1){ current++; renderQuestion(); }
+}
+function prevQ(){
+  if(current > 0){ current--; renderQuestion(); }
+}
+function toggleMark(){
+  marked[current] = !marked[current];
+  renderQuestion();
+}
+
+/* ===================== QUESTION MAP ===================== */
+function openMap(){
+  const grid = document.getElementById('mapGrid');
+  grid.innerHTML = '';
+  for(let i=0;i<TOTAL;i++){
+    const tile = document.createElement('div');
+    let cls = 'map-tile';
+    if(answers[i]!==null) cls += ' answered';
+    if(marked[i]) cls += ' marked';
+    if(i===current) cls += ' current';
+    tile.className = cls;
+    tile.textContent = i+1;
+    tile.onclick = ()=>{ current=i; renderQuestion(); closeMap(); };
+    grid.appendChild(tile);
+  }
+  document.getElementById('mapOverlay').classList.add('active');
+}
+function closeMap(){ document.getElementById('mapOverlay').classList.remove('active'); }
+
+/* ===================== SUBMIT FLOW ===================== */
+function confirmSubmit(){
+  const unanswered = answers.filter(a=>a===null).length;
+  document.getElementById('confirmText').textContent = unanswered>0
+    ? `You have ${unanswered} unanswered question${unanswered===1?'':'s'}. Submit anyway?`
+    : `All questions answered. Submit your test now?`;
+  document.getElementById('confirmOverlay').classList.add('active');
+}
+function closeConfirm(){ document.getElementById('confirmOverlay').classList.remove('active'); }
+
+function doSubmit(){
+  closeConfirm();
+  if(timerHandle) clearInterval(timerHandle);
+  finalTimeTaken = timerSeconds;
+  document.getElementById('bezelReadout').textContent = 'COMPLETE';
+  renderResults();
+  show('screen-results');
+}
+
+/* ===================== RESULTS ===================== */
+function renderResults(){
+  let correct=0, incorrect=0, skipped=0;
+  QUESTIONS.forEach((q,i)=>{
+    if(answers[i]===null) skipped++;
+    else if(answers[i]===q.a) correct++;
+    else incorrect++;
+  });
+  const pct = Math.round((correct/TOTAL)*100);
+
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statIncorrect').textContent = incorrect;
+  document.getElementById('statSkipped').textContent = skipped;
+  document.getElementById('statTime').textContent = fmtTime(finalTimeTaken);
+  document.getElementById('pctLabel').textContent = pct+'%';
+  document.getElementById('fracLabel').textContent = correct+' / '+TOTAL;
+
+  const badge = document.getElementById('resultBadge');
+  const pass = pct >= PASS_PCT;
+  badge.textContent = pass ? 'PASS' : 'BELOW BENCHMARK';
+  badge.className = 'result-badge ' + (pass ? 'pass' : 'fail');
+
+  const circumference = 2*Math.PI*68;
+  const offset = circumference - (pct/100)*circumference;
+  const ring = document.getElementById('ringFg');
+  ring.setAttribute('stroke-dasharray', circumference.toFixed(1));
+  ring.setAttribute('stroke-dashoffset', circumference.toFixed(1));
+  setTimeout(()=>{ ring.setAttribute('stroke-dashoffset', offset.toFixed(1)); }, 80);
+  ring.style.stroke = pass ? 'var(--green)' : 'var(--amber)';
+
+  document.getElementById('resultNote').textContent =
+    `Scored against a generic ${PASS_PCT}% benchmark for reference only — check the current DGCA syllabus/CAR for the actual passing criteria of this subject.`;
+}
+
+function retakeTest(){
+  startTest();
+}
+
+/* ===================== REVIEW ===================== */
+let reviewFilter = 'all';
+function buildReviewTabs(){
+  let correct=0, incorrect=0, skipped=0;
+  QUESTIONS.forEach((q,i)=>{
+    if(answers[i]===null) skipped++;
+    else if(answers[i]===q.a) correct++;
+    else incorrect++;
+  });
+  const tabs = [
+    {key:'all', label:'All ('+TOTAL+')'},
+    {key:'incorrect', label:'Incorrect ('+incorrect+')'},
+    {key:'correct', label:'Correct ('+correct+')'},
+    {key:'skipped', label:'Unanswered ('+skipped+')'}
+  ];
+  const wrap = document.getElementById('reviewTabs');
+  wrap.innerHTML = '';
+  tabs.forEach(t=>{
+    const btn = document.createElement('div');
+    btn.className = 'tab' + (reviewFilter===t.key ? ' active' : '');
+    btn.textContent = t.label;
+    btn.onclick = ()=>{ reviewFilter = t.key; renderReviewList(); buildReviewTabs(); };
+    wrap.appendChild(btn);
+  });
+}
+
+function renderReviewList(){
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C'];
+
+  QUESTIONS.forEach((q,i)=>{
+    const userAns = answers[i];
+    const isCorrect = userAns===q.a;
+    const isSkipped = userAns===null;
+    let status = isSkipped ? 'skipped' : (isCorrect ? 'correct' : 'incorrect');
+
+    if(reviewFilter!=='all' && reviewFilter!==status) return;
+
+    const card = document.createElement('div');
+    card.className = 'rev-card';
+
+    const head = document.createElement('div');
+    head.className = 'rev-head';
+    head.innerHTML = `<span class="rev-num mono">QUESTION ${i+1}</span>
+      <span class="rev-status ${status}">${status==='skipped'?'NOT ANSWERED':status.toUpperCase()}</span>`;
+    card.appendChild(head);
+
+    const qEl = document.createElement('div');
+    qEl.className = 'rev-q';
+    qEl.textContent = q.q;
+    card.appendChild(qEl);
+
+    q.o.forEach((optText,idx)=>{
+      const row = document.createElement('div');
+      let cls = 'rev-opt';
+      let chip = '';
+      if(idx===q.a){
+        cls += ' correct-pick';
+        chip = '<span class="tagchip right">CORRECT</span>';
+      }
+      if(idx===userAns && userAns!==q.a){
+        cls += ' wrong-pick';
+        chip = '<span class="tagchip your">YOUR PICK</span>';
+      }
+      row.className = cls;
+      row.innerHTML = `<div class="opt-badge mono" style="margin-top:0;">${letters[idx]}</div><div class="opt-text" style="flex:1;">${optText}</div>${chip}`;
+      card.appendChild(row);
+    });
+
+    list.appendChild(card);
+  });
+
+  if(list.innerHTML===''){
+    list.innerHTML = '<div style="text-align:center;color:var(--text-faint);padding:30px 0;">Nothing to show in this filter.</div>';
+  }
+}
+
+function openReview(filter){
+  reviewFilter = filter;
+  buildReviewTabs();
+  renderReviewList();
+  show('screen-review');
+}
+function backToResults(){
+  show('screen-results');
+}
+</script>
+</body>
+</html>
